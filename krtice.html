@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Krtice</title>
+    <script src = "simpleGame.js"></script>
+
+    <script>
+    var moles;
+    var NUM_MOLES = 10;
+    var scene;
+    var scoreboard;
+    var joy;
+    var hits = 0;
+    var lives = 3;
+    var highScore = 0;
+    
+    function Mole(){
+        tMole = new Sprite(scene, "slike/moleDown.png", 100, 100);
+        UP = 1;
+        DOWN = 0;
+        tMole.state = DOWN;
+        tMole.imgUp = "slike/moleUp.png";
+        tMole.imgDown = "slike/moleDown.png";
+        tMole.popupPerc = .003;  //likelihood a down mole will pop up
+        tMole.popupLength = 3;  //how long (in seconds) a mole stays up
+        tMole.timer = new Timer();
+        tMole.setSpeed(0);
+        
+        tMole.setState = function(state){
+            this.state = state;
+            if (state == UP){
+                this.setImage(this.imgUp);
+                //if mole pops up, start the timer
+                this.timer.reset();
+            } else {
+                this.setImage(this.imgDown);
+            } // end if
+        } // end setState
+        
+        tMole.swapState = function(){
+            if (this.state == UP){
+                this.setState(DOWN)
+            } else {
+                this.setState(UP);
+            } // end if
+        } // end swapState
+        
+        tMole.checkClick = function(){
+            if (this.isClicked()){
+                //only worry about clicks if state is UP
+                if (this.state == UP){
+                    this.setState(DOWN);
+                    //add a point
+                    hits++;
+                } // end if 
+            } // end if
+        }
+        
+        tMole.checkTime = function(){
+            //if down, consider popping up
+            if (this.state == DOWN){
+                randVal = Math.random();
+                if (randVal < this.popupPerc){
+                    this.setState(UP);
+                } // end if
+            } else {
+                //if up, check to see how long we've been up
+                time = this.timer.getElapsedTime();
+                if (time > this.popupLength){
+                    this.setState(DOWN);
+                    //lose a life
+                    lives--;
+                    if (lives < 0){
+                        saveHighScore();
+                        alert("Play again...");
+                        document.location.href = "";
+                    } // end if
+                } // end if
+            } // end if
+        } // end checkTime
+        
+        return tMole;
+    } // end Mole constructor
+    
+    function getHighScore(){
+        //get the high score on this machine using localStorage
+        highScore = parseInt(localStorage.getItem("moleHighScore"));
+        console.log("highScore: ", highScore);
+        if (highScore == "null"
+            || highScore == null
+            || isNaN(highScore)){
+            highScore = 0;
+        } // end if
+    } // end getHighScore
+    
+    function saveHighScore(){
+        if (hits > highScore){
+            alert("New high score!");
+            localStorage.setItem("moleHighScore", hits);
+        } // end if
+    } // end saveHighScore
+    
+    function updateScore(){
+        result = "High Score: " + highScore;
+        result += ", Hits: " + hits + ", Lives: " + lives;
+        scoreboard.innerHTML = result;
+    } // end updateScore
+    
+    function makeMoles(){
+        //create an array of Moles
+        moles = new Array(NUM_MOLES);
+        for (i = 0; i < NUM_MOLES; i++){
+            moles[i] = new Mole();
+            //put hole in a random spot
+            x = Math.random() * scene.width;   
+            x = Math.ceil(x / 200) * 200 - 50;          // zaokruzuje na gornju dvestotinu, pa smanjuje za 50 (da ne viri sa ekrana)
+            y = Math.round(Math.random()) * 200 + 200;  // bira izmedju dva reda
+            moles[i].setPosition(x, y);
+        } // end for
+    } // end makeMoles
+    
+    function updateMoles(){
+        for (i = 0; i < NUM_MOLES; i++){
+            moles[i].checkClick();
+            moles[i].checkTime();
+            moles[i].update();
+        } // end for
+    } // end updateMoles
+    
+    function init(){
+        scoreboard = document.getElementById("scoreboard");
+        scene = new Scene();
+        getHighScore();
+        
+        if (scene.touchable){
+            joy = new Joy();
+        }
+        makeMoles();
+        scene.start();
+    } // end init
+    
+    function update(){
+        scene.clear();
+        updateMoles();
+        updateScore();
+    } // end update
+
+    </script>
+</head>
+<body onload = "init()">
+    <div id = "scoreboard">Hits: 0, Lives: 3</div>
+</body>
+</html>

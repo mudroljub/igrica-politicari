@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+<body>
+<canvas id="platno"></canvas>
+<script>
+
+    var platno = document.getElementById('platno');
+    platno.height = window.innerHeight;
+    platno.width = window.innerWidth;
+    
+    var sadrzaj = platno.getContext('2d');
+    var slika = new Image();
+
+    slika.onload = function() {
+        sadrzaj.drawImage(slika, 0, 0);
+    };
+    slika.src = 'slike/skupstina.png';
+
+</script>
+</body>
+</html>      

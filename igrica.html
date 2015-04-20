@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Skupština</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            cursor: crosshair;
+        }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="platno"></canvas>
+
+    <script>
+
+        // da ne izlaze na isti prozor
+        // da ostaju na prozoru duze od brzine animacije
+        // politicar menja sliku na pogodak
+
+        "use strict";
+        window.$ = function(selector) {
+            return document.querySelector(selector);
+        };
+
+
+        /*************** VARIJABLE ***************/
+		var nova_visina_pozadine;
+		var pozicije_prozora;
+        var misX;
+        var misY;
+        var animacija;
+        var uvodna_spica;
+        var politicar;
+        var vulin;
+
+        var BAZICNA_SIRINA = 1280; // ekrana
+        var BRZINA_IGRICE = 1500; // veci broj je sporije
+        var vreme_igre = 30;
+        var poeni = 0;
+        var uvod = true;
+        var igranje = false;
+
+        var platno = document.getElementById('platno');
+        platno.height = window.innerHeight;
+        platno.width = window.innerWidth;
+
+        var sadrzaj = platno.getContext('2d');
+        sadrzaj.font = "30px Verdana";
+        sadrzaj.fillStyle = "white";
+        sadrzaj.strokeStyle = 'black';
+
+        // nazivi su bitni, od njih pravi img objekte
+        var slike = {
+            pozadina: 'slike/skupstina.png',            // pozadina mora da se zove pozadina, ostalo kako oces !
+            vulin_slika: 'slike/vulin.png',
+            politicar_slika: 'slike/politicar.png'
+        }
+
+
+        /*************** POZIVI ***************/
+
+        ucitajSlike(slike, function(slike) {
+            uvodniProzor();
+        });
+        
+
+        /*************** SLUSACI ***************/
+
+		platno.addEventListener('click', function(event){
+            misX = event.clientX;
+            misY = event.clientY;
+
+            if(uvod){
+                postaviScenu();
+                uvod = false;
+                igranje = true;
+                clearInterval(uvodna_spica);
+            }
+
+            if(igranje){
+                proveriPogodak(politicar);
+                proveriPogodak(vulin, "To boli!")
+                prikaziPoene();
+            }
+		})
+
+
+        /*************** FUNKCIJE ***************/
+
+		function postaviScenu(){
+            animacija = setInterval(azuriraj, BRZINA_IGRICE);
+            // Karakter() poziva zavisne funkcije, mora posle ucitavanja pozadine
+            praviKaraktere();
+            crtajSlike();
+            prikaziPoene();
+		}
+
+
+		function azuriraj(){
+            if(igranje){
+                politicar.slucajnaPozicija();     // prvo odredjuje koordinate, pa crta
+                vulin.slucajnaPozicija();
+                crtajSlike();
+                prikaziPoene();
+                vreme_igre--;
+                proveriKraj();
+            }
+		}
+
+
+        function ucitajSlike(slike, povratnaRadnja) {         // ucitava i pravi img objekte sa nazivima
+            var brojSlika = Object.keys(slike).length;
+            var ucitaneSlike = 0;
+
+            for (var ova_slika in slike) {
+                // pravi globalnu varijablu sa nazivom slike !
+                window[ova_slika] = new Image();
+
+                // kada ucita ovu sliku, ako su ostale ucitane, poziva povratnu funkciju
+                window[ova_slika].onload = function() {
+                    ucitaneSlike++;
+                    if (ucitaneSlike >= brojSlika) {
+                        povratnaRadnja();
+                    }
+                };
+                // daje izvor slici
+                window[ova_slika].src = slike[ova_slika];
+            }
+            nova_visina_pozadine = (window.innerWidth / pozadina.width) * pozadina.height;  // prilagodjava pozadinu
+        }
+
+
+        function praviKaraktere(){
+            politicar = new Karakter(politicar_slika);
+            vulin = new Karakter(vulin_slika);
+        }
+
+
+        function crtajSlike(){      // iznova crta slike svaki frejm
+            sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
+            politicar.crtaj();
+            vulin.crtaj();
+        }
+
+
+        function dajKoordinate(){
+            var slucajna_pozicija = Math.floor(Math.random() * 6);
+            pozicije_prozora = [
+                [window.innerWidth/5.9, nova_visina_pozadine/4],             // prvi prozor
+                [window.innerWidth/2.2, nova_visina_pozadine/4],
+                [window.innerWidth/1.35, nova_visina_pozadine/4],
+                [window.innerWidth/5.9, nova_visina_pozadine/1.55],
+                [window.innerWidth/2.2, nova_visina_pozadine/1.55],
+                [window.innerWidth/1.35, nova_visina_pozadine/1.55]
+            ]
+            return [pozicije_prozora[slucajna_pozicija][0], pozicije_prozora[slucajna_pozicija][1]];
+        }
+
+
+        function prikaziPoene(){
+            sadrzaj.fillStyle="#000";
+            sadrzaj.fillRect(20,80,180,100);
+            sadrzaj.stroke();
+            sadrzaj.fillStyle="#FFF";
+            sadrzaj.font = "24px Verdana";
+            sadrzaj.fillText("Poeni: " + poeni, 30, 120);
+            sadrzaj.fillText("Vreme: " + vreme_igre, 30, 160);
+        }
+
+
+        function proveriPogodak(ovaj_lik, poruka, desno, dole){
+            poruka = poruka || "Jaoj";
+            desno = desno || (Math.random() * 100) - 50;
+            dole = dole || (Math.random() * 100) - 50;
+            if( (misX > ovaj_lik.x && misX < ovaj_lik.x + ovaj_lik.sirina) && (misY > ovaj_lik.y && misY < ovaj_lik.y + ovaj_lik.visina) ){
+                sadrzaj.fillText(poruka, misX + desno, misY + dole);
+                poeni++;
+            }
+        }
+
+
+        function uvodniProzor(){
+            var anim_x = -100;
+            var anim_y = 200;
+
+            uvodna_spica = setInterval(function(){
+                sadrzaj.fillStyle = "black";
+                sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
+                sadrzaj.fillStyle="#fff";
+                sadrzaj.font = "48px Verdana";
+                sadrzaj.fillText("Spremi se za obracun!", anim_x += 5, anim_y);
+                if(anim_x > innerWidth-100) {
+                    anim_x = -100;
+                    anim_y += 100;
+                }
+                if(anim_y > innerHeight - 100) {
+                    anim_y = 200;
+                }
+
+            }, 30);
+
+            //sadrzaj.fillText("Spremi se za obracun!", window.innerWidth/2 - window.innerWidth/4 + 50, window.innerHeight/2 - window.innerHeight/4 + 100);
+        }
+
+
+        function proveriKraj(){
+            if(vreme_igre < 1) {
+                clearInterval(animacija);
+                sadrzaj.fillRect(window.innerWidth/2 - window.innerWidth/4, window.innerHeight/2 - window.innerHeight/4, window.innerWidth/2, window.innerHeight/2);
+                sadrzaj.fillStyle="#000";
+                sadrzaj.font = "48px Verdana";
+                sadrzaj.fillText("Igra je završena!", window.innerWidth/2 - window.innerWidth/4 + 100, window.innerHeight/2 - window.innerHeight/4 + 100);
+                igranje = false;
+            }
+        }
+
+        // prilagodjava sliku za razne ekrane, ne popravlja pogresnu velicinu slike!
+        function prilagodiSliku(slika){
+            var nova_sirina_slike = slika.width * (innerWidth/BAZICNA_SIRINA);
+            var nova_visina_slike = slika.height * (innerWidth/BAZICNA_SIRINA);
+            return [nova_sirina_slike, nova_visina_slike]
+        }
+
+
+        /*************** KLASE ***************/
+
+        function Karakter(slika){
+            this.x = dajKoordinate()[0];
+            this.y = dajKoordinate()[1];
+            this.sirina = slika.width;
+            this.visina = slika.height;
+
+            this.crtaj = function(x, y) {
+                if(!x) x = this.x;
+                if(!y) y = this.y;
+                sadrzaj.drawImage(slika, x, y, prilagodiSliku(slika)[0], prilagodiSliku(slika)[1]);
+            }
+
+            this.slucajnaPozicija = function() {
+                this.x = dajKoordinate()[0];
+                this.y = dajKoordinate()[1];
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
