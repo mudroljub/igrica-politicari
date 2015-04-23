@@ -110,8 +110,6 @@
 		function azuriraj(){
             if(igranje){
 
-                politicar.slucajnaPozicija();                   // prvo odredjuje koordinate, pa crta
-                vulin.slucajnaPozicija();
                 crtajSlike();
                 prikaziPoene();
                 vreme_igre--;
@@ -154,17 +152,26 @@
 
         function crtajSlike(){      // iznova crta slike svaki frejm
             sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
+
+            // uzima koordinate
+            vulin.slucajnaPozicija();
             vulin.crtaj();
 
-            // proveriti sudar sa svima redom karakteri[]
+            politicar.slucajnaPozicija();
 
-            proveriTeCrtaj(politicar, vulin);
-            proveriTeCrtaj(politicar2, politicar);
+            // proverava da li se na toj poziciji vec nalazi neko od ostalih
+            // ako ne, crta
+            // ako da, menja poziciju i ponovo proverava
+            politicar.imaSudar(vulin);
+            politicar.crtaj();
+
 
         } // kraj crtajSlike
 
-        
-        function proveriTeCrtaj(ovaj, drugi){
+
+
+        /*
+        function akoJeSlobodnoCrtaj(ovaj, drugi){
             if(!ovaj.imaSudar(drugi)) {
                 ovaj.crtaj();
             } else {
@@ -177,7 +184,28 @@
                 } // kraj while
             } // kraj else
         }
-        
+*/
+
+        // vraca true/false
+        function proveriSudar(ovaj, ostali){
+            // izbacuje sebe
+            var index = ostali.indexOf(ovaj);
+            if (index > -1) {
+                console.log(ostali)
+                ostali.splice(index, 1);
+            }
+
+            // ide redom kroz ostale i proverava sudar
+            for (var i = 0; i < ostali.length; i++) {
+
+                // crta sebe na prvo slobodno mesto
+                if( !ovaj.imaSudar(ostali[i]) ) {
+                    ovaj.crtaj();
+                    break;
+                }
+            }
+        }
+
 
         function dajKoordinate(){
             var slucajna_pozicija = Math.floor(Math.random() * 6);
@@ -274,10 +302,10 @@
                 this.x = dajKoordinate()[0];
                 this.y = dajKoordinate()[1];
             }
-            this.imaSudar = function(drugiKarakter){
-                if(this.x == drugiKarakter.x && this.y == drugiKarakter.y){
+            this.imaSudar = function(drugi){
+                if(this.x == drugi.x && this.y == drugi.y){
                     return true;
-                }
+                } else return false;
             }
 
         }
