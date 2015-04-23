@@ -21,9 +21,8 @@
 
     <script>
 
-        // da ne izlaze na isti prozor
-            // uneti metodu proveriSudar
-            // ovaj karakter proverava sve redom karaktere
+        // proverava sudar ovog sa svima redom
+        // nakon sto dodeli pozicije, pre nego ih iscrta
 
         // da ostaju na prozoru duze od brzine animacije
         // politicar menja sliku na pogodak
@@ -42,7 +41,9 @@
         var animacija;
         var uvodna_spica;
         var politicar;
+        var politicar2;
         var vulin;
+        var karakteri = [];
 
         var BAZICNA_SIRINA = 1280; // ekrana
         var BRZINA_IGRICE = 1500; // veci broj je sporije
@@ -62,7 +63,7 @@
 
         // nazivi su bitni, od njih pravi img objekte
         var slike = {
-            pozadina: 'slike/skupstina.png',            // pozadina mora da se zove pozadina, ostalo kako oces !
+            pozadina: 'slike/skupstina.png',            // pozadina mora da se zove pozadina, ostalo kako bilo !
             vulin_slika: 'slike/vulin.png',
             politicar_slika: 'slike/politicar.png'
         }
@@ -82,10 +83,10 @@
             misY = event.clientY;
 
             if(uvod){
-                postaviScenu();
-                uvod = false;
-                igranje = true;
                 clearInterval(uvodna_spica);
+                uvod = false;
+                postaviScenu();
+                igranje = true;
             }
 
             if(igranje){
@@ -100,8 +101,7 @@
 
 		function postaviScenu(){
             animacija = setInterval(azuriraj, BRZINA_IGRICE);
-            // Karakter() poziva zavisne funkcije, mora posle ucitavanja pozadine
-            praviKaraktere();
+            praviKaraktere();   // zasivno od nova_visina_pozadine, koju kreira funkcija ucitajSlike()
             crtajSlike();
             prikaziPoene();
 		}
@@ -109,7 +109,8 @@
 
 		function azuriraj(){
             if(igranje){
-                politicar.slucajnaPozicija();     // prvo odredjuje koordinate, pa crta
+
+                politicar.slucajnaPozicija();                   // prvo odredjuje koordinate, pa crta
                 vulin.slucajnaPozicija();
                 crtajSlike();
                 prikaziPoene();
@@ -143,16 +144,40 @@
 
         function praviKaraktere(){
             politicar = new Karakter(politicar_slika);
+            politicar2 = new Karakter(politicar_slika);
             vulin = new Karakter(vulin_slika);
+            karakteri.push(politicar);
+            karakteri.push(politicar2);
+            karakteri.push(vulin);
         }
 
 
         function crtajSlike(){      // iznova crta slike svaki frejm
             sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
-            politicar.crtaj();
             vulin.crtaj();
-        }
 
+            // proveriti sudar sa svima redom karakteri[]
+
+            proveriTeCrtaj(politicar, vulin);
+            proveriTeCrtaj(politicar2, politicar);
+
+        } // kraj crtajSlike
+
+        
+        function proveriTeCrtaj(ovaj, drugi){
+            if(!ovaj.imaSudar(drugi)) {
+                ovaj.crtaj();
+            } else {
+                while(ovaj.imaSudar(drugi)) {
+                    ovaj.slucajnaPozicija();
+                    if(!ovaj.imaSudar(drugi)) {
+                        ovaj.crtaj();
+                        break;
+                    }
+                } // kraj while
+            } // kraj else
+        }
+        
 
         function dajKoordinate(){
             var slucajna_pozicija = Math.floor(Math.random() * 6);
@@ -209,8 +234,6 @@
                 }
 
             }, 30);
-
-            //sadrzaj.fillText("Spremi se za obracun!", window.innerWidth/2 - window.innerWidth/4 + 50, window.innerHeight/2 - window.innerHeight/4 + 100);
         }
 
 
@@ -251,6 +274,12 @@
                 this.x = dajKoordinate()[0];
                 this.y = dajKoordinate()[1];
             }
+            this.imaSudar = function(drugiKarakter){
+                if(this.x == drugiKarakter.x && this.y == drugiKarakter.y){
+                    return true;
+                }
+            }
+
         }
 
 
