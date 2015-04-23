@@ -191,6 +191,7 @@
 
         // vraca true/false
         function proveriSudar(ovaj, ostali){
+            var slobodno = true;
             // izbacuje sebe
             var index = ostali.indexOf(ovaj);
             if (index > -1) {
@@ -200,12 +201,7 @@
 
             // ide redom kroz ostale i proverava sudar
             for (var i = 0; i < ostali.length; i++) {
-
-                // crta sebe na prvo slobodno mesto
-                if( !ovaj.imaSudar(ostali[i]) ) {
-                    ovaj.crtaj();
-                    break;
-                }
+                console.log( ovaj.imaSudar(ostali[i]) );
             }
         }
 
