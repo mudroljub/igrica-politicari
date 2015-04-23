@@ -153,17 +153,21 @@
         function crtajSlike(){      // iznova crta slike svaki frejm
             sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
 
-            // uzima koordinate
             vulin.slucajnaPozicija();
             vulin.crtaj();
 
             politicar.slucajnaPozicija();
 
+            // uzima koordinate
             // proverava da li se na toj poziciji vec nalazi neko od ostalih
             // ako ne, crta
             // ako da, menja poziciju i ponovo proverava
+
             politicar.imaSudar(vulin);
             politicar.crtaj();
+
+            // slobodno = true
+            // visestruko proverava tako sto vraca slobodno = true & true
 
 
         } // kraj crtajSlike
