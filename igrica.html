@@ -65,6 +65,7 @@
         var slike = {
             pozadina: 'slike/skupstina.png',            // pozadina mora da se zove pozadina, ostalo kako bilo !
             vulin_slika: 'slike/vulin-stari.png',
+			toma_slika: 'slike/toma2.png',
             politicar_slika: 'slike/politicar.png'
         }
 
@@ -74,11 +75,9 @@
         ucitajSlike(slike, uvodniProzor);
         
 
-
         /*************** SLUSACI ***************/
 
 		platno.addEventListener('click', reagujNaKlikove);
-
 
 
         /*************** FUNKCIJE ***************/
@@ -95,7 +94,6 @@
 
 		function azuriraj(){
             if(igranje){
-
                 crtajSlike();
                 prikaziPoene();
                 vreme_igre--;
@@ -127,7 +125,7 @@
 
         function praviKaraktere(){
             politicar = new Karakter(politicar_slika);
-            politicar2 = new Karakter(vulin_slika);
+            politicar2 = new Karakter(toma_slika);
             vulin = new Karakter(vulin_slika);
             karakteri.push(politicar);
             karakteri.push(politicar2);
