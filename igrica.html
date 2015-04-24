@@ -71,33 +71,19 @@
 
         /*************** POZIVI ***************/
 
-        ucitajSlike(slike, function(slike) {
-            uvodniProzor();
-        });
+        ucitajSlike(slike, uvodniProzor);
         
+
 
         /*************** SLUSACI ***************/
 
-		platno.addEventListener('click', function(event){
-            misX = event.clientX;
-            misY = event.clientY;
+		platno.addEventListener('click', reagujNaKlikove);
 
-            if(uvod){
-                clearInterval(uvodna_spica);
-                uvod = false;
-                postaviScenu();
-                igranje = true;
-            }
-
-            if(igranje){
-                proveriPogodak(politicar);
-                proveriPogodak(vulin, "To boli!")
-                prikaziPoene();
-            }
-		})
 
 
         /*************** FUNKCIJE ***************/
+
+
 
 		function postaviScenu(){
             animacija = setInterval(azuriraj, BRZINA_IGRICE);
@@ -125,18 +111,17 @@
             for (var ova_slika in slike) {
                 // pravi globalnu varijablu sa nazivom slike !
                 window[ova_slika] = new Image();
-
                 // kada ucita ovu sliku, ako su ostale ucitane, poziva povratnu funkciju
-                window[ova_slika].onload = function() {
+                window[ova_slika].onload = function kadUcitas() {
                     ucitaneSlike++;
                     if (ucitaneSlike >= brojSlika) {
+                        nova_visina_pozadine = (window.innerWidth / pozadina.width) * pozadina.height;  // prilagodjava pozadinu
                         povratnaRadnja();
                     }
                 };
                 // daje izvor slici
                 window[ova_slika].src = slike[ova_slika];
             }
-            nova_visina_pozadine = (window.innerWidth / pozadina.width) * pozadina.height;  // prilagodjava pozadinu
         }
 
 
@@ -158,28 +143,11 @@
             vulin.crtaj();
 
             politicar2.slucajnaPozicija();
-            politicar2.akoJeSlobodnoCrtaj(karakteri);
+            politicar2.naSlobodnomCrtaj(karakteri);
 
             politicar.slucajnaPozicija();
-            politicar.akoJeSlobodnoCrtaj(karakteri);
-            console.log(karakteri)
-
+            politicar.naSlobodnomCrtaj(karakteri);
         } // kraj crtajSlike
-
-
-        /* uzima niz karaktera, izbacuje sebe, trazi slobodnu poziciju, vraca sebe */
-        function imaLiMesta(ovaj, ostali){
-            var index = ostali.indexOf(ovaj);
-            ostali.splice(index, 1);    // izbacuje sebe
-
-            var slobodno = true;
-            // ide redom kroz ostale i proverava sudar
-            for (var i = 0; i < ostali.length; i++) {
-                slobodno = slobodno & !ovaj.imaSudar(ostali[i]);
-            }
-            ostali.push(ovaj);          // vraca sebe
-            return slobodno;
-        }
 
 
         function dajKoordinate(){
@@ -240,6 +208,25 @@
         }
 
 
+        function reagujNaKlikove(event){
+            misX = event.clientX;
+            misY = event.clientY;
+
+            if(uvod){
+                clearInterval(uvodna_spica);
+                postaviScenu();
+                igranje = true;
+                uvod = false;
+            }
+
+            if(igranje){
+                proveriPogodak(politicar);
+                proveriPogodak(vulin, "To boli!")
+                prikaziPoene();
+            }
+        }
+
+
         function proveriKraj(){
             if(vreme_igre < 1) {
                 clearInterval(animacija);
@@ -267,38 +254,62 @@
             this.sirina = slika.width;
             this.visina = slika.height;
 
+
+            /* uzima slucajne koordinate i pripisuje sebi */
+            this.slucajnaPozicija = function() {
+                this.x = dajKoordinate()[0];
+                this.y = dajKoordinate()[1];
+            }   // slucajnaPozicija
+
+
+            /* crta sebe na zadatim koordinatama ili slucajnim ako nisu zadate */
             this.crtaj = function(x, y) {
                 if(!x) x = this.x;
                 if(!y) y = this.y;
                 sadrzaj.drawImage(slika, x, y, prilagodiSliku(slika)[0], prilagodiSliku(slika)[1]);
-            }
+            }   // kraj crtaj
 
-            this.slucajnaPozicija = function() {
-                this.x = dajKoordinate()[0];
-                this.y = dajKoordinate()[1];
-            }
-            this.imaSudar = function(onaj){
-                if(this.x == onaj.x && this.y == onaj.y){
+
+            /* proverava jel drugi karakter zauzeo njegovu poziciju */
+            this.jelDrugiZauzeo = function(drugi_karakter){
+                if(this.x == drugi_karakter.x && this.y == drugi_karakter.y){
                     return true;
                 } else return false;
-            }
+            }   // kraj jelDrugiZauzeo
 
-            this.akoJeSlobodnoCrtaj = function (drugi) {
-                if ( imaLiMesta(this, drugi) ) {
+
+            /* uzima niz likova, proverava dal su zauzeli njegovu poziciju, vraca jel slobodna */
+            this.jelOvoSlobodno = function (ostali) {
+                var index = ostali.indexOf(this);
+                ostali.splice(index, 1);    // izbacuje sebe
+
+                var slobodno = true;
+                // ide redom kroz ostale i proverava sudar
+                for (var i = 0; i < ostali.length; i++) {
+                    slobodno = slobodno & !this.jelDrugiZauzeo(ostali[i]);
+                }
+                ostali.push(this);          // vraca sebe
+                return slobodno;
+            }   // kraj jelOvoSlobodno
+
+
+            /* ako niko nije zauzeo poziciju, crta sebe, ako je zauzeto, uporno resetuje svoju poziciju */
+            this.naSlobodnomCrtaj = function (drugi_karakter) {
+                if ( this.jelOvoSlobodno(drugi_karakter) ) {
                     this.crtaj();
                 } else {
-                    while ( !imaLiMesta(this, drugi) ) {
+                    while ( !this.jelOvoSlobodno(drugi_karakter) ) {
                         this.slucajnaPozicija();
-                        if ( imaLiMesta(this, drugi) ) {
+                        if ( this.jelOvoSlobodno(drugi_karakter) ) {
                             this.crtaj();
                             break;
                         }
                     }
                 }
-            }
+            }   // kraj naSlobodnomCrtaj
 
+        }   // kraj Karakter
 
-        }
 
 
     </script>
