@@ -75,7 +75,6 @@
 
 
         var slike = {
-            pozadina: 'slike/skupstina2.png',            // pozadina mora da se zove pozadina, ostalo kako bilo !
             vulin: 'slike/vulin-stari.png',
 			toma: 'slike/toma2.png',
             politicar: 'slike/politicar.png'
@@ -132,25 +131,11 @@
 
 
         function praviKaraktere(){
-
-            politicar = new Karakter(window['politicar_slika']);
-            toma = new Karakter(toma_slika);
-            vulin = new Karakter(vulin_slika);
-            karakteri.push(politicar);
-            karakteri.push(toma);
-            karakteri.push(vulin);
-
-
             for (var ovaj_lik in slike){
-                console.log(ovaj_lik);                      // naziv (string)
-                console.log(ovaj_lik + "_slika");           // naziv slike (string)
-                console.log(window[ovaj_lik]);              // objekt
-                console.log(window[ovaj_lik + "_slika"]);   // slika
-            }
-
-        }
-
-
+                window[ovaj_lik] = new Karakter(window[ovaj_lik + "_slika"]);
+                karakteri.push(window[ovaj_lik]);
+            }   // kraj for
+        }   // kraj praviKaraktere()
 
 
         /* prvog crta gde bilo, za ostale proverava slobodno mesto */
