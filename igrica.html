@@ -21,11 +21,15 @@
 
     <script>
 
+        // prilikom prvog ucitavanja prilagoditi sve slike
+
         // da automatski pravi politicare i ubacuje u niz
         // da ostaju na prozoru duze od brzine animacije
         // politicar menja sliku na pogodak
 		// vicu evropa nema altenativu
 		// grafiti na skupstini vucicu pederu
+
+        // kad je presirok ekran, sece sliku po visini !
 
         "use strict";
         window.$ = function(selector) {
@@ -41,7 +45,7 @@
         var animacija;
         var uvodna_spica;
         var politicar;
-        var politicar2;
+        var toma;
         var vulin;
         var karakteri = [];
 
@@ -62,11 +66,19 @@
         sadrzaj.strokeStyle = 'black';
 
         // nazivi su bitni, od njih pravi img objekte
+        var pozadina = new Image();
+        pozadina.onload = function() {
+            nova_visina_pozadine = (window.innerWidth / pozadina.width) * pozadina.height;  // prilagodjava pozadinu
+            sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
+        };
+        pozadina.src = 'slike/skupstina2.png';
+
+
         var slike = {
             pozadina: 'slike/skupstina2.png',            // pozadina mora da se zove pozadina, ostalo kako bilo !
-            vulin_slika: 'slike/vulin-stari.png',
-			toma_slika: 'slike/toma2.png',
-            politicar_slika: 'slike/politicar.png'
+            vulin: 'slike/vulin-stari.png',
+			toma: 'slike/toma2.png',
+            politicar: 'slike/politicar.png'
         }
 
 
@@ -107,30 +119,37 @@
             var ucitaneSlike = 0;
 
             for (var ova_slika in slike) {
-                // pravi globalnu varijablu sa nazivom slike !
-                window[ova_slika] = new Image();
-                // kada ucita ovu sliku, ako su ostale ucitane, poziva povratnu funkciju
-                window[ova_slika].onload = function kadUcitas() {
+                window[ova_slika + "_slika"] = new Image();              // pravi globalnu varijablu sa nazivom slike !
+                window[ova_slika + "_slika"].onload = function kadUcitas() {
                     ucitaneSlike++;
                     if (ucitaneSlike >= brojSlika) {
-                        nova_visina_pozadine = (window.innerWidth / pozadina.width) * pozadina.height;  // prilagodjava pozadinu
                         povratnaRadnja();
                     }
                 };
-                // daje izvor slici
-                window[ova_slika].src = slike[ova_slika];
+                window[ova_slika + "_slika"].src = slike[ova_slika];
             }
         }
 
 
         function praviKaraktere(){
-            politicar = new Karakter(politicar_slika);
-            politicar2 = new Karakter(toma_slika);
+
+            /*
+            for (var ovaj_lik in slike){
+                window[ovaj_lik] = new Karakter(window[ovaj_lik + "_slika"]);
+                console.log(window[ovaj_lik + "_slika"]);
+                karakteri.push(window[ovaj_lik]);
+            }
+            */
+
+            politicar = new Karakter(window['politicar_slika']);
+            toma = new Karakter(toma_slika);
             vulin = new Karakter(vulin_slika);
             karakteri.push(politicar);
-            karakteri.push(politicar2);
+            karakteri.push(toma);
             karakteri.push(vulin);
         }
+
+
 
 
         /* prvog crta gde bilo, za ostale proverava slobodno mesto */
@@ -140,8 +159,8 @@
             vulin.slucajnaPozicija();
             vulin.crtaj();
 
-            politicar2.slucajnaPozicija();
-            politicar2.naSlobodnomCrtaj(karakteri);
+            toma.slucajnaPozicija();
+            toma.naSlobodnomCrtaj(karakteri);
 
             politicar.slucajnaPozicija();
             politicar.naSlobodnomCrtaj(karakteri);
@@ -177,14 +196,20 @@
             poruka = poruka || "Jaoj";
             desno = desno || (Math.random() * 100) - 50;
             dole = dole || (Math.random() * 100) - 50;
+
+            sadrzaj.font = "30px Verdana";
+
             if( (misX > ovaj_lik.x && misX < ovaj_lik.x + ovaj_lik.sirina) && (misY > ovaj_lik.y && misY < ovaj_lik.y + ovaj_lik.visina) ){
-                sadrzaj.fillText(poruka, misX + desno, misY + dole);
+                sadrzaj.fillText(poruka, misX+desno, misY+dole, 250);       // poslednji argument je maksimalna shirina
+                sadrzaj.lineWidth = 1;
+                sadrzaj.strokeText(poruka, misX+desno, misY+dole, 250);       // poslednji argument je maksimalna shirina
                 poeni++;
             }
         }
 
 
         function uvodniProzor(){
+            // pravi uvodnu animaciju
             var anim_x = -100;
             var anim_y = 200;
 
@@ -219,7 +244,7 @@
 
             if(igranje){
                 proveriPogodak(politicar);
-				proveriPogodak(politicar2, "Evropa nema alternativu!");
+				proveriPogodak(toma, "Evropa nema alternativu!");
                 proveriPogodak(vulin, "To boli!")
                 prikaziPoene();
             }
