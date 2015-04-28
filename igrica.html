@@ -23,13 +23,11 @@
 
         // prilikom prvog ucitavanja prilagoditi sve slike
 
-        // da automatski pravi politicare i ubacuje u niz
         // da ostaju na prozoru duze od brzine animacije
         // politicar menja sliku na pogodak
-		// vicu evropa nema altenativu
 		// grafiti na skupstini vucicu pederu
 
-        // kad je presirok ekran, sece sliku po visini !
+        // problem: kad je presirok ekran, sece sliku po visini !
 
         "use strict";
         window.$ = function(selector) {
@@ -49,7 +47,8 @@
         var vulin;
         var karakteri = [];
 
-        var BAZICNA_SIRINA = 1280; // ekrana
+        var BAZICNA_SIRINA_EKRANA = 1280;
+        var BAZICNA_VISINA_SLIKE = 118;
         var BRZINA_IGRICE = 1500; // veci broj je sporije
         var vreme_igre = 30;
         var poeni = 0;
@@ -65,7 +64,6 @@
         sadrzaj.fillStyle = "white";
         sadrzaj.strokeStyle = 'black';
 
-        // nazivi su bitni, od njih pravi img objekte
         var pozadina = new Image();
         pozadina.onload = function() {
             nova_visina_pozadine = (window.innerWidth / pozadina.width) * pozadina.height;  // prilagodjava pozadinu
@@ -73,10 +71,10 @@
         };
         pozadina.src = 'slike/skupstina2.png';
 
-
+        // nazivi su bitni, od njih pravi img objekte
         var slike = {
             vulin: 'slike/vulin-stari.png',
-			toma: 'slike/toma2.png',
+			toma: 'slike/toma.png',
             politicar: 'slike/politicar.png'
         }
 
@@ -126,6 +124,9 @@
                     }
                 };
                 window[ova_slika + "_slika"].src = slike[ova_slika];
+                // 
+                window[ova_slika + "_slika"].width = window[ova_slika + "_slika"].width / (window[ova_slika + "_slika"].height / BAZICNA_VISINA_SLIKE);
+                window[ova_slika + "_slika"].height = BAZICNA_VISINA_SLIKE;
             }
         }
 
@@ -153,15 +154,18 @@
         } // kraj crtajSlike
 
 
-        function dajKoordinate(){
+        function slucajniProzor(){
+            var gornja_osa = nova_visina_pozadine/4;
+            var donja_osa = nova_visina_pozadine/1.53;
             var slucajna_pozicija = Math.floor(Math.random() * 6);
+            
             pozicije_prozora = [
-                [window.innerWidth/5.9, nova_visina_pozadine/4],             // prvi prozor
-                [window.innerWidth/2.2, nova_visina_pozadine/4],
-                [window.innerWidth/1.35, nova_visina_pozadine/4],
-                [window.innerWidth/5.9, nova_visina_pozadine/1.55],
-                [window.innerWidth/2.2, nova_visina_pozadine/1.55],
-                [window.innerWidth/1.35, nova_visina_pozadine/1.55]
+                [window.innerWidth/5.9, gornja_osa],             // prvi prozor
+                [window.innerWidth/2.2, gornja_osa],             // drugi prozor
+                [window.innerWidth/1.35, gornja_osa],
+                [window.innerWidth/5.9, donja_osa],
+                [window.innerWidth/2.2, donja_osa],
+                [window.innerWidth/1.35, donja_osa]
             ]
             return [pozicije_prozora[slucajna_pozicija][0], pozicije_prozora[slucajna_pozicija][1]];
         }
@@ -250,8 +254,8 @@
 
         // prilagodjava sliku za razne ekrane, ne popravlja pogresnu velicinu slike!
         function prilagodiSliku(slika){
-            var nova_sirina_slike = slika.width * (innerWidth/BAZICNA_SIRINA);
-            var nova_visina_slike = slika.height * (innerWidth/BAZICNA_SIRINA);
+            var nova_sirina_slike = slika.width * (innerWidth/BAZICNA_SIRINA_EKRANA);
+            var nova_visina_slike = slika.height * (innerWidth/BAZICNA_SIRINA_EKRANA);
             return [nova_sirina_slike, nova_visina_slike]
         }
 
@@ -259,16 +263,16 @@
         /*************** KLASE ***************/
 
         function Karakter(slika){
-            this.x = dajKoordinate()[0];
-            this.y = dajKoordinate()[1];
+            this.x = slucajniProzor()[0];
+            this.y = slucajniProzor()[1];
             this.sirina = slika.width;
             this.visina = slika.height;
 
 
             /* uzima slucajne koordinate i pripisuje sebi */
             this.slucajnaPozicija = function() {
-                this.x = dajKoordinate()[0];
-                this.y = dajKoordinate()[1];
+                this.x = slucajniProzor()[0];
+                this.y = slucajniProzor()[1];
             }   // slucajnaPozicija
 
 
