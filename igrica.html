@@ -22,7 +22,7 @@
     <script>
 
         // da ostaju na prozoru duze od brzine animacije
-        // politicar menja sliku na pogodak
+        // dacic menja sliku na pogodak
 		// grafiti na skupstini vucicu pederu
 
         // problem: kad je presirok ekran, sece sliku po visini !
@@ -40,14 +40,11 @@
         var misY;
         var animacija;
         var uvodna_spica;
-        var politicar;
-        var toma;
-        var vulin;
         var karakteri = [];
 
         var BAZICNA_SIRINA_EKRANA = 1280;
         var BAZICNA_VISINA_SLIKE = 118;
-        var BRZINA_IGRICE = 1500; // veci broj je sporije
+        var BRZINA_IGRICE = 1200; // veci broj je sporije
         var vreme_igre = 30;
         var poeni = 0;
         var uvod = true;
@@ -69,17 +66,17 @@
         };
         pozadina.src = 'slike/skupstina2.png';
 
-        // nazivi su bitni, od njih pravi img objekte
+        // nazivi su bitni, od njih pravi objekte i slike
         var slike = {
-            vulin: 'slike/vulin-stari.png',
+            vulin: 'slike/vulin.png',
 			toma: 'slike/toma.png',
-            politicar: 'slike/politicar.png'
+            dacic: 'slike/dacic.png'
         }
-
+        var brojSlika = Object.keys(slike).length;
 
         /*************** POZIVI ***************/
 
-        ucitajSlike(slike, uvodniProzor);
+        praviSlike(slike, uvodniProzor);
         
 
         /*************** SLUSACI ***************/
@@ -93,7 +90,7 @@
 
 		function postaviScenu(){
             animacija = setInterval(azuriraj, BRZINA_IGRICE);
-            praviKaraktere();   // zasivno od nova_visina_pozadine, koju kreira funkcija ucitajSlike()
+            praviKaraktere(slike);   // pravi karaktere od datih slika
             crtajSlike();
             prikaziPoene();
 		}
@@ -109,10 +106,8 @@
 		}
 
 
-        function ucitajSlike(slike, povratnaRadnja) {         // ucitava i pravi img objekte sa nazivima
-            var brojSlika = Object.keys(slike).length;
+        function praviSlike(slike, povratnaRadnja) {         // ucitava i pravi img objekte sa nazivima
             var ucitaneSlike = 0;
-
             for (var ova_slika in slike) {
                 window[ova_slika + "_slika"] = new Image();              // pravi globalnu varijablu sa nazivom slike !
                 window[ova_slika + "_slika"].onload = function kadUcitas() {
@@ -122,14 +117,14 @@
                     }
                 };
                 window[ova_slika + "_slika"].src = slike[ova_slika];
-                // 
+                // prilagodjava velicinu slika bazicnoj velicini
                 window[ova_slika + "_slika"].width = window[ova_slika + "_slika"].width / (window[ova_slika + "_slika"].height / BAZICNA_VISINA_SLIKE);
                 window[ova_slika + "_slika"].height = BAZICNA_VISINA_SLIKE;
             }
         }
 
 
-        function praviKaraktere(){
+        function praviKaraktere(slike){
             for (var ovaj_lik in slike){
                 window[ovaj_lik] = new Karakter(window[ovaj_lik + "_slika"]);
                 karakteri.push(window[ovaj_lik]);
@@ -137,18 +132,17 @@
         }   // kraj praviKaraktere()
 
 
-        /* prvog crta gde bilo, za ostale proverava slobodno mesto */
         function crtajSlike(){
             sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
 
-            vulin.slucajnaPozicija();
-            vulin.crtaj();
+            dacic.naSlobodnomCrtaj(karakteri);
+            if(vreme_igre <= 20) {
+                vulin.naSlobodnomCrtaj(karakteri);
+            }
+            if(vreme_igre <= 10) {
+                toma.naSlobodnomCrtaj(karakteri);
+            }
 
-            toma.slucajnaPozicija();
-            toma.naSlobodnomCrtaj(karakteri);
-
-            politicar.slucajnaPozicija();
-            politicar.naSlobodnomCrtaj(karakteri);
         } // kraj crtajSlike
 
 
@@ -231,7 +225,7 @@
             }
 
             if(igranje){
-                proveriPogodak(politicar);
+                proveriPogodak(dacic);
 				proveriPogodak(toma, "Evropa nema alternativu!");
                 proveriPogodak(vulin, "To boli!")
                 prikaziPoene();
@@ -306,13 +300,14 @@
 
 
             /* ako niko nije zauzeo poziciju, crta sebe, ako je zauzeto, uporno resetuje svoju poziciju */
-            this.naSlobodnomCrtaj = function (drugi_karakter) {
-                if ( this.jelOvoSlobodno(drugi_karakter) ) {
+            this.naSlobodnomCrtaj = function (ostali) {
+                this.slucajnaPozicija();
+                if ( this.jelOvoSlobodno(ostali) ) {
                     this.crtaj();
                 } else {
-                    while ( !this.jelOvoSlobodno(drugi_karakter) ) {
+                    while ( !this.jelOvoSlobodno(ostali) ) {
                         this.slucajnaPozicija();
-                        if ( this.jelOvoSlobodno(drugi_karakter) ) {
+                        if ( this.jelOvoSlobodno(ostali) ) {
                             this.crtaj();
                             break;
                         }
