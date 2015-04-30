@@ -21,9 +21,10 @@
 
     <script>
 
+
+        // da ostaju na prozoru duze od brzine animacije
         // da izlaze animirano, kao da proviruju
         // da ne izlaze uvek, nego da malo sacekaju
-        // da ostaju na prozoru duze od brzine animacije
         // da menjaju sliku na pogodak
         // da nasumicno ispustaju parole
 		// grafiti na skupstini vucicu pederu
@@ -103,14 +104,17 @@
 
 		function azuriraj(){
             if(igranje){
-                var ova_sekunda = new Date().getSeconds();
-                if(referentna_sekunda != ova_sekunda) {
-                    crtajSlike();
-                    referentna_sekunda = ova_sekunda;
-                    vreme_igre--;
-                }
+                // ovo izvrsava na svaki frejm
+                crtajSlike();
                 prikaziPoene();
                 proveriKraj();
+
+                if(referentna_sekunda != new Date().getSeconds()) {
+                    // ovo izvrsava svake sekunde
+                    dodeliPozicije();
+                    vreme_igre--;
+                    referentna_sekunda = new Date().getSeconds();
+                }
                 ovaAnimacija = requestAnimationFrame(azuriraj);
             }
 		}
@@ -152,15 +156,22 @@
         }   // kraj praviKaraktere()
 
 
+        function dodeliPozicije(){
+            dacic.slucajnaPozicija();
+            vulin.nadjiSlobodnuPoziciju(karakteri);
+            toma.nadjiSlobodnuPoziciju(karakteri);
+        }
+
         function crtajSlike(){
             sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
-            dacic.naSlobodnomCrtaj(karakteri);
+
+            dacic.crtaj();
 
             if(vreme_igre <= 20) {
-                vulin.naSlobodnomCrtaj(karakteri);
+                vulin.crtaj();
             }
             if(vreme_igre <= 10) {
-                toma.naSlobodnomCrtaj(karakteri);
+                toma.crtaj();
             }
         } // kraj crtajSlike
 
@@ -209,10 +220,7 @@
 
         function pustiUvod(){
             // pravi uvodnu animaciju
-            //uvodna_spica = setInterval(iduSlova, 30);
-
             uvodna_spica = requestAnimationFrame(iduSlova);
-
         }
 
 
@@ -268,10 +276,9 @@
         /*************** KLASE ***************/
 
         function Karakter(slika){
-            // potrebno za proveru sudara
+            // prima visinu i sirinu od svoje slike
             this.sirina = slika.width;
             this.visina = slika.height;
-            this.mrdanjeSlike;
 
             /* uzima slucajne koordinate i pripisuje sebi */
             this.slucajnaPozicija = function() {
@@ -311,22 +318,15 @@
             }   // kraj jelOvoSlobodno
 
 
-            /* ako niko nije zauzeo poziciju, crta sebe, ako je zauzeto, uporno resetuje svoju poziciju */
-            this.naSlobodnomCrtaj = function (ostali) {
+            /* uzima slucajnu poziciju, ako je zauzeta, uporno trazi slobodnu */
+            this.nadjiSlobodnuPoziciju = function (ostali) {
                 this.slucajnaPozicija();
-                if ( this.jelOvoSlobodno(ostali) ) {
-                    this.crtaj();
-                } else {
-                    while ( !this.jelOvoSlobodno(ostali) ) {
-                        this.slucajnaPozicija();
-                        if ( this.jelOvoSlobodno(ostali) ) {
-                            this.crtaj();
-                        }
-                    }
+                while ( !this.jelOvoSlobodno(ostali) ) {
+                    this.slucajnaPozicija();
                 }
             }   // kraj naSlobodnomCrtaj
 
-        }   // kraj Karakter
+        }   // kraj klase Karakter
 
 
 
