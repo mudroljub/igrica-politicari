@@ -41,18 +41,19 @@
 		var pozicije_prozora;
         var misX;
         var misY;
-        var animacija;
+        var ovaAnimacija;
         var uvodna_spica;
-        var karakteri = [];
+        var slova_x = -100;
+        var slova_y = 200;
 
         var BAZICNA_SIRINA_EKRANA = 1280;
         var BAZICNA_VISINA_SLIKE = 118;
-        var BRZINA_ANIMACIJE = 30; // veci broj je sporije
         var vreme_igre = 30;
         var poeni = 0;
         var uvod = true;
         var igranje = false;
         var referentna_sekunda = 0;
+        var karakteri = [];
 
         var platno = document.getElementById('platno');
         platno.height = window.innerHeight;
@@ -70,7 +71,7 @@
         };
         pozadina.src = 'slike/skupstina2.png';
 
-        // nazivi su bitni, od njih pravi objekte i slike
+        // nazivi su bitni, od njih pravi objekte i slike !
         var slike = {
             vulin: 'slike/vulin.png',
 			toma: 'slike/toma.png',
@@ -92,7 +93,8 @@
         /*************** FUNKCIJE ***************/
 
 		function postaviScenu(){
-            animacija = setInterval(azuriraj, BRZINA_ANIMACIJE);
+            ovaAnimacija = requestAnimationFrame(azuriraj);
+
             praviKaraktere(slike);   // pravi karaktere od datih slika
             crtajSlike();
             prikaziPoene();
@@ -109,6 +111,7 @@
                 }
                 prikaziPoene();
                 proveriKraj();
+                ovaAnimacija = requestAnimationFrame(azuriraj);
             }
 		}
 
@@ -206,24 +209,27 @@
 
         function pustiUvod(){
             // pravi uvodnu animaciju
-            var anim_x = -100;
-            var anim_y = 200;
+            //uvodna_spica = setInterval(iduSlova, 30);
 
-            uvodna_spica = setInterval(function iduSlova(){
-                sadrzaj.fillStyle = "black";
-                sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
-                sadrzaj.fillStyle="#fff";
-                sadrzaj.font = "48px Verdana";
-                sadrzaj.fillText("Spremi se za obracun!", anim_x += 5, anim_y);
-                if(anim_x > innerWidth-100) {
-                    anim_x = -100;
-                    anim_y += 100;
-                }
-                if(anim_y > innerHeight - 100) {
-                    anim_y = 200;
-                }
+            uvodna_spica = requestAnimationFrame(iduSlova);
 
-            }, 30);
+        }
+
+
+        function iduSlova(){
+            sadrzaj.fillStyle = "black";
+            sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
+            sadrzaj.fillStyle="#fff";
+            sadrzaj.font = "48px Verdana";
+            sadrzaj.fillText("Spremi se za obracun!", slova_x += 5, slova_y);
+            if(slova_x > innerWidth-100) {
+                slova_x = -100;
+                slova_y += 100;
+            }
+            if(slova_y > innerHeight - 100) {
+                slova_y = 200;
+            }
+            uvodna_spica = requestAnimationFrame(iduSlova);
         }
 
 
@@ -232,7 +238,7 @@
             misY = event.clientY;
 
             if(uvod){
-                clearInterval(uvodna_spica);
+                cancelAnimationFrame(uvodna_spica);
                 postaviScenu();
                 igranje = true;
                 uvod = false;
@@ -241,7 +247,7 @@
             if(igranje){
                 proveriPogodak(dacic);
 				proveriPogodak(toma, "Evropa nema alternativu!");
-                proveriPogodak(vulin, "To boli!")
+                proveriPogodak(vulin, "To boli!");
                 prikaziPoene();
             }
         }
@@ -249,7 +255,7 @@
 
         function proveriKraj(){
             if(vreme_igre < 1) {
-                clearInterval(animacija);
+                cancelAnimationFrame(ovaAnimacija);
                 sadrzaj.fillRect(window.innerWidth/2 - window.innerWidth/4, window.innerHeight/2 - window.innerHeight/4, window.innerWidth/2, window.innerHeight/2);
                 sadrzaj.fillStyle="#000";
                 sadrzaj.font = "48px Verdana";
