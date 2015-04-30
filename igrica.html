@@ -21,8 +21,11 @@
 
     <script>
 
+        // da izlaze animirano, kao da proviruju
+        // da ne izlaze uvek, nego da malo sacekaju
         // da ostaju na prozoru duze od brzine animacije
-        // dacic menja sliku na pogodak
+        // da menjaju sliku na pogodak
+        // da nasumicno ispustaju parole
 		// grafiti na skupstini vucicu pederu
 
         // problem: kad je presirok ekran, sece sliku po visini !
@@ -44,11 +47,12 @@
 
         var BAZICNA_SIRINA_EKRANA = 1280;
         var BAZICNA_VISINA_SLIKE = 118;
-        var BRZINA_IGRICE = 1200; // veci broj je sporije
+        var BRZINA_ANIMACIJE = 30; // veci broj je sporije
         var vreme_igre = 30;
         var poeni = 0;
         var uvod = true;
         var igranje = false;
+        var referentna_sekunda = 0;
 
         var platno = document.getElementById('platno');
         platno.height = window.innerHeight;
@@ -74,7 +78,7 @@
         }
         var brojSlika = Object.keys(slike).length;
 
-        
+
         /*************** POZIVI ***************/
 
         praviSlike(slike, pustiUvod);
@@ -82,15 +86,13 @@
 
         /*************** SLUSACI ***************/
 
-		platno.addEventListener('click', reagujNaKlikove);
+		platno.addEventListener('click', reagujNaKlik);
 
 
         /*************** FUNKCIJE ***************/
 
-
-
 		function postaviScenu(){
-            animacija = setInterval(azuriraj, BRZINA_IGRICE);
+            animacija = setInterval(azuriraj, BRZINA_ANIMACIJE);
             praviKaraktere(slike);   // pravi karaktere od datih slika
             crtajSlike();
             prikaziPoene();
@@ -99,9 +101,13 @@
 
 		function azuriraj(){
             if(igranje){
-                crtajSlike();
+                var ova_sekunda = new Date().getSeconds();
+                if(referentna_sekunda != ova_sekunda) {
+                    crtajSlike();
+                    referentna_sekunda = ova_sekunda;
+                    vreme_igre--;
+                }
                 prikaziPoene();
-                vreme_igre--;
                 proveriKraj();
             }
 		}
@@ -111,25 +117,29 @@
             var ucitaneSlike = 0;
             for (var ova_slika in slike) {
                 window[ova_slika + "_slika"] = new Image();                     // pravi globalnu varijablu sa nazivom slike !
-                window[ova_slika + "_slika"].onload = function kadUcitas() {
+                window[ova_slika + "_slika"].onload = function kadUcita() {
                     ucitaneSlike++;
                     if (ucitaneSlike >= brojSlika) {
-                        prilagodiSlikeProzoru(slike);
+                        prilagodiSlike(slike);
                         povratnaRadnja();
                     }
-                };  // kadUcitas
+                };  // kraj kadUcita()
                 window[ova_slika + "_slika"].src = slike[ova_slika];
             }
         }
 
 
-        function prilagodiSlikeProzoru(slike){
+        function prilagodiSlike(slike){
             for (var ova_slika in slike) {
-                // prilagodjava velicinu slika bazicnoj velicini
+                // prilagodjava sliku standardnoj velicini slike
                 window[ova_slika + "_slika"].width = window[ova_slika + "_slika"].width / (window[ova_slika + "_slika"].height / BAZICNA_VISINA_SLIKE);
                 window[ova_slika + "_slika"].height = BAZICNA_VISINA_SLIKE;
+                // prilagodjava sliku za razne ekrane
+                window[ova_slika + "_slika"].width = window[ova_slika + "_slika"].width * (window.innerWidth/BAZICNA_SIRINA_EKRANA);
+                window[ova_slika + "_slika"].height = window[ova_slika + "_slika"].height * (window.innerWidth/BAZICNA_SIRINA_EKRANA);
             }
         }
+
 
         function praviKaraktere(slike){
             for (var ovaj_lik in slike){
@@ -141,17 +151,14 @@
 
         function crtajSlike(){
             sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
+            dacic.naSlobodnomCrtaj(karakteri);
 
-            //dacic.ovdeCrtaj();
-            dacic.naSlucajnomProzoruCrtaj(karakteri);
-            
             if(vreme_igre <= 20) {
-                vulin.naSlucajnomProzoruCrtaj(karakteri);
+                vulin.naSlobodnomCrtaj(karakteri);
             }
             if(vreme_igre <= 10) {
-                toma.naSlucajnomProzoruCrtaj(karakteri);
+                toma.naSlobodnomCrtaj(karakteri);
             }
-
         } // kraj crtajSlike
 
 
@@ -159,7 +166,6 @@
             var gornja_osa = nova_visina_pozadine/4;
             var donja_osa = nova_visina_pozadine/1.53;
             var slucajna_pozicija = Math.floor(Math.random() * 6);
-            
             pozicije_prozora = [
                 [window.innerWidth/5.9, gornja_osa],             // prvi prozor
                 [window.innerWidth/2.2, gornja_osa],             // drugi prozor
@@ -187,13 +193,12 @@
             poruka = poruka || "Jaoj";
             desno = desno || (Math.random() * 100) - 50;
             dole = dole || (Math.random() * 100) - 50;
-
+            // upisuje poene i ostavlja poruku
             sadrzaj.font = "30px Verdana";
-
             if( (misX > ovaj_lik.x && misX < ovaj_lik.x + ovaj_lik.sirina) && (misY > ovaj_lik.y && misY < ovaj_lik.y + ovaj_lik.visina) ){
-                sadrzaj.fillText(poruka, misX+desno, misY+dole, 250);       // poslednji argument je maksimalna shirina
+                sadrzaj.fillText(poruka, misX+desno, misY+dole, 250);           // poslednji argument je maksimalna shirina teksta
                 sadrzaj.lineWidth = 1;
-                sadrzaj.strokeText(poruka, misX+desno, misY+dole, 250);       // poslednji argument je maksimalna shirina
+                sadrzaj.strokeText(poruka, misX+desno, misY+dole, 250);         // poslednji argument je maksimalna shirina teksta
                 poeni++;
             }
         }
@@ -204,7 +209,7 @@
             var anim_x = -100;
             var anim_y = 200;
 
-            uvodna_spica = setInterval(function(){
+            uvodna_spica = setInterval(function iduSlova(){
                 sadrzaj.fillStyle = "black";
                 sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
                 sadrzaj.fillStyle="#fff";
@@ -222,7 +227,7 @@
         }
 
 
-        function reagujNaKlikove(event){
+        function reagujNaKlik(event){
             misX = event.clientX;
             misY = event.clientY;
 
@@ -253,13 +258,6 @@
             }
         }
 
-        // prilagodjava sliku za razne ekrane, ne popravlja pogresnu velicinu slike!
-        function prilagodiSliku(slika){
-            var nova_sirina_slike = slika.width * (window.innerWidth/BAZICNA_SIRINA_EKRANA);
-            var nova_visina_slike = slika.height * (window.innerWidth/BAZICNA_SIRINA_EKRANA);
-            return [nova_sirina_slike, nova_visina_slike];
-        }
-
 
         /*************** KLASE ***************/
 
@@ -267,6 +265,7 @@
             // potrebno za proveru sudara
             this.sirina = slika.width;
             this.visina = slika.height;
+            this.mrdanjeSlike;
 
             /* uzima slucajne koordinate i pripisuje sebi */
             this.slucajnaPozicija = function() {
@@ -276,11 +275,11 @@
 
 
             /* crta sebe na trenutnim ili zadatim koordinatama */
-            this.ovdeCrtaj = function(x, y) {
+            this.crtaj = function(x, y) {                                       // opciono prima koordinate ili koristi svoje
                 if(!x) x = this.x;
                 if(!y) y = this.y;
-                sadrzaj.drawImage(slika, x, y, prilagodiSliku(slika)[0], prilagodiSliku(slika)[1]);
-            }   // kraj ovdeCrtaj
+                sadrzaj.drawImage(slika, x, y, slika.width, slika.height);      // ako ne ekspliciram crta naturalWidth i naturalHeight
+            }   // kraj crtaj
 
 
             /* proverava jel drugi karakter zauzeo njegovu poziciju */
@@ -291,7 +290,7 @@
             }   // kraj jelDrugiZauzeo
 
 
-            /* uzima niz likova, proverava dal su zauzeli njegovu poziciju, vraca jel slobodna */
+            /* prima niz likova, proverava dal su zauzeli njegovu poziciju, vraca jel slobodna */
             this.jelOvoSlobodno = function (ostali) {
                 var index = ostali.indexOf(this);
                 ostali.splice(index, 1);    // izbacuje sebe
@@ -307,19 +306,19 @@
 
 
             /* ako niko nije zauzeo poziciju, crta sebe, ako je zauzeto, uporno resetuje svoju poziciju */
-            this.naSlucajnomProzoruCrtaj = function (ostali) {
+            this.naSlobodnomCrtaj = function (ostali) {
                 this.slucajnaPozicija();
                 if ( this.jelOvoSlobodno(ostali) ) {
-                    this.ovdeCrtaj();
+                    this.crtaj();
                 } else {
                     while ( !this.jelOvoSlobodno(ostali) ) {
                         this.slucajnaPozicija();
                         if ( this.jelOvoSlobodno(ostali) ) {
-                            this.ovdeCrtaj();
+                            this.crtaj();
                         }
                     }
                 }
-            }   // kraj naSlucajnomProzoruCrtaj
+            }   // kraj naSlobodnomCrtaj
 
         }   // kraj Karakter
 
