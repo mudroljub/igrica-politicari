@@ -21,7 +21,6 @@
 
     <script>
 
-
         // da ostaju na prozoru duze od brzine animacije
         // da izlaze animirano, kao da proviruju
         // da ne izlaze uvek, nego da malo sacekaju
@@ -44,8 +43,8 @@
         var misY;
         var ovaAnimacija;
         var uvodna_spica;
-        var slova_x = -100;
-        var slova_y = 200;
+        var uvodna_slova_x = -100;
+        var uvodna_slova_y = 200;
 
         var BAZICNA_SIRINA_EKRANA = 1280;
         var BAZICNA_VISINA_SLIKE = 118;
@@ -53,7 +52,7 @@
         var poeni = 0;
         var uvod = true;
         var igranje = false;
-        var referentna_sekunda = 0;
+        var prosla_sekunda = 0;
         var karakteri = [];
 
         var platno = document.getElementById('platno');
@@ -72,8 +71,7 @@
         };
         pozadina.src = 'slike/skupstina2.png';
 
-        // nazivi su bitni, od njih pravi objekte i slike !
-        var slike = {
+        var slike = {                           // nazivi su bitni, od njih pravi objekte i slike !
             vulin: 'slike/vulin.png',
 			toma: 'slike/toma.png',
             dacic: 'slike/dacic.png'
@@ -84,7 +82,7 @@
         /*************** POZIVI ***************/
 
         praviSlike(slike, pustiUvod);
-        
+
 
         /*************** SLUSACI ***************/
 
@@ -95,8 +93,11 @@
 
 		function postaviScenu(){
             ovaAnimacija = requestAnimationFrame(azuriraj);
-
             praviKaraktere(slike);   // pravi karaktere od datih slika
+            // dodaje jedinstvene poruke
+            dacic.poruka = "Jaoj";
+            vulin.poruka = "To boli!";
+            toma.poruka = "Evropa nema alternativu!";
             crtajSlike();
             prikaziPoene();
 		}
@@ -105,15 +106,18 @@
 		function azuriraj(){
             if(igranje){
                 // ovo izvrsava na svaki frejm
+                uvodiLikove();
                 crtajSlike();
+                ispisujPoruke();
                 prikaziPoene();
                 proveriKraj();
 
-                if(referentna_sekunda != new Date().getSeconds()) {
+                if(prosla_sekunda != new Date().getSeconds()) {
                     // ovo izvrsava svake sekunde
+                    brisiPoruke();
                     dodeliPozicije();
                     vreme_igre--;
-                    referentna_sekunda = new Date().getSeconds();
+                    prosla_sekunda = new Date().getSeconds();
                 }
                 ovaAnimacija = requestAnimationFrame(azuriraj);
             }
@@ -162,16 +166,25 @@
             toma.nadjiSlobodnuPoziciju(karakteri);
         }
 
-        function crtajSlike(){
-            sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
 
-            dacic.crtaj();
+        function uvodiLikove(){
+            dacic.uveden_u_igru = true;
 
             if(vreme_igre <= 20) {
-                vulin.crtaj();
+                vulin.uveden_u_igru = true;
             }
             if(vreme_igre <= 10) {
-                toma.crtaj();
+                toma.uveden_u_igru = true;
+            }
+        }
+
+
+        function crtajSlike(){
+            sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
+            for(var i=0; i<karakteri.length; i++){
+                if(karakteri[i].uveden_u_igru){
+                    karakteri[i].crtaj();
+                }
             }
         } // kraj crtajSlike
 
@@ -203,17 +216,36 @@
         }
 
 
-        function proveriPogodak(ovaj_lik, poruka, desno, dole){
-            poruka = poruka || "Jaoj";
-            desno = desno || (Math.random() * 100) - 50;
-            dole = dole || (Math.random() * 100) - 50;
-            // upisuje poene i ostavlja poruku
-            sadrzaj.font = "30px Verdana";
+        function proveriPogodak(ovaj_lik){
             if( (misX > ovaj_lik.x && misX < ovaj_lik.x + ovaj_lik.sirina) && (misY > ovaj_lik.y && misY < ovaj_lik.y + ovaj_lik.visina) ){
-                sadrzaj.fillText(poruka, misX+desno, misY+dole, 250);           // poslednji argument je maksimalna shirina teksta
-                sadrzaj.lineWidth = 1;
-                sadrzaj.strokeText(poruka, misX+desno, misY+dole, 250);         // poslednji argument je maksimalna shirina teksta
+                ovaj_lik.ostavlja_poruku = true;
+                //ispisiPoruku(ovaj_lik);
                 poeni++;
+            }
+        }
+
+
+        function ispisiPoruku(ovaj_lik){
+            var poruka = ovaj_lik.poruka || "Jaoj";
+            sadrzaj.font = "30px Verdana";
+            sadrzaj.lineWidth = 1;
+            sadrzaj.fillText(poruka, misX+30, misY, 250);           // poslednji argument je maksimalna shirina teksta
+            sadrzaj.strokeText(poruka, misX+30, misY, 250);         // poslednji argument je maksimalna shirina teksta
+        }
+
+
+        function ispisujPoruke(){
+            for(var i=0; i<karakteri.length; i++){
+                if(karakteri[i].uveden_u_igru && karakteri[i].ostavlja_poruku){
+                    ispisiPoruku(karakteri[i]);
+                }
+            }
+        }
+
+
+        function brisiPoruke(){
+            for(var i=0; i<karakteri.length; i++){
+                karakteri[i].ostavlja_poruku = false;
             }
         }
 
@@ -229,13 +261,13 @@
             sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
             sadrzaj.fillStyle="#fff";
             sadrzaj.font = "48px Verdana";
-            sadrzaj.fillText("Spremi se za obracun!", slova_x += 5, slova_y);
-            if(slova_x > innerWidth-100) {
-                slova_x = -100;
-                slova_y += 100;
+            sadrzaj.fillText("Spremi se za obracun!", uvodna_slova_x += 5, uvodna_slova_y);
+            if(uvodna_slova_x > innerWidth-100) {
+                uvodna_slova_x = -100;
+                uvodna_slova_y += 100;
             }
-            if(slova_y > innerHeight - 100) {
-                slova_y = 200;
+            if(uvodna_slova_y > innerHeight - 100) {
+                uvodna_slova_y = 200;
             }
             uvodna_spica = requestAnimationFrame(iduSlova);
         }
@@ -254,8 +286,8 @@
 
             if(igranje){
                 proveriPogodak(dacic);
-				proveriPogodak(toma, "Evropa nema alternativu!");
-                proveriPogodak(vulin, "To boli!");
+				proveriPogodak(toma);
+                proveriPogodak(vulin);
                 prikaziPoene();
             }
         }
@@ -279,6 +311,8 @@
             // prima visinu i sirinu od svoje slike
             this.sirina = slika.width;
             this.visina = slika.height;
+            this.uveden_u_igru = false;
+            this.ostavlja_poruku = false;
 
             /* uzima slucajne koordinate i pripisuje sebi */
             this.slucajnaPozicija = function() {
