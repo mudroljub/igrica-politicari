@@ -21,7 +21,9 @@
 
     <script>
 
-        // da ostaju na prozoru duze od brzine animacije
+        // problem: pozadina se crta prilagodjeno, a delove crta neprilagodjeno
+        // resenje: napraviti proporciju
+
         // da izlaze animirano, kao da proviruju
         // da ne izlaze uvek, nego da malo sacekaju
         // da menjaju sliku na pogodak
@@ -313,6 +315,8 @@
             this.visina = slika.height;
             this.uveden_u_igru = false;
             this.ostavlja_poruku = false;
+            this.spust = 0;
+            this.opada = false;
 
             /* uzima slucajne koordinate i pripisuje sebi */
             this.slucajnaPozicija = function() {
@@ -320,12 +324,17 @@
                 this.y = slucajniProzor()[1];
             }   // slucajnaPozicija
 
-
             /* crta sebe na trenutnim ili zadatim koordinatama */
-            this.crtaj = function(x, y) {                                       // opciono prima koordinate ili koristi svoje
-                if(!x) x = this.x;
-                if(!y) y = this.y;
-                sadrzaj.drawImage(slika, x, y, slika.width, slika.height);      // ako ne ekspliciram crta naturalWidth i naturalHeight
+            this.crtaj = function() {
+                // lagano se spusta i dize
+                if(this.spust >= 100) {
+                    this.opada = true;
+                } else if (this.spust <= 0) {
+                    this.opada = false;
+                }
+                this.opada ? this.spust-- : this.spust++;
+
+                sadrzaj.drawImage(slika, 0, 0, slika.naturalWidth, slika.naturalHeight - (this.spust * (slika.naturalHeight/slika.height)), this.x, this.y + this.spust, this.sirina, this.visina - this.spust);
             }   // kraj crtaj
 
 
