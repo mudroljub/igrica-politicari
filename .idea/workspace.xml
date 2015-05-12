@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f00d2fcd-5176-4298-80f6-ed9131d93a7c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/images/enemy.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/images/player.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/javascripts/jquery.hotkeys.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/javascripts/key_status.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/javascripts/sound.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/javascripts/sprite.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/javascripts/util.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/proba.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/sounds/explosion.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/sounds/explosion.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/sounds/shoot.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/sounds/shoot.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/space-game/stylesheets/screen.css" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/igrica.html" afterPath="$PROJECT_DIR$/igrica.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="f00d2fcd-5176-4298-80f6-ed9131d93a7c" name="Default" comment="" />
     <ignored path="html5-games.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
