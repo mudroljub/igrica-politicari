@@ -35,6 +35,9 @@
         window.$ = function(selector) {
             return document.querySelector(selector);
         };
+        window.$$ = function(selector) {
+            return document.querySelectorAll(selector);
+        };
 
 
         /*************** VARIJABLE ***************/
@@ -308,14 +311,65 @@
 
         /*************** KLASE ***************/
 
-        function Karakter(slika){
+
+
+        /* prima sliku pozadine i naziv platna */
+        function Scena('platno', 'pozadina'){
+            this.platno = $("#platno");
+            this.platno.style.backgroundColor = "yellow";
+            this.sadrzaj = this.platno.getContext("2d");
+
+            this.cisti = function(){
+                this.sadrzaj.clearRect(0, 0, this.sirina, this.visina);
+            }
+
+            this.podesiVelicinu = function(sirina, visina){
+                //set the width and height of the canvas in pixels
+                this.sirina = sirina;
+                this.visina = visina;
+                this.platno.width = this.sirina;
+                this.platno.height = this.visina;
+            } // end setSize
+
+            this.promeniBoju = function(color){
+                this.platno.style.backgroundColor = color;
+            } // end this.setBG
+
+            this.getMouseX = function(){
+                //incorporate offset for canvas position
+                return document.mouseX - this.left;
+            }
+
+            this.getMouseY = function(){
+                //incorporate offset for canvas position
+                return document.mouseY - this.top;
+            }
+
+            this.getMouseClicked = function(){
+                return document.mouseClicked;
+            }
+
+        }
+
+
+        /* prepraviti da prima url slike i pravi objekat */
+        function Karakter(slika, scena){
             // prima visinu i sirinu od svoje slike
             this.sirina = slika.width;
             this.visina = slika.height;
             this.uveden_u_igru = false;
             this.ostavlja_poruku = false;
             this.spust = 0;
-            this.opada = false;
+            this.spustanje = false;
+
+            // prepisano iz simple game, upotrebiti!
+            this.scena = scena;
+            this.platno = scena.platno;
+            this.sadrzaj = this.platno.getContext("2d");
+            this.slika = new Image();   // pravi objekat od slike koju primi
+            this.slika.src = slika_url;
+            this.visinaSveta = parseInt(this.platno.height);
+            this.sirinaSveta = parseInt(this.platno.width);
 
             /* uzima slucajne koordinate i pripisuje sebi */
             this.slucajnaPozicija = function() {
@@ -328,11 +382,11 @@
             this.crtaj = function() {
                 // lagano se spusta i dize
                 if(this.spust >= 100) {
-                    this.opada = true;
+                    this.spustanje = true;
                 } else if (this.spust <= 0) {
-                    this.opada = false;
+                    this.spustanje = false;
                 }
-                this.opada ? this.spust-- : this.spust++;
+                this.spustanje ? this.spust-- : this.spust++;
 
                 sadrzaj.drawImage(slika, 0, 0, slika.naturalWidth, slika.naturalHeight - (this.spust * (slika.naturalHeight/slika.height)), this.x, this.y + this.spust, this.sirina, this.visina - this.spust);
             }   // kraj crtaj
