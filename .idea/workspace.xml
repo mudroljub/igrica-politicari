@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f00d2fcd-5176-4298-80f6-ed9131d93a7c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/igrica.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="html5-games.iws" />
@@ -30,17 +33,63 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="3300">
-              <caret line="26" column="54" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.16736402" vertical-offset="0" max-vertical-offset="717">
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding>
-                <element signature="e#10800#12524#0" expanded="true" />
-                <element signature="e#11230#11318#0" expanded="true" />
-                <element signature="e#11371#11405#0" expanded="true" />
-                <element signature="e#11451#11467#0" expanded="true" />
-                <element signature="e#11513#11529#0" expanded="true" />
-                <element signature="e#11577#11631#0" expanded="true" />
-                <element signature="e#11675#11726#0" expanded="true" />
-                <element signature="e#11778#11812#0" expanded="true" />
+                <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="igrica.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/igrica.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6615">
+              <caret line="435" column="0" selection-start-line="435" selection-start-column="0" selection-end-line="435" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#651#699#0" expanded="true" />
+                <element signature="e#732#783#0" expanded="true" />
+                <element signature="e#1481#1673#0" expanded="true" />
+                <element signature="n#!!block;n#postaviScenu#0" expanded="true" />
+                <element signature="n#!!block;n#azuriraj#0" expanded="true" />
+                <element signature="n#!!block;n#praviSlike#0" expanded="true" />
+                <element signature="e#3338#3509#0" expanded="true" />
+                <element signature="n#!!block;n#prilagodiSlike#0" expanded="true" />
+                <element signature="n#!!block;n#praviKaraktere#0" expanded="true" />
+                <element signature="n#!!block;n#dodeliPozicije#0" expanded="true" />
+                <element signature="n#!!block;n#uvodiLikove#0" expanded="true" />
+                <element signature="n#!!block;n#crtajSlike#0" expanded="true" />
+                <element signature="n#!!block;n#slucajniProzor#0" expanded="true" />
+                <element signature="n#!!block;n#prikaziPoene#0" expanded="true" />
+                <element signature="n#!!block;n#proveriPogodak#0" expanded="true" />
+                <element signature="n#!!block;n#ispisiPoruku#0" expanded="true" />
+                <element signature="n#!!block;n#ispisujPoruke#0" expanded="true" />
+                <element signature="n#!!block;n#brisiPoruke#0" expanded="true" />
+                <element signature="n#!!block;n#pustiUvod#0" expanded="true" />
+                <element signature="n#!!block;n#iduSlova#0" expanded="true" />
+                <element signature="n#!!block;n#reagujNaKlik#0" expanded="true" />
+                <element signature="n#!!block;n#proveriKraj#0" expanded="true" />
+                <element signature="n#!!block;n#Scena#0" expanded="true" />
+                <element signature="e#8945#9017#0" expanded="true" />
+                <element signature="e#9062#9080#0" expanded="true" />
+                <element signature="e#9118#9126#0" expanded="true" />
+                <element signature="e#9164#9172#0" expanded="true" />
+                <element signature="e#9212#9250#0" expanded="true" />
+                <element signature="e#9286#9321#0" expanded="true" />
+                <element signature="e#9365#9383#0" expanded="true" />
+                <element signature="e#9412#9483#0" expanded="true" />
+                <element signature="e#9523#9581#0" expanded="true" />
+                <element signature="e#9632#9732#0" expanded="true" />
+                <element signature="e#9765#9864#0" expanded="true" />
+                <element signature="e#9903#9948#0" expanded="true" />
+                <element signature="n#!!block;n#Karakter#0" expanded="true" />
+                <element signature="e#10710#10793#0" expanded="true" />
+                <element signature="e#10904#11353#0" expanded="true" />
+                <element signature="e#11485#11616#0" expanded="true" />
+                <element signature="e#11778#12163#0" expanded="true" />
+                <element signature="e#12315#12451#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -61,6 +110,7 @@
         <option value="$PROJECT_DIR$/proba.html" />
         <option value="$PROJECT_DIR$/igrica.html" />
         <option value="$PROJECT_DIR$/simpleGame.js" />
+        <option value="$PROJECT_DIR$/js/igrica.js" />
         <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
@@ -81,7 +131,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
@@ -97,17 +147,18 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="html5-games" />
+              <option name="myItemId" value="igrica" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="html5-games" />
+              <option name="myItemId" value="igrica" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -115,9 +166,22 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="igrica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="igrica" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -148,15 +212,15 @@
       <BehatRunner />
       <method />
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-options />
       <gulpfile />
       <tasks />
       <pass-parent-envs>true</pass-parent-envs>
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <list size="0" />
@@ -173,7 +237,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="977" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1330327" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -181,7 +245,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2492891" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1171459" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11821086" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -236,14 +300,17 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3300">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#10800#12524#0" expanded="true" />
-            <element signature="e#11230#11318#0" expanded="true" />
-            <element signature="e#11371#11405#0" expanded="true" />
-            <element signature="e#11451#11467#0" expanded="true" />
-            <element signature="e#11513#11529#0" expanded="true" />
-            <element signature="e#11577#11631#0" expanded="true" />
-            <element signature="e#11675#11726#0" expanded="true" />
-            <element signature="e#11778#11812#0" expanded="true" />
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3300">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -312,19 +379,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/igrica.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6615">
+          <caret line="435" column="0" selection-start-line="435" selection-start-column="0" selection-end-line="435" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#651#699#0" expanded="true" />
+            <element signature="e#732#783#0" expanded="true" />
+            <element signature="e#1481#1673#0" expanded="true" />
+            <element signature="n#!!block;n#postaviScenu#0" expanded="true" />
+            <element signature="n#!!block;n#azuriraj#0" expanded="true" />
+            <element signature="n#!!block;n#praviSlike#0" expanded="true" />
+            <element signature="e#3338#3509#0" expanded="true" />
+            <element signature="n#!!block;n#prilagodiSlike#0" expanded="true" />
+            <element signature="n#!!block;n#praviKaraktere#0" expanded="true" />
+            <element signature="n#!!block;n#dodeliPozicije#0" expanded="true" />
+            <element signature="n#!!block;n#uvodiLikove#0" expanded="true" />
+            <element signature="n#!!block;n#crtajSlike#0" expanded="true" />
+            <element signature="n#!!block;n#slucajniProzor#0" expanded="true" />
+            <element signature="n#!!block;n#prikaziPoene#0" expanded="true" />
+            <element signature="n#!!block;n#proveriPogodak#0" expanded="true" />
+            <element signature="n#!!block;n#ispisiPoruku#0" expanded="true" />
+            <element signature="n#!!block;n#ispisujPoruke#0" expanded="true" />
+            <element signature="n#!!block;n#brisiPoruke#0" expanded="true" />
+            <element signature="n#!!block;n#pustiUvod#0" expanded="true" />
+            <element signature="n#!!block;n#iduSlova#0" expanded="true" />
+            <element signature="n#!!block;n#reagujNaKlik#0" expanded="true" />
+            <element signature="n#!!block;n#proveriKraj#0" expanded="true" />
+            <element signature="n#!!block;n#Scena#0" expanded="true" />
+            <element signature="e#8945#9017#0" expanded="true" />
+            <element signature="e#9062#9080#0" expanded="true" />
+            <element signature="e#9118#9126#0" expanded="true" />
+            <element signature="e#9164#9172#0" expanded="true" />
+            <element signature="e#9212#9250#0" expanded="true" />
+            <element signature="e#9286#9321#0" expanded="true" />
+            <element signature="e#9365#9383#0" expanded="true" />
+            <element signature="e#9412#9483#0" expanded="true" />
+            <element signature="e#9523#9581#0" expanded="true" />
+            <element signature="e#9632#9732#0" expanded="true" />
+            <element signature="e#9765#9864#0" expanded="true" />
+            <element signature="e#9903#9948#0" expanded="true" />
+            <element signature="n#!!block;n#Karakter#0" expanded="true" />
+            <element signature="e#10710#10793#0" expanded="true" />
+            <element signature="e#10904#11353#0" expanded="true" />
+            <element signature="e#11485#11616#0" expanded="true" />
+            <element signature="e#11778#12163#0" expanded="true" />
+            <element signature="e#12315#12451#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="3300">
-          <caret line="26" column="54" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="54" />
+        <state vertical-scroll-proportion="0.16736402" vertical-offset="0" max-vertical-offset="717">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <element signature="e#10800#12524#0" expanded="true" />
-            <element signature="e#11230#11318#0" expanded="true" />
-            <element signature="e#11371#11405#0" expanded="true" />
-            <element signature="e#11451#11467#0" expanded="true" />
-            <element signature="e#11513#11529#0" expanded="true" />
-            <element signature="e#11577#11631#0" expanded="true" />
-            <element signature="e#11675#11726#0" expanded="true" />
-            <element signature="e#11778#11812#0" expanded="true" />
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
