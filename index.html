@@ -21,6 +21,10 @@
 
     <script>
 
+        // paradajz pogadja
+        // lokalni i globalni hajskor
+        // uvodna animacija
+        // da mrda objekat politicara nize, a ne sliku
         // mozda nepotrebno stvarati img objekte
         // napraviti objekat scena, sa slikom pozadine i pozicijom prozora
         // mozda i klasu ucitavac, da ucitava i pravi slike ?
@@ -315,6 +319,8 @@
 
 
         /* prima sliku pozadine i naziv platna */
+
+        // dodaje likove
         function Scena(pozadina, platno){
             this.sirina = window.innerWidth;
             this.visina = window.innerHeight;
@@ -324,8 +330,12 @@
             this.platno.style.backgroundColor = "black";
             this.sadrzaj = this.platno.getContext("2d");
 
-            this.prilagodiPozadinu = function(){
+            this.odrediDimenzije = function(){
+                // ili prilagodiPozadinu() ili racunaProporcije() za sve
+            }
 
+            this.raspolozivePozicije() = function(){
+                //
             }
 
             this.crtaPozadinu() = function(){
@@ -336,12 +346,16 @@
 
             }
 
-            this.dodeliPozicije() = function(){
-
-            }
-
             this.slucajniProzor() = function(){
                 // ili slobodan prozor
+            }
+
+            this.crtaLikove() = function(){
+                // ili crtaju sebe?
+            }
+
+            this.proveriJelNapustio() = function(){
+                //
             }
 
             this.brisi = function(){
