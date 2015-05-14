@@ -315,22 +315,38 @@
 
 
         /* prima sliku pozadine i naziv platna */
-        function Scena('platno', 'pozadina'){
-            this.platno = $("#platno");
-            this.platno.style.backgroundColor = "yellow";
+        function Scena(pozadina, platno){
+            this.sirina = window.innerWidth;
+            this.visina = window.innerHeight;
+            this.platno = $("#platno");     // ako nije dato platno, da ga sam dodaje
+            this.platno.width = this.sirina;
+            this.platno.height = this.visina;
+            this.platno.style.backgroundColor = "black";
             this.sadrzaj = this.platno.getContext("2d");
 
-            this.cisti = function(){
-                this.sadrzaj.clearRect(0, 0, this.sirina, this.visina);
+            this.prilagodiPozadinu = function(){
+
             }
 
-            this.podesiVelicinu = function(sirina, visina){
-                //set the width and height of the canvas in pixels
-                this.sirina = sirina;
-                this.visina = visina;
-                this.platno.width = this.sirina;
-                this.platno.height = this.visina;
-            } // end setSize
+            this.crtaPozadinu() = function(){
+
+            }
+
+            this.mrdaPozadinu() = function(){
+
+            }
+
+            this.dodeliPozicije() = function(){
+
+            }
+
+            this.slucajniProzor() = function(){
+                // ili slobodan prozor
+            }
+
+            this.brisi = function(){
+                this.sadrzaj.clearRect(0, 0, this.sirina, this.visina);
+            }
 
             this.promeniBoju = function(color){
                 this.platno.style.backgroundColor = color;
