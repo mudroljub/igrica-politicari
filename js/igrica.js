@@ -1,7 +1,7 @@
 
 
 // nepotrebno stvara img objekte ? spojiti praviKaraktere i praviSlike (ovu prepraviti u ucitava slike, anonimno)
-// img objekti trenutno potrebni zbog prilagodjavanja
+// mozda posebna klasa ucitavac ?
 // da mrda objekat politicara nize, a ne sliku
 // napraviti objekat scena, sa slikom pozadine i pozicijom prozora
 // mozda i klasu ucitavac, da ucitava i pravi slike ?
@@ -139,6 +139,8 @@ function praviKaraktere(slike){
 
 
 // dodati Sceni
+// reforma: slike bi se pravile u okviru Karaktera
+// objekt bi bio vulin.slika ili dacic.slika
 function prilagodiSlike(slike){
     for (var ova_slika in slike) {
         // prilagodjava sliku standardnoj velicini slike
@@ -371,11 +373,8 @@ function Scena(pozadina, platno){
 }
 
 
-/* prepraviti da prima url slike i pravi objekat */
+/* prepraviti da prima slika_url umesto slika i pravi this.slika objekat */
 function Karakter(slika, scena){
-    // prima visinu i sirinu od svoje slike
-    this.sirina = slika.width;
-    this.visina = slika.height;
     this.uveden_u_igru = false;
     this.ostavlja_poruku = false;
     this.spust = 0;
@@ -385,8 +384,17 @@ function Karakter(slika, scena){
     this.scena = scena;
     this.platno = scena.platno;
     this.sadrzaj = this.platno.getContext("2d");
+
     this.slika = new Image();   // pravi objekat od slike koju primi
     this.slika.src = slika_url;
+
+    // prima visinu i sirinu od svoje slike
+    this.sirina = slika.width;
+    this.visina = slika.height;
+    // prepraviti u
+    //this.sirina = this.slika.width;
+    //this.visina = this.slika.height;
+
     this.visinaSveta = parseInt(this.platno.height);
     this.sirinaSveta = parseInt(this.platno.width);
 
