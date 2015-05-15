@@ -1,14 +1,17 @@
-// paradajz pogadja
-// lokalni i globalni hajskor
-// uvodna animacija
+
+
+// nepotrebno stvara img objekte ? spojiti praviKaraktere i praviSlike (ovu prepraviti u ucitava slike, anonimno)
+// img objekti trenutno potrebni zbog prilagodjavanja
 // da mrda objekat politicara nize, a ne sliku
-// mozda nepotrebno stvarati img objekte
 // napraviti objekat scena, sa slikom pozadine i pozicijom prozora
 // mozda i klasu ucitavac, da ucitava i pravi slike ?
 // da ne izlaze uvek, nego da malo sacekaju
 // da menjaju sliku na pogodak
 // da nasumicno ispustaju parole
+// lokalni i globalni hajskor
 // grafiti na skupstini vucicu pederu
+// paradajz pogadja
+// uvodna animacija uvecavanje skupstina
 
 // problem: pozadina se crta prilagodjeno, a delove crta neprilagodjeno
 // resenje: napraviti jedinstveno prilagodjavanje
@@ -127,6 +130,15 @@ function praviSlike(slike, povratnaRadnja) {                            // ucita
 }
 
 
+function praviKaraktere(slike){
+    for (var ovaj_lik in slike){
+        window[ovaj_lik] = new Karakter(window[ovaj_lik + "_slika"]);
+        karakteri.push(window[ovaj_lik]);
+    }   // kraj for
+}   // kraj praviKaraktere()
+
+
+// dodati Sceni
 function prilagodiSlike(slike){
     for (var ova_slika in slike) {
         // prilagodjava sliku standardnoj velicini slike
@@ -139,14 +151,7 @@ function prilagodiSlike(slike){
 }
 
 
-function praviKaraktere(slike){
-    for (var ovaj_lik in slike){
-        window[ovaj_lik] = new Karakter(window[ovaj_lik + "_slika"]);
-        karakteri.push(window[ovaj_lik]);
-    }   // kraj for
-}   // kraj praviKaraktere()
-
-
+// dodati Sceni
 function dodeliPozicije(){
     dacic.slucajnaPozicija();
     vulin.nadjiSlobodnuPoziciju(karakteri);
@@ -176,6 +181,7 @@ function crtajSlike(){
 } // kraj crtajSlike
 
 
+// dodati Sceni
 function slucajniProzor(){
     var gornja_osa = nova_visina_pozadine/4;
     var donja_osa = nova_visina_pozadine/1.53;
@@ -192,6 +198,7 @@ function slucajniProzor(){
 }
 
 
+// dodati Sceni
 function prikaziPoene(){
     sadrzaj.fillStyle="#000";
     sadrzaj.fillRect(20,80,180,100);
@@ -237,13 +244,15 @@ function brisiPoruke(){
 }
 
 
+// dodati Sceni
 function pustiUvod(){
     // pravi uvodnu animaciju
-    uvodna_spica = requestAnimationFrame(iduSlova);
+    uvodna_spica = requestAnimationFrame(uvodnaSpica);
 }
 
 
-function iduSlova(){
+// dodati Sceni
+function uvodnaSpica(){
     sadrzaj.fillStyle = "black";
     sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
     sadrzaj.fillStyle="#fff";
@@ -256,10 +265,11 @@ function iduSlova(){
     if(uvodna_slova_y > innerHeight - 100) {
         uvodna_slova_y = 200;
     }
-    uvodna_spica = requestAnimationFrame(iduSlova);
+    uvodna_spica = requestAnimationFrame(uvodnaSpica);
 }
 
 
+// dodati Sceni
 function reagujNaKlik(event){
     misX = event.clientX;
     misY = event.clientY;
@@ -280,6 +290,7 @@ function reagujNaKlik(event){
 }
 
 
+// dodati Sceni
 function proveriKraj(){
     if(vreme_igre < 1) {
         cancelAnimationFrame(ovaAnimacija);
