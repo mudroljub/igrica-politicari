@@ -1,18 +1,13 @@
 
-
 // dodati Sceni
-// reforma: slike bi se pravile u okviru Karaktera
-// objekt bi bio vulin.slika ili dacic.slika
-function prilagodiSlike(slike){
-    for (var ova_slika in slike) {
-        // prilagodjava sliku standardnoj velicini slike
-        window[ova_slika + "_slika"].width = window[ova_slika + "_slika"].width / (window[ova_slika + "_slika"].height / BAZICNA_VISINA_SLIKE);
-        window[ova_slika + "_slika"].height = BAZICNA_VISINA_SLIKE;
-        // prilagodjava sliku za razne ekrane
-        window[ova_slika + "_slika"].width = window[ova_slika + "_slika"].width * (window.innerWidth/BAZICNA_SIRINA_EKRANA);
-        window[ova_slika + "_slika"].height = window[ova_slika + "_slika"].height * (window.innerWidth/BAZICNA_SIRINA_EKRANA);
+function crtajSlike(){
+    sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
+    for(var i=0; i<karakteri.length; i++){
+        if(karakteri[i].uveden_u_igru){
+            karakteri[i].crtaj();
+        }
     }
-}
+} // kraj crtajSlike
 
 // dodati Sceni
 function dodeliPozicije(){

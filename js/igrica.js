@@ -1,22 +1,23 @@
-
-
-// nepotrebno stvara img objekte ? spojiti praviKaraktere i praviSlike (ovu prepraviti u ucitava slike, anonimno)
-// mozda posebna klasa ucitavac ?
-// da mrda objekat politicara nize, a ne sliku
+/*****************************************************************
+    REFORME:
 // napraviti objekat scena, sa slikom pozadine i pozicijom prozora
-// mozda i klasu ucitavac, da ucitava i pravi slike ?
-// da ne izlaze uvek, nego da malo sacekaju
-// da menjaju sliku na pogodak
-// da nasumicno ispustaju parole
-// lokalni i globalni hajskor
-// grafiti na skupstini vucicu pederu
-// paradajz pogadja
-// uvodna animacija uvecavanje skupstina
+// mozda posebna klasa ucitavac, da ucitava i pravi slike ?
 
-// problem: pozadina se crta prilagodjeno, a delove crta neprilagodjeno
-// resenje: napraviti jedinstveno prilagodjavanje
-// problem: kad je presirok ekran, sece sliku po visini !
-// na manjim ekranima prilagoditi slova (uvod i kraj)
+    IDEJE:
+ // da ne izlaze uvek, nego da malo sacekaju
+ // da menjaju sliku na pogodak
+ // da nasumicno ispustaju parole
+ // lokalni i globalni hajskor
+ // grafiti na skupstini vucicu pederu
+ // paradajz pogadja
+ // uvodna animacija uvecavanje skupstina
+
+    PROBLEMI:
+ // pozadina se crta prilagodjeno, a delove crta neprilagodjeno
+ // resenje: napraviti jedinstveno prilagodjavanje
+ // kad je presirok ekran, sece pozadinu po visini !
+ // na manjim ekranima prilagoditi slova (uvod i kraj)
+********************************************************************/
 
 "use strict";
 window.$ = function(selector) {
@@ -62,17 +63,17 @@ pozadina.onload = function() {
 };
 pozadina.src = 'slike/skupstina2.png';
 
-var slike = {                           // nazivi su bitni, od njih pravi objekte i slike !
+var likovi = {                           // nazivi su bitni, od njih pravi objekte
     vulin: 'slike/vulin.png',
     toma: 'slike/toma.png',
     dacic: 'slike/dacic.png'
 }
-var brojSlika = Object.keys(slike).length;
+var brojSlika = Object.keys(likovi).length;
 
 
 /*************** POZIVI ***************/
 
-praviSlike(slike, pustiUvod);
+praviSlike(likovi, pustiUvod);
 
 
 /*************** SLUSACI ***************/
@@ -84,7 +85,7 @@ platno.addEventListener('click', reagujNaKlik);
 
 function postaviScenu(){
     ovaAnimacija = requestAnimationFrame(azuriraj);
-    praviKaraktere(slike);   // pravi karaktere od datih slika
+    praviKaraktere(likovi);   // pravi karaktere od niza likova
     // dodaje jedinstvene poruke
     dacic.poruka = "Jaoj";
     vulin.poruka = "To boli!";
@@ -114,26 +115,26 @@ function azuriraj(){
     }
 }
 
-
-function praviSlike(slike, povratnaRadnja) {                            // ucitava i pravi img objekte sa nazivima
+// za sad moram da ih pravim, dok ne sredim ucitavanje bez pravljenja img obj
+function praviSlike(likovi, povratnaRadnja) {                            // ucitava i pravi img objekte sa nazivima
     var ucitaneSlike = 0;
-    for (var ova_slika in slike) {
-        window[ova_slika + "_slika"] = new Image();                     // pravi globalnu varijablu sa nazivom slike !
-        window[ova_slika + "_slika"].onload = function kadUcita() {
+    for (var ovaj_lik in likovi) {
+        window[ovaj_lik + "_slika"] = new Image();                     // pravi globalnu varijablu sa nazivom slike !
+        window[ovaj_lik + "_slika"].onload = function kadUcita() {
             ucitaneSlike++;
             if (ucitaneSlike >= brojSlika) {
-                prilagodiSlike(slike);
+                //prilagodiSlike(likovi);
                 povratnaRadnja();
             }
         };  // kraj kadUcita()
-        window[ova_slika + "_slika"].src = slike[ova_slika];
+        window[ovaj_lik + "_slika"].src = likovi[ovaj_lik];
     }
 }
 
 
-function praviKaraktere(slike){
-    for (var ovaj_lik in slike){
-        window[ovaj_lik] = new Karakter(window[ovaj_lik + "_slika"]);
+function praviKaraktere(likovi){
+    for (var ovaj_lik in likovi){
+        window[ovaj_lik] = new Karakter(likovi[ovaj_lik]);
         karakteri.push(window[ovaj_lik]);
     }   // kraj for
 }   // kraj praviKaraktere()
@@ -149,16 +150,6 @@ function uvodiLikove(){
         toma.uveden_u_igru = true;
     }
 }
-
-
-function crtajSlike(){
-    sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
-    for(var i=0; i<karakteri.length; i++){
-        if(karakteri[i].uveden_u_igru){
-            karakteri[i].crtaj();
-        }
-    }
-} // kraj crtajSlike
 
 
 function proveriPogodak(ovaj_lik){
@@ -195,11 +186,10 @@ function brisiPoruke(){
 }
 
 
-
 /*************** KLASE ***************/
 
 /* prepraviti da prima slika_url umesto slika i pravi this.slika objekat */
-function Karakter(slika){
+function Karakter(slika_src){
     this.uveden_u_igru = false;
     this.ostavlja_poruku = false;
     this.spust = 0;
@@ -208,7 +198,6 @@ function Karakter(slika){
     /*
     // prepisano iz simple game, upotrebiti!
     this.scena = scena; // scenu proslediti kao argument
-
      this.visinaSveta = parseInt(this.platno.height);
      this.sirinaSveta = parseInt(this.platno.width);
 */
@@ -219,17 +208,18 @@ function Karakter(slika){
     //this.platno = scena.platno;
     //this.sadrzaj = this.platno.getContext("2d");
 
-//    this.slika = new Image();
-  //  this.slika.src = slika_url; // pravi objekat od slike koju primi
-
+    this.slika = new Image();
+    this.slika.src = slika_src;
+    // prilagodjava sliku bazicnoj velicini slike
+    this.slika.width = this.slika.width / (this.slika.height / BAZICNA_VISINA_SLIKE);
+    this.slika.height = BAZICNA_VISINA_SLIKE;
+    // prilagodjava sliku trenutnom ekranu
+    this.slika.width = this.slika.width * (window.innerWidth/BAZICNA_SIRINA_EKRANA);
+    this.slika.height = this.slika.height * (window.innerWidth/BAZICNA_SIRINA_EKRANA);
 
     // prima visinu i sirinu od svoje slike
-    this.sirina = slika.width;
-    this.visina = slika.height;
-    // prepraviti u
-    //this.sirina = this.slika.width;
-    //this.visina = this.slika.height;
-
+    this.sirina = this.slika.width;
+    this.visina = this.slika.height;
 
     /* uzima slucajne koordinate i pripisuje sebi */
     this.slucajnaPozicija = function() {
@@ -250,7 +240,7 @@ function Karakter(slika){
 
     /* crta sebe na trenutnim ili zadatim koordinatama */
     this.crtaj = function() {
-        sadrzaj.drawImage(slika, this.x, this.y, this.sirina, this.visina);
+        sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
     }   // kraj crtaj
 
 
