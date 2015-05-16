@@ -48,6 +48,7 @@ var karakteri = [];
 
 var nivo1 = new Scena('platno');
 
+// za ucitavac
 var likovi = {                           // nazivi su bitni, od njih pravi objekte
     vulin: 'slike/vulin.png',
     toma: 'slike/toma.png',
@@ -58,7 +59,7 @@ var brojSlika = Object.keys(likovi).length;
 
 /*************** POZIVI ***************/
 
-praviSlike(likovi, pustiUvod);
+ucitajSlike(likovi, pustiUvod);
 
 
 /*************** SLUSACI ***************/
@@ -100,58 +101,6 @@ function azuriraj(){
     }
 }
 
-// za sad moram da ih pravim, dok ne sredim ucitavanje bez pravljenja img obj
-function praviSlike(likovi, povratnaRadnja) {                            // ucitava i pravi img objekte sa nazivima
-    var ucitaneSlike = 0;
-    for (var ovaj_lik in likovi) {
-        window[ovaj_lik + "_slika"] = new Image();                     // pravi globalnu varijablu sa nazivom slike !
-        window[ovaj_lik + "_slika"].onload = function kadUcita() {
-            ucitaneSlike++;
-            if (ucitaneSlike >= brojSlika) {
-                //prilagodiSlike(likovi);
-                povratnaRadnja();
-            }
-        };  // kraj kadUcita()
-        window[ovaj_lik + "_slika"].src = likovi[ovaj_lik];
-    }
-}
-
-
-function praviKaraktere(likovi){
-    for (var ovaj_lik in likovi){
-        window[ovaj_lik] = new Karakter(likovi[ovaj_lik], nivo1);
-        karakteri.push(window[ovaj_lik]);
-    }   // kraj for
-}   // kraj praviKaraktere()
-
-
-function uvodiLikove(){
-    dacic.uveden_u_igru = true;
-
-    if(vreme_igre <= 20) {
-        vulin.uveden_u_igru = true;
-    }
-    if(vreme_igre <= 10) {
-        toma.uveden_u_igru = true;
-    }
-}
-
-
-function proveriPogodak(ovaj_lik){
-    if( (misX > ovaj_lik.x && misX < ovaj_lik.x + ovaj_lik.sirina) && (misY > ovaj_lik.y && misY < ovaj_lik.y + ovaj_lik.visina) ){
-        ovaj_lik.ostavlja_poruku = true;
-        poeni++;
-    }
-}
-
-
-function ispisiPoruku(ovaj_lik){
-    var poruka = ovaj_lik.poruka || "Jaoj";
-    nivo1.sadrzaj.font = "30px Verdana";
-    nivo1.sadrzaj.lineWidth = 1;
-    nivo1.sadrzaj.fillText(poruka, misX+30, misY, 250);           // poslednji argument je maksimalna shirina teksta
-    nivo1.sadrzaj.strokeText(poruka, misX+30, misY, 250);
-}
 
 
 function ispisujPoruke(){
@@ -168,7 +117,3 @@ function brisiPoruke(){
         karakteri[i].ostavlja_poruku = false;
     }
 }
-
-
-/*************** KLASE ***************/
-

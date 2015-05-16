@@ -1,3 +1,21 @@
+
+function proveriPogodak(ovaj_lik){
+    if( (misX > ovaj_lik.x && misX < ovaj_lik.x + ovaj_lik.sirina) && (misY > ovaj_lik.y && misY < ovaj_lik.y + ovaj_lik.visina) ){
+        ovaj_lik.ostavlja_poruku = true;
+        poeni++;
+    }
+}
+
+
+function ispisiPoruku(ovaj_lik){
+    var poruka = ovaj_lik.poruka || "Jaoj";
+    nivo1.sadrzaj.font = "30px Verdana";
+    nivo1.sadrzaj.lineWidth = 1;
+    nivo1.sadrzaj.fillText(poruka, misX+30, misY, 250);           // poslednji argument je maksimalna shirina teksta
+    nivo1.sadrzaj.strokeText(poruka, misX+30, misY, 250);
+}
+
+
 /* prima sliku i scenu, pravi novog lika */
 function Karakter(slika_src, scena){
     this.uveden_u_igru = false;

@@ -1,3 +1,38 @@
+/* prima sliku pozadine i id platna */
+/* uredjuje platno, sadrzaj i pozadinu */
+function Scena(platno_id, pozadina_src) {
+
+    this.platno = document.getElementById(platno_id);
+    this.platno.height = window.innerHeight;
+    this.platno.width = window.innerWidth;
+
+    this.sadrzaj = this.platno.getContext('2d');
+    this.sadrzaj.font = "30px Verdana";
+    this.sadrzaj.fillStyle = "white";
+    this.sadrzaj.strokeStyle = 'black';
+    var sadrzaj = this.sadrzaj;                 // proglašava varijablu da bi je poslao nižoj funkciji
+
+    this.pozadina = new Image();
+    this.pozadina.onload = function() {                                     // this je ovde scena
+        this.nova_visina = (window.innerWidth / this.width) * this.height;  // this je ovde pozadina, prilagodjava visinu
+        sadrzaj.drawImage(this, 0, 0, window.innerWidth, this.nova_visina);
+    };
+    this.pozadina.src = 'slike/skupstina2.png';
+}
+
+
+
+function uvodiLikove(){
+    dacic.uveden_u_igru = true;
+
+    if(vreme_igre <= 20) {
+        vulin.uveden_u_igru = true;
+    }
+    if(vreme_igre <= 10) {
+        toma.uveden_u_igru = true;
+    }
+}
+
 
 // dodati Sceni
 function crtajSlike(){
@@ -106,27 +141,6 @@ function proveriKraj(){
 }
 
 
-/* prima sliku pozadine i id platna */
-/* uredjuje platno, sadrzaj i pozadinu */
-function Scena(platno_id, pozadina_src) {
-
-    this.platno = document.getElementById(platno_id);
-    this.platno.height = window.innerHeight;
-    this.platno.width = window.innerWidth;
-
-    this.sadrzaj = this.platno.getContext('2d');
-    this.sadrzaj.font = "30px Verdana";
-    this.sadrzaj.fillStyle = "white";
-    this.sadrzaj.strokeStyle = 'black';
-    var sadrzaj = this.sadrzaj;                 // proglašava varijablu da bi je poslao nižoj funkciji
-
-    this.pozadina = new Image();
-    this.pozadina.onload = function() {                                     // this je ovde scena
-        this.nova_visina = (window.innerWidth / this.width) * this.height;  // this je ovde pozadina, prilagodjava visinu
-        sadrzaj.drawImage(this, 0, 0, window.innerWidth, this.nova_visina);
-    };
-    this.pozadina.src = 'slike/skupstina2.png';
-}
 
 // dodaje likove
 function Scena2(pozadina, platno){
