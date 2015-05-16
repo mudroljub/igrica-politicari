@@ -1,7 +1,7 @@
 
 // dodati Sceni
 function crtajSlike(){
-    nivo1.sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
+    nivo1.sadrzaj.drawImage(nivo1.pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
     for(var i=0; i<karakteri.length; i++){
         if(karakteri[i].uveden_u_igru){
             karakteri[i].crtaj();
@@ -119,7 +119,13 @@ function Scena(platno_id, pozadina_src) {
     this.sadrzaj.fillStyle = "white";
     this.sadrzaj.strokeStyle = 'black';
 
-
+    this.pozadina = new Image();
+    console.log(this.pozadina.width)
+    this.pozadina.onload = function vratiKadUcitasPozadinu() {                  // unutra this postaje pozadina
+        nova_visina_pozadine = (window.innerWidth / this.width) * this.height;  // prilagodjava pozadinu
+        sadrzaj.drawImage(this, 0, 0, window.innerWidth, nova_visina_pozadine);
+    };
+    this.pozadina.src = 'slike/skupstina2.png';
 }
 
 // dodaje likove

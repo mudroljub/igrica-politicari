@@ -50,12 +50,7 @@ var karakteri = [];
 var nivo1 = new Scena('platno');
 
 
-var pozadina = new Image();
-pozadina.onload = function() {
-    nova_visina_pozadine = (window.innerWidth / pozadina.width) * pozadina.height;  // prilagodjava pozadinu
-    nivo1.sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
-};
-pozadina.src = 'slike/skupstina2.png';
+
 
 var likovi = {                           // nazivi su bitni, od njih pravi objekte
     vulin: 'slike/vulin.png',
