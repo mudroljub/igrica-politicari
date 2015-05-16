@@ -1,7 +1,7 @@
 
 // dodati Sceni
 function crtajSlike(){
-    sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
+    nivo1.sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
     for(var i=0; i<karakteri.length; i++){
         if(karakteri[i].uveden_u_igru){
             karakteri[i].crtaj();
@@ -36,13 +36,13 @@ function slucajniProzor(){
 
 // dodati Sceni
 function prikaziPoene(){
-    sadrzaj.fillStyle="#000";
-    sadrzaj.fillRect(20,80,180,100);
-    sadrzaj.stroke();
-    sadrzaj.fillStyle="#FFF";
-    sadrzaj.font = "24px Verdana";
-    sadrzaj.fillText("Poeni: " + poeni, 30, 120);
-    sadrzaj.fillText("Vreme: " + vreme_igre, 30, 160);
+    nivo1.sadrzaj.fillStyle="#000";
+    nivo1.sadrzaj.fillRect(20,80,180,100);
+    nivo1.sadrzaj.stroke();
+    nivo1.sadrzaj.fillStyle="#FFF";
+    nivo1.sadrzaj.font = "24px Verdana";
+    nivo1.sadrzaj.fillText("Poeni: " + poeni, 30, 120);
+    nivo1.sadrzaj.fillText("Vreme: " + vreme_igre, 30, 160);
 }
 
 
@@ -56,11 +56,11 @@ function pustiUvod(){
 
 // dodati Sceni
 function uvodnaSpica(){
-    sadrzaj.fillStyle = "black";
-    sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
-    sadrzaj.fillStyle="#fff";
-    sadrzaj.font = "48px Verdana";
-    sadrzaj.fillText("Spremi se za obracun!", uvodna_slova_x += 5, uvodna_slova_y);
+    nivo1.sadrzaj.fillStyle = "black";
+    nivo1.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    nivo1.sadrzaj.fillStyle="#fff";
+    nivo1.sadrzaj.font = "48px Verdana";
+    nivo1.sadrzaj.fillText("Spremi se za obracun!", uvodna_slova_x += 5, uvodna_slova_y);
     if(uvodna_slova_x > innerWidth-100) {
         uvodna_slova_x = -100;
         uvodna_slova_y += 100;
@@ -97,20 +97,33 @@ function reagujNaKlik(event){
 function proveriKraj(){
     if(vreme_igre < 1) {
         cancelAnimationFrame(ovaAnimacija);
-        sadrzaj.fillRect(window.innerWidth/2 - window.innerWidth/4, window.innerHeight/2 - window.innerHeight/4, window.innerWidth/2, window.innerHeight/2);
-        sadrzaj.fillStyle="#000";
-        sadrzaj.font = "48px Verdana";
-        sadrzaj.fillText("Igra je završena!", window.innerWidth/2 - window.innerWidth/4 + 100, window.innerHeight/2 - window.innerHeight/4 + 100);
+        nivo1.sadrzaj.fillRect(window.innerWidth/2 - window.innerWidth/4, window.innerHeight/2 - window.innerHeight/4, window.innerWidth/2, window.innerHeight/2);
+        nivo1.sadrzaj.fillStyle="#000";
+        nivo1.sadrzaj.font = "48px Verdana";
+        nivo1.sadrzaj.fillText("Igra je završena!", window.innerWidth/2 - window.innerWidth/4 + 100, window.innerHeight/2 - window.innerHeight/4 + 100);
         igranje = false;
     }
 }
 
 
+/* prima sliku pozadine i id platna */
+/* uredjuje platno, sadrzaj i pozadinu */
+function Scena(platno_id, pozadina_src) {
 
-/* prima sliku pozadine i naziv platna */
+    this.platno = document.getElementById(platno_id);
+    this.platno.height = window.innerHeight;
+    this.platno.width = window.innerWidth;
+
+    this.sadrzaj = this.platno.getContext('2d');
+    this.sadrzaj.font = "30px Verdana";
+    this.sadrzaj.fillStyle = "white";
+    this.sadrzaj.strokeStyle = 'black';
+
+
+}
 
 // dodaje likove
-function Scena(pozadina, platno){
+function Scena2(pozadina, platno){
     this.sirina = window.innerWidth;
     this.visina = window.innerHeight;
     this.platno = $("#platno");     // ako nije dato platno, da ga sam dodaje

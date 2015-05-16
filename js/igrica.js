@@ -47,19 +47,13 @@ var igranje = false;
 var prosla_sekunda = 0;
 var karakteri = [];
 
-var platno = document.getElementById('platno');
-platno.height = window.innerHeight;
-platno.width = window.innerWidth;
+var nivo1 = new Scena('platno');
 
-var sadrzaj = platno.getContext('2d');
-sadrzaj.font = "30px Verdana";
-sadrzaj.fillStyle = "white";
-sadrzaj.strokeStyle = 'black';
 
 var pozadina = new Image();
 pozadina.onload = function() {
     nova_visina_pozadine = (window.innerWidth / pozadina.width) * pozadina.height;  // prilagodjava pozadinu
-    sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
+    nivo1.sadrzaj.drawImage(pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
 };
 pozadina.src = 'slike/skupstina2.png';
 
@@ -78,7 +72,7 @@ praviSlike(likovi, pustiUvod);
 
 /*************** SLUSACI ***************/
 
-platno.addEventListener('click', reagujNaKlik);
+nivo1.platno.addEventListener('click', reagujNaKlik);
 
 
 /*************** FUNKCIJE ***************/
@@ -134,7 +128,7 @@ function praviSlike(likovi, povratnaRadnja) {                            // ucit
 
 function praviKaraktere(likovi){
     for (var ovaj_lik in likovi){
-        window[ovaj_lik] = new Karakter(likovi[ovaj_lik]);
+        window[ovaj_lik] = new Karakter(likovi[ovaj_lik], nivo1);
         karakteri.push(window[ovaj_lik]);
     }   // kraj for
 }   // kraj praviKaraktere()
@@ -155,7 +149,6 @@ function uvodiLikove(){
 function proveriPogodak(ovaj_lik){
     if( (misX > ovaj_lik.x && misX < ovaj_lik.x + ovaj_lik.sirina) && (misY > ovaj_lik.y && misY < ovaj_lik.y + ovaj_lik.visina) ){
         ovaj_lik.ostavlja_poruku = true;
-        //ispisiPoruku(ovaj_lik);
         poeni++;
     }
 }
@@ -163,10 +156,10 @@ function proveriPogodak(ovaj_lik){
 
 function ispisiPoruku(ovaj_lik){
     var poruka = ovaj_lik.poruka || "Jaoj";
-    sadrzaj.font = "30px Verdana";
-    sadrzaj.lineWidth = 1;
-    sadrzaj.fillText(poruka, misX+30, misY, 250);           // poslednji argument je maksimalna shirina teksta
-    sadrzaj.strokeText(poruka, misX+30, misY, 250);         // poslednji argument je maksimalna shirina teksta
+    nivo1.sadrzaj.font = "30px Verdana";
+    nivo1.sadrzaj.lineWidth = 1;
+    nivo1.sadrzaj.fillText(poruka, misX+30, misY, 250);           // poslednji argument je maksimalna shirina teksta
+    nivo1.sadrzaj.strokeText(poruka, misX+30, misY, 250);
 }
 
 
@@ -188,8 +181,8 @@ function brisiPoruke(){
 
 /*************** KLASE ***************/
 
-/* prepraviti da prima slika_url umesto slika i pravi this.slika objekat */
-function Karakter(slika_src){
+/* prima sliku i scenu, pravi novog lika */
+function Karakter(slika_src, scena){
     this.uveden_u_igru = false;
     this.ostavlja_poruku = false;
     this.spust = 0;
@@ -202,8 +195,8 @@ function Karakter(slika_src){
      this.sirinaSveta = parseInt(this.platno.width);
 */
 
-    this.platno = platno;
-    this.sadrzaj = platno.getContext("2d");
+    this.platno = scena.platno;
+    this.sadrzaj = scena.sadrzaj;
     // prepraviti da ide preko scene
     //this.platno = scena.platno;
     //this.sadrzaj = this.platno.getContext("2d");
@@ -240,7 +233,7 @@ function Karakter(slika_src){
 
     /* crta sebe na trenutnim ili zadatim koordinatama */
     this.crtaj = function() {
-        sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
+        this.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
     }   // kraj crtaj
 
 
