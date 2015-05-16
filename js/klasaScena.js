@@ -120,8 +120,9 @@ function Scena(platno_id, pozadina_src) {
     this.sadrzaj.strokeStyle = 'black';
 
     this.pozadina = new Image();
-    console.log(this.pozadina.width)
-    this.pozadina.onload = function vratiKadUcitasPozadinu() {                  // unutra this postaje pozadina
+    var sadrzaj = this.sadrzaj;     // neopdhodno proglasiti varijablu da bi je poslao nižoj funkciji
+
+    this.pozadina.onload = function() {
         nova_visina_pozadine = (window.innerWidth / this.width) * this.height;  // prilagodjava pozadinu
         sadrzaj.drawImage(this, 0, 0, window.innerWidth, nova_visina_pozadine);
     };
