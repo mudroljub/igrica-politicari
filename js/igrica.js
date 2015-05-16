@@ -16,6 +16,7 @@
 // problem: pozadina se crta prilagodjeno, a delove crta neprilagodjeno
 // resenje: napraviti jedinstveno prilagodjavanje
 // problem: kad je presirok ekran, sece sliku po visini !
+// na manjim ekranima prilagoditi slova (uvod i kraj)
 
 "use strict";
 window.$ = function(selector) {
@@ -138,29 +139,6 @@ function praviKaraktere(slike){
 }   // kraj praviKaraktere()
 
 
-// dodati Sceni
-// reforma: slike bi se pravile u okviru Karaktera
-// objekt bi bio vulin.slika ili dacic.slika
-function prilagodiSlike(slike){
-    for (var ova_slika in slike) {
-        // prilagodjava sliku standardnoj velicini slike
-        window[ova_slika + "_slika"].width = window[ova_slika + "_slika"].width / (window[ova_slika + "_slika"].height / BAZICNA_VISINA_SLIKE);
-        window[ova_slika + "_slika"].height = BAZICNA_VISINA_SLIKE;
-        // prilagodjava sliku za razne ekrane
-        window[ova_slika + "_slika"].width = window[ova_slika + "_slika"].width * (window.innerWidth/BAZICNA_SIRINA_EKRANA);
-        window[ova_slika + "_slika"].height = window[ova_slika + "_slika"].height * (window.innerWidth/BAZICNA_SIRINA_EKRANA);
-    }
-}
-
-
-// dodati Sceni
-function dodeliPozicije(){
-    dacic.slucajnaPozicija();
-    vulin.nadjiSlobodnuPoziciju(karakteri);
-    toma.nadjiSlobodnuPoziciju(karakteri);
-}
-
-
 function uvodiLikove(){
     dacic.uveden_u_igru = true;
 
@@ -181,35 +159,6 @@ function crtajSlike(){
         }
     }
 } // kraj crtajSlike
-
-
-// dodati Sceni
-function slucajniProzor(){
-    var gornja_osa = nova_visina_pozadine/4;
-    var donja_osa = nova_visina_pozadine/1.53;
-    var slucajna_pozicija = Math.floor(Math.random() * 6);
-    pozicije_prozora = [
-        [window.innerWidth/5.9, gornja_osa],             // prvi prozor
-        [window.innerWidth/2.2, gornja_osa],             // drugi prozor
-        [window.innerWidth/1.35, gornja_osa],
-        [window.innerWidth/5.9, donja_osa],
-        [window.innerWidth/2.2, donja_osa],
-        [window.innerWidth/1.35, donja_osa]
-    ]
-    return [pozicije_prozora[slucajna_pozicija][0], pozicije_prozora[slucajna_pozicija][1]];
-}
-
-
-// dodati Sceni
-function prikaziPoene(){
-    sadrzaj.fillStyle="#000";
-    sadrzaj.fillRect(20,80,180,100);
-    sadrzaj.stroke();
-    sadrzaj.fillStyle="#FFF";
-    sadrzaj.font = "24px Verdana";
-    sadrzaj.fillText("Poeni: " + poeni, 30, 120);
-    sadrzaj.fillText("Vreme: " + vreme_igre, 30, 160);
-}
 
 
 function proveriPogodak(ovaj_lik){
@@ -246,147 +195,33 @@ function brisiPoruke(){
 }
 
 
-// dodati Sceni
-function pustiUvod(){
-    // pravi uvodnu animaciju
-    uvodna_spica = requestAnimationFrame(uvodnaSpica);
-}
-
-
-// dodati Sceni
-function uvodnaSpica(){
-    sadrzaj.fillStyle = "black";
-    sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
-    sadrzaj.fillStyle="#fff";
-    sadrzaj.font = "48px Verdana";
-    sadrzaj.fillText("Spremi se za obracun!", uvodna_slova_x += 5, uvodna_slova_y);
-    if(uvodna_slova_x > innerWidth-100) {
-        uvodna_slova_x = -100;
-        uvodna_slova_y += 100;
-    }
-    if(uvodna_slova_y > innerHeight - 100) {
-        uvodna_slova_y = 200;
-    }
-    uvodna_spica = requestAnimationFrame(uvodnaSpica);
-}
-
-
-// dodati Sceni
-function reagujNaKlik(event){
-    misX = event.clientX;
-    misY = event.clientY;
-
-    if(uvod){
-        cancelAnimationFrame(uvodna_spica);
-        postaviScenu();
-        igranje = true;
-        uvod = false;
-    }
-
-    if(igranje){
-        proveriPogodak(dacic);
-        proveriPogodak(toma);
-        proveriPogodak(vulin);
-        prikaziPoene();
-    }
-}
-
-
-// dodati Sceni
-function proveriKraj(){
-    if(vreme_igre < 1) {
-        cancelAnimationFrame(ovaAnimacija);
-        sadrzaj.fillRect(window.innerWidth/2 - window.innerWidth/4, window.innerHeight/2 - window.innerHeight/4, window.innerWidth/2, window.innerHeight/2);
-        sadrzaj.fillStyle="#000";
-        sadrzaj.font = "48px Verdana";
-        sadrzaj.fillText("Igra je završena!", window.innerWidth/2 - window.innerWidth/4 + 100, window.innerHeight/2 - window.innerHeight/4 + 100);
-        igranje = false;
-    }
-}
-
 
 /*************** KLASE ***************/
 
-
-/* prima sliku pozadine i naziv platna */
-
-// dodaje likove
-function Scena(pozadina, platno){
-    this.sirina = window.innerWidth;
-    this.visina = window.innerHeight;
-    this.platno = $("#platno");     // ako nije dato platno, da ga sam dodaje
-    this.platno.width = this.sirina;
-    this.platno.height = this.visina;
-    this.platno.style.backgroundColor = "black";
-    this.sadrzaj = this.platno.getContext("2d");
-
-    this.odrediDimenzije = function(){
-        // ili prilagodiPozadinu() ili racunaProporcije() za sve
-    }
-
-    this.raspolozivePozicije() = function(){
-        //
-    }
-
-    this.crtaPozadinu() = function(){
-
-    }
-
-    this.mrdaPozadinu() = function(){
-
-    }
-
-    this.slucajniProzor() = function(){
-        // ili slobodan prozor
-    }
-
-    this.crtaLikove() = function(){
-        // ili crtaju sebe?
-    }
-
-    this.proveriJelNapustio() = function(){
-        //
-    }
-
-    this.brisi = function(){
-        this.sadrzaj.clearRect(0, 0, this.sirina, this.visina);
-    }
-
-    this.promeniBoju = function(color){
-        this.platno.style.backgroundColor = color;
-    } // end this.setBG
-
-    this.getMouseX = function(){
-        //incorporate offset for canvas position
-        return document.mouseX - this.left;
-    }
-
-    this.getMouseY = function(){
-        //incorporate offset for canvas position
-        return document.mouseY - this.top;
-    }
-
-    this.getMouseClicked = function(){
-        return document.mouseClicked;
-    }
-
-}
-
-
 /* prepraviti da prima slika_url umesto slika i pravi this.slika objekat */
-function Karakter(slika, scena){
+function Karakter(slika){
     this.uveden_u_igru = false;
     this.ostavlja_poruku = false;
     this.spust = 0;
     this.spustanje = false;
 
+    /*
     // prepisano iz simple game, upotrebiti!
-    this.scena = scena;
-    this.platno = scena.platno;
-    this.sadrzaj = this.platno.getContext("2d");
+    this.scena = scena; // scenu proslediti kao argument
 
-    this.slika = new Image();   // pravi objekat od slike koju primi
-    this.slika.src = slika_url;
+     this.visinaSveta = parseInt(this.platno.height);
+     this.sirinaSveta = parseInt(this.platno.width);
+*/
+
+    this.platno = platno;
+    this.sadrzaj = platno.getContext("2d");
+    // prepraviti da ide preko scene
+    //this.platno = scena.platno;
+    //this.sadrzaj = this.platno.getContext("2d");
+
+//    this.slika = new Image();
+  //  this.slika.src = slika_url; // pravi objekat od slike koju primi
+
 
     // prima visinu i sirinu od svoje slike
     this.sirina = slika.width;
@@ -395,8 +230,6 @@ function Karakter(slika, scena){
     //this.sirina = this.slika.width;
     //this.visina = this.slika.height;
 
-    this.visinaSveta = parseInt(this.platno.height);
-    this.sirinaSveta = parseInt(this.platno.width);
 
     /* uzima slucajne koordinate i pripisuje sebi */
     this.slucajnaPozicija = function() {
@@ -405,8 +238,7 @@ function Karakter(slika, scena){
     }   // slucajnaPozicija
 
 
-    /* crta sebe na trenutnim ili zadatim koordinatama */
-    this.crtaj = function() {
+    this.goreDole = function(){
         // lagano se spusta i dize
         if(this.spust >= 100) {
             this.spustanje = true;
@@ -414,8 +246,11 @@ function Karakter(slika, scena){
             this.spustanje = false;
         }
         this.spustanje ? this.spust-- : this.spust++;
+    }
 
-        sadrzaj.drawImage(slika, 0, 0, slika.naturalWidth, slika.naturalHeight - (this.spust * (slika.naturalHeight/slika.height)), this.x, this.y + this.spust, this.sirina, this.visina - this.spust);
+    /* crta sebe na trenutnim ili zadatim koordinatama */
+    this.crtaj = function() {
+        sadrzaj.drawImage(slika, this.x, this.y, this.sirina, this.visina);
     }   // kraj crtaj
 
 

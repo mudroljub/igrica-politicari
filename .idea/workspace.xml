@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f00d2fcd-5176-4298-80f6-ed9131d93a7c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/klasaScena.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/igrica.js" afterPath="$PROJECT_DIR$/js/igrica.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="html5-games.iws" />
@@ -31,49 +33,30 @@
       <file leaf-file-name="igrica.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/igrica.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20728292" vertical-offset="4562" max-vertical-offset="6015">
-              <caret line="373" column="0" selection-start-line="373" selection-start-column="0" selection-end-line="373" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.033755273" vertical-offset="3120" max-vertical-offset="4720">
+              <caret line="196" column="0" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="klasaScena.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/klasaScena.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1366" max-vertical-offset="2976">
+              <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="320">
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding>
-                <element signature="e#781#829#0" expanded="true" />
-                <element signature="e#862#913#0" expanded="true" />
-                <element signature="e#1611#1803#0" expanded="true" />
-                <element signature="n#!!block;n#postaviScenu#0" expanded="true" />
-                <element signature="n#!!block;n#azuriraj#0" expanded="true" />
-                <element signature="n#!!block;n#praviSlike#0" expanded="true" />
-                <element signature="e#3468#3639#0" expanded="true" />
-                <element signature="n#!!block;n#praviKaraktere#0" expanded="true" />
-                <element signature="n#!!block;n#prilagodiSlike#0" expanded="true" />
-                <element signature="n#!!block;n#dodeliPozicije#0" expanded="true" />
-                <element signature="n#!!block;n#uvodiLikove#0" expanded="true" />
-                <element signature="n#!!block;n#crtajSlike#0" expanded="true" />
-                <element signature="n#!!block;n#slucajniProzor#0" expanded="true" />
-                <element signature="n#!!block;n#prikaziPoene#0" expanded="true" />
-                <element signature="n#!!block;n#proveriPogodak#0" expanded="true" />
-                <element signature="n#!!block;n#ispisiPoruku#0" expanded="true" />
-                <element signature="n#!!block;n#ispisujPoruke#0" expanded="true" />
-                <element signature="n#!!block;n#brisiPoruke#0" expanded="true" />
-                <element signature="n#!!block;n#pustiUvod#0" expanded="true" />
-                <element signature="n#!!block;n#uvodnaSpica#0" expanded="true" />
-                <element signature="n#!!block;n#reagujNaKlik#0" expanded="true" />
-                <element signature="n#!!block;n#proveriKraj#0" expanded="true" />
-                <element signature="e#9308#9380#0" expanded="true" />
-                <element signature="e#9425#9443#0" expanded="true" />
-                <element signature="e#9481#9489#0" expanded="true" />
-                <element signature="e#9527#9535#0" expanded="true" />
-                <element signature="e#9575#9613#0" expanded="true" />
-                <element signature="e#9649#9684#0" expanded="true" />
-                <element signature="e#9728#9746#0" expanded="true" />
-                <element signature="e#9775#9846#0" expanded="true" />
-                <element signature="e#9886#9944#0" expanded="true" />
-                <element signature="e#9995#10095#0" expanded="true" />
-                <element signature="e#10128#10227#0" expanded="true" />
-                <element signature="e#10266#10311#0" expanded="true" />
-                <element signature="n#!!block;n#Karakter#0" expanded="true" />
-                <element signature="e#11197#11280#0" expanded="true" />
-                <element signature="e#11391#11840#0" expanded="true" />
-                <element signature="e#11972#12103#0" expanded="true" />
-                <element signature="e#12265#12650#0" expanded="true" />
-                <element signature="e#12802#12938#0" expanded="true" />
+                <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -96,6 +79,7 @@
         <option value="$PROJECT_DIR$/simpleGame.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/igrica.js" />
+        <option value="$PROJECT_DIR$/js/klasaScena.js" />
       </list>
     </option>
   </component>
@@ -104,9 +88,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1920" />
-    <option name="height" value="977" />
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1291" />
+    <option name="height" value="714" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -196,15 +181,16 @@
       <BehatRunner />
       <method />
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-options />
       <gulpfile />
       <tasks />
+      <arguments />
       <pass-parent-envs>true</pass-parent-envs>
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <list size="0" />
@@ -220,16 +206,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="977" extended-state="6" />
-    <editor active="false" />
+    <frame x="65" y="24" width="1291" height="714" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1330327" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13171577" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2492891" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11927582" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12123678" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -237,9 +225,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
@@ -273,58 +259,30 @@
           <line>459</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/igrica.js</url>
+          <line>201</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="26" />
+      <option name="time" value="27" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/js/igrica.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7360">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/igrica.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6645">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#781#829#0" expanded="true" />
-            <element signature="e#862#913#0" expanded="true" />
-            <element signature="e#1611#1803#0" expanded="true" />
-            <element signature="n#!!block;n#postaviScenu#0" expanded="true" />
-            <element signature="n#!!block;n#azuriraj#0" expanded="true" />
-            <element signature="n#!!block;n#praviSlike#0" expanded="true" />
-            <element signature="e#3468#3639#0" expanded="true" />
-            <element signature="n#!!block;n#praviKaraktere#0" expanded="true" />
-            <element signature="n#!!block;n#prilagodiSlike#0" expanded="true" />
-            <element signature="n#!!block;n#dodeliPozicije#0" expanded="true" />
-            <element signature="n#!!block;n#uvodiLikove#0" expanded="true" />
-            <element signature="n#!!block;n#crtajSlike#0" expanded="true" />
-            <element signature="n#!!block;n#slucajniProzor#0" expanded="true" />
-            <element signature="n#!!block;n#prikaziPoene#0" expanded="true" />
-            <element signature="n#!!block;n#proveriPogodak#0" expanded="true" />
-            <element signature="n#!!block;n#ispisiPoruku#0" expanded="true" />
-            <element signature="n#!!block;n#ispisujPoruke#0" expanded="true" />
-            <element signature="n#!!block;n#brisiPoruke#0" expanded="true" />
-            <element signature="n#!!block;n#pustiUvod#0" expanded="true" />
-            <element signature="n#!!block;n#uvodnaSpica#0" expanded="true" />
-            <element signature="n#!!block;n#reagujNaKlik#0" expanded="true" />
-            <element signature="n#!!block;n#proveriKraj#0" expanded="true" />
-            <element signature="e#9308#9380#0" expanded="true" />
-            <element signature="e#9425#9443#0" expanded="true" />
-            <element signature="e#9481#9489#0" expanded="true" />
-            <element signature="e#9527#9535#0" expanded="true" />
-            <element signature="e#9575#9613#0" expanded="true" />
-            <element signature="e#9649#9684#0" expanded="true" />
-            <element signature="e#9728#9746#0" expanded="true" />
-            <element signature="e#9775#9846#0" expanded="true" />
-            <element signature="e#9886#9944#0" expanded="true" />
-            <element signature="e#9995#10095#0" expanded="true" />
-            <element signature="e#10128#10227#0" expanded="true" />
-            <element signature="e#10266#10311#0" expanded="true" />
-            <element signature="n#!!block;n#Karakter#0" expanded="true" />
-            <element signature="e#11197#11280#0" expanded="true" />
-            <element signature="e#11391#11840#0" expanded="true" />
-            <element signature="e#11972#12103#0" expanded="true" />
-            <element signature="e#12265#12650#0" expanded="true" />
-            <element signature="e#12802#12938#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -414,60 +372,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16736402" vertical-offset="0" max-vertical-offset="717">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="320">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/klasaScena.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1366" max-vertical-offset="2976">
+          <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/igrica.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20728292" vertical-offset="4562" max-vertical-offset="6015">
-          <caret line="373" column="0" selection-start-line="373" selection-start-column="0" selection-end-line="373" selection-end-column="0" />
-          <folding>
-            <element signature="e#781#829#0" expanded="true" />
-            <element signature="e#862#913#0" expanded="true" />
-            <element signature="e#1611#1803#0" expanded="true" />
-            <element signature="n#!!block;n#postaviScenu#0" expanded="true" />
-            <element signature="n#!!block;n#azuriraj#0" expanded="true" />
-            <element signature="n#!!block;n#praviSlike#0" expanded="true" />
-            <element signature="e#3468#3639#0" expanded="true" />
-            <element signature="n#!!block;n#praviKaraktere#0" expanded="true" />
-            <element signature="n#!!block;n#prilagodiSlike#0" expanded="true" />
-            <element signature="n#!!block;n#dodeliPozicije#0" expanded="true" />
-            <element signature="n#!!block;n#uvodiLikove#0" expanded="true" />
-            <element signature="n#!!block;n#crtajSlike#0" expanded="true" />
-            <element signature="n#!!block;n#slucajniProzor#0" expanded="true" />
-            <element signature="n#!!block;n#prikaziPoene#0" expanded="true" />
-            <element signature="n#!!block;n#proveriPogodak#0" expanded="true" />
-            <element signature="n#!!block;n#ispisiPoruku#0" expanded="true" />
-            <element signature="n#!!block;n#ispisujPoruke#0" expanded="true" />
-            <element signature="n#!!block;n#brisiPoruke#0" expanded="true" />
-            <element signature="n#!!block;n#pustiUvod#0" expanded="true" />
-            <element signature="n#!!block;n#uvodnaSpica#0" expanded="true" />
-            <element signature="n#!!block;n#reagujNaKlik#0" expanded="true" />
-            <element signature="n#!!block;n#proveriKraj#0" expanded="true" />
-            <element signature="e#9308#9380#0" expanded="true" />
-            <element signature="e#9425#9443#0" expanded="true" />
-            <element signature="e#9481#9489#0" expanded="true" />
-            <element signature="e#9527#9535#0" expanded="true" />
-            <element signature="e#9575#9613#0" expanded="true" />
-            <element signature="e#9649#9684#0" expanded="true" />
-            <element signature="e#9728#9746#0" expanded="true" />
-            <element signature="e#9775#9846#0" expanded="true" />
-            <element signature="e#9886#9944#0" expanded="true" />
-            <element signature="e#9995#10095#0" expanded="true" />
-            <element signature="e#10128#10227#0" expanded="true" />
-            <element signature="e#10266#10311#0" expanded="true" />
-            <element signature="n#!!block;n#Karakter#0" expanded="true" />
-            <element signature="e#11197#11280#0" expanded="true" />
-            <element signature="e#11391#11840#0" expanded="true" />
-            <element signature="e#11972#12103#0" expanded="true" />
-            <element signature="e#12265#12650#0" expanded="true" />
-            <element signature="e#12802#12938#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.033755273" vertical-offset="3120" max-vertical-offset="4720">
+          <caret line="196" column="0" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
