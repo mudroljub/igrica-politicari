@@ -1,7 +1,7 @@
 
 // dodati Sceni
 function crtajSlike(){
-    nivo1.sadrzaj.drawImage(nivo1.pozadina, 0, 0, window.innerWidth, nova_visina_pozadine);
+    nivo1.sadrzaj.drawImage(nivo1.pozadina, 0, 0, window.innerWidth, nivo1.pozadina.nova_visina);
     for(var i=0; i<karakteri.length; i++){
         if(karakteri[i].uveden_u_igru){
             karakteri[i].crtaj();
@@ -19,8 +19,8 @@ function dodeliPozicije(){
 
 // dodati Sceni
 function slucajniProzor(){
-    var gornja_osa = nova_visina_pozadine/4;
-    var donja_osa = nova_visina_pozadine/1.53;
+    var gornja_osa = nivo1.pozadina.nova_visina/4;
+    var donja_osa = nivo1.pozadina.nova_visina/1.53;
     var slucajna_pozicija = Math.floor(Math.random() * 6);
     pozicije_prozora = [
         [window.innerWidth/5.9, gornja_osa],             // prvi prozor
@@ -118,13 +118,12 @@ function Scena(platno_id, pozadina_src) {
     this.sadrzaj.font = "30px Verdana";
     this.sadrzaj.fillStyle = "white";
     this.sadrzaj.strokeStyle = 'black';
+    var sadrzaj = this.sadrzaj;                 // proglašava varijablu da bi je poslao nižoj funkciji
 
     this.pozadina = new Image();
-    var sadrzaj = this.sadrzaj;     // neopdhodno proglasiti varijablu da bi je poslao nižoj funkciji
-
-    this.pozadina.onload = function() {
-        nova_visina_pozadine = (window.innerWidth / this.width) * this.height;  // prilagodjava pozadinu
-        sadrzaj.drawImage(this, 0, 0, window.innerWidth, nova_visina_pozadine);
+    this.pozadina.onload = function() {                                     // this je ovde scena
+        this.nova_visina = (window.innerWidth / this.width) * this.height;  // this je ovde pozadina, prilagodjava visinu
+        sadrzaj.drawImage(this, 0, 0, window.innerWidth, this.nova_visina);
     };
     this.pozadina.src = 'slike/skupstina2.png';
 }

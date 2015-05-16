@@ -29,7 +29,6 @@ window.$$ = function(selector) {
 
 
 /*************** VARIJABLE ***************/
-var nova_visina_pozadine;
 var pozicije_prozora;
 var misX;
 var misY;
