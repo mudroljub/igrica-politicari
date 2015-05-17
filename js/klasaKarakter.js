@@ -1,40 +1,18 @@
 
-function proveriPogodak(ovaj_lik){
-    if( (misX > ovaj_lik.x && misX < ovaj_lik.x + ovaj_lik.sirina) && (misY > ovaj_lik.y && misY < ovaj_lik.y + ovaj_lik.visina) ){
-        ovaj_lik.ostavlja_poruku = true;
-        poeni++;
-    }
-}
-
-
-function ispisiPoruku(ovaj_lik){
-    var poruka = ovaj_lik.poruka || "Jaoj";
-    scena.sadrzaj.font = "30px Verdana";
-    scena.sadrzaj.lineWidth = 1;
-    scena.sadrzaj.fillText(poruka, misX+30, misY, 250);           // poslednji argument je maksimalna shirina teksta
-    scena.sadrzaj.strokeText(poruka, misX+30, misY, 250);
-}
-
-
 /* prima sliku i scenu, pravi novog lika */
 function Karakter(slika_src, scena){
-	//this.scena = scena; 
     this.uveden_u_igru = false;
-    this.ostavlja_poruku = false;
-    this.spust = 0;
+    this.ostaviti_poruku = false;
     this.spustanje = false;
+    this.spust = 0;
 
-    /*
-     // prepisano iz simple game, upotrebiti!
-     this.visinaSveta = parseInt(this.platno.height);
-     this.sirinaSveta = parseInt(this.platno.width);
-     */
-    
+    this.scena = scena;
     this.platno = scena.platno;
     this.sadrzaj = scena.sadrzaj;
-    // prepraviti da ide preko scene
-    //this.platno = scena.platno;
-    //this.sadrzaj = this.platno.getContext("2d");
+    /*
+     this.visinaSveta = parseInt(this.platno.height);   // ili scena.visina
+     this.sirinaSveta = parseInt(this.platno.width);
+     */
 
     this.slika = new Image();
     this.slika.src = slika_src;
@@ -66,7 +44,8 @@ function Karakter(slika_src, scena){
         this.spustanje ? this.spust-- : this.spust++;
     }
 
-    /* crta sebe na trenutnim ili zadatim koordinatama */
+
+    /* crta sebe na trenutnim koordinatama */
     this.crtaj = function() {
         this.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
     }   // kraj crtaj
@@ -82,15 +61,14 @@ function Karakter(slika_src, scena){
 
     /* prima niz likova, proverava dal su zauzeli njegovu poziciju, vraca jel slobodna */
     this.jelOvoSlobodno = function (ostali) {
-        var index = ostali.indexOf(this);
-        ostali.splice(index, 1);    // izbacuje sebe
-
         var slobodno = true;
+        var izbaci_me = ostali.indexOf(this);       // traži sebe
+        ostali.splice(izbaci_me, 1);                // izbacuje sebe
         // ide redom kroz ostale i proverava sudar
         for (var i = 0; i < ostali.length; i++) {
             slobodno = slobodno & !this.jelDrugiZauzeo(ostali[i]);
         }
-        ostali.push(this);          // vraca sebe
+        ostali.push(this);                          // vraca sebe
         return slobodno;
     }   // kraj jelOvoSlobodno
 
@@ -103,5 +81,23 @@ function Karakter(slika_src, scena){
         }
     }   // kraj naSlobodnomCrtaj
 
-}   // kraj klase Karakter
 
+    this.ispisiPoruku = function(){
+        var poruka = this.poruka || "Jaoj";
+        scena.sadrzaj.font = "30px Verdana";
+        scena.sadrzaj.lineWidth = 1;
+        scena.sadrzaj.fillText(poruka, misX+30, misY, 250);           // poslednji argument je maksimalna shirina teksta
+        scena.sadrzaj.strokeText(poruka, misX+30, misY, 250);
+    }   // ispisiPoruku
+
+
+    // varijable sceni!
+    this.proveriPogodak = function (){
+        if( (misX > this.x && misX < this.x + this.sirina) && (misY > this.y && misY < this.y + this.visina) ){
+            this.ostaviti_poruku = true;
+            poeni++;
+        }
+    }   // proveriPogodak
+
+
+}   // kraj klase Karakter

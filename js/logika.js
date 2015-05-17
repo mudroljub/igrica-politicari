@@ -32,6 +32,7 @@ window.$$ = function(selector) {
 /*************** VARIJABLE ***************/
 
 // koriste ih i Karakter i Scena
+// pretvoriti u scena.misX
 var misX;
 var misY;
 
@@ -138,8 +139,8 @@ function dodeliPozicije(){
 
 function ispisujPoruke(){
     for(var i=0; i<scena.karakteri.length; i++){
-        if(scena.karakteri[i].uveden_u_igru && scena.karakteri[i].ostavlja_poruku){
-            ispisiPoruku(scena.karakteri[i]);
+        if(scena.karakteri[i].uveden_u_igru && scena.karakteri[i].ostaviti_poruku){
+            scena.karakteri[i].ispisiPoruku();
         }
     }
 }
@@ -147,6 +148,6 @@ function ispisujPoruke(){
 
 function brisiPoruke(){
     for(var i=0; i<scena.karakteri.length; i++){
-        scena.karakteri[i].ostavlja_poruku = false;
+        scena.karakteri[i].ostaviti_poruku = false;
     }
 }

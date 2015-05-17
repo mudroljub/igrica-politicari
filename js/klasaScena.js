@@ -56,11 +56,11 @@ function Scena(naziv_platna, izvor_pozadine) {
 		}
 	} // kraj crtajSlike
 
-    // prosleduju se ka scena.pozicije_prozora i odatle vuku
+
     this.izracunajPozicije = function(){
         var gornji_red = this.pozadina.nova_visina / gornji_f;
         var donji_red = this.pozadina.nova_visina / donji_f;
-        var prvi_prozor = window.innerWidth / prvi_f;			// promeniti u pozadina.sirina
+        var prvi_prozor = window.innerWidth / prvi_f;			// promeniti u scena.sirina
         var drugi_prozor = window.innerWidth / drugi_f;
         var treci_prozor = window.innerWidth / treci_f;
 
@@ -92,6 +92,7 @@ function Scena(naziv_platna, izvor_pozadine) {
     }
 
 
+    // this je unutar funkcije platno, jer je na njega prikazen okidač !
     this.reagujNaKlik = function(event){
         misX = event.clientX;
         misY = event.clientY;
@@ -103,10 +104,17 @@ function Scena(naziv_platna, izvor_pozadine) {
             uvod = false;
         }
 
+        // srediti da provrti karaktere, a ne ručno!
+        // problem da dohvati scena.karakteri iznutra
+        // ne moze ni this.karakteri, this je platno
         if(igranje){
-            proveriPogodak(dacic);
-            proveriPogodak(toma);
-            proveriPogodak(vulin);
+            /*for(var i=0; i < this.karakteri.length; i++){
+                this.karakteri[i].proveriPogodak();
+             }*/
+            dacic.proveriPogodak();
+            toma.proveriPogodak();
+            vulin.proveriPogodak();
+
         }
     }   // kraj reagujNaKlik
 
@@ -127,7 +135,6 @@ function proveriKraj(){
 
 
 
-// dodaje likove
 function Scena2(pozadina, platno){
     this.sirina = window.innerWidth;
     this.visina = window.innerHeight;
@@ -149,14 +156,6 @@ function Scena2(pozadina, platno){
         //
     }
 
-    this.brisi = function(){
-        this.sadrzaj.clearRect(0, 0, this.sirina, this.visina);
-    }
-
-    this.promeniBoju = function(color){
-        this.platno.style.backgroundColor = color;
-    } // end this.setBG
-
     this.getMouseX = function(){
         //incorporate offset for canvas position
         return document.mouseX - this.left;
@@ -174,20 +173,20 @@ function Scena2(pozadina, platno){
 }
 
 
-// dodati Sceni
-function pustiUvod(){
-    // pravi uvodnu animaciju
-    scena.sadrzaj.fillStyle = "black";
-    scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
-    scena.sadrzaj.fillStyle="#fff";
-    scena.sadrzaj.font = "48px Verdana";
-    scena.sadrzaj.fillText("Spremi se za obracun!", uvodna_slova_x += 5, uvodna_slova_y);
-    if(uvodna_slova_x > innerWidth-100) {
-        uvodna_slova_x = -100;
-        uvodna_slova_y += 100;
+    // dodati Sceni
+    function pustiUvod(){
+        // pravi uvodnu animaciju
+        scena.sadrzaj.fillStyle = "black";
+        scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
+        scena.sadrzaj.fillStyle="#fff";
+        scena.sadrzaj.font = "48px Verdana";
+        scena.sadrzaj.fillText("Spremi se za obracun!", uvodna_slova_x += 5, uvodna_slova_y);
+        if(uvodna_slova_x > innerWidth-100) {
+            uvodna_slova_x = -100;
+            uvodna_slova_y += 100;
+        }
+        if(uvodna_slova_y > innerHeight - 100) {
+            uvodna_slova_y = 200;
+        }
+        uvodna_spica = requestAnimationFrame(pustiUvod);
     }
-    if(uvodna_slova_y > innerHeight - 100) {
-        uvodna_slova_y = 200;
-    }
-    uvodna_spica = requestAnimationFrame(pustiUvod);
-}
