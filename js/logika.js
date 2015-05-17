@@ -46,7 +46,7 @@ var igranje = false;
 var prosla_sekunda = 0;
 var karakteri = [];
 
-var nivo1 = new Scena('platno');
+var nivo1 = new Scena('platno', 'slike/skupstina2.png');
 
 // za ucitavac
 var likovi = {                           // nazivi su bitni, od njih pravi objekte

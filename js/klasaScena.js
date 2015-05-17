@@ -1,5 +1,4 @@
-/* prima sliku pozadine i id platna */
-/* uredjuje platno, sadrzaj i pozadinu */
+
 function Scena(platno_id, pozadina_src) {
 
     this.platno = document.getElementById(platno_id);
@@ -17,7 +16,7 @@ function Scena(platno_id, pozadina_src) {
         this.nova_visina = (window.innerWidth / this.width) * this.height;  // this je ovde pozadina, prilagodjava visinu
         sadrzaj.drawImage(this, 0, 0, window.innerWidth, this.nova_visina);
     };
-    this.pozadina.src = 'slike/skupstina2.png';
+    this.pozadina.src = pozadina_src;
 }
 
 
