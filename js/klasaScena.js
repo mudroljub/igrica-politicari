@@ -1,8 +1,11 @@
 
+// primiti sirinu i visinu scene od prozora, nadalje koristiti to
+
 function Scena(naziv_platna, izvor_pozadine) {
-	this.karakteri = [];		// aktivni karakteri na sceni
-	
-	// napraviti ako nema platna da ga pravi
+	this.karakteri = [];		// popunja funkcija praviLikove
+    this.pozicije_prozora = []  // popunja funkcija izracunajPozicije
+
+        // napraviti ako nema platna da ga pravi
     this.platno = document.getElementById(naziv_platna);
     this.platno.height = window.innerHeight;
     this.platno.width = window.innerWidth;
@@ -33,17 +36,15 @@ function Scena(naziv_platna, izvor_pozadine) {
 			ova_slika.src = slike[kljuc];
 		}	// kraj for
 	}	// kraj ucitajSlike
-	
-	
+
 	// uzima niz likova, pretvara ih u karaktere i ređa u niz karaktera
-	this.pravLikove = function(likovi){
+	this.praviLikove = function(likovi){
 		for (var ovaj_lik in likovi){
 			window[ovaj_lik] = new Karakter(likovi[ovaj_lik], this);
 			this.karakteri.push(window[ovaj_lik]);
 		}   // kraj for
-	}   // kraj pravLikove()
-	
-	
+	}   // kraj praviLikove()
+
 	// iscrtava pozadinu i aktivne karaktere
 	this.crtaSlike = function(){
 		this.sadrzaj.drawImage(this.pozadina, 0, 0, window.innerWidth, this.pozadina.nova_visina);
@@ -53,42 +54,43 @@ function Scena(naziv_platna, izvor_pozadine) {
 			}
 		}
 	} // kraj crtaSlike
-		
-	
-	// razdvojiti na raspolozivePozicije i slucajniProzor ?
-	this.slucajniProzor = function(){
-		var gornji_red = this.pozadina.nova_visina / gornji_f;
-		var donji_red = this.pozadina.nova_visina / donji_f;
-		var prvi_prozor = window.innerWidth / prvi_f;			// promeniti u pozadina.sirina
-		var drugi_prozor = window.innerWidth / drugi_f;
-		var treci_prozor = window.innerWidth / treci_f;
 
-		var pozicije_prozora = [
-			[prvi_prozor, gornji_red],             // prvi prozor
-			[drugi_prozor, gornji_red],             // drugi prozor
-			[treci_prozor, gornji_red],
-			[prvi_prozor, donji_red],
-			[drugi_prozor, donji_red],
-			[treci_prozor, donji_red]
-		]
-		var slucajna_pozicija = Math.floor(Math.random() * 6);
-		return [pozicije_prozora[slucajna_pozicija][0], pozicije_prozora[slucajna_pozicija][1]];
+    // prosleduju se ka scena.pozicije_prozora i odatle vuku
+    this.izracunajPozicije = function(){
+        var gornji_red = this.pozadina.nova_visina / gornji_f;
+        var donji_red = this.pozadina.nova_visina / donji_f;
+        var prvi_prozor = window.innerWidth / prvi_f;			// promeniti u pozadina.sirina
+        var drugi_prozor = window.innerWidth / drugi_f;
+        var treci_prozor = window.innerWidth / treci_f;
+
+        this.pozicije_prozora = [
+            [prvi_prozor, gornji_red],             // prvi prozor
+            [drugi_prozor, gornji_red],             // drugi prozor
+            [treci_prozor, gornji_red],
+            [prvi_prozor, donji_red],
+            [drugi_prozor, donji_red],
+            [treci_prozor, donji_red]
+        ]
+    }   // kraj izracunajPozicije
+
+
+	this.slucajniProzor = function(){
+		var slucajna_pozicija = Math.floor(Math.random() * this.pozicije_prozora.length);
+		return [this.pozicije_prozora[slucajna_pozicija][0], this.pozicije_prozora[slucajna_pozicija][1]];
 	}	// kraj slucajniProzor
 	
+    
+    this.prikaziPoene = function(poeni, vreme_igre){
+        this.sadrzaj.fillStyle="#000";
+        this.sadrzaj.fillRect(20,80,180,100);
+        this.sadrzaj.stroke();
+        this.sadrzaj.fillStyle="#FFF";
+        this.sadrzaj.font = "24px Verdana";
+        this.sadrzaj.fillText("Poeni: " + poeni, 30, 120);
+        this.sadrzaj.fillText("Vreme: " + vreme_igre, 30, 160);        
+    }
+    
 }
-
-
-// dodati Sceni
-function prikaziPoene(){
-    scena.sadrzaj.fillStyle="#000";
-    scena.sadrzaj.fillRect(20,80,180,100);
-    scena.sadrzaj.stroke();
-    scena.sadrzaj.fillStyle="#FFF";
-    scena.sadrzaj.font = "24px Verdana";
-    scena.sadrzaj.fillText("Poeni: " + poeni, 30, 120);
-    scena.sadrzaj.fillText("Vreme: " + vreme_igre, 30, 160);
-}
-
 
 
 // dodati Sceni
@@ -132,7 +134,7 @@ function reagujNaKlik(event){
         proveriPogodak(dacic);
         proveriPogodak(toma);
         proveriPogodak(vulin);
-        prikaziPoene();
+        scena.prikaziPoene(poeni, vreme_igre);
     }
 }
 

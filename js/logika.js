@@ -39,8 +39,11 @@ var uvodna_slova_y = 200;
 
 var BAZICNA_SIRINA_EKRANA = 1280;
 var BAZICNA_VISINA_SLIKE = 118;
+
+// pridruziti sceni
 var vreme_igre = 30;
 var poeni = 0;
+
 var uvod = true;
 var igranje = false;
 var prosla_sekunda = 0;
@@ -76,7 +79,8 @@ scena.platno.addEventListener('click', reagujNaKlik);
 
 function postaviScenu(){
     ovaAnimacija = requestAnimationFrame(azuriraj);
-    scena.pravLikove(likovi);   // pravi objekte od niza likova
+    scena.izracunajPozicije();
+    scena.praviLikove(likovi);   // pravi objekte od niza likova
     // dodaje jedinstvene poruke
     dacic.poruka = "Jaoj";
     vulin.poruka = "To boli!";
@@ -90,7 +94,7 @@ function azuriraj(){
         uvodiLikove();
         scena.crtaSlike();
         ispisujPoruke();
-        prikaziPoene();
+        scena.prikaziPoene(poeni, vreme_igre);
         proveriKraj();
 
         if(prosla_sekunda != new Date().getSeconds()) {
