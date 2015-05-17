@@ -19,9 +19,10 @@ function Scena(platno_id, pozadina_src) {
     this.pozadina.src = pozadina_src;
 	
 	
-	this.ucitajSlike = function(likovi, povratnaRadnja){
+	this.ucitajSlike = function(slike, povratnaRadnja){
+		var brojSlika = Object.keys(slike).length;
 		var ucitaneSlike = 0;
-		for (var ovaj_lik in likovi) {
+		for (var kljuc in slike) {
 			var ova_slika = new Image(); 
 			ova_slika.onload = function kadSveUcita() {
 				ucitaneSlike++;
@@ -29,13 +30,28 @@ function Scena(platno_id, pozadina_src) {
 					povratnaRadnja();
 				}
 			};  // kraj kadSveUcita()
-			ova_slika.src = likovi[ovaj_lik];
+			ova_slika.src = slike[kljuc];
+		}	// kraj for
+	}	// kraj ucitajSlike
+	
+	/*
+	this.uvodiLikove = function(likovi){
+		// mozda vreme igre podeliti brojem likova, i na toliko uvoditi
+		window[Object.keys(likovi)[0]].uveden_u_igru = true;	
+		
+		if(vreme_igre <= 20) {
+			window[Object.keys(likovi)[1]].uveden_u_igru = true;
 		}
-	}
+		if(vreme_igre <= 10) {
+			window[Object.keys(likovi)[2]].uveden_u_igru = true;
+		}
+	}	// kraj uvodiLikove
+	*/
 }
 
 
 function uvodiLikove(){
+	// prepraviti da ih hvata iz likovi, po redosledu, ne po imenu
     dacic.uveden_u_igru = true;
 
     if(vreme_igre <= 20) {

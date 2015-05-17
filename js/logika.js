@@ -2,6 +2,7 @@
     REFORME:
 // napraviti objekat scena, sa slikom pozadine i pozicijom prozora
 // mozda posebna klasa ucitavac, da ucitava i pravi slike ?
+// praviti likove sa imenom, dodati atibut ime
 
     IDEJE:
  // da ne izlaze uvek, nego da malo sacekaju
@@ -54,7 +55,6 @@ var likovi = {                           // nazivi su bitni, od njih pravi objek
     toma: 'slike/toma.png',
     dacic: 'slike/dacic.png'
 }
-var brojSlika = Object.keys(likovi).length;
 
 
 /*************** POZIVI ***************/
@@ -85,6 +85,7 @@ function azuriraj(){
     if(igranje){
         // ovo izvrsava na svaki frejm
         uvodiLikove();
+		//nivo1.uvodiLikove(likovi);
         crtajSlike();
         ispisujPoruke();
         prikaziPoene();
