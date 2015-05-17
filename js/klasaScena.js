@@ -165,10 +165,6 @@ function Scena2(pozadina, platno){
         // ili prilagodiPozadinu() ili racunaProporcije() za sve
     }
 
-    this.raspolozivePozicije = function(){
-        //
-    }
-
     this.mrdaPozadinu = function(){
 
     }
