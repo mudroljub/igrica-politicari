@@ -30,9 +30,15 @@ window.$$ = function(selector) {
 
 
 /*************** VARIJABLE ***************/
+
+// koriste ih i Karakter i Scena
 var misX;
 var misY;
+
+
 var ovaAnimacija;
+
+// prabaciti u scenu
 var uvodna_spica;
 var uvodna_slova_x = -100;
 var uvodna_slova_y = 200;
@@ -72,7 +78,9 @@ scena.ucitajSlike(likovi, pustiUvod);
 
 /*************** SLUSACI ***************/
 
-scena.platno.addEventListener('click', reagujNaKlik);
+
+// pripojiti sceni
+scena.platno.addEventListener('click', scena.reagujNaKlik);
 
 
 /*************** FUNKCIJE ***************/
@@ -92,9 +100,9 @@ function azuriraj(){
     if(igranje){
         // ovo izvrsava na svaki frejm
         uvodiLikove();
-        scena.crtaSlike();
+        scena.crtajSlike();
         ispisujPoruke();
-        scena.prikaziPoene(poeni, vreme_igre);
+        scena.ispisiPoene(poeni, vreme_igre);
         proveriKraj();
 
         if(prosla_sekunda != new Date().getSeconds()) {

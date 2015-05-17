@@ -37,7 +37,8 @@ function Scena(naziv_platna, izvor_pozadine) {
 		}	// kraj for
 	}	// kraj ucitajSlike
 
-	// uzima niz likova, pretvara ih u karaktere i ređa u niz karaktera
+
+    // uzima niz likova, pretvara ih u karaktere i ređa u niz karaktera
 	this.praviLikove = function(likovi){
 		for (var ovaj_lik in likovi){
 			window[ovaj_lik] = new Karakter(likovi[ovaj_lik], this);
@@ -46,14 +47,14 @@ function Scena(naziv_platna, izvor_pozadine) {
 	}   // kraj praviLikove()
 
 	// iscrtava pozadinu i aktivne karaktere
-	this.crtaSlike = function(){
+	this.crtajSlike = function(){
 		this.sadrzaj.drawImage(this.pozadina, 0, 0, window.innerWidth, this.pozadina.nova_visina);
 		for(var i=0; i < this.karakteri.length; i++){
 			if(this.karakteri[i].uveden_u_igru){
 				this.karakteri[i].crtaj();
 			}
 		}
-	} // kraj crtaSlike
+	} // kraj crtajSlike
 
     // prosleduju se ka scena.pozicije_prozora i odatle vuku
     this.izracunajPozicije = function(){
@@ -78,9 +79,9 @@ function Scena(naziv_platna, izvor_pozadine) {
 		var slucajna_pozicija = Math.floor(Math.random() * this.pozicije_prozora.length);
 		return [this.pozicije_prozora[slucajna_pozicija][0], this.pozicije_prozora[slucajna_pozicija][1]];
 	}	// kraj slucajniProzor
-	
-    
-    this.prikaziPoene = function(poeni, vreme_igre){
+
+
+    this.ispisiPoene = function(poeni, vreme_igre){
         this.sadrzaj.fillStyle="#000";
         this.sadrzaj.fillRect(20,80,180,100);
         this.sadrzaj.stroke();
@@ -89,53 +90,26 @@ function Scena(naziv_platna, izvor_pozadine) {
         this.sadrzaj.fillText("Poeni: " + poeni, 30, 120);
         this.sadrzaj.fillText("Vreme: " + vreme_igre, 30, 160);        
     }
-    
-}
 
 
-// dodati Sceni
-function pustiUvod(){
-    // pravi uvodnu animaciju
-    uvodna_spica = requestAnimationFrame(uvodnaSpica);
-}
+    this.reagujNaKlik = function(event){
+        misX = event.clientX;
+        misY = event.clientY;
 
+        if(uvod){
+            cancelAnimationFrame(uvodna_spica);
+            postaviScenu();
+            igranje = true;
+            uvod = false;
+        }
 
-// dodati Sceni
-function uvodnaSpica(){
-    scena.sadrzaj.fillStyle = "black";
-    scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
-    scena.sadrzaj.fillStyle="#fff";
-    scena.sadrzaj.font = "48px Verdana";
-    scena.sadrzaj.fillText("Spremi se za obracun!", uvodna_slova_x += 5, uvodna_slova_y);
-    if(uvodna_slova_x > innerWidth-100) {
-        uvodna_slova_x = -100;
-        uvodna_slova_y += 100;
-    }
-    if(uvodna_slova_y > innerHeight - 100) {
-        uvodna_slova_y = 200;
-    }
-    uvodna_spica = requestAnimationFrame(uvodnaSpica);
-}
+        if(igranje){
+            proveriPogodak(dacic);
+            proveriPogodak(toma);
+            proveriPogodak(vulin);
+        }
+    }   // kraj reagujNaKlik
 
-
-// dodati Sceni
-function reagujNaKlik(event){
-    misX = event.clientX;
-    misY = event.clientY;
-
-    if(uvod){
-        cancelAnimationFrame(uvodna_spica);
-        postaviScenu();
-        igranje = true;
-        uvod = false;
-    }
-
-    if(igranje){
-        proveriPogodak(dacic);
-        proveriPogodak(toma);
-        proveriPogodak(vulin);
-        scena.prikaziPoene(poeni, vreme_igre);
-    }
 }
 
 
@@ -199,3 +173,21 @@ function Scena2(pozadina, platno){
 
 }
 
+
+// dodati Sceni
+function pustiUvod(){
+    // pravi uvodnu animaciju
+    scena.sadrzaj.fillStyle = "black";
+    scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    scena.sadrzaj.fillStyle="#fff";
+    scena.sadrzaj.font = "48px Verdana";
+    scena.sadrzaj.fillText("Spremi se za obracun!", uvodna_slova_x += 5, uvodna_slova_y);
+    if(uvodna_slova_x > innerWidth-100) {
+        uvodna_slova_x = -100;
+        uvodna_slova_y += 100;
+    }
+    if(uvodna_slova_y > innerHeight - 100) {
+        uvodna_slova_y = 200;
+    }
+    uvodna_spica = requestAnimationFrame(pustiUvod);
+}
