@@ -59,30 +59,24 @@ function Scena(naziv_platna, izvor_pozadine) {
 }
 
 
-// integrisati karaktere u scenu
-
-
 // dodati Sceni
-function dodeliPozicije(){
-    dacic.slucajnaPozicija();
-    vulin.nadjiSlobodnuPoziciju(scena.karakteri);
-    toma.nadjiSlobodnuPoziciju(scena.karakteri);
-}
-
-
-// dodati Sceni
+// treba da prima pozicije za svaku pozadinu
 function slucajniProzor(){
-    var gornja_osa = scena.pozadina.nova_visina/4;
-    var donja_osa = scena.pozadina.nova_visina/1.53;
-    var slucajna_pozicija = Math.floor(Math.random() * 6);
+    var gornji_red = scena.pozadina.nova_visina/4;
+    var donji_red = scena.pozadina.nova_visina/1.53;
+	var prvi_prozor = window.innerWidth/5.9;
+	var drugi_prozor = window.innerWidth/2.2;
+	var treci_prozor = window.innerWidth/1.35;
+
     pozicije_prozora = [
-        [window.innerWidth/5.9, gornja_osa],             // prvi prozor
-        [window.innerWidth/2.2, gornja_osa],             // drugi prozor
-        [window.innerWidth/1.35, gornja_osa],
-        [window.innerWidth/5.9, donja_osa],
-        [window.innerWidth/2.2, donja_osa],
-        [window.innerWidth/1.35, donja_osa]
+        [prvi_prozor, gornji_red],             // prvi prozor
+        [drugi_prozor, gornji_red],             // drugi prozor
+        [treci_prozor, gornji_red],
+        [prvi_prozor, donji_red],
+        [drugi_prozor, donji_red],
+        [treci_prozor, donji_red]
     ]
+	var slucajna_pozicija = Math.floor(Math.random() * 6);
     return [pozicije_prozora[slucajna_pozicija][0], pozicije_prozora[slucajna_pozicija][1]];
 }
 

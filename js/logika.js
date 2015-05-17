@@ -69,6 +69,11 @@ scena.platno.addEventListener('click', reagujNaKlik);
 /*************** FUNKCIJE ***************/
 
 function postaviScenu(){
+	    var gornji_red = scena.pozadina.nova_visina/4;
+    var donji_red = scena.pozadina.nova_visina/1.53;
+	var prvi_prozor = window.innerWidth/5.9;
+	var drugi_prozor = window.innerWidth/2.2;
+	var treci_prozor = window.innerWidth/1.35;
     ovaAnimacija = requestAnimationFrame(azuriraj);
     scena.pravLikove(likovi);   // pravi objekte od niza likova
     // dodaje jedinstvene poruke
@@ -107,6 +112,14 @@ function uvodiLikove(){
     if(vreme_igre <= 10) {
         toma.uveden_u_igru = true;
     }
+}
+
+
+// dodati Sceni
+function dodeliPozicije(){
+    dacic.slucajnaPozicija();
+    vulin.nadjiSlobodnuPoziciju(scena.karakteri);
+    toma.nadjiSlobodnuPoziciju(scena.karakteri);
 }
 
 
