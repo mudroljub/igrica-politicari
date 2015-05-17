@@ -86,18 +86,17 @@ function Karakter(slika_src, scena){
         var poruka = this.poruka || "Jaoj";
         scena.sadrzaj.font = "30px Verdana";
         scena.sadrzaj.lineWidth = 1;
-        scena.sadrzaj.fillText(poruka, misX+30, misY, 250);           // poslednji argument je maksimalna shirina teksta
-        scena.sadrzaj.strokeText(poruka, misX+30, misY, 250);
+        scena.sadrzaj.fillText(poruka, scena.misX+30, scena.misY, 250);           // poslednji argument je maksimalna shirina teksta
+        scena.sadrzaj.strokeText(poruka, scena.misX+30, scena.misY, 250);
     }   // ispisiPoruku
 
 
     // varijable sceni!
     this.proveriPogodak = function (){
-        if( (misX > this.x && misX < this.x + this.sirina) && (misY > this.y && misY < this.y + this.visina) ){
+        if( (scena.misX > this.x && scena.misX < this.x + this.sirina) && (scena.misY > this.y && scena.misY < this.y + this.visina) ){
             this.ostaviti_poruku = true;
             poeni++;
         }
     }   // proveriPogodak
-
 
 }   // kraj klase Karakter

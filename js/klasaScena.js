@@ -2,11 +2,13 @@
 // primiti sirinu i visinu scene od prozora, nadalje koristiti to
 
 function Scena(naziv_platna, izvor_pozadine) {
-    var ova_scena = this;          // hvata sebe, za niže funkcije
+    var ova_scena = this;       // hvata sebe, za niže funkcije
 	this.karakteri = [];		// popunjava funkcija praviLikove
     this.pozicije_prozora = []  // popunjava funkcija izracunajPozicije
+    this.misX;
+    this.misY;
 
-        // napraviti ako nema platna da ga pravi
+    // napraviti ako nema platna da ga pravi
     this.platno = document.getElementById(naziv_platna);
     this.platno.height = window.innerHeight;
     this.platno.width = window.innerWidth;
@@ -21,7 +23,7 @@ function Scena(naziv_platna, izvor_pozadine) {
         this.nova_visina = (window.innerWidth / this.width) * this.height;  // this je unutra pozadina, prilagodjava visinu
     };
     this.pozadina.src = izvor_pozadine;
-	
+
 	
 	this.ucitajSlike = function(slike, povratnaRadnja){
 		var brojSlika = Object.keys(slike).length;
@@ -96,8 +98,8 @@ function Scena(naziv_platna, izvor_pozadine) {
 
     // this je unutar funkcije platno, jer je na njega prikazen okidač !
     this.reagujNaKlik = function(event){
-        misX = event.clientX;
-        misY = event.clientY;
+        ova_scena.misX = event.clientX;
+        ova_scena.misY = event.clientY;
 
         if(uvod){
             cancelAnimationFrame(uvodna_spica);

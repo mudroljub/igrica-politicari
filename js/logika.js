@@ -1,7 +1,5 @@
 /*****************************************************************
     REFORME:
-// napraviti objekat scena, sa slikom pozadine i pozicijom prozora
-// mozda posebna klasa ucitavac, da ucitava i pravi slike ?
 // praviti likove sa imenom, dodati atibut ime
 
     IDEJE:
@@ -31,12 +29,6 @@ window.$$ = function(selector) {
 
 /*************** VARIJABLE ***************/
 
-// koriste ih i Karakter i Scena
-// pretvoriti u scena.misX
-var misX;
-var misY;
-
-
 var ovaAnimacija;
 
 // prabaciti u scenu
@@ -50,7 +42,6 @@ var BAZICNA_VISINA_SLIKE = 118;
 // pridruziti sceni
 var vreme_igre = 30;
 var poeni = 0;
-
 var uvod = true;
 var igranje = false;
 var prosla_sekunda = 0;
@@ -79,9 +70,7 @@ scena.ucitajSlike(likovi, pustiUvod);
 
 /*************** SLUSACI ***************/
 
-
-// pripojiti sceni
-scena.platno.addEventListener('click', scena.reagujNaKlik);
+$("#platno").addEventListener('click', scena.reagujNaKlik);
 
 
 /*************** FUNKCIJE ***************/
