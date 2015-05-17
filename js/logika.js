@@ -45,7 +45,7 @@ var poeni = 0;
 var uvod = true;
 var igranje = false;
 var prosla_sekunda = 0;
-var karakteri = [];
+var karakteri = [];		// likovi kao objekti postaju karakteri
 
 var scena = new Scena('platno', 'slike/skupstina2.png');
 
@@ -76,8 +76,8 @@ function postaviScenu(){
     dacic.poruka = "Jaoj";
     vulin.poruka = "To boli!";
     toma.poruka = "Evropa nema alternativu!";
-    crtajSlike();
-    prikaziPoene();
+    //scena.crtaSlike();
+    //prikaziPoene();
 }
 
 
@@ -85,8 +85,7 @@ function azuriraj(){
     if(igranje){
         // ovo izvrsava na svaki frejm
         uvodiLikove();
-		//scena.uvodiLikove(likovi);
-        crtajSlike();
+        scena.crtaSlike();
         ispisujPoruke();
         prikaziPoene();
         proveriKraj();
@@ -102,6 +101,16 @@ function azuriraj(){
     }
 }
 
+
+function uvodiLikove(){
+    dacic.uveden_u_igru = true;
+    if(vreme_igre <= 20) {
+        vulin.uveden_u_igru = true;
+    }
+    if(vreme_igre <= 10) {
+        toma.uveden_u_igru = true;
+    }
+}
 
 
 function ispisujPoruke(){

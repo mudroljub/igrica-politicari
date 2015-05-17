@@ -34,21 +34,8 @@ function Scena(platno_id, pozadina_src) {
 		}	// kraj for
 	}	// kraj ucitajSlike
 	
-	/*
-	this.uvodiLikove = function(likovi){
-		// mozda vreme igre podeliti brojem likova, i na toliko uvoditi
-		window[Object.keys(likovi)[0]].uveden_u_igru = true;	
-		
-		if(vreme_igre <= 20) {
-			window[Object.keys(likovi)[1]].uveden_u_igru = true;
-		}
-		if(vreme_igre <= 10) {
-			window[Object.keys(likovi)[2]].uveden_u_igru = true;
-		}
-	}	// kraj uvodiLikove
-	*/
 	
-	
+	// uzima niz likova, pretvara ih u karaktere i ređa u niz karaktera
 	this.pravLikove = function(likovi){
 		for (var ovaj_lik in likovi){
 			window[ovaj_lik] = new Karakter(likovi[ovaj_lik], this);
@@ -56,31 +43,19 @@ function Scena(platno_id, pozadina_src) {
 		}   // kraj for
 	}   // kraj pravLikove()
 	
+	
+	// iscrtava pozadinu i aktivne karaktere
+	this.crtaSlike = function(){
+		this.sadrzaj.drawImage(this.pozadina, 0, 0, window.innerWidth, this.pozadina.nova_visina);
+		for(var i=0; i < karakteri.length; i++){
+			if(karakteri[i].uveden_u_igru){
+				karakteri[i].crtaj();
+			}
+		}
+	} // kraj crtaSlike
+		
 }
 
-
-function uvodiLikove(){
-	// prepraviti da ih hvata iz likovi, po redosledu, ne po imenu
-    dacic.uveden_u_igru = true;
-
-    if(vreme_igre <= 20) {
-        vulin.uveden_u_igru = true;
-    }
-    if(vreme_igre <= 10) {
-        toma.uveden_u_igru = true;
-    }
-}
-
-
-// dodati Sceni
-function crtajSlike(){
-    scena.sadrzaj.drawImage(scena.pozadina, 0, 0, window.innerWidth, scena.pozadina.nova_visina);
-    for(var i=0; i<karakteri.length; i++){
-        if(karakteri[i].uveden_u_igru){
-            karakteri[i].crtaj();
-        }
-    }
-} // kraj crtajSlike
 
 // dodati Sceni
 function dodeliPozicije(){
