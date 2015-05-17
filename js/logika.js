@@ -88,7 +88,7 @@ function azuriraj(){
     if(igranje){
         // ovo izvrsava na svaki frejm
         uvodiLikove();
-        scena.crtaLikove();
+        scena.crtaSlike();
         ispisujPoruke();
         prikaziPoene();
         proveriKraj();

@@ -11,10 +11,9 @@ function Scena(naziv_platna, izvor_pozadine) {
     this.sadrzaj.font = "30px Verdana";
     this.sadrzaj.fillStyle = "white";
     this.sadrzaj.strokeStyle = 'black';
-    var sadrzaj = this.sadrzaj;          	// proglašava varijablu da bi je poslao unutarnjoj funkciji
 
     this.pozadina = new Image();
-    this.pozadina.onload = function() {                                     // this je ovde scena
+    this.pozadina.onload = function() {                                     // this je izvan scena
         this.nova_visina = (window.innerWidth / this.width) * this.height;  // this je unutra pozadina, prilagodjava visinu
     };
     this.pozadina.src = izvor_pozadine;
@@ -46,21 +45,21 @@ function Scena(naziv_platna, izvor_pozadine) {
 	
 	
 	// iscrtava pozadinu i aktivne karaktere
-	this.crtaLikove = function(){
+	this.crtaSlike = function(){
 		this.sadrzaj.drawImage(this.pozadina, 0, 0, window.innerWidth, this.pozadina.nova_visina);
 		for(var i=0; i < this.karakteri.length; i++){
 			if(this.karakteri[i].uveden_u_igru){
 				this.karakteri[i].crtaj();
 			}
 		}
-	} // kraj crtaLikove
+	} // kraj crtaSlike
 		
 	
-	// razdvojiti na raspolozivePozicije i slucajniProzor
+	// razdvojiti na raspolozivePozicije i slucajniProzor ?
 	this.slucajniProzor = function(){
 		var gornji_red = this.pozadina.nova_visina / gornji_f;
 		var donji_red = this.pozadina.nova_visina / donji_f;
-		var prvi_prozor = window.innerWidth / prvi_f;
+		var prvi_prozor = window.innerWidth / prvi_f;			// promeniti u pozadina.sirina
 		var drugi_prozor = window.innerWidth / drugi_f;
 		var treci_prozor = window.innerWidth / treci_f;
 
