@@ -47,7 +47,7 @@ var igranje = false;
 var prosla_sekunda = 0;
 var karakteri = [];
 
-var nivo1 = new Scena('platno', 'slike/skupstina2.png');
+var scena = new Scena('platno', 'slike/skupstina2.png');
 
 // za ucitavac
 var likovi = {                           // nazivi su bitni, od njih pravi objekte
@@ -59,19 +59,19 @@ var likovi = {                           // nazivi su bitni, od njih pravi objek
 
 /*************** POZIVI ***************/
 
-nivo1.ucitajSlike(likovi, pustiUvod);
+scena.ucitajSlike(likovi, pustiUvod);
 
 
 /*************** SLUSACI ***************/
 
-nivo1.platno.addEventListener('click', reagujNaKlik);
+scena.platno.addEventListener('click', reagujNaKlik);
 
 
 /*************** FUNKCIJE ***************/
 
 function postaviScenu(){
     ovaAnimacija = requestAnimationFrame(azuriraj);
-    praviKaraktere(likovi);   // pravi karaktere od niza likova
+    scena.pravLikove(likovi);   // pravi objekte od niza likova
     // dodaje jedinstvene poruke
     dacic.poruka = "Jaoj";
     vulin.poruka = "To boli!";
@@ -85,7 +85,7 @@ function azuriraj(){
     if(igranje){
         // ovo izvrsava na svaki frejm
         uvodiLikove();
-		//nivo1.uvodiLikove(likovi);
+		//scena.uvodiLikove(likovi);
         crtajSlike();
         ispisujPoruke();
         prikaziPoene();

@@ -47,6 +47,15 @@ function Scena(platno_id, pozadina_src) {
 		}
 	}	// kraj uvodiLikove
 	*/
+	
+	
+	this.pravLikove = function(likovi){
+		for (var ovaj_lik in likovi){
+			window[ovaj_lik] = new Karakter(likovi[ovaj_lik], this);
+			karakteri.push(window[ovaj_lik]);
+		}   // kraj for
+	}   // kraj pravLikove()
+	
 }
 
 
@@ -65,7 +74,7 @@ function uvodiLikove(){
 
 // dodati Sceni
 function crtajSlike(){
-    nivo1.sadrzaj.drawImage(nivo1.pozadina, 0, 0, window.innerWidth, nivo1.pozadina.nova_visina);
+    scena.sadrzaj.drawImage(scena.pozadina, 0, 0, window.innerWidth, scena.pozadina.nova_visina);
     for(var i=0; i<karakteri.length; i++){
         if(karakteri[i].uveden_u_igru){
             karakteri[i].crtaj();
@@ -83,8 +92,8 @@ function dodeliPozicije(){
 
 // dodati Sceni
 function slucajniProzor(){
-    var gornja_osa = nivo1.pozadina.nova_visina/4;
-    var donja_osa = nivo1.pozadina.nova_visina/1.53;
+    var gornja_osa = scena.pozadina.nova_visina/4;
+    var donja_osa = scena.pozadina.nova_visina/1.53;
     var slucajna_pozicija = Math.floor(Math.random() * 6);
     pozicije_prozora = [
         [window.innerWidth/5.9, gornja_osa],             // prvi prozor
@@ -100,13 +109,13 @@ function slucajniProzor(){
 
 // dodati Sceni
 function prikaziPoene(){
-    nivo1.sadrzaj.fillStyle="#000";
-    nivo1.sadrzaj.fillRect(20,80,180,100);
-    nivo1.sadrzaj.stroke();
-    nivo1.sadrzaj.fillStyle="#FFF";
-    nivo1.sadrzaj.font = "24px Verdana";
-    nivo1.sadrzaj.fillText("Poeni: " + poeni, 30, 120);
-    nivo1.sadrzaj.fillText("Vreme: " + vreme_igre, 30, 160);
+    scena.sadrzaj.fillStyle="#000";
+    scena.sadrzaj.fillRect(20,80,180,100);
+    scena.sadrzaj.stroke();
+    scena.sadrzaj.fillStyle="#FFF";
+    scena.sadrzaj.font = "24px Verdana";
+    scena.sadrzaj.fillText("Poeni: " + poeni, 30, 120);
+    scena.sadrzaj.fillText("Vreme: " + vreme_igre, 30, 160);
 }
 
 
@@ -120,11 +129,11 @@ function pustiUvod(){
 
 // dodati Sceni
 function uvodnaSpica(){
-    nivo1.sadrzaj.fillStyle = "black";
-    nivo1.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
-    nivo1.sadrzaj.fillStyle="#fff";
-    nivo1.sadrzaj.font = "48px Verdana";
-    nivo1.sadrzaj.fillText("Spremi se za obracun!", uvodna_slova_x += 5, uvodna_slova_y);
+    scena.sadrzaj.fillStyle = "black";
+    scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    scena.sadrzaj.fillStyle="#fff";
+    scena.sadrzaj.font = "48px Verdana";
+    scena.sadrzaj.fillText("Spremi se za obracun!", uvodna_slova_x += 5, uvodna_slova_y);
     if(uvodna_slova_x > innerWidth-100) {
         uvodna_slova_x = -100;
         uvodna_slova_y += 100;
@@ -161,10 +170,10 @@ function reagujNaKlik(event){
 function proveriKraj(){
     if(vreme_igre < 1) {
         cancelAnimationFrame(ovaAnimacija);
-        nivo1.sadrzaj.fillRect(window.innerWidth/2 - window.innerWidth/4, window.innerHeight/2 - window.innerHeight/4, window.innerWidth/2, window.innerHeight/2);
-        nivo1.sadrzaj.fillStyle="#000";
-        nivo1.sadrzaj.font = "48px Verdana";
-        nivo1.sadrzaj.fillText("Igra je završena!", window.innerWidth/2 - window.innerWidth/4 + 100, window.innerHeight/2 - window.innerHeight/4 + 100);
+        scena.sadrzaj.fillRect(window.innerWidth/2 - window.innerWidth/4, window.innerHeight/2 - window.innerHeight/4, window.innerWidth/2, window.innerHeight/2);
+        scena.sadrzaj.fillStyle="#000";
+        scena.sadrzaj.font = "48px Verdana";
+        scena.sadrzaj.fillText("Igra je završena!", window.innerWidth/2 - window.innerWidth/4 + 100, window.innerHeight/2 - window.innerHeight/4 + 100);
         igranje = false;
     }
 }

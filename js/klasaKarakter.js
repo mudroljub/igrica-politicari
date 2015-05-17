@@ -9,10 +9,10 @@ function proveriPogodak(ovaj_lik){
 
 function ispisiPoruku(ovaj_lik){
     var poruka = ovaj_lik.poruka || "Jaoj";
-    nivo1.sadrzaj.font = "30px Verdana";
-    nivo1.sadrzaj.lineWidth = 1;
-    nivo1.sadrzaj.fillText(poruka, misX+30, misY, 250);           // poslednji argument je maksimalna shirina teksta
-    nivo1.sadrzaj.strokeText(poruka, misX+30, misY, 250);
+    scena.sadrzaj.font = "30px Verdana";
+    scena.sadrzaj.lineWidth = 1;
+    scena.sadrzaj.fillText(poruka, misX+30, misY, 250);           // poslednji argument je maksimalna shirina teksta
+    scena.sadrzaj.strokeText(poruka, misX+30, misY, 250);
 }
 
 
