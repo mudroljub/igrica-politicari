@@ -16,7 +16,6 @@ function Scena(naziv_platna, izvor_pozadine) {
     this.pozadina = new Image();
     this.pozadina.onload = function() {                                     // this je ovde scena
         this.nova_visina = (window.innerWidth / this.width) * this.height;  // this je unutra pozadina, prilagodjava visinu
-        sadrzaj.drawImage(this, 0, 0, window.innerWidth, this.nova_visina);
     };
     this.pozadina.src = izvor_pozadine;
 	
@@ -47,38 +46,37 @@ function Scena(naziv_platna, izvor_pozadine) {
 	
 	
 	// iscrtava pozadinu i aktivne karaktere
-	this.crtaSlike = function(){
+	this.crtaLikove = function(){
 		this.sadrzaj.drawImage(this.pozadina, 0, 0, window.innerWidth, this.pozadina.nova_visina);
 		for(var i=0; i < this.karakteri.length; i++){
 			if(this.karakteri[i].uveden_u_igru){
 				this.karakteri[i].crtaj();
 			}
 		}
-	} // kraj crtaSlike
+	} // kraj crtaLikove
 		
-}
-
-
-// dodati Sceni
-// treba da prima pozicije za svaku pozadinu
-function slucajniProzor(){
 	
-    var gornji_red = scena.pozadina.nova_visina / gornji_f;
-    var donji_red = scena.pozadina.nova_visina / donji_f;
-	var prvi_prozor = window.innerWidth / prvi_f;
-	var drugi_prozor = window.innerWidth / drugi_f;
-	var treci_prozor = window.innerWidth / treci_f;
+	// da prima pozicije za svaku pozadinu
+	// razdvojiti na raspolozivePozicije i vracaSlucajnu
+	this.slucajniProzor = function(){
+		var gornji_red = scena.pozadina.nova_visina / gornji_f;
+		var donji_red = scena.pozadina.nova_visina / donji_f;
+		var prvi_prozor = window.innerWidth / prvi_f;
+		var drugi_prozor = window.innerWidth / drugi_f;
+		var treci_prozor = window.innerWidth / treci_f;
 
-    pozicije_prozora = [
-        [prvi_prozor, gornji_red],             // prvi prozor
-        [drugi_prozor, gornji_red],             // drugi prozor
-        [treci_prozor, gornji_red],
-        [prvi_prozor, donji_red],
-        [drugi_prozor, donji_red],
-        [treci_prozor, donji_red]
-    ]
-	var slucajna_pozicija = Math.floor(Math.random() * 6);
-    return [pozicije_prozora[slucajna_pozicija][0], pozicije_prozora[slucajna_pozicija][1]];
+		var pozicije_prozora = [
+			[prvi_prozor, gornji_red],             // prvi prozor
+			[drugi_prozor, gornji_red],             // drugi prozor
+			[treci_prozor, gornji_red],
+			[prvi_prozor, donji_red],
+			[drugi_prozor, donji_red],
+			[treci_prozor, donji_red]
+		]
+		var slucajna_pozicija = Math.floor(Math.random() * 6);
+		return [pozicije_prozora[slucajna_pozicija][0], pozicije_prozora[slucajna_pozicija][1]];
+	}	// kraj slucajniProzor
+	
 }
 
 
@@ -173,20 +171,8 @@ function Scena2(pozadina, platno){
         //
     }
 
-    this.crtaPozadinu = function(){
-
-    }
-
     this.mrdaPozadinu = function(){
 
-    }
-
-    this.slucajniProzor = function(){
-        // ili slobodan prozor
-    }
-
-    this.crtaLikove = function(){
-        // ili crtaju sebe?
     }
 
     this.proveriJelNapustio = function(){

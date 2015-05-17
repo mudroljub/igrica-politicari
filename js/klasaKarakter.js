@@ -18,6 +18,7 @@ function ispisiPoruku(ovaj_lik){
 
 /* prima sliku i scenu, pravi novog lika */
 function Karakter(slika_src, scena){
+	//this.scena = scena; 
     this.uveden_u_igru = false;
     this.ostavlja_poruku = false;
     this.spust = 0;
@@ -25,11 +26,10 @@ function Karakter(slika_src, scena){
 
     /*
      // prepisano iz simple game, upotrebiti!
-     this.scena = scena; // scenu proslediti kao argument
      this.visinaSveta = parseInt(this.platno.height);
      this.sirinaSveta = parseInt(this.platno.width);
      */
-
+    
     this.platno = scena.platno;
     this.sadrzaj = scena.sadrzaj;
     // prepraviti da ide preko scene
@@ -51,8 +51,8 @@ function Karakter(slika_src, scena){
 
     /* uzima slucajne koordinate i pripisuje sebi */
     this.slucajnaPozicija = function() {
-        this.x = slucajniProzor()[0];
-        this.y = slucajniProzor()[1];
+        this.x = scena.slucajniProzor()[0];
+        this.y = scena.slucajniProzor()[1];
     }   // slucajnaPozicija
 
 

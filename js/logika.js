@@ -30,7 +30,6 @@ window.$$ = function(selector) {
 
 
 /*************** VARIJABLE ***************/
-var pozicije_prozora;
 var misX;
 var misY;
 var ovaAnimacija;
@@ -55,10 +54,10 @@ var likovi = {                           // nazivi su bitni, od njih pravi objek
     dacic: 'slike/dacic.png'
 }
 
-// faktori za polozaj prozora
-var gornji_f = 4;
-var donji_f = 1.53;
-var prvi_f = 5.9;
+// delioci za polozaj prozora
+var gornji_f = 4;		// za gornji red
+var donji_f = 1.53;		// za donji red
+var prvi_f = 5.9;		// za prvi prozor
 var drugi_f = 2.2;
 var treci_f = 1.35;
 
@@ -89,7 +88,7 @@ function azuriraj(){
     if(igranje){
         // ovo izvrsava na svaki frejm
         uvodiLikove();
-        scena.crtaSlike();
+        scena.crtaLikove();
         ispisujPoruke();
         prikaziPoene();
         proveriKraj();
