@@ -62,11 +62,12 @@ function Scena(naziv_platna, izvor_pozadine) {
 // dodati Sceni
 // treba da prima pozicije za svaku pozadinu
 function slucajniProzor(){
-    var gornji_red = scena.pozadina.nova_visina/4;
-    var donji_red = scena.pozadina.nova_visina/1.53;
-	var prvi_prozor = window.innerWidth/5.9;
-	var drugi_prozor = window.innerWidth/2.2;
-	var treci_prozor = window.innerWidth/1.35;
+	
+    var gornji_red = scena.pozadina.nova_visina / gornji_f;
+    var donji_red = scena.pozadina.nova_visina / donji_f;
+	var prvi_prozor = window.innerWidth / prvi_f;
+	var drugi_prozor = window.innerWidth / drugi_f;
+	var treci_prozor = window.innerWidth / treci_f;
 
     pozicije_prozora = [
         [prvi_prozor, gornji_red],             // prvi prozor
