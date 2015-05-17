@@ -1,7 +1,9 @@
 
-function Scena(platno_id, pozadina_src) {
-
-    this.platno = document.getElementById(platno_id);
+function Scena(naziv_platna, izvor_pozadine) {
+	this.karakteri = [];		// aktivni karakteri na sceni
+	
+	// napraviti ako nema platna da ga pravi
+    this.platno = document.getElementById(naziv_platna);
     this.platno.height = window.innerHeight;
     this.platno.width = window.innerWidth;
 
@@ -9,14 +11,14 @@ function Scena(platno_id, pozadina_src) {
     this.sadrzaj.font = "30px Verdana";
     this.sadrzaj.fillStyle = "white";
     this.sadrzaj.strokeStyle = 'black';
-    var sadrzaj = this.sadrzaj;                 // proglašava varijablu da bi je poslao nižoj funkciji
+    var sadrzaj = this.sadrzaj;          	// proglašava varijablu da bi je poslao unutarnjoj funkciji
 
     this.pozadina = new Image();
     this.pozadina.onload = function() {                                     // this je ovde scena
-        this.nova_visina = (window.innerWidth / this.width) * this.height;  // this je ovde pozadina, prilagodjava visinu
+        this.nova_visina = (window.innerWidth / this.width) * this.height;  // this je unutra pozadina, prilagodjava visinu
         sadrzaj.drawImage(this, 0, 0, window.innerWidth, this.nova_visina);
     };
-    this.pozadina.src = pozadina_src;
+    this.pozadina.src = izvor_pozadine;
 	
 	
 	this.ucitajSlike = function(slike, povratnaRadnja){
@@ -39,7 +41,7 @@ function Scena(platno_id, pozadina_src) {
 	this.pravLikove = function(likovi){
 		for (var ovaj_lik in likovi){
 			window[ovaj_lik] = new Karakter(likovi[ovaj_lik], this);
-			karakteri.push(window[ovaj_lik]);
+			this.karakteri.push(window[ovaj_lik]);
 		}   // kraj for
 	}   // kraj pravLikove()
 	
@@ -47,9 +49,9 @@ function Scena(platno_id, pozadina_src) {
 	// iscrtava pozadinu i aktivne karaktere
 	this.crtaSlike = function(){
 		this.sadrzaj.drawImage(this.pozadina, 0, 0, window.innerWidth, this.pozadina.nova_visina);
-		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].uveden_u_igru){
-				karakteri[i].crtaj();
+		for(var i=0; i < this.karakteri.length; i++){
+			if(this.karakteri[i].uveden_u_igru){
+				this.karakteri[i].crtaj();
 			}
 		}
 	} // kraj crtaSlike
@@ -57,11 +59,14 @@ function Scena(platno_id, pozadina_src) {
 }
 
 
+// integrisati karaktere u scenu
+
+
 // dodati Sceni
 function dodeliPozicije(){
     dacic.slucajnaPozicija();
-    vulin.nadjiSlobodnuPoziciju(karakteri);
-    toma.nadjiSlobodnuPoziciju(karakteri);
+    vulin.nadjiSlobodnuPoziciju(scena.karakteri);
+    toma.nadjiSlobodnuPoziciju(scena.karakteri);
 }
 
 
