@@ -17,8 +17,22 @@ function Scena(platno_id, pozadina_src) {
         sadrzaj.drawImage(this, 0, 0, window.innerWidth, this.nova_visina);
     };
     this.pozadina.src = pozadina_src;
+	
+	
+	this.ucitajSlike = function(likovi, povratnaRadnja){
+		var ucitaneSlike = 0;
+		for (var ovaj_lik in likovi) {
+			var ova_slika = new Image(); 
+			ova_slika.onload = function kadSveUcita() {
+				ucitaneSlike++;
+				if (ucitaneSlike >= brojSlika) {
+					povratnaRadnja();
+				}
+			};  // kraj kadSveUcita()
+			ova_slika.src = likovi[ovaj_lik];
+		}
+	}
 }
-
 
 
 function uvodiLikove(){

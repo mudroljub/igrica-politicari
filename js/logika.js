@@ -59,7 +59,7 @@ var brojSlika = Object.keys(likovi).length;
 
 /*************** POZIVI ***************/
 
-ucitajSlike(likovi, pustiUvod);
+nivo1.ucitajSlike(likovi, pustiUvod);
 
 
 /*************** SLUSACI ***************/
