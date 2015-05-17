@@ -2,8 +2,9 @@
 // primiti sirinu i visinu scene od prozora, nadalje koristiti to
 
 function Scena(naziv_platna, izvor_pozadine) {
-	this.karakteri = [];		// popunja funkcija praviLikove
-    this.pozicije_prozora = []  // popunja funkcija izracunajPozicije
+    var ova_scena = this;          // hvata sebe, za niže funkcije
+	this.karakteri = [];		// popunjava funkcija praviLikove
+    this.pozicije_prozora = []  // popunjava funkcija izracunajPozicije
 
         // napraviti ako nema platna da ga pravi
     this.platno = document.getElementById(naziv_platna);
@@ -45,6 +46,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 			this.karakteri.push(window[ovaj_lik]);
 		}   // kraj for
 	}   // kraj praviLikove()
+
 
 	// iscrtava pozadinu i aktivne karaktere
 	this.crtajSlike = function(){
@@ -104,17 +106,10 @@ function Scena(naziv_platna, izvor_pozadine) {
             uvod = false;
         }
 
-        // srediti da provrti karaktere, a ne ručno!
-        // problem da dohvati scena.karakteri iznutra
-        // ne moze ni this.karakteri, this je platno
         if(igranje){
-            /*for(var i=0; i < this.karakteri.length; i++){
-                this.karakteri[i].proveriPogodak();
-             }*/
-            dacic.proveriPogodak();
-            toma.proveriPogodak();
-            vulin.proveriPogodak();
-
+            for(var i=0; i < ova_scena.karakteri.length; i++){
+                ova_scena.karakteri[i].proveriPogodak();
+             }
         }
     }   // kraj reagujNaKlik
 
@@ -133,6 +128,25 @@ function proveriKraj(){
     }
 }
 
+
+
+// dodati Sceni
+function pustiUvod(){
+    // pravi uvodnu animaciju
+    scena.sadrzaj.fillStyle = "black";
+    scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    scena.sadrzaj.fillStyle="#fff";
+    scena.sadrzaj.font = "48px Verdana";
+    scena.sadrzaj.fillText("Spremi se za obracun!", uvodna_slova_x += 5, uvodna_slova_y);
+    if(uvodna_slova_x > innerWidth-100) {
+        uvodna_slova_x = -100;
+        uvodna_slova_y += 100;
+    }
+    if(uvodna_slova_y > innerHeight - 100) {
+        uvodna_slova_y = 200;
+    }
+    uvodna_spica = requestAnimationFrame(pustiUvod);
+}
 
 
 function Scena2(pozadina, platno){
@@ -171,22 +185,3 @@ function Scena2(pozadina, platno){
     }
 
 }
-
-
-    // dodati Sceni
-    function pustiUvod(){
-        // pravi uvodnu animaciju
-        scena.sadrzaj.fillStyle = "black";
-        scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
-        scena.sadrzaj.fillStyle="#fff";
-        scena.sadrzaj.font = "48px Verdana";
-        scena.sadrzaj.fillText("Spremi se za obracun!", uvodna_slova_x += 5, uvodna_slova_y);
-        if(uvodna_slova_x > innerWidth-100) {
-            uvodna_slova_x = -100;
-            uvodna_slova_y += 100;
-        }
-        if(uvodna_slova_y > innerHeight - 100) {
-            uvodna_slova_y = 200;
-        }
-        uvodna_spica = requestAnimationFrame(pustiUvod);
-    }
