@@ -56,11 +56,10 @@ function Scena(naziv_platna, izvor_pozadine) {
 	} // kraj crtaLikove
 		
 	
-	// da prima pozicije za svaku pozadinu
-	// razdvojiti na raspolozivePozicije i vracaSlucajnu
+	// razdvojiti na raspolozivePozicije i slucajniProzor
 	this.slucajniProzor = function(){
-		var gornji_red = scena.pozadina.nova_visina / gornji_f;
-		var donji_red = scena.pozadina.nova_visina / donji_f;
+		var gornji_red = this.pozadina.nova_visina / gornji_f;
+		var donji_red = this.pozadina.nova_visina / donji_f;
 		var prvi_prozor = window.innerWidth / prvi_f;
 		var drugi_prozor = window.innerWidth / drugi_f;
 		var treci_prozor = window.innerWidth / treci_f;
