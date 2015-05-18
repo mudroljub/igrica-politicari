@@ -13,6 +13,8 @@ function Scena(naziv_platna, izvor_pozadine) {
     this.misX = 0;				// koordinate misha
     this.misY = 0;
 	this.poeni = 0;
+	this.krecu_slova_x = -100;	// podrazumevano
+	this.krecu_slova_y = 200;
 	
 	this.BAZICNA_SIRINA_EKRANA = 1280;
 	this.BAZICNA_VISINA_SLIKE = 118;
@@ -70,12 +72,12 @@ function Scena(naziv_platna, izvor_pozadine) {
 	} // kraj crtajSlike
 
 
-    this.izracunajPozicije = function(){
-        var gornji_red = this.pozadina.nova_visina / gornji_f;
-        var donji_red = this.pozadina.nova_visina / donji_f;
-        var prvi_prozor = this.sirina / prvi_f;			// promeniti u scena.sirina
-        var drugi_prozor = this.sirina / drugi_f;
-        var treci_prozor = this.sirina / treci_f;
+    this.izracunajPozicije = function(faktori){
+        var gornji_red = this.pozadina.nova_visina / faktori[0];
+        var donji_red = this.pozadina.nova_visina / faktori[1];
+        var prvi_prozor = this.sirina / faktori[2];			// promeniti u scena.sirina
+        var drugi_prozor = this.sirina / faktori[3];
+        var treci_prozor = this.sirina / faktori[4];
 
         this.pozicije_prozora = [
             [prvi_prozor, gornji_red],             // prvi prozor
@@ -143,13 +145,13 @@ function Scena(naziv_platna, izvor_pozadine) {
 		ova_scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
 		ova_scena.sadrzaj.fillStyle="#fff";
 		ova_scena.sadrzaj.font = "48px Verdana";
-		ova_scena.sadrzaj.fillText("Spremi se za obracun!", pocetna_slova_x += 5, pocetna_slova_y);
-		if(pocetna_slova_x > innerWidth-100) {
-			pocetna_slova_x = -100;
-			pocetna_slova_y += 100;
+		ova_scena.sadrzaj.fillText("Spremi se za obracun!", ova_scena.krecu_slova_x += 5, ova_scena.krecu_slova_y);
+		if(ova_scena.krecu_slova_x > innerWidth-100) {
+			ova_scena.krecu_slova_x = -100;
+			ova_scena.krecu_slova_y += 100;
 		}
-		if(pocetna_slova_y > innerHeight - 100) {
-			pocetna_slova_y = 200;
+		if(ova_scena.krecu_slova_y > innerHeight - 100) {
+			ova_scena.krecu_slova_y = 200;
 		}
 		this.uvodna_spica = requestAnimationFrame(ova_scena.pustiUvod);
 	}	// kraj pustiUvod

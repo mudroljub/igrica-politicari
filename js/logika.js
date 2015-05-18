@@ -27,11 +27,7 @@ window.$$ = function(selector) {
 
 /*************** VARIJABLE ***************/
 
-// prabaciti u scenu
-var pocetna_slova_x = -100;
-var pocetna_slova_y = 200;
-
-// pomocna globalna varijabla
+// pomocna varijabla
 var prethodna_sekunda = 0;
 
 // za ucitavac
@@ -48,11 +44,12 @@ var prvi_f = 5.9;		// za prvi prozor
 var drugi_f = 2.2;
 var treci_f = 1.35;
 
+var faktori_za_pozicije_prozora = [4, 1.53, 5.9, 2.2, 1.35];
+
 
 /*************** POZIVI ***************/
 
 var scena = new Scena('platno', 'slike/skupstina2.png');
-
 scena.ucitajSlike(likovi, scena.pustiUvod);
 
 
@@ -65,7 +62,7 @@ $("#platno").addEventListener('click', scena.reagujNaKlik);
 
 function postaviScenu(){
 	scena.vreme_igre = 30;			// podešava dužinu igre
-    scena.izracunajPozicije();
+    scena.izracunajPozicije(faktori_za_pozicije_prozora);
     scena.praviLikove(likovi);   	// pravi objekte od niza likova
     dacic.poruka = "Jaoj";			// dodaje jedinstvene poruke
     vulin.poruka = "To boli!";
