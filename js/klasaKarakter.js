@@ -2,7 +2,7 @@
 /* prima sliku i scenu, pravi novog lika */
 function Karakter(slika_src, scena){
     this.uveden_u_igru = false;
-    this.ostaviti_poruku = false;
+    this.vicem = false;
     this.spustanje = false;
     this.spust = 0;
 
@@ -103,7 +103,7 @@ function Karakter(slika_src, scena){
     // varijable sceni!
     this.proveriPogodak = function (){
         if( (scena.misX > this.x && scena.misX < this.x + this.sirina) && (scena.misY > this.y && scena.misY < this.y + this.visina) ){
-            this.ostaviti_poruku = true;
+            this.vicem = true;
             scena.poeni++;
         }
     }   // proveriPogodak

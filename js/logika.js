@@ -77,13 +77,13 @@ function azuriraj(){
 		vulin.igraj(20);
 		toma.igraj(10);
         scena.crtajSlike();
-        ispisujPoruke();
-        scena.ispisiPoene();
+        scena.pisiPoruke();
+        scena.pisiPoene();
         scena.proveriKraj();
 
 		// ovo izvrsava svake sekunde
         if(prethodna_sekunda != new Date().getSeconds()) {
-            brisiPoruke();
+            scena.prestaniPoruke();
             scena.dodeliPozicije(scena.likovi);
             scena.vreme_igre--;
             prethodna_sekunda = new Date().getSeconds();
@@ -91,20 +91,4 @@ function azuriraj(){
 		
         scena.animacija_igre = requestAnimationFrame(azuriraj);
     }	// kraj svaki frejm
-}
-
-
-function ispisujPoruke(){
-    for(var i=0; i<scena.likovi.length; i++){
-        if(scena.likovi[i].uveden_u_igru && scena.likovi[i].ostaviti_poruku){
-            scena.likovi[i].ispisiPoruku();
-        }
-    }
-}
-
-
-function brisiPoruke(){
-    for(var i=0; i<scena.likovi.length; i++){
-        scena.likovi[i].ostaviti_poruku = false;
-    }
 }
