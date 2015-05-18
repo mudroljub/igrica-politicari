@@ -12,6 +12,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 	this.animacija_igre = 0;	
     this.misX = 0;				// koordinate misha
     this.misY = 0;
+	
 
     this.sirina = window.innerWidth;
     this.visina = window.innerHeight;
