@@ -13,7 +13,8 @@ function Scena(naziv_platna, izvor_pozadine) {
     this.misX = 0;				// koordinate misha
     this.misY = 0;
 	
-
+	this.BAZICNA_SIRINA_EKRANA = 1280;
+	this.BAZICNA_VISINA_SLIKE = 118;
     this.sirina = window.innerWidth;
     this.visina = window.innerHeight;
     this.platno = document.getElementById(naziv_platna);        // ako nema platna, da sam stvara

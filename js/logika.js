@@ -30,8 +30,6 @@ window.$$ = function(selector) {
 // prabaciti u scenu
 var pocetna_slova_x = -100;
 var pocetna_slova_y = 200;
-var BAZICNA_SIRINA_EKRANA = 1280;
-var BAZICNA_VISINA_SLIKE = 118;
 
 // pridruziti sceni
 var poeni = 0;
