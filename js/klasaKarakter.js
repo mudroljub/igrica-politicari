@@ -108,4 +108,4 @@ function Karakter(slika_src, scena){
         }
     }   // proveriPogodak
 
-}   // kraj klase Karakter
+}   // kraj Karakter

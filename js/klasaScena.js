@@ -63,6 +63,23 @@ function Scena(naziv_platna, izvor_pozadine) {
 	}   // kraj praviLikove()
 
 
+	this.pustiUvod = function(){
+		//console.log(this)			// this je iz nekog razloga window
+		ova_scena.sadrzaj.fillStyle = "black";
+		ova_scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
+		ova_scena.sadrzaj.fillStyle="#fff";
+		ova_scena.sadrzaj.font = "48px Verdana";
+		ova_scena.sadrzaj.fillText("Spremi se za obracun!", ova_scena.krecu_slova_x += 5, ova_scena.krecu_slova_y);
+		if(ova_scena.krecu_slova_x > innerWidth-100) {
+			ova_scena.krecu_slova_x = -100;
+			ova_scena.krecu_slova_y += 100;
+		}
+		if(ova_scena.krecu_slova_y > innerHeight - 100) {
+			ova_scena.krecu_slova_y = 200;
+		}
+		this.uvodna_spica = requestAnimationFrame(ova_scena.pustiUvod);
+	}	// kraj pustiUvod
+	
 	// iscrtava pozadinu i aktivne karaktere
 	this.crtajSlike = function(){
 		this.sadrzaj.drawImage(this.pozadina, 0, 0, window.innerWidth, this.pozadina.nova_visina);
@@ -106,8 +123,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 		}
 	} // kraj dodeliPozicije
 	
-		
-	// this je unutar ove funkcije platno, mora ova_scena
+	// this je unutar funkcije platno !
     this.reagujNaKlik = function(event){
         ova_scena.misX = event.clientX;   
         ova_scena.misY = event.clientY;
@@ -151,7 +167,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 		for(var i=0; i < this.likovi.length; i++){
 			this.likovi[i].vicem = false;
 		}
-	}
+	}	// kraj prestaniPoruke
 
 	
 	this.proveriKraj = function(){
@@ -165,54 +181,22 @@ function Scena(naziv_platna, izvor_pozadine) {
 		}
 	}	// kraj proveriKraj
 	
-	
-	this.pustiUvod = function(){
-		//console.log(this)			// this je iz nekog razloga window
-		ova_scena.sadrzaj.fillStyle = "black";
-		ova_scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
-		ova_scena.sadrzaj.fillStyle="#fff";
-		ova_scena.sadrzaj.font = "48px Verdana";
-		ova_scena.sadrzaj.fillText("Spremi se za obracun!", ova_scena.krecu_slova_x += 5, ova_scena.krecu_slova_y);
-		if(ova_scena.krecu_slova_x > innerWidth-100) {
-			ova_scena.krecu_slova_x = -100;
-			ova_scena.krecu_slova_y += 100;
-		}
-		if(ova_scena.krecu_slova_y > innerHeight - 100) {
-			ova_scena.krecu_slova_y = 200;
-		}
-		this.uvodna_spica = requestAnimationFrame(ova_scena.pustiUvod);
-	}	// kraj pustiUvod
 
-	
-}	// kraj Scena
-
-
-function Scena2(pozadina, platno){
-
-    this.prilagodiPozadinu = function(){
+	this.prilagodiPozadinu = function(){
         // ili prilagodiPozadinu() ili racunaProporcije() za sve
+		// uzeti u obzir sire i tanje ekrane
     }
+
 
     this.mrdaPozadinu = function(){
-
+		// kad imamo vecu pozadinu da se pomera
     }
 
-    this.proveriJelNapustio = function(){
-        //
+	
+    this.proveriJelNapustio = function(ovaj_lik){
+        // da li je ovaj_lik jos u sceni
+		// ako je napustio, radi nesto, unistava ga, pamti
     }
-
-    this.getMouseX = function(){
-        //incorporate offset for canvas position
-        return document.mouseX - this.left;
-    }
-
-    this.getMouseY = function(){
-        //incorporate offset for canvas position
-        return document.mouseY - this.top;
-    }
-
-    this.getMouseClicked = function(){
-        return document.mouseClicked;
-    }
-
-}
+	
+	
+}	// kraj Scena
