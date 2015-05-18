@@ -3,7 +3,7 @@
 
 function Scena(naziv_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
-	this.karakteri = [];		// za funkciju praviLikove
+	this.likovi = [];		// za funkciju praviLikove
     this.pozicije_prozora = []  // za funkciju izracunajPozicije
     this.uvod = true;           // podrazumevano krece uvod
     this.igranje = false;
@@ -55,10 +55,10 @@ function Scena(naziv_platna, izvor_pozadine) {
 
 
     // uzima niz likova, pretvara ih u karaktere i ređa u niz karaktera
-	this.praviLikove = function(likovi){
-		for (var ovaj_lik in likovi){
-			window[ovaj_lik] = new Karakter(likovi[ovaj_lik], this);
-			this.karakteri.push(window[ovaj_lik]);
+	this.praviLikove = function(likovi_za_ucitavanje){
+		for (var ovaj_lik in likovi_za_ucitavanje){
+			window[ovaj_lik] = new Karakter(likovi_za_ucitavanje[ovaj_lik], this);
+			this.likovi.push(window[ovaj_lik]);
 		}   // kraj for
 	}   // kraj praviLikove()
 
@@ -66,9 +66,9 @@ function Scena(naziv_platna, izvor_pozadine) {
 	// iscrtava pozadinu i aktivne karaktere
 	this.crtajSlike = function(){
 		this.sadrzaj.drawImage(this.pozadina, 0, 0, window.innerWidth, this.pozadina.nova_visina);
-		for(var i=0; i < this.karakteri.length; i++){
-			if(this.karakteri[i].uveden_u_igru){
-				this.karakteri[i].crtaj();
+		for(var i=0; i < this.likovi.length; i++){
+			if(this.likovi[i].uveden_u_igru){
+				this.likovi[i].crtaj();
 			}
 		}
 	} // kraj crtajSlike
@@ -97,7 +97,16 @@ function Scena(naziv_platna, izvor_pozadine) {
 		return [this.pozicije_prozora[slucajna_pozicija][0], this.pozicije_prozora[slucajna_pozicija][1]];
 	}	// kraj slucajniProzor
 
-
+	
+	this.dodeliPozicije = function(likovi){
+		for(var i=0; i < likovi.length; i++){
+			if(likovi[i].uveden_u_igru){
+				likovi[i].nadjiSlobodnuPoziciju(likovi);
+			}
+		}
+	} // kraj dodeliPozicije
+	
+	
     this.ispisiPoene = function(){
         this.sadrzaj.fillStyle="#000";
         this.sadrzaj.fillRect(20,80,180,100);
@@ -122,8 +131,8 @@ function Scena(naziv_platna, izvor_pozadine) {
         }	// kraj if uvod
 
         if(ova_scena.igranje){
-            for(var i=0; i < ova_scena.karakteri.length; i++){
-                ova_scena.karakteri[i].proveriPogodak();
+            for(var i=0; i < ova_scena.likovi.length; i++){
+                ova_scena.likovi[i].proveriPogodak();
              }
         }	// kraj if igranje
     }   // kraj reagujNaKlik
