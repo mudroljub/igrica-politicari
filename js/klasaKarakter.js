@@ -15,7 +15,7 @@ function Karakter(slika_src, scena){
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
 
-	this.uveden_u_igru = false;
+	this.igram = false;
     this.vicem = false;
     this.spustam = false;
     this.spusten = 0;
@@ -24,7 +24,7 @@ function Karakter(slika_src, scena){
 
 	this.igraj = function(vreme_ulaska){
 		if(scena.vreme_igre <= vreme_ulaska) {
-		this.uveden_u_igru = true;
+		this.igram = true;
 		}
 	}	// kraj igraj
 

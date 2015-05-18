@@ -3,15 +3,15 @@
 
 function Scena(naziv_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
-	this.likovi = [];			// za funkciju praviLikove
-    this.pozicije_prozora = []  // za funkciju izracunajPozicije
-    this.uvod = true;           // podrazumevano krece uvod
+    this.ide_uvod = true;           // podrazumevano krece ide_uvod
     this.igranje = false;
 	this.vreme_igre = 30;		// podrazumevano vreme
 	this.vreme_poredjenje = 0;
-	
-	this.uvodna_spica = 0;		// prazne animacije
-	this.animacija_igre = 0;	
+
+	this.likovi = [];			// za funkciju praviLikove
+    this.pozicije_prozora = []  // za funkciju izracunajPozicije
+	this.uvodna_spica;			// prazne animacije
+	this.animacija_igre;	
     this.misX = 0;				// koordinate misha
     this.misY = 0;
 	this.poeni = 0;
@@ -22,6 +22,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 	this.BAZICNA_VISINA_SLIKE = 118;
     this.sirina = window.innerWidth;
     this.visina = window.innerHeight;
+	
     this.platno = document.getElementById(naziv_platna);        // ako nema platna, da sam stvara
     this.platno.width = this.sirina;
     this.platno.height = this.visina;
@@ -86,7 +87,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 	this.crtajSlike = function(){
 		this.sadrzaj.drawImage(this.pozadina, 0, 0, window.innerWidth, this.pozadina.nova_visina);
 		for(var i=0; i < this.likovi.length; i++){
-			if(this.likovi[i].uveden_u_igru){
+			if(this.likovi[i].igram){
 				this.likovi[i].crtaj();
 			}
 		}
@@ -119,7 +120,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 	
 	this.dodeliPozicije = function(likovi){
 		for(var i=0; i < likovi.length; i++){
-			if(likovi[i].uveden_u_igru){
+			if(likovi[i].igram){
 				likovi[i].nadjiSlobodnuPoziciju(likovi);
 			}
 		}
@@ -130,12 +131,12 @@ function Scena(naziv_platna, izvor_pozadine) {
         ova_scena.misX = event.clientX;   
         ova_scena.misY = event.clientY;
 
-        if(ova_scena.uvod){
+        if(ova_scena.ide_uvod){
             window.cancelAnimationFrame(ova_scena.uvodna_spica);
             postaviScenu();
             ova_scena.igranje = true;
-            ova_scena.uvod = false;
-        }	// kraj if uvod
+            ova_scena.ide_uvod = false;
+        }	// kraj if ide_uvod
 
         if(ova_scena.igranje){
             for(var i=0; i < ova_scena.likovi.length; i++){
@@ -158,7 +159,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 
 	this.pisiPoruke = function(){
 		for(var i=0; i < this.likovi.length; i++){
-			if(this.likovi[i].uveden_u_igru && this.likovi[i].vicem){
+			if(this.likovi[i].igram && this.likovi[i].vicem){
 				this.likovi[i].ispisiPoruku();
 			}
 		}

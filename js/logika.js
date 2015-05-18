@@ -13,27 +13,13 @@
 // pozadina se crta prilagodjeno, a delove crta neprilagodjeno
 // resenje: napraviti jedinstveno prilagodjavanje
 // kad je presirok ekran, sece pozadinu po visini !
-// na manjim ekranima prilagoditi slova (uvod i kraj)
+// na manjim ekranima prilagoditi slova (ide_uvod i kraj)
 ********************************************************************/
 
-"use strict";
-window.$ = function(selector) {
-    return document.querySelector(selector);
-};
-window.$$ = function(selector) {
-    return document.querySelectorAll(selector);
-};
 
+/*************** PODEŠAVANJA ***************/
 
-/*************** VARIJABLE ***************/
-
-// nazivi su bitni, od njih pravi objekte
-var likovi_za_ucitavanje = { 
-    vulin: 'slike/vulin.png',
-    toma: 'slike/toma.png',
-    dacic: 'slike/dacic.png'
-}
-
+var postavke_prozora = [4, 1.53, 5.9, 2.2, 1.35];
 /******************************************************************
 0. broj kojim se deli visina pozadine da dobijes gornju osu prozora
 1. broj kojim se deli visina pozadine da dobijes donju osu prozora
@@ -42,26 +28,25 @@ var likovi_za_ucitavanje = {
 4. broj kojim se deli sirina pozadine da dobijes trecí red prozora
 skupstina ima dva reda prozora uspravno i tri vodoravno
 *******************************************************************/
-var postavke_prozora = [4, 1.53, 5.9, 2.2, 1.35];
-// pomocna varijabla
+
+var likovi_za_ucitavanje = { // nazivi bitni, od njih pravi objekte
+    vulin: 'slike/vulin.png',
+    toma: 'slike/toma.png',
+    dacic: 'slike/dacic.png'
+}
 
 
-/*************** POZIVI ***************/
+/*************** LOGIKA IGRE ***************/
 
 var scena = new Scena('platno', 'slike/skupstina2.png');
+$("#platno").addEventListener('click', scena.reagujNaKlik);
 scena.ucitajSlike(likovi_za_ucitavanje, scena.pustiUvod);
 
 
-/*************** SLUSACI ***************/
-
-$("#platno").addEventListener('click', scena.reagujNaKlik);
-
-
-/*************** FUNKCIJE ***************/
+/*************** GLAVNE FUNKCIJE ***************/
 
 function postaviScenu(){
-	scena.vreme_igre = 30;			// podešava dužinu igre
-    scena.izracunajPozicije(postavke_prozora  );
+    scena.izracunajPozicije(postavke_prozora);
     scena.praviLikove(likovi_za_ucitavanje);   	// pravi objekte od niza likova
     dacic.poruka = "Jaoj";			// dodaje jedinstvene poruke
     vulin.poruka = "To boli!";
