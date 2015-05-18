@@ -3,15 +3,18 @@
 
 function Scena(naziv_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
-	this.karakteri = [];		// popunjava funkcija praviLikove
-    this.pozicije_prozora = []  // popunjava funkcija izracunajPozicije
+	this.karakteri = [];		// za funkciju praviLikove
+    this.pozicije_prozora = []  // za funkciju izracunajPozicije
     this.misX;
     this.misY;
+    this.uvod = true;           // podrazumevano krece uvod
+    this.igranje = false;
 
-    // napraviti ako nema platna da ga pravi
-    this.platno = document.getElementById(naziv_platna);
-    this.platno.height = window.innerHeight;
-    this.platno.width = window.innerWidth;
+    this.sirina = window.innerWidth;
+    this.visina = window.innerHeight;
+    this.platno = document.getElementById(naziv_platna);        // ako nema platna, da sam stvara
+    this.platno.width = this.sirina;
+    this.platno.height = this.visina;
 
     this.sadrzaj = this.platno.getContext('2d');
     this.sadrzaj.font = "30px Verdana";
@@ -20,7 +23,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 
     this.pozadina = new Image();
     this.pozadina.onload = function() {                                     // this je izvan scena
-        this.nova_visina = (window.innerWidth / this.width) * this.height;  // this je unutra pozadina, prilagodjava visinu
+        this.nova_visina = (ova_scena.sirina / this.width) * this.height;  // this je unutra pozadina, prilagodjava visinu pozadine
     };
     this.pozadina.src = izvor_pozadine;
 
@@ -64,9 +67,9 @@ function Scena(naziv_platna, izvor_pozadine) {
     this.izracunajPozicije = function(){
         var gornji_red = this.pozadina.nova_visina / gornji_f;
         var donji_red = this.pozadina.nova_visina / donji_f;
-        var prvi_prozor = window.innerWidth / prvi_f;			// promeniti u scena.sirina
-        var drugi_prozor = window.innerWidth / drugi_f;
-        var treci_prozor = window.innerWidth / treci_f;
+        var prvi_prozor = this.sirina / prvi_f;			// promeniti u scena.sirina
+        var drugi_prozor = this.sirina / drugi_f;
+        var treci_prozor = this.sirina / treci_f;
 
         this.pozicije_prozora = [
             [prvi_prozor, gornji_red],             // prvi prozor
@@ -96,19 +99,18 @@ function Scena(naziv_platna, izvor_pozadine) {
     }
 
 
-    // this je unutar funkcije platno, jer je na njega prikazen okidač !
     this.reagujNaKlik = function(event){
-        ova_scena.misX = event.clientX;
+        ova_scena.misX = event.clientX;                 // this je unutar funkcije platno, zato mora ova_scena
         ova_scena.misY = event.clientY;
 
-        if(uvod){
-            cancelAnimationFrame(uvodna_spica);
+        if(ova_scena.uvod){
+            window.cancelAnimationFrame(uvodna_spica);
             postaviScenu();
-            igranje = true;
-            uvod = false;
+            ova_scena.igranje = true;
+            ova_scena.uvod = false;
         }
 
-        if(igranje){
+        if(ova_scena.igranje){
             for(var i=0; i < ova_scena.karakteri.length; i++){
                 ova_scena.karakteri[i].proveriPogodak();
              }
@@ -121,12 +123,12 @@ function Scena(naziv_platna, izvor_pozadine) {
 // dodati Sceni
 function proveriKraj(){
     if(vreme_igre < 1) {
-        cancelAnimationFrame(ovaAnimacija);
+        window.cancelAnimationFrame(ovaAnimacija);
         scena.sadrzaj.fillRect(window.innerWidth/2 - window.innerWidth/4, window.innerHeight/2 - window.innerHeight/4, window.innerWidth/2, window.innerHeight/2);
         scena.sadrzaj.fillStyle="#000";
         scena.sadrzaj.font = "48px Verdana";
         scena.sadrzaj.fillText("Igra je završena!", window.innerWidth/2 - window.innerWidth/4 + 100, window.innerHeight/2 - window.innerHeight/4 + 100);
-        igranje = false;
+        scena.igranje = false;
     }
 }
 
@@ -152,15 +154,8 @@ function pustiUvod(){
 
 
 function Scena2(pozadina, platno){
-    this.sirina = window.innerWidth;
-    this.visina = window.innerHeight;
-    this.platno = $("#platno");     // ako nije dato platno, da ga sam dodaje
-    this.platno.width = this.sirina;
-    this.platno.height = this.visina;
-    this.platno.style.backgroundColor = "black";
-    this.sadrzaj = this.platno.getContext("2d");
 
-    this.odrediDimenzije = function(){
+    this.prilagodiPozadinu = function(){
         // ili prilagodiPozadinu() ili racunaProporcije() za sve
     }
 

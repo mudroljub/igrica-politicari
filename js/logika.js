@@ -42,8 +42,6 @@ var BAZICNA_VISINA_SLIKE = 118;
 // pridruziti sceni
 var vreme_igre = 30;
 var poeni = 0;
-var uvod = true;
-var igranje = false;
 var prosla_sekunda = 0;
 
 var scena = new Scena('platno', 'slike/skupstina2.png');
@@ -87,7 +85,7 @@ function postaviScenu(){
 
 
 function azuriraj(){
-    if(igranje){
+    if(scena.igranje){
         // ovo izvrsava na svaki frejm
         uvodiLikove();
         scena.crtajSlike();
