@@ -31,8 +31,7 @@ window.$$ = function(selector) {
 var pocetna_slova_x = -100;
 var pocetna_slova_y = 200;
 
-// pridruziti sceni
-var poeni = 0;
+// pomocna globalna varijabla
 var prethodna_sekunda = 0;
 
 // za ucitavac
@@ -54,7 +53,7 @@ var treci_f = 1.35;
 
 var scena = new Scena('platno', 'slike/skupstina2.png');
 
-scena.ucitajSlike(likovi, pustiUvod);
+scena.ucitajSlike(likovi, scena.pustiUvod);
 
 
 /*************** SLUSACI ***************/
@@ -76,12 +75,13 @@ function postaviScenu(){
 
 
 function azuriraj(){
+	//var prethodna_sekunda = 0;
     // ovo izvrsava na svaki frejm
     if(scena.igranje){
         uvodiLikove();
         scena.crtajSlike();
         ispisujPoruke();
-        scena.ispisiPoene(poeni, scena.vreme_igre);
+        scena.ispisiPoene();
         scena.proveriKraj();
 
 		// ovo izvrsava svake sekunde

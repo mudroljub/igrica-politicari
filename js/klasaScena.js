@@ -12,6 +12,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 	this.animacija_igre = 0;	
     this.misX = 0;				// koordinate misha
     this.misY = 0;
+	this.poeni = 0;
 	
 	this.BAZICNA_SIRINA_EKRANA = 1280;
 	this.BAZICNA_VISINA_SLIKE = 118;
@@ -93,14 +94,14 @@ function Scena(naziv_platna, izvor_pozadine) {
 	}	// kraj slucajniProzor
 
 
-    this.ispisiPoene = function(poeni, preostalo_vreme){
+    this.ispisiPoene = function(){
         this.sadrzaj.fillStyle="#000";
         this.sadrzaj.fillRect(20,80,180,100);
         this.sadrzaj.stroke();
         this.sadrzaj.fillStyle="#FFF";
         this.sadrzaj.font = "24px Verdana";
-        this.sadrzaj.fillText("Poeni: " + poeni, 30, 120);
-        this.sadrzaj.fillText("Vreme: " + preostalo_vreme, 30, 160);        
+        this.sadrzaj.fillText("Poeni: " + this.poeni, 30, 120);
+        this.sadrzaj.fillText("Vreme: " + this.vreme_igre, 30, 160);        
     }
 
 	
@@ -114,13 +115,13 @@ function Scena(naziv_platna, izvor_pozadine) {
             postaviScenu();
             ova_scena.igranje = true;
             ova_scena.uvod = false;
-        }
+        }	// kraj if uvod
 
         if(ova_scena.igranje){
             for(var i=0; i < ova_scena.karakteri.length; i++){
                 ova_scena.karakteri[i].proveriPogodak();
              }
-        }
+        }	// kraj if igranje
     }   // kraj reagujNaKlik
 
 
@@ -133,28 +134,29 @@ function Scena(naziv_platna, izvor_pozadine) {
 			this.sadrzaj.fillText("Igra je završena!", window.innerWidth/2 - window.innerWidth/4 + 100, window.innerHeight/2 - window.innerHeight/4 + 100);
 			this.igranje = false;
 		}
-	}
+	}	// kraj proveriKraj
 	
-}
+	
+	this.pustiUvod = function(){
+		//console.log(this)			// this je iz nekog razloga window
+		ova_scena.sadrzaj.fillStyle = "black";
+		ova_scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
+		ova_scena.sadrzaj.fillStyle="#fff";
+		ova_scena.sadrzaj.font = "48px Verdana";
+		ova_scena.sadrzaj.fillText("Spremi se za obracun!", pocetna_slova_x += 5, pocetna_slova_y);
+		if(pocetna_slova_x > innerWidth-100) {
+			pocetna_slova_x = -100;
+			pocetna_slova_y += 100;
+		}
+		if(pocetna_slova_y > innerHeight - 100) {
+			pocetna_slova_y = 200;
+		}
+		this.uvodna_spica = requestAnimationFrame(ova_scena.pustiUvod);
+	}	// kraj pustiUvod
 
+	
+}	// kraj Scena
 
-// dodati Sceni
-function pustiUvod(){
-    // pravi uvodnu animaciju
-    scena.sadrzaj.fillStyle = "black";
-    scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
-    scena.sadrzaj.fillStyle="#fff";
-    scena.sadrzaj.font = "48px Verdana";
-    scena.sadrzaj.fillText("Spremi se za obracun!", pocetna_slova_x += 5, pocetna_slova_y);
-    if(pocetna_slova_x > innerWidth-100) {
-        pocetna_slova_x = -100;
-        pocetna_slova_y += 100;
-    }
-    if(pocetna_slova_y > innerHeight - 100) {
-        pocetna_slova_y = 200;
-    }
-    scena.uvodna_spica = requestAnimationFrame(pustiUvod);
-}
 
 
 function Scena2(pozadina, platno){

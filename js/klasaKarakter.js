@@ -95,7 +95,7 @@ function Karakter(slika_src, scena){
     this.proveriPogodak = function (){
         if( (scena.misX > this.x && scena.misX < this.x + this.sirina) && (scena.misY > this.y && scena.misY < this.y + this.visina) ){
             this.ostaviti_poruku = true;
-            poeni++;
+            scena.poeni++;
         }
     }   // proveriPogodak
 
