@@ -1,7 +1,4 @@
 /*****************************************************************
-    REFORME:
-// praviti likove sa imenom, dodati atibut ime
-
     IDEJE:
 // da ne izlaze uvek, nego da malo sacekaju
 // da menjaju sliku na pogodak
@@ -30,11 +27,9 @@ window.$$ = function(selector) {
 
 /*************** VARIJABLE ***************/
 
-var animacija_igre;
-
 // prabaciti u scenu
-var uvodna_slova_x = -100;
-var uvodna_slova_y = 200;
+var pocetna_slova_x = -100;
+var pocetna_slova_y = 200;
 var BAZICNA_SIRINA_EKRANA = 1280;
 var BAZICNA_VISINA_SLIKE = 118;
 
@@ -78,7 +73,7 @@ function postaviScenu(){
     dacic.poruka = "Jaoj";			// dodaje jedinstvene poruke
     vulin.poruka = "To boli!";
     toma.poruka = "Evropa nema alternativu!";
-	animacija_igre = requestAnimationFrame(azuriraj); // krace igra
+	scena.animacija_igre = requestAnimationFrame(azuriraj); // krace igra
 }
 
 
@@ -99,7 +94,7 @@ function azuriraj(){
             prethodna_sekunda = new Date().getSeconds();
         }	// kraj svaki sekund
 		
-        animacija_igre = requestAnimationFrame(azuriraj);
+        scena.animacija_igre = requestAnimationFrame(azuriraj);
     }	// kraj svaki frejm
 }
 

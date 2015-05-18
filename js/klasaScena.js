@@ -7,10 +7,11 @@ function Scena(naziv_platna, izvor_pozadine) {
     this.pozicije_prozora = []  // za funkciju izracunajPozicije
     this.uvod = true;           // podrazumevano krece uvod
     this.igranje = false;
-	this.vreme_igre = 30;
-	this.uvodna_spica = 0;
-    this.misX;
-    this.misY;
+	this.vreme_igre = 30;		// podrazumevano vreme
+	this.uvodna_spica = 0;		// prazne animacije
+	this.animacija_igre = 0;	
+    this.misX = 0;				// koordinate misha
+    this.misY = 0;
 
     this.sirina = window.innerWidth;
     this.visina = window.innerHeight;
@@ -123,7 +124,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 
 	this.proveriKraj = function(){
 		if(this.vreme_igre < 1) {
-			window.cancelAnimationFrame(animacija_igre);
+			window.cancelAnimationFrame(this.animacija_igre);
 			this.sadrzaj.fillRect(window.innerWidth/2 - window.innerWidth/4, window.innerHeight/2 - window.innerHeight/4, window.innerWidth/2, window.innerHeight/2);
 			this.sadrzaj.fillStyle="#000";
 			this.sadrzaj.font = "48px Verdana";
@@ -142,13 +143,13 @@ function pustiUvod(){
     scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
     scena.sadrzaj.fillStyle="#fff";
     scena.sadrzaj.font = "48px Verdana";
-    scena.sadrzaj.fillText("Spremi se za obracun!", uvodna_slova_x += 5, uvodna_slova_y);
-    if(uvodna_slova_x > innerWidth-100) {
-        uvodna_slova_x = -100;
-        uvodna_slova_y += 100;
+    scena.sadrzaj.fillText("Spremi se za obracun!", pocetna_slova_x += 5, pocetna_slova_y);
+    if(pocetna_slova_x > innerWidth-100) {
+        pocetna_slova_x = -100;
+        pocetna_slova_y += 100;
     }
-    if(uvodna_slova_y > innerHeight - 100) {
-        uvodna_slova_y = 200;
+    if(pocetna_slova_y > innerHeight - 100) {
+        pocetna_slova_y = 200;
     }
     scena.uvodna_spica = requestAnimationFrame(pustiUvod);
 }
