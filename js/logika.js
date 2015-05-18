@@ -35,16 +35,16 @@ var likovi_za_ucitavanje = {
 }
 
 /******************************************************************
-- broj kojim se deli visina pozadine da dobijes gornju osu prozora
-- broj kojim se deli visina pozadine da dobijes donju osu prozora
-- broj kojim se deli sirina pozadine da dobijes prvi red prozora
-- broj kojim se deli sirina pozadine da dobijes drugi red prozora
-- broj kojim se deli sirina pozadine da dobijes trecí red prozora
+0. broj kojim se deli visina pozadine da dobijes gornju osu prozora
+1. broj kojim se deli visina pozadine da dobijes donju osu prozora
+2. broj kojim se deli sirina pozadine da dobijes prvi red prozora
+3. broj kojim se deli sirina pozadine da dobijes drugi red prozora
+4. broj kojim se deli sirina pozadine da dobijes trecí red prozora
+skupstina ima dva reda prozora uspravno i tri vodoravno
 *******************************************************************/
-var faktori_za_pozicije_prozora = [4, 1.53, 5.9, 2.2, 1.35];
+var postavke_prozora = [4, 1.53, 5.9, 2.2, 1.35];
 // pomocna varijabla
 
-var prethodna_sekunda = 0;
 
 /*************** POZIVI ***************/
 
@@ -61,7 +61,7 @@ $("#platno").addEventListener('click', scena.reagujNaKlik);
 
 function postaviScenu(){
 	scena.vreme_igre = 30;			// podešava dužinu igre
-    scena.izracunajPozicije(faktori_za_pozicije_prozora);
+    scena.izracunajPozicije(postavke_prozora  );
     scena.praviLikove(likovi_za_ucitavanje);   	// pravi objekte od niza likova
     dacic.poruka = "Jaoj";			// dodaje jedinstvene poruke
     vulin.poruka = "To boli!";
@@ -82,11 +82,11 @@ function azuriraj(){
         scena.proveriKraj();
 
 		// ovo izvrsava svake sekunde
-        if(prethodna_sekunda != new Date().getSeconds()) {
+        if(scena.vreme_poredjenje != new Date().getSeconds()) {
             scena.prestaniPoruke();
             scena.dodeliPozicije(scena.likovi);
             scena.vreme_igre--;
-            prethodna_sekunda = new Date().getSeconds();
+            scena.vreme_poredjenje = new Date().getSeconds();
         }	// kraj svaki sekund
 		
         scena.animacija_igre = requestAnimationFrame(azuriraj);

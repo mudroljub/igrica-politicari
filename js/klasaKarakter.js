@@ -1,32 +1,24 @@
 
 /* prima sliku i scenu, pravi novog lika */
 function Karakter(slika_src, scena){
-    this.uveden_u_igru = false;
-    this.vicem = false;
-    this.spustanje = false;
-    this.spust = 0;
-
     this.scena = scena;
-    this.platno = scena.platno;
     this.sadrzaj = scena.sadrzaj;
-    /*
-     this.visinaSveta = parseInt(this.platno.height);   // ili scena.visina
-     this.sirinaSveta = parseInt(this.platno.width);
-     */
-
-    this.slika = new Image();
+	this.slika = new Image();
     this.slika.src = slika_src;
-    // prilagodjava sliku bazicnoj velicini slike
+    // prilagodjava sliku standardnoj velicini slike
     this.slika.width = this.slika.width / (this.slika.height / scena.BAZICNA_VISINA_SLIKE);
     this.slika.height = scena.BAZICNA_VISINA_SLIKE;
-    // prilagodjava sliku trenutnom ekranu
+    // prilagodjava sliku ekranu
     this.slika.width = this.slika.width * (window.innerWidth/scena.BAZICNA_SIRINA_EKRANA);
     this.slika.height = this.slika.height * (window.innerWidth/scena.BAZICNA_SIRINA_EKRANA);
-	
-    // prima visinu i sirinu od svoje slike
+    // prima visinu i sirinu od slike
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
 
+	this.uveden_u_igru = false;
+    this.vicem = false;
+    this.spustam = false;
+    this.spusten = 0;
 	
 	/*************** FUNKCIJE ***************/
 
@@ -45,12 +37,12 @@ function Karakter(slika_src, scena){
 
     this.goreDole = function(){
         // lagano se spusta i dize
-        if(this.spust >= 100) {
-            this.spustanje = true;
-        } else if (this.spust <= 0) {
-            this.spustanje = false;
+        if(this.spusten >= 100) {
+            this.spustam = true;
+        } else if (this.spusten <= 0) {
+            this.spustam = false;
         }
-        this.spustanje ? this.spust-- : this.spust++;
+        this.spustam ? this.spusten-- : this.spusten++;
     }
 
 
@@ -108,4 +100,11 @@ function Karakter(slika_src, scena){
         }
     }   // proveriPogodak
 
+	
+    this.jelNapustio = function(scena){
+        // da li je ovaj_lik jos u sceni
+		// ako je napustio, radi nesto, unistava ga, pamti
+    }
+	
+	
 }   // kraj Karakter

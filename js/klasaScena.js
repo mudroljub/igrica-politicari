@@ -3,11 +3,13 @@
 
 function Scena(naziv_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
-	this.likovi = [];		// za funkciju praviLikove
+	this.likovi = [];			// za funkciju praviLikove
     this.pozicije_prozora = []  // za funkciju izracunajPozicije
     this.uvod = true;           // podrazumevano krece uvod
     this.igranje = false;
 	this.vreme_igre = 30;		// podrazumevano vreme
+	this.vreme_poredjenje = 0;
+	
 	this.uvodna_spica = 0;		// prazne animacije
 	this.animacija_igre = 0;	
     this.misX = 0;				// koordinate misha
@@ -192,11 +194,5 @@ function Scena(naziv_platna, izvor_pozadine) {
 		// kad imamo vecu pozadinu da se pomera
     }
 
-	
-    this.proveriJelNapustio = function(ovaj_lik){
-        // da li je ovaj_lik jos u sceni
-		// ako je napustio, radi nesto, unistava ga, pamti
-    }
-	
-	
+
 }	// kraj Scena
