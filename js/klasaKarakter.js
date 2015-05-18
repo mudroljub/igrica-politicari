@@ -29,7 +29,13 @@ function Karakter(slika_src, scena){
 
 	
 	/*************** FUNKCIJE ***************/
-	
+
+	this.igraj = function(vreme_ulaska){
+		if(scena.vreme_igre <= vreme_ulaska) {
+		this.uveden_u_igru = true;
+		}
+	}	// kraj igraj
+
     /* uzima slucajne koordinate i pripisuje sebi */
     this.slucajnaPozicija = function() {
         this.x = scena.slucajniProzor()[0];

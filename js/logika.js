@@ -70,10 +70,11 @@ function postaviScenu(){
 
 
 function azuriraj(){
-	//var prethodna_sekunda = 0;
     // ovo izvrsava na svaki frejm
     if(scena.igranje){
-        uvodiLikove();
+		dacic.igraj(30);
+		vulin.igraj(20);
+		toma.igraj(10);
         scena.crtajSlike();
         ispisujPoruke();
         scena.ispisiPoene();
@@ -89,17 +90,6 @@ function azuriraj(){
 		
         scena.animacija_igre = requestAnimationFrame(azuriraj);
     }	// kraj svaki frejm
-}
-
-
-function uvodiLikove(){
-    dacic.uveden_u_igru = true;
-    if(scena.vreme_igre <= 20) {
-        vulin.uveden_u_igru = true;
-    }
-    if(scena.vreme_igre <= 10) {
-        toma.uveden_u_igru = true;
-    }
 }
 
 
