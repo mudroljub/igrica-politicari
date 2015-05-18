@@ -5,10 +5,12 @@ function Scena(naziv_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
 	this.karakteri = [];		// za funkciju praviLikove
     this.pozicije_prozora = []  // za funkciju izracunajPozicije
-    this.misX;
-    this.misY;
     this.uvod = true;           // podrazumevano krece uvod
     this.igranje = false;
+	this.vreme_igre = 30;
+	this.uvodna_spica = 0;
+    this.misX;
+    this.misY;
 
     this.sirina = window.innerWidth;
     this.visina = window.innerHeight;
@@ -88,23 +90,24 @@ function Scena(naziv_platna, izvor_pozadine) {
 	}	// kraj slucajniProzor
 
 
-    this.ispisiPoene = function(poeni, vreme_igre){
+    this.ispisiPoene = function(poeni, preostalo_vreme){
         this.sadrzaj.fillStyle="#000";
         this.sadrzaj.fillRect(20,80,180,100);
         this.sadrzaj.stroke();
         this.sadrzaj.fillStyle="#FFF";
         this.sadrzaj.font = "24px Verdana";
         this.sadrzaj.fillText("Poeni: " + poeni, 30, 120);
-        this.sadrzaj.fillText("Vreme: " + vreme_igre, 30, 160);        
+        this.sadrzaj.fillText("Vreme: " + preostalo_vreme, 30, 160);        
     }
 
-
+	
+	// this je unutar ove funkcije platno, mora ova_scena
     this.reagujNaKlik = function(event){
-        ova_scena.misX = event.clientX;                 // this je unutar funkcije platno, zato mora ova_scena
+        ova_scena.misX = event.clientX;   
         ova_scena.misY = event.clientY;
 
         if(ova_scena.uvod){
-            window.cancelAnimationFrame(uvodna_spica);
+            window.cancelAnimationFrame(ova_scena.uvodna_spica);
             postaviScenu();
             ova_scena.igranje = true;
             ova_scena.uvod = false;
@@ -117,21 +120,19 @@ function Scena(naziv_platna, izvor_pozadine) {
         }
     }   // kraj reagujNaKlik
 
+
+	this.proveriKraj = function(){
+		if(this.vreme_igre < 1) {
+			window.cancelAnimationFrame(animacija_igre);
+			this.sadrzaj.fillRect(window.innerWidth/2 - window.innerWidth/4, window.innerHeight/2 - window.innerHeight/4, window.innerWidth/2, window.innerHeight/2);
+			this.sadrzaj.fillStyle="#000";
+			this.sadrzaj.font = "48px Verdana";
+			this.sadrzaj.fillText("Igra je završena!", window.innerWidth/2 - window.innerWidth/4 + 100, window.innerHeight/2 - window.innerHeight/4 + 100);
+			this.igranje = false;
+		}
+	}
+	
 }
-
-
-// dodati Sceni
-function proveriKraj(){
-    if(vreme_igre < 1) {
-        window.cancelAnimationFrame(ovaAnimacija);
-        scena.sadrzaj.fillRect(window.innerWidth/2 - window.innerWidth/4, window.innerHeight/2 - window.innerHeight/4, window.innerWidth/2, window.innerHeight/2);
-        scena.sadrzaj.fillStyle="#000";
-        scena.sadrzaj.font = "48px Verdana";
-        scena.sadrzaj.fillText("Igra je završena!", window.innerWidth/2 - window.innerWidth/4 + 100, window.innerHeight/2 - window.innerHeight/4 + 100);
-        scena.igranje = false;
-    }
-}
-
 
 
 // dodati Sceni
@@ -149,7 +150,7 @@ function pustiUvod(){
     if(uvodna_slova_y > innerHeight - 100) {
         uvodna_slova_y = 200;
     }
-    uvodna_spica = requestAnimationFrame(pustiUvod);
+    scena.uvodna_spica = requestAnimationFrame(pustiUvod);
 }
 
 

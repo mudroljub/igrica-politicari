@@ -3,19 +3,20 @@
 // praviti likove sa imenom, dodati atibut ime
 
     IDEJE:
- // da ne izlaze uvek, nego da malo sacekaju
- // da menjaju sliku na pogodak
- // da nasumicno ispustaju parole
- // lokalni i globalni hajskor
- // grafiti na skupstini vucicu pederu
- // paradajz pogadja
- // uvodna animacija uvecavanje skupstina
+// da ne izlaze uvek, nego da malo sacekaju
+// da menjaju sliku na pogodak
+// da nasumicno ispustaju parole
+// lokalni i globalni hajskor
+// grafiti na skupstini vucicu pederu
+// paradajz pogadja
+// uvodna animacija uvecavanje skupstina
 
     PROBLEMI:
- // pozadina se crta prilagodjeno, a delove crta neprilagodjeno
- // resenje: napraviti jedinstveno prilagodjavanje
- // kad je presirok ekran, sece pozadinu po visini !
- // na manjim ekranima prilagoditi slova (uvod i kraj)
+// klikom detektuje karaktera i kad nije nacrtan. dodati uslov if nacrtan. 
+// pozadina se crta prilagodjeno, a delove crta neprilagodjeno
+// resenje: napraviti jedinstveno prilagodjavanje
+// kad je presirok ekran, sece pozadinu po visini !
+// na manjim ekranima prilagoditi slova (uvod i kraj)
 ********************************************************************/
 
 "use strict";
@@ -29,22 +30,17 @@ window.$$ = function(selector) {
 
 /*************** VARIJABLE ***************/
 
-var ovaAnimacija;
+var animacija_igre;
 
 // prabaciti u scenu
-var uvodna_spica;
 var uvodna_slova_x = -100;
 var uvodna_slova_y = 200;
-
 var BAZICNA_SIRINA_EKRANA = 1280;
 var BAZICNA_VISINA_SLIKE = 118;
 
 // pridruziti sceni
-var vreme_igre = 30;
 var poeni = 0;
-var prosla_sekunda = 0;
-
-var scena = new Scena('platno', 'slike/skupstina2.png');
+var prethodna_sekunda = 0;
 
 // za ucitavac
 var likovi = {                           // nazivi su bitni, od njih pravi objekte
@@ -63,6 +59,8 @@ var treci_f = 1.35;
 
 /*************** POZIVI ***************/
 
+var scena = new Scena('platno', 'slike/skupstina2.png');
+
 scena.ucitajSlike(likovi, pustiUvod);
 
 
@@ -74,43 +72,44 @@ $("#platno").addEventListener('click', scena.reagujNaKlik);
 /*************** FUNKCIJE ***************/
 
 function postaviScenu(){
-    ovaAnimacija = requestAnimationFrame(azuriraj);
+	scena.vreme_igre = 30;			// podešava dužinu igre
     scena.izracunajPozicije();
-    scena.praviLikove(likovi);   // pravi objekte od niza likova
-    // dodaje jedinstvene poruke
-    dacic.poruka = "Jaoj";
+    scena.praviLikove(likovi);   	// pravi objekte od niza likova
+    dacic.poruka = "Jaoj";			// dodaje jedinstvene poruke
     vulin.poruka = "To boli!";
     toma.poruka = "Evropa nema alternativu!";
+	animacija_igre = requestAnimationFrame(azuriraj); // krace igra
 }
 
 
 function azuriraj(){
+    // ovo izvrsava na svaki frejm
     if(scena.igranje){
-        // ovo izvrsava na svaki frejm
         uvodiLikove();
         scena.crtajSlike();
         ispisujPoruke();
-        scena.ispisiPoene(poeni, vreme_igre);
-        proveriKraj();
+        scena.ispisiPoene(poeni, scena.vreme_igre);
+        scena.proveriKraj();
 
-        if(prosla_sekunda != new Date().getSeconds()) {
-            // ovo izvrsava svake sekunde
+		// ovo izvrsava svake sekunde
+        if(prethodna_sekunda != new Date().getSeconds()) {
             brisiPoruke();
             dodeliPozicije();
-            vreme_igre--;
-            prosla_sekunda = new Date().getSeconds();
-        }
-        ovaAnimacija = requestAnimationFrame(azuriraj);
-    }
+            scena.vreme_igre--;
+            prethodna_sekunda = new Date().getSeconds();
+        }	// kraj svaki sekund
+		
+        animacija_igre = requestAnimationFrame(azuriraj);
+    }	// kraj svaki frejm
 }
 
 
 function uvodiLikove(){
     dacic.uveden_u_igru = true;
-    if(vreme_igre <= 20) {
+    if(scena.vreme_igre <= 20) {
         vulin.uveden_u_igru = true;
     }
-    if(vreme_igre <= 10) {
+    if(scena.vreme_igre <= 10) {
         toma.uveden_u_igru = true;
     }
 }
