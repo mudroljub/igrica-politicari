@@ -27,25 +27,23 @@ window.$$ = function(selector) {
 
 /*************** VARIJABLE ***************/
 
-// pomocna varijabla
-var prethodna_sekunda = 0;
-
-// za ucitavac
 var likovi = {                           // nazivi su bitni, od njih pravi objekte
     vulin: 'slike/vulin.png',
     toma: 'slike/toma.png',
     dacic: 'slike/dacic.png'
 }
 
-// delioci za polozaj prozora
-var gornji_f = 4;		// za gornji red
-var donji_f = 1.53;		// za donji red
-var prvi_f = 5.9;		// za prvi prozor
-var drugi_f = 2.2;
-var treci_f = 1.35;
-
+/******************************************************************
+- broj kojim se deli visina pozadine da dobijes gornju osu prozora
+- broj kojim se deli visina pozadine da dobijes donju osu prozora
+- broj kojim se deli sirina pozadine da dobijes prvi red prozora
+- broj kojim se deli sirina pozadine da dobijes drugi red prozora
+- broj kojim se deli sirina pozadine da dobijes trecí red prozora
+*******************************************************************/
 var faktori_za_pozicije_prozora = [4, 1.53, 5.9, 2.2, 1.35];
+// pomocna varijabla
 
+var prethodna_sekunda = 0;
 
 /*************** POZIVI ***************/
 

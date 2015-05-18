@@ -36,6 +36,8 @@ function Scena(naziv_platna, izvor_pozadine) {
     this.pozadina.src = izvor_pozadine;
 
 	
+	/*************** FUNKCIJE ***************/
+	
 	this.ucitajSlike = function(slike, povratnaRadnja){
 		var brojSlika = Object.keys(slike).length;
 		var ucitaneSlike = 0;

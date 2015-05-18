@@ -27,6 +27,9 @@ function Karakter(slika_src, scena){
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
 
+	
+	/*************** FUNKCIJE ***************/
+	
     /* uzima slucajne koordinate i pripisuje sebi */
     this.slucajnaPozicija = function() {
         this.x = scena.slucajniProzor()[0];
