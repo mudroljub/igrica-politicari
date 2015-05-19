@@ -10,7 +10,5 @@ function Postavke(){
      - broj kojim se deli sirina pozadine da dobijes trecí red prozora
      *******************************************************************/
 
-    this.BAZNA_SIRINA_EKRANA = 1280;
-    this.BAZNA_VISINA_SLIKE = 118;
 
-}
+}   // kraj Postavke

@@ -3,6 +3,7 @@
 
 function Scena(naziv_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
+    this.BAZNA_SIRINA_EKRANA = 1280;
     this.ide_uvod = true;       // podrazumevano krece ide_uvod
     this.igranje = false;
 	this.vreme_igre = 30;		// podrazumevano vreme
@@ -38,7 +39,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 
 	
 	/*************** FUNKCIJE ***************/
-	
+
 	this.ucitajSlike = function(slike, povratnaRadnja){
 		var brojSlika = Object.keys(slike).length;
 		var ucitaneSlike = 0;
