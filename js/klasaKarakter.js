@@ -5,12 +5,13 @@ function Karakter(slika_src, scena){
     this.sadrzaj = scena.sadrzaj;
 	this.slika = new Image();
     this.slika.src = slika_src;
+
     // prilagodjava sliku standardnoj velicini slike
-    this.slika.width = this.slika.width / (this.slika.height / scena.BAZICNA_VISINA_SLIKE);
-    this.slika.height = scena.BAZICNA_VISINA_SLIKE;
+    this.slika.width = this.slika.width / (this.slika.height / postavke.BAZNA_VISINA_SLIKE);
+    this.slika.height = postavke.BAZNA_VISINA_SLIKE;
     // prilagodjava sliku ekranu
-    this.slika.width = this.slika.width * (window.innerWidth/scena.BAZICNA_SIRINA_EKRANA);
-    this.slika.height = this.slika.height * (window.innerWidth/scena.BAZICNA_SIRINA_EKRANA);
+    this.slika.width = this.slika.width * (window.innerWidth/postavke.BAZNA_SIRINA_EKRANA);
+    this.slika.height = this.slika.height * (window.innerWidth/postavke.BAZNA_SIRINA_EKRANA);
     // prima visinu i sirinu od slike
     this.sirina = this.slika.width;
     this.visina = this.slika.height;

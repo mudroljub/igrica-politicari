@@ -17,18 +17,6 @@
 ********************************************************************/
 
 
-/*************** PODEŠAVANJA ***************/
-
-var postavke_prozora = [4, 1.53, 5.9, 2.2, 1.35];
-/******************************************************************
-0. broj kojim se deli visina pozadine da dobijes gornju osu prozora
-1. broj kojim se deli visina pozadine da dobijes donju osu prozora
-2. broj kojim se deli sirina pozadine da dobijes prvi red prozora
-3. broj kojim se deli sirina pozadine da dobijes drugi red prozora
-4. broj kojim se deli sirina pozadine da dobijes trecí red prozora
-skupstina ima dva reda prozora uspravno i tri vodoravno
-*******************************************************************/
-
 var likovi_za_ucitavanje = { // nazivi bitni, od njih pravi objekte
     vulin: 'slike/vulin.png',
     toma: 'slike/toma.png',
@@ -38,15 +26,17 @@ var likovi_za_ucitavanje = { // nazivi bitni, od njih pravi objekte
 
 /*************** LOGIKA IGRE ***************/
 
+var postavke = new Postavke();      // prima podrazumevana podešavanja igre
 var scena = new Scena('platno', 'slike/skupstina2.png');
-$("#platno").addEventListener('click', scena.reagujNaKlik);
+
 scena.ucitajSlike(likovi_za_ucitavanje, scena.pustiUvod);
+$("#platno").addEventListener('click', scena.reagujNaKlik);
 
 
 /*************** GLAVNE FUNKCIJE ***************/
 
 function postaviScenu(){
-    scena.izracunajPozicije(postavke_prozora);
+    scena.praviProzore(postavke.ose_prozora);
     scena.praviLikove(likovi_za_ucitavanje);   	// pravi objekte od niza likova
     dacic.poruka = "Jaoj";			// dodaje jedinstvene poruke
     vulin.poruka = "To boli!";
@@ -67,11 +57,11 @@ function azuriraj(){
         scena.proveriKraj();
 
 		// ovo izvrsava svake sekunde
-        if(scena.vreme_poredjenje != new Date().getSeconds()) {
+        if(scena.prethodna_sekunda != new Date().getSeconds()) {
             scena.prestaniPoruke();
             scena.dodeliPozicije(scena.likovi);
             scena.vreme_igre--;
-            scena.vreme_poredjenje = new Date().getSeconds();
+            scena.prethodna_sekunda = new Date().getSeconds();
         }	// kraj svaki sekund
 		
         scena.animacija_igre = requestAnimationFrame(azuriraj);
