@@ -1,5 +1,4 @@
 
-/* prima sliku i scenu, pravi novog lika */
 function Karakter(slika_src, scena){
     this.scena = scena;
     this.sadrzaj = scena.sadrzaj;
@@ -7,30 +6,18 @@ function Karakter(slika_src, scena){
     this.slika.src = slika_src;
 
     this.BAZNA_VISINA_SLIKE = 118;
+    this.slika = prilagodiSliku(this, this.slika);
+    // prima visinu i sirinu od prilagođene slike
+    this.sirina = this.slika.width;
+    this.visina = this.slika.height;
+
     this.igram = false;
     this.vicem = false;
     this.spustam = false;
     this.spusten = 0;
 
-    // problem jer mora metod pre poziva
-    this.prilagodiSliku = function(slika) {
-        // prilagodjava sliku standardnoj velicini slike
-        var nova_sirina = slika.width / (slika.height / this.BAZNA_VISINA_SLIKE);
-        var nova_visina = this.BAZNA_VISINA_SLIKE;
-        // prilagodjava sliku ovom ekranu
-        slika.width = nova_sirina * (window.innerWidth / scena.BAZNA_SIRINA_EKRANA);
-        slika.height = nova_visina * (window.innerWidth / scena.BAZNA_SIRINA_EKRANA);
-        return slika;
-    }   // kraj prilagodiSliku
-
-    this.prilagodiSliku(this.slika);
-    // prima visinu i sirinu od prilagođene slike
-    this.sirina = this.slika.width;
-    this.visina = this.slika.height;
-
 
 	/*************** FUNKCIJE ***************/
-
 
 	this.igraj = function(vreme_ulaska) {
 		if(scena.vreme_igre <= vreme_ulaska) {
@@ -115,6 +102,16 @@ function Karakter(slika_src, scena){
         // da li je ovaj_lik jos u sceni
 		// ako je napustio, radi nesto, unistava ga, pamti
     }
-	
-	
+
+
+    function prilagodiSliku(ovaj_karakter, slika){
+        // prilagodjava sliku standardnoj velicini slike
+        var nova_sirina = slika.width / (slika.height / ovaj_karakter.BAZNA_VISINA_SLIKE);
+        var nova_visina = ovaj_karakter.BAZNA_VISINA_SLIKE;
+        // prilagodjava sliku ovom ekranu
+        slika.width = nova_sirina * (window.innerWidth / scena.BAZNA_SIRINA_EKRANA);
+        slika.height = nova_visina * (window.innerWidth / scena.BAZNA_SIRINA_EKRANA);
+        return slika;
+    }
+
 }   // kraj Karakter

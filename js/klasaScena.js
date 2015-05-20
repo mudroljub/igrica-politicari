@@ -21,7 +21,8 @@ function Scena(naziv_platna, izvor_pozadine) {
 
     this.sirina = window.innerWidth;
     this.visina = window.innerHeight;
-	
+
+	// napraviti funkcije postaviPlatno, postaviSadrzaj i postaviPozadinu
     this.platno = document.getElementById(naziv_platna);        // ako nema platna, da sam stvara
     this.platno.width = this.sirina;
     this.platno.height = this.visina;
