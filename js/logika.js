@@ -49,7 +49,7 @@ function azuriraj(){
 		dacic.igraj(30);
 		vulin.igraj(20);
 		toma.igraj(10);
-        scena.crtajSlike();
+        scena.crtajSve();
         scena.pisiPoruke();
         scena.pisiPoene();
         scena.proveriKraj();

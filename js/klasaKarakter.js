@@ -6,7 +6,7 @@ function Karakter(slika_src, scena){
     this.slika.src = slika_src;
 
     this.BAZNA_VISINA_SLIKE = 118;
-    this.slika = prilagodiSliku(this, this.slika);
+    prilagodiSliku(this, this.slika);
     // prima visinu i sirinu od prilagođene slike
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
