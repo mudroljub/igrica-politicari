@@ -5,9 +5,8 @@ function Karakter(slika_src, scena){
 	this.slika = new Image();
     this.slika.src = slika_src;
 
-    this.BAZNA_VISINA_SLIKE = 118;
+    this.STANDARDNA_VISINA = 118;
     prilagodiSliku(this, this.slika);
-    // prima visinu i sirinu od prilagođene slike
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
 
@@ -106,11 +105,11 @@ function Karakter(slika_src, scena){
 
     function prilagodiSliku(ovaj_karakter, slika){
         // prilagodjava sliku standardnoj velicini slike
-        var nova_sirina = slika.width / (slika.height / ovaj_karakter.BAZNA_VISINA_SLIKE);
-        var nova_visina = ovaj_karakter.BAZNA_VISINA_SLIKE;
+        var nova_sirina = slika.width / (slika.height / ovaj_karakter.STANDARDNA_VISINA);
+        var nova_visina = ovaj_karakter.STANDARDNA_VISINA;
         // prilagodjava sliku ovom ekranu
-        slika.width = nova_sirina * (window.innerWidth / scena.BAZNA_SIRINA_EKRANA);
-        slika.height = nova_visina * (window.innerWidth / scena.BAZNA_SIRINA_EKRANA);
+        slika.width = nova_sirina * (window.innerWidth / scena.STANDARDNA_SIRINA);
+        slika.height = nova_visina * (window.innerWidth / scena.STANDARDNA_SIRINA);
         return slika;
     }
 

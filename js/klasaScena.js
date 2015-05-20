@@ -3,13 +3,11 @@
 
 function Scena(naziv_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
-    this.BAZNA_SIRINA_EKRANA = 1280;
-	this.sirina = window.innerWidth;
-    this.visina = window.innerHeight;
     this.ide_uvod = true;       // podrazumevano krece ide_uvod
     this.igranje = false;
 	this.vreme_igre = 10;		// podrazumevano vreme
 	this.prethodna_sekunda = 0;
+	this.STANDARDNA_SIRINA = 1280;
 
 	this.likovi = [];			// popunjava ga funkcija praviLikove
     this.pozicije_prozora = []  // popunjava ga funkcija praviProzore
@@ -23,7 +21,10 @@ function Scena(naziv_platna, izvor_pozadine) {
 
 	this.platno = postaviPlatno(naziv_platna, ova_scena);
 	this.sadrzaj = postaviSadrzaj(this.platno);
-	this.pozadina = ucitajPozadinu(izvor_pozadine);
+	this.pozadina = ucitajPozadinu(izvor_pozadine);		// dodati povratnu funkciju kao argument
+	this.sirina = this.platno.width;
+    this.visina = this.platno.height;	
+	
 	
 	/*************** FUNKCIJE ***************/
 
@@ -167,11 +168,11 @@ function Scena(naziv_platna, izvor_pozadine) {
 	
 	function postaviPlatno(naziv_platna, ova_scena){
 		var platno = document.getElementById(naziv_platna);        // ako nema platna, da sam stvara
-		platno.width = ova_scena.sirina;
-		platno.height = ova_scena.visina;
+		platno.width = window.innerWidth;
+		platno.height = window.innerHeight;
 		return platno;
 	}
-
+	
 	function postaviSadrzaj(platno) {
 		var sadrzaj = platno.getContext('2d');
 		sadrzaj.font = "30px Verdana";
