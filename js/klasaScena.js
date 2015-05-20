@@ -3,13 +3,14 @@
 
 function Scena(naziv_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
-    this.ide_uvod = true;           // podrazumevano krece ide_uvod
+    this.BAZNA_SIRINA_EKRANA = 1280;
+    this.ide_uvod = true;       // podrazumevano krece ide_uvod
     this.igranje = false;
 	this.vreme_igre = 30;		// podrazumevano vreme
-	this.vreme_poredjenje = 0;
+	this.prethodna_sekunda = 0;
 
-	this.likovi = [];			// za funkciju praviLikove
-    this.pozicije_prozora = []  // za funkciju izracunajPozicije
+	this.likovi = [];			// popunjava ga funkcija praviLikove
+    this.pozicije_prozora = []  // popunjava ga funkcija praviProzore
 	this.uvodna_spica;			// prazne animacije
 	this.animacija_igre;	
     this.misX = 0;				// koordinate misha
@@ -17,9 +18,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 	this.poeni = 0;
 	this.krecu_slova_x = -100;	// podrazumevano
 	this.krecu_slova_y = 200;
-	
-	this.BAZICNA_SIRINA_EKRANA = 1280;
-	this.BAZICNA_VISINA_SLIKE = 118;
+
     this.sirina = window.innerWidth;
     this.visina = window.innerHeight;
 	
@@ -40,7 +39,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 
 	
 	/*************** FUNKCIJE ***************/
-	
+
 	this.ucitajSlike = function(slike, povratnaRadnja){
 		var brojSlika = Object.keys(slike).length;
 		var ucitaneSlike = 0;
@@ -66,8 +65,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 	}   // kraj praviLikove()
 
 
-	this.pustiUvod = function(){
-		//console.log(this)			// this je iz nekog razloga window
+	this.pustiUvod = function(){            // this je iz nekog razloga window
 		ova_scena.sadrzaj.fillStyle = "black";
 		ova_scena.sadrzaj.fillRect(0, 0, window.innerWidth, window.innerHeight);
 		ova_scena.sadrzaj.fillStyle="#fff";
@@ -94,7 +92,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 	} // kraj crtajSlike
 
 
-    this.izracunajPozicije = function(faktori){
+    this.praviProzore = function(faktori){
         var gornji_red = this.pozadina.nova_visina / faktori[0];
         var donji_red = this.pozadina.nova_visina / faktori[1];
         var prvi_prozor = this.sirina / faktori[2];			// promeniti u scena.sirina
@@ -102,14 +100,10 @@ function Scena(naziv_platna, izvor_pozadine) {
         var treci_prozor = this.sirina / faktori[4];
 
         this.pozicije_prozora = [
-            [prvi_prozor, gornji_red],             // prvi prozor
-            [drugi_prozor, gornji_red],             // drugi prozor
-            [treci_prozor, gornji_red],
-            [prvi_prozor, donji_red],
-            [drugi_prozor, donji_red],
-            [treci_prozor, donji_red]
+            [prvi_prozor, gornji_red], [drugi_prozor, gornji_red], [treci_prozor, gornji_red],
+            [prvi_prozor, donji_red], [drugi_prozor, donji_red], [treci_prozor, donji_red]
         ]
-    }   // kraj izracunajPozicije
+    }   // kraj praviProzore
 
 
 	this.slucajniProzor = function(){
