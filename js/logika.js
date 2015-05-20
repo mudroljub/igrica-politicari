@@ -16,8 +16,6 @@
 // na manjim ekranima prilagoditi slova (ide_uvod i kraj)
 ********************************************************************/
 
-var uvodna_spica;
-
 var likovi_za_ucitavanje = { // nazivi bitni, od njih pravi objekte
     vulin: 'slike/vulin.png',
     toma: 'slike/toma.png',
@@ -29,7 +27,6 @@ var likovi_za_ucitavanje = { // nazivi bitni, od njih pravi objekte
 
 var postavke = new Postavke();      // prima podrazumevana podešavanja igre
 var scena = new Scena('platno', 'slike/skupstina2.png');
-
 scena.ucitajSlike(likovi_za_ucitavanje, scena.pustiUvod);
 $("#platno").addEventListener('click', scena.reagujNaKlik);
 

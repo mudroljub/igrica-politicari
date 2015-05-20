@@ -6,12 +6,12 @@ function Scena(naziv_platna, izvor_pozadine) {
     this.BAZNA_SIRINA_EKRANA = 1280;
     this.ide_uvod = true;       // podrazumevano krece ide_uvod
     this.igranje = false;
-	this.vreme_igre = 3;		// podrazumevano vreme
+	this.vreme_igre = 10;		// podrazumevano vreme
 	this.prethodna_sekunda = 0;
 
 	this.likovi = [];			// popunjava ga funkcija praviLikove
     this.pozicije_prozora = []  // popunjava ga funkcija praviProzore
-	//this.uvodna_spica;			// prazne animacije
+	this.uvodna_spica;			// prazne animacije
 	this.animacija_igre;	
     this.misX = 0;				// koordinate misha
     this.misY = 0;
@@ -79,8 +79,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 		if(ova_scena.krecu_slova_y > innerHeight - 100) {
 			ova_scena.krecu_slova_y = 200;
 		}
-		uvodna_spica = requestAnimationFrame(ova_scena.pustiUvod);
-console.log(uvodna_spica)
+		ova_scena.uvodna_spica = requestAnimationFrame(ova_scena.pustiUvod);
 	}	// kraj pustiUvod
 	
 	// iscrtava pozadinu i aktivne karaktere
@@ -128,8 +127,7 @@ console.log(uvodna_spica)
         ova_scena.misY = event.clientY;
 
         if(ova_scena.ide_uvod){
-            window.cancelAnimationFrame(uvodna_spica);
-console.log(uvodna_spica)
+            window.cancelAnimationFrame(ova_scena.uvodna_spica);
             postaviScenu();
             ova_scena.igranje = true;
             ova_scena.ide_uvod = false;
@@ -172,8 +170,6 @@ console.log(uvodna_spica)
 	
 	this.proveriKraj = function(){
 		if(this.vreme_igre < 1) {
-console.log("Igra je završena!")
-//console.log(this.uvodna_spica)
 			window.cancelAnimationFrame(this.animacija_igre);
 			this.sadrzaj.fillRect(window.innerWidth/2 - window.innerWidth/4, window.innerHeight/2 - window.innerHeight/4, window.innerWidth/2, window.innerHeight/2);
 			this.sadrzaj.fillStyle="#000";
