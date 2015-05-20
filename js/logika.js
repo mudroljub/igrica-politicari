@@ -16,6 +16,7 @@
 // na manjim ekranima prilagoditi slova (ide_uvod i kraj)
 ********************************************************************/
 
+var uvodna_spica;
 
 var likovi_za_ucitavanje = { // nazivi bitni, od njih pravi objekte
     vulin: 'slike/vulin.png',
@@ -38,7 +39,7 @@ $("#platno").addEventListener('click', scena.reagujNaKlik);
 function postaviScenu(){
     scena.praviProzore(postavke.ose_prozora);
     scena.praviLikove(likovi_za_ucitavanje);   	// pravi objekte od niza likova
-    dacic.poruka = "Jaoj";			// dodaje jedinstvene poruke
+    dacic.poruka = "Jaoj";						// dodaje jedinstvene poruke
     vulin.poruka = "To boli!";
     toma.poruka = "Evropa nema alternativu!";
 	scena.animacija_igre = requestAnimationFrame(azuriraj); // krace igra
