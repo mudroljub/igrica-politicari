@@ -32,21 +32,9 @@ function Karakter(ime, slika_src, scena, vreme){
     }   // kraj slucajnaPozicija
 
 
-    this.goreDole = function(){
-        // lagano se spusta i dize
-        if(this.spusten >= 100) {
-            this.spustam = true;
-        } else if (this.spusten <= 0) {
-            this.spustam = false;
-        }
-        this.spustam ? this.spusten-- : this.spusten++;
-    }
-
-
-    /* crta sebe na trenutnim koordinatama */
-    this.crtaj = function() {
+    this.crtajSebe = function() {
         this.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
-    }   // kraj crtaj
+    }   // kraj crtajSebe
 
 
     /* proverava jel drugi karakter zauzeo njegovu poziciju */
@@ -97,7 +85,18 @@ function Karakter(ime, slika_src, scena, vreme){
         }
     }   // proveriPogodak
 
-	
+
+    this.goreDole = function(){
+        // lagano se spusta i dize
+        if(this.spusten >= 100) {
+            this.spustam = true;
+        } else if (this.spusten <= 0) {
+            this.spustam = false;
+        }
+        this.spustam ? this.spusten-- : this.spusten++;
+    }
+
+
     this.jelNapustio = function(scena){
         // da li je ovaj_lik jos u sceni
 		// ako je napustio, radi nesto, unistava ga, pamti
@@ -113,5 +112,6 @@ function Karakter(ime, slika_src, scena, vreme){
         slika.height = nova_visina * (window.innerWidth / scena.STANDARDNA_SIRINA);
         return slika;
     }
+
 
 }   // kraj Karakter

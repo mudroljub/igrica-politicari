@@ -25,7 +25,7 @@ var likovi_za_ucitati = { // nazivi bitni, od njih pravi objekte
 /*************** LOGIKA IGRE ***************/
 
 var postavke = new Postavke();      // osnovna podešavanja scene
-var vreme = new Vreme(30);
+var vreme = new Vreme(30);          // prosledjuje vreme igre
 var scena = new Scena('platno', 'slike/skupstina2.png', vreme);
 scena.ucitajSlike(likovi_za_ucitati, scena.pustiUvod);
 

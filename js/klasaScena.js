@@ -1,5 +1,5 @@
 
-// primiti sirinu i visinu scene od prozora, nadalje koristiti to
+// primiti sirinu i visinu scene od window, nadalje koristiti to
 // prilagodiPozadinu, uzeti u obzir sire i tanje ekrane
 
 function Scena(naziv_platna, izvor_pozadine, vreme) {
@@ -71,7 +71,7 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 		this.sadrzaj.drawImage(this.pozadina, 0, 0, window.innerWidth, this.pozadina.nova_visina);
 		for(var i=0; i < this.likovi.length; i++){
 			if(this.likovi[i].igram){
-				this.likovi[i].crtaj();
+				this.likovi[i].crtajSebe();
 			}
 		}
 	} // kraj crtajSve
