@@ -140,11 +140,11 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 		}
 	}	// kraj pisiPoruke
 
-	this.prestaniPoruke = function(){
+	this.brisiPoruke = function(){
 		for(var i=0; i < this.likovi.length; i++){
 			this.likovi[i].vicem = false;
 		}
-	}	// kraj prestaniPoruke
+	}	// kraj brisiPoruke
 
 	this.proveriKraj = function(){
 		if(vreme.preostalo < 1) {

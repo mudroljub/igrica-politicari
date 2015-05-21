@@ -57,11 +57,11 @@ function azuriraj(){
         scena.proveriKraj();
 
 		// ovo izvrsava svake sekunde
-        if(vreme.prethodna_sekunda != vreme.ova_sekunda) {
-            scena.prestaniPoruke();
+        if(vreme.prethodna_sekunda != vreme.ovaSekunda()) {
+            scena.brisiPoruke();
             scena.dodeliPozicije(scena.likovi);
             vreme.preostalo--;
-            vreme.prethodna_sekunda = vreme.ova_sekunda;
+            vreme.prethodna_sekunda = vreme.ovaSekunda();
         }	// kraj svaki sekund
 		
         scena.animacija_igre = requestAnimationFrame(azuriraj);
