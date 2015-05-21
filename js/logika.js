@@ -1,4 +1,5 @@
 /*****************************************************************
+// zameniti for petlje sa provrti
     IDEJE:
 // da ne izlaze uvek, nego da malo sacekaju
 // da menjaju sliku na pogodak
@@ -66,3 +67,5 @@ function azuriraj(){
         scena.animacija_igre = requestAnimationFrame(azuriraj);
     }	// kraj svaki frejm
 }
+
+// mozda ovde prebaciti reagujNaKlik

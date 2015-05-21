@@ -119,6 +119,7 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
                 ova_scena.likovi[i].proveriPogodak();
              }
         }	// kraj if igranje
+		
     }   // kraj reagujNaKlik
 
     this.pisiPoene = function(){
