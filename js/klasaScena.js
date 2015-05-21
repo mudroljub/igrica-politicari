@@ -5,7 +5,7 @@ function Scena(naziv_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
     this.ide_uvod = true;       // podrazumevano krece ide_uvod
     this.igranje = false;
-	this.vreme_igre = 10;		// podrazumevano vreme
+	this.vreme_igre = 30;		// podrazumevano vreme
 	this.prethodna_sekunda = 0;
 	this.STANDARDNA_SIRINA = 1280;
 
@@ -109,10 +109,10 @@ function Scena(naziv_platna, izvor_pozadine) {
         ova_scena.misY = event.clientY;
 
         if(ova_scena.ide_uvod){
+            ova_scena.ide_uvod = false;
             window.cancelAnimationFrame(ova_scena.uvodna_animacija);
             postaviScenu();
             ova_scena.igranje = true;
-            ova_scena.ide_uvod = false;
         }	// kraj if ide_uvod
 
         if(ova_scena.igranje){

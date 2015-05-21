@@ -22,7 +22,6 @@ var likovi_za_ucitavanje = { // nazivi bitni, od njih pravi objekte
     dacic: 'slike/dacic.png'
 }
 
-
 /*************** LOGIKA IGRE ***************/
 
 var postavke = new Postavke();      // prima podrazumevana podešavanja igre
