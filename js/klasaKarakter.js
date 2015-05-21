@@ -7,7 +7,7 @@ function Karakter(ime, slika_src, scena, vreme){
     this.slika.src = slika_src;
 
     this.STANDARDNA_VISINA = 118;
-    prilagodiSliku(this, this.slika);
+    _prilagodiSliku(this, this.slika);
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
 
@@ -104,7 +104,7 @@ function Karakter(ime, slika_src, scena, vreme){
     }
 
 
-    function prilagodiSliku(ovaj_karakter, slika){
+    function _prilagodiSliku(ovaj_karakter, slika){
         // prilagodjava sliku standardnoj velicini slike
         var nova_sirina = slika.width / (slika.height / ovaj_karakter.STANDARDNA_VISINA);
         var nova_visina = ovaj_karakter.STANDARDNA_VISINA;

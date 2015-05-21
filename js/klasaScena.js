@@ -1,11 +1,11 @@
 
 // primiti sirinu i visinu scene od prozora, nadalje koristiti to
+// prilagodiPozadinu, uzeti u obzir sire i tanje ekrane
 
 function Scena(naziv_platna, izvor_pozadine, vreme) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
     this.ide_uvod = true;       // podrazumevano krece ide_uvod
     this.igranje = false;
-	this.prethodna_sekunda = 0;
 	this.STANDARDNA_SIRINA = 1280;
 
 	this.likovi = [];			// popunjava ga funkcija praviLikove
@@ -18,9 +18,9 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 	this.krecu_slova_x = -100;	// podrazumevano
 	this.krecu_slova_y = 200;
 
-	this.platno = postaviPlatno(naziv_platna, ova_scena);
-	this.sadrzaj = postaviSadrzaj(this.platno);
-	this.pozadina = ucitajPozadinu(izvor_pozadine);		// dodati povratnu funkciju kao argument
+	this.platno = _postaviPlatno(naziv_platna, ova_scena);
+	this.sadrzaj = _postaviSadrzaj(this.platno);
+	this.pozadina = _ucitajPozadinu(izvor_pozadine);		// dodati povratnu funkciju kao argument
 	this.sirina = this.platno.width;
     this.visina = this.platno.height;	
 	
@@ -155,24 +155,19 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 			this.igranje = false;
 		}
 	}	// kraj proveriKraj
-	
-	this.prilagodiPozadinu = function(){
-        // ili prilagodiPozadinu() ili racunaProporcije() za sve
-		// uzeti u obzir sire i tanje ekrane
-    }
 
     this.mrdaPozadinu = function(){
 		// kad imamo vecu pozadinu da se pomera
     }
 	
-	function postaviPlatno(naziv_platna, ova_scena){
+	function _postaviPlatno(naziv_platna, ova_scena){
 		var platno = document.getElementById(naziv_platna);        // ako nema platna, da sam stvara
 		platno.width = window.innerWidth;
 		platno.height = window.innerHeight;
 		return platno;
 	}
 	
-	function postaviSadrzaj(platno) {
+	function _postaviSadrzaj(platno) {
 		var sadrzaj = platno.getContext('2d');
 		sadrzaj.font = "30px Verdana";
 		sadrzaj.fillStyle = "white";
@@ -180,18 +175,18 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 		return sadrzaj;		
 	}
 	
-	function ucitajPozadinu(izvor_pozadine){
+	function _ucitajPozadinu(izvor_pozadine){
 		var pozadina = new Image();
 		pozadina.onload = function povratno() {                                     // this je izvan scena
-			ova_scena.pozadina = prilagodiPozadinu(pozadina);
+			ova_scena.pozadina = _prilagodiPozadinu(pozadina);
 		};
 		pozadina.src = izvor_pozadine;		
 	}
 	
-	function prilagodiPozadinu(pozadina){
+	function _prilagodiPozadinu(pozadina){
 			pozadina.nova_visina = (ova_scena.sirina / pozadina.width) * pozadina.height;  // this je unutra pozadina, prilagodjava visinu pozadine
 			return pozadina;
 	}
-		
-	
+
+
 }	// kraj Scena

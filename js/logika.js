@@ -25,7 +25,7 @@ var likovi_za_ucitati = { // nazivi bitni, od njih pravi objekte
 /*************** LOGIKA IGRE ***************/
 
 var postavke = new Postavke();      // osnovna podešavanja scene
-var vreme = new Vreme();
+var vreme = new Vreme(30);
 var scena = new Scena('platno', 'slike/skupstina2.png', vreme);
 scena.ucitajSlike(likovi_za_ucitati, scena.pustiUvod);
 
@@ -56,11 +56,11 @@ function azuriraj(){
         scena.proveriKraj();
 
 		// ovo izvrsava svake sekunde
-        if(scena.prethodna_sekunda != new Date().getSeconds()) {
+        if(vreme.prethodna_sekunda != vreme.ova_sekunda) {
             scena.prestaniPoruke();
             scena.dodeliPozicije(scena.likovi);
             vreme.preostalo--;
-            scena.prethodna_sekunda = new Date().getSeconds();
+            vreme.prethodna_sekunda = vreme.ova_sekunda;
         }	// kraj svaki sekund
 		
         scena.animacija_igre = requestAnimationFrame(azuriraj);
