@@ -1,6 +1,6 @@
 
 function Mish(scena){
-	this.x = 0;				// na naKlik primaju trenutnu koordinatu
+	this.x = 0;				// na uradiNaKlik primaju trenutnu koordinatu
     this.y = 0;
 	
     this.proveriPogodak = function(karakter) { 

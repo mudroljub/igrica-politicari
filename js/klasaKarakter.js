@@ -70,7 +70,6 @@ function Karakter(ime, slika_src, scena, vreme, mish){
 		// bacaParole koje ti skidaju energiju
     }   // kraj bacaParole
 
-
     this.goreDole = function(){
         // lagano se spusta i dize
         if(this.spusten >= 100) {

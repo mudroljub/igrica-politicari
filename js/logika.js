@@ -1,5 +1,4 @@
 /*****************************************************************
-// zameniti for petlje sa provrti
     IDEJE:
 // da ne izlaze uvek, nego da malo sacekaju
 // da menjaju sliku na pogodak
@@ -10,13 +9,11 @@
 // uvodna animacija uvecavanje skupstina
 
     PROBLEMI:
+// na manjim ekranima prilagodiSlova, mozda klasa Prilagodjavac za pozadinu, slike, slova
 // deo sekunde su u igri, a nisu nacrtani, dodati varijablu nacrtani radi provere
-// klikom pogadjam i one kojih nema	
-// klikom detektuje karaktera i kad nije nacrtan. dodati uslov if nacrtan. 
 // pozadina se crta prilagodjeno, a delove crta neprilagodjeno
 // resenje: napraviti jedinstveno prilagodjavanje
 // kad je presirok ekran, sece pozadinu po visini !
-// na manjim ekranima prilagoditi slova (ide i kraj)
 ********************************************************************/
 
 var likovi = { // nazivi bitni, od njih pravi objekte!
@@ -33,8 +30,8 @@ var scena = new Scena('platno', 'slike/skupstina2.png', vreme);
 var mish = new Mish(scena); 
 var uvod = new Uvod(scena);
 
-scena.ucitajSlike(likovi, uvod.pusti);
-$("#platno").addEventListener('click', naKlik);
+ucitajSlike(likovi, uvod.pusti);
+$("#platno").addEventListener('click', uradiNaKlik);
 
 
 /*************** GLAVNE FUNKCIJE ***************/
@@ -73,7 +70,7 @@ function azuriraj(){
 }
 
 
-function naKlik(klik){
+function uradiNaKlik(klik){
 	mish.x = klik.clientX;   
 	mish.y = klik.clientY;
 	
@@ -92,12 +89,28 @@ function naKlik(klik){
 			}
 		}
 	}	// kraj ako igranje
-}   // kraj naKlik
+}   // kraj uradiNaKlik
 
 
-praviKaraktere = function(likovi){
+function praviKaraktere(likovi){
 	for (var lik in likovi){
 		window[lik] = new Karakter(lik, likovi[lik], scena, vreme, mish);
 		scena.karakteri.push(window[lik]);
 	}   // kraj for
 }   // kraj praviKaraktere()
+
+
+function ucitajSlike(slike, povratnoPustaUvod){		
+	var brojSlika = Object.keys(slike).length;
+	var ucitaneSlike = 0;
+	for (var kljuc in slike) {
+		var ova_slika = new Image(); 
+		ova_slika.onload = function kadSveUcita() {
+			ucitaneSlike++;
+			if (ucitaneSlike >= brojSlika) {
+				povratnoPustaUvod();
+			}
+		};  // kraj kadSveUcita()
+		ova_slika.src = slike[kljuc];
+	}	// kraj for
+}	// kraj ucitajSlike
