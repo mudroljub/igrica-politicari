@@ -23,48 +23,38 @@ function Karakter(ime, slika_src, scena, vreme){
 		}
 	}	// kraj igraj
 
-    /* uzima slucajne koordinate i pripisuje sebi */
-    this.slucajnaPozicija = function() {
-        this.x = scena.slucajniProzor()[0];
-        this.y = scena.slucajniProzor()[1];
+    this.slucajnaPozicija = function(pozicije) {
+		var slucajno = Math.floor (Math.random() * pozicije.length);		
+        this.x = pozicije[slucajno][0];
+        this.y = pozicije[slucajno][1];
     }   // kraj slucajnaPozicija
 
-
-    this.crtajSebe = function() {
+    this.crtaj = function() {
         scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
-    }   // kraj crtajSebe
+    }   // kraj crtaj
 
-
-    /* proverava jel drugi karakter zauzeo njegovu poziciju */
-    this.jelDrugiZauzeo = function(drugi_karakter){
-        if(this.x == drugi_karakter.x && this.y == drugi_karakter.y){
+    this.sudar = function(karakter){
+        if(this.x == karakter.x && this.y == karakter.y){
             return true;
         } else return false;
-    }   // kraj jelDrugiZauzeo
+    }   // kraj sudar
 
-
-    /* prima niz likova, proverava dal su zauzeli njegovu poziciju, vraca jel slobodna */
-    this.jelOvoSlobodno = function (ostali) {
-        var slobodno = true;
-        var izbaci_me = ostali.indexOf(this);       // traži sebe
-        ostali.splice(izbaci_me, 1);                // izbacuje sebe
-        // ide redom kroz ostale i proverava sudar
-        for (var i = 0; i < ostali.length; i++) {
-            slobodno = slobodno & !this.jelDrugiZauzeo(ostali[i]);
-        }
-        ostali.push(this);                          // vraca sebe
-        return slobodno;
-    }   // kraj jelOvoSlobodno
-
+    this.proveriSveSudare = function (karakteri) {
+        var sudari = false;        
+        for (var i = 0; i < karakteri.length; i++) {
+			if( i == karakteri.indexOf(this) ) continue;		// preskoci sebe
+            sudari = sudari || this.sudar(karakteri[i]);
+        }  // kraj petlje
+		return sudari;
+    }   // kraj proveriSveSudare
 
     /* uzima slucajnu poziciju, ako je zauzeta, uporno trazi slobodnu */
-    this.nadjiSlobodnuPoziciju = function (ostali) {
-        this.slucajnaPozicija();
-        while ( !this.jelOvoSlobodno(ostali) ) {
-            this.slucajnaPozicija();
+    this.nadjiSlobodnoMesto = function (karakteri) {
+        this.slucajnaPozicija(scena.pozicije);
+        while ( this.proveriSveSudare(karakteri) ) {
+            this.slucajnaPozicija(scena.pozicije);
         }
     }   // kraj naSlobodnomCrtaj
-
 
     this.ispisiPoruku = function(){
         var poruka = this.poruka || "Jaoj";
@@ -74,7 +64,6 @@ function Karakter(ime, slika_src, scena, vreme){
         scena.sadrzaj.strokeText(poruka, scena.misX+30, scena.misY, 250);
     }   // ispisiPoruku
 
-
     // varijable sceni!
     this.proveriPogodak = function (){
         if( (scena.misX > this.x && scena.misX < this.x + this.sirina) && (scena.misY > this.y && scena.misY < this.y + this.visina) ){
@@ -82,7 +71,6 @@ function Karakter(ime, slika_src, scena, vreme){
             scena.poeni++;
         }
     }   // proveriPogodak
-
 
     this.goreDole = function(){
         // lagano se spusta i dize
@@ -94,12 +82,10 @@ function Karakter(ime, slika_src, scena, vreme){
         this.spustam ? this.spusten-- : this.spusten++;
     }
 
-
     this.jelNapustio = function(scena){
         // da li je ovaj_lik jos u sceni
 		// ako je napustio, radi nesto, unistava ga, pamti
     }
-
 
     function _prilagodiSliku(ovaj_karakter, slika){
         // prilagodjava sliku standardnoj velicini slike

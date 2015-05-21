@@ -8,7 +8,7 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 	this.STANDARDNA_SIRINA = 1280;
 
 	this.karakteri = [];		// popunjava ga funkcija praviKaraktere
-    this.pozicije_prozora = []  // popunjava ga funkcija praviProzore
+    this.pozicije = []  // popunjava ga funkcija praviProzore
 	this.animacija_igre;		// identifikator animacije
     this.misX = 0;				// koordinate misha
     this.misY = 0;
@@ -52,7 +52,7 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 		
 		for(var i=0; i < this.karakteri.length; i++){
 			if(this.karakteri[i].igram){
-				this.karakteri[i].crtajSebe();
+				this.karakteri[i].crtaj();
 			}
 		}
 
@@ -65,26 +65,20 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
         var drugi_prozor = this.sirina / faktori[3];
         var treci_prozor = this.sirina / faktori[4];
 
-        this.pozicije_prozora = [
+        this.pozicije = [
             [prvi_prozor, gornji_red], [drugi_prozor, gornji_red], [treci_prozor, gornji_red],
             [prvi_prozor, donji_red], [drugi_prozor, donji_red], [treci_prozor, donji_red]
         ]
     }   // kraj praviProzore
-
-	this.slucajniProzor = function(){
-		var slucajna_pozicija = Math.floor(Math.random() * this.pozicije_prozora.length);
-		return [this.pozicije_prozora[slucajna_pozicija][0], this.pozicije_prozora[slucajna_pozicija][1]];
-	}	// kraj slucajniProzor
 	
 	this.dodeliPozicije = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igram){
-				karakteri[i].nadjiSlobodnuPoziciju(karakteri);
+				karakteri[i].nadjiSlobodnoMesto(karakteri);
 			}
 		}
 	} // kraj dodeliPozicije
 	
-
     this.pisiPoene = function(){
         this.sadrzaj.fillStyle="#000";
         this.sadrzaj.fillRect(20,80,180,100);
