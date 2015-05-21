@@ -61,8 +61,8 @@ function Karakter(ime, slika_src, scena, vreme, mish){
         var kuknjava = this.kuknjava || "Jaoj, to boli!";
         scena.sadrzaj.font = "30px Verdana";
         scena.sadrzaj.lineWidth = 1;
-        scena.sadrzaj.fillText(kuknjava, mish.misX+30, mish.misY, 250);           // poslednji argument je maksimalna shirina teksta
-        scena.sadrzaj.strokeText(kuknjava, mish.misX+30, mish.misY, 250);
+        scena.sadrzaj.fillText(kuknjava, mish.x+30, mish.y, 250);           // poslednji argument je maksimalna shirina teksta
+        scena.sadrzaj.strokeText(kuknjava, mish.x+30, mish.y, 250);
     }   // kraj kuka
 
 	this.bacaParole = function(){

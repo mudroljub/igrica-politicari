@@ -74,8 +74,8 @@ function azuriraj(){
 
 
 function naKlik(klik){
-	mish.misX = klik.clientX;   
-	mish.misY = klik.clientY;
+	mish.x = klik.clientX;   
+	mish.y = klik.clientY;
 	
 	if(uvod.ide){
 		uvod.ide = false;

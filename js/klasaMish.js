@@ -1,14 +1,15 @@
 
 function Mish(scena){
-	this.misX = 0;				// na naKlik primaju trenutnu koordinatu
-    this.misY = 0;
+	this.x = 0;				// na naKlik primaju trenutnu koordinatu
+    this.y = 0;
 	
     this.proveriPogodak = function(karakter) { 
-        if( (this.misX > karakter.x && this.misX < karakter.x + karakter.sirina) && (this.misY > karakter.y && this.misY < karakter.y + karakter.visina) ){ 
+		var mishNaKarakteru = (this.x > karakter.x && this.x < karakter.x + karakter.sirina) && (this.y > karakter.y && this.y < karakter.y + karakter.visina)
+        if(mishNaKarakteru){ 
 			karakter.vicem = true;
             scena.poeni++;
         }
-    }   // proveriPogodak
+    }   // kraj proveriPogodak
 
 	
 }	// kraj Mish
