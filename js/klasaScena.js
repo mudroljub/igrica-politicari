@@ -10,8 +10,6 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 	this.karakteri = [];		// popunjava ga funkcija praviKaraktere
     this.pozicije = []  // popunjava ga funkcija praviProzore
 	this.animacija_igre;		// identifikator animacije
-    this.misX = 0;				// koordinate misha
-    this.misY = 0;
 	this.poeni = 0;
 
 	this.platno = _postaviPlatno(naziv_platna, ova_scena);
@@ -38,14 +36,7 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 		}	// kraj for
 	}	// kraj ucitajSlike
 
-    // uzima niz likova, pretvara ih u karaktere i ređa u niz karaktera
-	this.praviKaraktere = function(likovi){
-		for (var ovaj_lik in likovi){
-			window[ovaj_lik] = new Karakter(ovaj_lik, likovi[ovaj_lik], this, vreme);
-			this.karakteri.push(window[ovaj_lik]);
-		}   // kraj for
-	}   // kraj praviKaraktere()
-
+	
 	// iscrtava pozadinu i aktivne karaktere
 	this.crtajSve = function(){
 		this.sadrzaj.drawImage(this.pozadina, 0, 0, this.sirina, this.pozadina.nova_visina);
@@ -78,7 +69,7 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 			}
 		}
 	} // kraj dodeliPozicije
-	
+
     this.pisiPoene = function(){
         this.sadrzaj.fillStyle="#000";
         this.sadrzaj.fillRect(20,80,180,100);
@@ -92,7 +83,7 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 	this.pisiPoruke = function(){
 		for(var i=0; i < this.karakteri.length; i++){
 			if(this.karakteri[i].igram && this.karakteri[i].vicem){
-				this.karakteri[i].ispisiPoruku();
+				this.karakteri[i].kuka();
 			}
 		}
 	}	// kraj pisiPoruke

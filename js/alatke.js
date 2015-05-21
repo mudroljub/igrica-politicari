@@ -26,3 +26,9 @@ function kazi(bilo_sta){
     console.log(bilo_sta);
 }
 
+// napraviti logiku za proveru koja uzima varijablu 
+// i kaze njeno ime u struni + vrednost
+
+function proveri(varijabla){
+    console.log(varijabla);
+}

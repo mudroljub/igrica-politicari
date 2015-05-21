@@ -1,5 +1,7 @@
+// izdojiti klasu Politicar iz Karaktera
+// specificnost bacaParole
 
-function Karakter(ime, slika_src, scena, vreme){
+function Karakter(ime, slika_src, scena, vreme, mish){
     this.ime = ime.VelikoSlovo();
 	this.slika = new Image();
     this.slika.src = slika_src;
@@ -48,7 +50,6 @@ function Karakter(ime, slika_src, scena, vreme){
 		return sudari;
     }   // kraj proveriSveSudare
 
-    /* uzima slucajnu poziciju, ako je zauzeta, uporno trazi slobodnu */
     this.nadjiSlobodnoMesto = function (karakteri) {
         this.slucajnaPozicija(scena.pozicije);
         while ( this.proveriSveSudare(karakteri) ) {
@@ -56,21 +57,19 @@ function Karakter(ime, slika_src, scena, vreme){
         }
     }   // kraj naSlobodnomCrtaj
 
-    this.ispisiPoruku = function(){
-        var poruka = this.poruka || "Jaoj";
+    this.kuka = function(){
+        var kuknjava = this.kuknjava || "Jaoj, to boli!";
         scena.sadrzaj.font = "30px Verdana";
         scena.sadrzaj.lineWidth = 1;
-        scena.sadrzaj.fillText(poruka, scena.misX+30, scena.misY, 250);           // poslednji argument je maksimalna shirina teksta
-        scena.sadrzaj.strokeText(poruka, scena.misX+30, scena.misY, 250);
-    }   // ispisiPoruku
+        scena.sadrzaj.fillText(kuknjava, mish.misX+30, mish.misY, 250);           // poslednji argument je maksimalna shirina teksta
+        scena.sadrzaj.strokeText(kuknjava, mish.misX+30, mish.misY, 250);
+    }   // kraj kuka
 
-    // varijable sceni!
-    this.proveriPogodak = function (){
-        if( (scena.misX > this.x && scena.misX < this.x + this.sirina) && (scena.misY > this.y && scena.misY < this.y + this.visina) ){
-            this.vicem = true;
-            scena.poeni++;
-        }
-    }   // proveriPogodak
+	this.bacaParole = function(){
+        var parola = this.parola || "Mi branimo srpski narod!";
+		// bacaParole koje ti skidaju energiju
+    }   // kraj bacaParole
+
 
     this.goreDole = function(){
         // lagano se spusta i dize

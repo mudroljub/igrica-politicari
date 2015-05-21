@@ -10,6 +10,8 @@
 // uvodna animacija uvecavanje skupstina
 
     PROBLEMI:
+// deo sekunde su u igri, a nisu nacrtani, dodati varijablu nacrtani radi provere
+// klikom pogadjam i one kojih nema	
 // klikom detektuje karaktera i kad nije nacrtan. dodati uslov if nacrtan. 
 // pozadina se crta prilagodjeno, a delove crta neprilagodjeno
 // resenje: napraviti jedinstveno prilagodjavanje
@@ -28,20 +30,21 @@ var likovi = { // nazivi bitni, od njih pravi objekte!
 var postavke = new Postavke();      				// racuna pozicije prozora
 var vreme = new Vreme(30);          				// prosledjuje vreme igre
 var scena = new Scena('platno', 'slike/skupstina2.png', vreme);
+var mish = new Mish(scena); 
 var uvod = new Uvod(scena);
 
 scena.ucitajSlike(likovi, uvod.pusti);
-$("#platno").addEventListener('click', reagujNaKlik);
+$("#platno").addEventListener('click', naKlik);
 
 
 /*************** GLAVNE FUNKCIJE ***************/
 
 function postaviScenu(){
     scena.praviProzore(postavke.ose_prozora);
-    scena.praviKaraktere(likovi);   	// pravi objekte od niza likova
-    dacic.poruka = "Jaoj";						// dodaje jedinstvene poruke
-    vulin.poruka = "To boli!";
-    toma.poruka = "Evropa nema alternativu!";
+    praviKaraktere(likovi);   	// pravi objekte od niza likova
+    dacic.kuknjava = "Jaoj";						// dodaje jedinstvene poruke
+    vulin.kuknjava = "To boli!";
+    toma.kuknjava = "Evropa nema alternativu!";
 	scena.animacija_igre = requestAnimationFrame(azuriraj); // krace igra
 }
 
@@ -70,9 +73,9 @@ function azuriraj(){
 }
 
 
-function reagujNaKlik(event){
-	scena.misX = event.clientX;   
-	scena.misY = event.clientY;
+function naKlik(klik){
+	mish.misX = klik.clientX;   
+	mish.misY = klik.clientY;
 	
 	if(uvod.ide){
 		uvod.ide = false;
@@ -83,9 +86,18 @@ function reagujNaKlik(event){
 
 	if(scena.igranje){
 		for(var i=0; i < scena.karakteri.length; i++){
-			scena.karakteri[i].proveriPogodak();
-		 }
+			// ako je karakter u igri
+			if(scena.karakteri[i].igram) {
+				mish.proveriPogodak(scena.karakteri[i]);
+			}
+		}
 	}	// kraj ako igranje
-	
-}   // kraj reagujNaKlik
+}   // kraj naKlik
 
+
+praviKaraktere = function(likovi){
+	for (var lik in likovi){
+		window[lik] = new Karakter(lik, likovi[lik], scena, vreme, mish);
+		scena.karakteri.push(window[lik]);
+	}   // kraj for
+}   // kraj praviKaraktere()
