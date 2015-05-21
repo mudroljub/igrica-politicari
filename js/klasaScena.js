@@ -44,9 +44,9 @@ function Scena(naziv_platna, izvor_pozadine) {
 	}	// kraj ucitajSlike
 
     // uzima niz likova, pretvara ih u karaktere i ređa u niz karaktera
-	this.praviLikove = function(likovi_za_ucitavanje){
-		for (var ovaj_lik in likovi_za_ucitavanje){
-			window[ovaj_lik] = new Karakter(likovi_za_ucitavanje[ovaj_lik], this);
+	this.praviLikove = function(likovi_za_ucitati){
+		for (var ovaj_lik in likovi_za_ucitati){
+			window[ovaj_lik] = new Karakter(ovaj_lik, likovi_za_ucitati[ovaj_lik], this);
 			this.likovi.push(window[ovaj_lik]);
 		}   // kraj for
 	}   // kraj praviLikove()

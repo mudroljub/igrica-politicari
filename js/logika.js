@@ -16,7 +16,7 @@
 // na manjim ekranima prilagoditi slova (ide_uvod i kraj)
 ********************************************************************/
 
-var likovi_za_ucitavanje = { // nazivi bitni, od njih pravi objekte
+var likovi_za_ucitati = { // nazivi bitni, od njih pravi objekte
     vulin: 'slike/vulin.png',
     toma: 'slike/toma.png',
     dacic: 'slike/dacic.png'
@@ -26,7 +26,7 @@ var likovi_za_ucitavanje = { // nazivi bitni, od njih pravi objekte
 
 var postavke = new Postavke();      // prima podrazumevana podešavanja igre
 var scena = new Scena('platno', 'slike/skupstina2.png');
-scena.ucitajSlike(likovi_za_ucitavanje, scena.pustiUvod);
+scena.ucitajSlike(likovi_za_ucitati, scena.pustiUvod);
 $("#platno").addEventListener('click', scena.reagujNaKlik);
 
 
@@ -34,7 +34,7 @@ $("#platno").addEventListener('click', scena.reagujNaKlik);
 
 function postaviScenu(){
     scena.praviProzore(postavke.ose_prozora);
-    scena.praviLikove(likovi_za_ucitavanje);   	// pravi objekte od niza likova
+    scena.praviLikove(likovi_za_ucitati);   	// pravi objekte od niza likova
     dacic.poruka = "Jaoj";						// dodaje jedinstvene poruke
     vulin.poruka = "To boli!";
     toma.poruka = "Evropa nema alternativu!";

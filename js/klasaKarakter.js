@@ -1,5 +1,6 @@
 
-function Karakter(slika_src, scena){
+function Karakter(ime, slika_src, scena){
+    this.ime = ime.prvoSlovo();
     this.scena = scena;
     this.sadrzaj = scena.sadrzaj;
 	this.slika = new Image();
