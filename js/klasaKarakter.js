@@ -7,7 +7,7 @@ function Karakter(ime, slika_src, scena, vreme){
     this.slika.src = slika_src;
 
     this.STANDARDNA_VISINA = 118;
-    _prilagodiSliku(this, this.slika);
+    this.slika = _prilagodiSliku(this, this.slika);
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
 

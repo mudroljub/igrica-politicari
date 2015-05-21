@@ -17,7 +17,7 @@
 // na manjim ekranima prilagoditi slova (ide_uvod i kraj)
 ********************************************************************/
 
-var likovi_za_ucitati = { // nazivi bitni, od njih pravi objekte
+var likovi_za_igru = { // nazivi bitni, od njih pravi objekte!
     vulin: 'slike/vulin.png',
     toma: 'slike/toma.png',
     dacic: 'slike/dacic.png'
@@ -25,10 +25,10 @@ var likovi_za_ucitati = { // nazivi bitni, od njih pravi objekte
 
 /*************** LOGIKA IGRE ***************/
 
-var postavke = new Postavke();      // osnovna podešavanja scene
+var postavke = new Postavke();      // racuna pozicije prozora
 var vreme = new Vreme(30);          // prosledjuje vreme igre
 var scena = new Scena('platno', 'slike/skupstina2.png', vreme);
-scena.ucitajSlike(likovi_za_ucitati, scena.pustiUvod);
+scena.ucitajSlike(likovi_za_igru, scena.pustiUvod);
 
 $("#platno").addEventListener('click', scena.reagujNaKlik);
 
@@ -37,7 +37,7 @@ $("#platno").addEventListener('click', scena.reagujNaKlik);
 
 function postaviScenu(){
     scena.praviProzore(postavke.ose_prozora);
-    scena.praviLikove(likovi_za_ucitati);   	// pravi objekte od niza likova
+    scena.praviLikove(likovi_za_igru);   	// pravi objekte od niza likova
     dacic.poruka = "Jaoj";						// dodaje jedinstvene poruke
     vulin.poruka = "To boli!";
     toma.poruka = "Evropa nema alternativu!";
@@ -59,7 +59,7 @@ function azuriraj(){
 		// ovo izvrsava svake sekunde
         if(vreme.prethodna_sekunda != vreme.ovaSekunda()) {
             scena.brisiPoruke();
-            scena.dodeliPozicije(scena.likovi);
+            scena.dodeliPozicije(scena.likovi_u_igri);
             vreme.preostalo--;
             vreme.prethodna_sekunda = vreme.ovaSekunda();
         }	// kraj svaki sekund
