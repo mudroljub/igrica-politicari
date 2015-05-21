@@ -8,13 +8,13 @@ window.$$ = function(selector) {
     return document.querySelectorAll(selector);
 };
 
-Array.prototype.provrti = function(neka_funkcija){
-    for ( var i = 0; i < this.length; i++ ) {
-        neka_funkcija(this[i]);
+Array.prototype.redom = function(ulazna_funkcija){
+    for (var i = 0; i < this.length; i++) {
+        ulazna_funkcija(this[i]);
     }
 };
 
-String.prototype.prvoSlovo = function() {
+String.prototype.VelikoSlovo = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 

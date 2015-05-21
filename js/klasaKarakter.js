@@ -1,8 +1,6 @@
 
 function Karakter(ime, slika_src, scena, vreme){
-    this.ime = ime.prvoSlovo();
-    this.scena = scena;
-    this.sadrzaj = scena.sadrzaj;
+    this.ime = ime.VelikoSlovo();
 	this.slika = new Image();
     this.slika.src = slika_src;
 
@@ -33,7 +31,7 @@ function Karakter(ime, slika_src, scena, vreme){
 
 
     this.crtajSebe = function() {
-        this.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
+        scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
     }   // kraj crtajSebe
 
 

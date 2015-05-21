@@ -4,19 +4,15 @@
 
 function Scena(naziv_platna, izvor_pozadine, vreme) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
-    this.ide_uvod = true;       // podrazumevano krece ide_uvod
     this.igranje = false;
 	this.STANDARDNA_SIRINA = 1280;
 
-	this.likovi_u_igri = [];			// popunjava ga funkcija praviLikove
+	this.karakteri = [];		// popunjava ga funkcija praviKaraktere
     this.pozicije_prozora = []  // popunjava ga funkcija praviProzore
-	this.uvodna_animacija;		// prazne animacije
-	this.animacija_igre;	
+	this.animacija_igre;		// identifikator animacije
     this.misX = 0;				// koordinate misha
     this.misY = 0;
 	this.poeni = 0;
-	this.krecu_slova_x = -100;	// podrazumevano
-	this.krecu_slova_y = 200;
 
 	this.platno = _postaviPlatno(naziv_platna, ova_scena);
 	this.sadrzaj = _postaviSadrzaj(this.platno);
@@ -43,37 +39,23 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 	}	// kraj ucitajSlike
 
     // uzima niz likova, pretvara ih u karaktere i ređa u niz karaktera
-	this.praviLikove = function(likovi_za_igru){
-		for (var ovaj_lik in likovi_za_igru){
-			window[ovaj_lik] = new Karakter(ovaj_lik, likovi_za_igru[ovaj_lik], this, vreme);
-			this.likovi_u_igri.push(window[ovaj_lik]);
+	this.praviKaraktere = function(likovi){
+		for (var ovaj_lik in likovi){
+			window[ovaj_lik] = new Karakter(ovaj_lik, likovi[ovaj_lik], this, vreme);
+			this.karakteri.push(window[ovaj_lik]);
 		}   // kraj for
-	}   // kraj praviLikove()
+	}   // kraj praviKaraktere()
 
-	this.pustiUvod = function(){            // this je window
-		ova_scena.sadrzaj.fillStyle = "black";
-		ova_scena.sadrzaj.fillRect(0, 0, ova_scena.sirina, ova_scena.visina);
-		ova_scena.sadrzaj.fillStyle="#fff";
-		ova_scena.sadrzaj.font = "48px Verdana";
-		ova_scena.sadrzaj.fillText("Spremi se za obracun!", ova_scena.krecu_slova_x += 5, ova_scena.krecu_slova_y);
-		if(ova_scena.krecu_slova_x > innerWidth-100) {
-			ova_scena.krecu_slova_x = -100;
-			ova_scena.krecu_slova_y += 100;
-		}
-		if(ova_scena.krecu_slova_y > innerHeight - 100) {
-			ova_scena.krecu_slova_y = 200;
-		}
-		ova_scena.uvodna_animacija = window.requestAnimationFrame(ova_scena.pustiUvod);
-	}	// kraj pustiUvod
-	
 	// iscrtava pozadinu i aktivne karaktere
 	this.crtajSve = function(){
 		this.sadrzaj.drawImage(this.pozadina, 0, 0, this.sirina, this.pozadina.nova_visina);
-		for(var i=0; i < this.likovi_u_igri.length; i++){
-			if(this.likovi_u_igri[i].igram){
-				this.likovi_u_igri[i].crtajSebe();
+		
+		for(var i=0; i < this.karakteri.length; i++){
+			if(this.karakteri[i].igram){
+				this.karakteri[i].crtajSebe();
 			}
 		}
+
 	} // kraj crtajSve
 
     this.praviProzore = function(faktori){
@@ -94,33 +76,14 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 		return [this.pozicije_prozora[slucajna_pozicija][0], this.pozicije_prozora[slucajna_pozicija][1]];
 	}	// kraj slucajniProzor
 	
-	this.dodeliPozicije = function(likovi_u_igri){
-		for(var i=0; i < likovi_u_igri.length; i++){
-			if(likovi_u_igri[i].igram){
-				likovi_u_igri[i].nadjiSlobodnuPoziciju(likovi_u_igri);
+	this.dodeliPozicije = function(karakteri){
+		for(var i=0; i < karakteri.length; i++){
+			if(karakteri[i].igram){
+				karakteri[i].nadjiSlobodnuPoziciju(karakteri);
 			}
 		}
 	} // kraj dodeliPozicije
 	
-	// this je unutar funkcije platno !
-    this.reagujNaKlik = function(event){
-        ova_scena.misX = event.clientX;   
-        ova_scena.misY = event.clientY;
-
-        if(ova_scena.ide_uvod){
-            ova_scena.ide_uvod = false;
-            window.cancelAnimationFrame(ova_scena.uvodna_animacija);
-            postaviScenu();
-            ova_scena.igranje = true;
-        }	// kraj if ide_uvod
-
-        if(ova_scena.igranje){
-            for(var i=0; i < ova_scena.likovi_u_igri.length; i++){
-                ova_scena.likovi_u_igri[i].proveriPogodak();
-             }
-        }	// kraj if igranje
-		
-    }   // kraj reagujNaKlik
 
     this.pisiPoene = function(){
         this.sadrzaj.fillStyle="#000";
@@ -133,16 +96,16 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
     }	// kraj pisiPoene
 
 	this.pisiPoruke = function(){
-		for(var i=0; i < this.likovi_u_igri.length; i++){
-			if(this.likovi_u_igri[i].igram && this.likovi_u_igri[i].vicem){
-				this.likovi_u_igri[i].ispisiPoruku();
+		for(var i=0; i < this.karakteri.length; i++){
+			if(this.karakteri[i].igram && this.karakteri[i].vicem){
+				this.karakteri[i].ispisiPoruku();
 			}
 		}
 	}	// kraj pisiPoruke
 
 	this.brisiPoruke = function(){
-		for(var i=0; i < this.likovi_u_igri.length; i++){
-			this.likovi_u_igri[i].vicem = false;
+		for(var i=0; i < this.karakteri.length; i++){
+			this.karakteri[i].vicem = false;
 		}
 	}	// kraj brisiPoruke
 

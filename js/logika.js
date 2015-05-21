@@ -14,10 +14,10 @@
 // pozadina se crta prilagodjeno, a delove crta neprilagodjeno
 // resenje: napraviti jedinstveno prilagodjavanje
 // kad je presirok ekran, sece pozadinu po visini !
-// na manjim ekranima prilagoditi slova (ide_uvod i kraj)
+// na manjim ekranima prilagoditi slova (ide i kraj)
 ********************************************************************/
 
-var likovi_za_igru = { // nazivi bitni, od njih pravi objekte!
+var likovi = { // nazivi bitni, od njih pravi objekte!
     vulin: 'slike/vulin.png',
     toma: 'slike/toma.png',
     dacic: 'slike/dacic.png'
@@ -25,21 +25,20 @@ var likovi_za_igru = { // nazivi bitni, od njih pravi objekte!
 
 /*************** LOGIKA IGRE ***************/
 
-var postavke = new Postavke();      // racuna pozicije prozora
-var vreme = new Vreme(30);          // prosledjuje vreme igre
+var postavke = new Postavke();      				// racuna pozicije prozora
+var vreme = new Vreme(30);          				// prosledjuje vreme igre
 var scena = new Scena('platno', 'slike/skupstina2.png', vreme);
 var uvod = new Uvod(scena);
 
-scena.ucitajSlike(likovi_za_igru, uvod.pustiUvod);
-
-$("#platno").addEventListener('click', scena.reagujNaKlik);
+scena.ucitajSlike(likovi, uvod.pusti);
+$("#platno").addEventListener('click', reagujNaKlik);
 
 
 /*************** GLAVNE FUNKCIJE ***************/
 
 function postaviScenu(){
     scena.praviProzore(postavke.ose_prozora);
-    scena.praviLikove(likovi_za_igru);   	// pravi objekte od niza likova
+    scena.praviKaraktere(likovi);   	// pravi objekte od niza likova
     dacic.poruka = "Jaoj";						// dodaje jedinstvene poruke
     vulin.poruka = "To boli!";
     toma.poruka = "Evropa nema alternativu!";
@@ -61,7 +60,7 @@ function azuriraj(){
 		// ovo izvrsava svake sekunde
         if(vreme.prethodna_sekunda != vreme.ovaSekunda()) {
             scena.brisiPoruke();
-            scena.dodeliPozicije(scena.likovi_u_igri);
+            scena.dodeliPozicije(scena.karakteri);
             vreme.preostalo--;
             vreme.prethodna_sekunda = vreme.ovaSekunda();
         }	// kraj svaki sekund
@@ -70,4 +69,23 @@ function azuriraj(){
     }	// kraj svaki frejm
 }
 
-// mozda ovde prebaciti reagujNaKlik
+
+function reagujNaKlik(event){
+	scena.misX = event.clientX;   
+	scena.misY = event.clientY;
+	
+	if(uvod.ide){
+		uvod.ide = false;
+		window.cancelAnimationFrame(uvod.animacija);
+		postaviScenu();
+		scena.igranje = true;
+	}	// kraj ako ide
+
+	if(scena.igranje){
+		for(var i=0; i < scena.karakteri.length; i++){
+			scena.karakteri[i].proveriPogodak();
+		 }
+	}	// kraj ako igranje
+	
+}   // kraj reagujNaKlik
+
