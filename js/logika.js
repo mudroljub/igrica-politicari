@@ -28,7 +28,9 @@ var likovi_za_igru = { // nazivi bitni, od njih pravi objekte!
 var postavke = new Postavke();      // racuna pozicije prozora
 var vreme = new Vreme(30);          // prosledjuje vreme igre
 var scena = new Scena('platno', 'slike/skupstina2.png', vreme);
-scena.ucitajSlike(likovi_za_igru, scena.pustiUvod);
+var uvod = new Uvod(scena);
+
+scena.ucitajSlike(likovi_za_igru, uvod.pustiUvod);
 
 $("#platno").addEventListener('click', scena.reagujNaKlik);
 
