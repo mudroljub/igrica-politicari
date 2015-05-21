@@ -26,4 +26,3 @@ function kazi(bilo_sta){
     console.log(bilo_sta);
 }
 
-

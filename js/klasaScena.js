@@ -1,11 +1,10 @@
 
 // primiti sirinu i visinu scene od prozora, nadalje koristiti to
 
-function Scena(naziv_platna, izvor_pozadine) {
+function Scena(naziv_platna, izvor_pozadine, vreme) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
     this.ide_uvod = true;       // podrazumevano krece ide_uvod
     this.igranje = false;
-	this.vreme_igre = 30;		// podrazumevano vreme
 	this.prethodna_sekunda = 0;
 	this.STANDARDNA_SIRINA = 1280;
 
@@ -46,7 +45,7 @@ function Scena(naziv_platna, izvor_pozadine) {
     // uzima niz likova, pretvara ih u karaktere i ređa u niz karaktera
 	this.praviLikove = function(likovi_za_ucitati){
 		for (var ovaj_lik in likovi_za_ucitati){
-			window[ovaj_lik] = new Karakter(ovaj_lik, likovi_za_ucitati[ovaj_lik], this);
+			window[ovaj_lik] = new Karakter(ovaj_lik, likovi_za_ucitati[ovaj_lik], this, vreme);
 			this.likovi.push(window[ovaj_lik]);
 		}   // kraj for
 	}   // kraj praviLikove()
@@ -129,7 +128,7 @@ function Scena(naziv_platna, izvor_pozadine) {
         this.sadrzaj.fillStyle="#FFF";
         this.sadrzaj.font = "24px Verdana";
         this.sadrzaj.fillText("Poeni: " + this.poeni, 30, 120);
-        this.sadrzaj.fillText("Vreme: " + this.vreme_igre, 30, 160);        
+        this.sadrzaj.fillText("Vreme: " + vreme.preostalo, 30, 160);
     }	// kraj pisiPoene
 
 	this.pisiPoruke = function(){
@@ -147,7 +146,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 	}	// kraj prestaniPoruke
 
 	this.proveriKraj = function(){
-		if(this.vreme_igre < 1) {
+		if(vreme.preostalo < 1) {
 			window.cancelAnimationFrame(this.animacija_igre);
 			this.sadrzaj.fillRect(window.innerWidth/2 - window.innerWidth/4, window.innerHeight/2 - window.innerHeight/4, window.innerWidth/2, window.innerHeight/2);
 			this.sadrzaj.fillStyle="#000";

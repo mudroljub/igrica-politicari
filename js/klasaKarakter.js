@@ -1,5 +1,5 @@
 
-function Karakter(ime, slika_src, scena){
+function Karakter(ime, slika_src, scena, vreme){
     this.ime = ime.prvoSlovo();
     this.scena = scena;
     this.sadrzaj = scena.sadrzaj;
@@ -19,8 +19,8 @@ function Karakter(ime, slika_src, scena){
 
 	/*************** FUNKCIJE ***************/
 
-	this.igraj = function(vreme_ulaska) {
-		if(scena.vreme_igre <= vreme_ulaska) {
+	this.igraj = function(trenutak_ulaska) {
+		if(vreme.preostalo <= trenutak_ulaska) {
 		this.igram = true;
 		}
 	}	// kraj igraj
@@ -29,7 +29,7 @@ function Karakter(ime, slika_src, scena){
     this.slucajnaPozicija = function() {
         this.x = scena.slucajniProzor()[0];
         this.y = scena.slucajniProzor()[1];
-    }   // slucajnaPozicija
+    }   // kraj slucajnaPozicija
 
 
     this.goreDole = function(){
