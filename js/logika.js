@@ -28,11 +28,11 @@ var postavke = new Postavke();      				// pretvoriti u objekat
 
 var vreme = new Vreme(30);          				// prosledjuje vreme igre
 var scena = new Scena('platno', 'slike/skupstina2.png', vreme);
-// ucitavac
+var ucitavac = new Ucitavac();
 var mish = new Mish(scena); 
 var uvod = new Uvod(scena);
 
-ucitajSlike(likovi, uvod.pusti);
+ucitavac.ucitajSlike(likovi, uvod.pusti);
 $("#platno").addEventListener('click', uradiNaKlik);
 
 
@@ -100,19 +100,3 @@ function praviKaraktere(likovi){
 		scena.karakteri.push(window[lik]);
 	}   // kraj for
 }   // kraj praviKaraktere()
-
-
-function ucitajSlike(slike, povratnoPustaUvod){		
-	var brojSlika = Object.keys(slike).length;
-	var ucitaneSlike = 0;
-	for (var kljuc in slike) {
-		var ova_slika = new Image(); 
-		ova_slika.onload = function kadSveUcita() {
-			ucitaneSlike++;
-			if (ucitaneSlike >= brojSlika) {
-				povratnoPustaUvod();
-			}
-		};  // kraj kadSveUcita()
-		ova_slika.src = slike[kljuc];
-	}	// kraj for
-}	// kraj ucitajSlike
