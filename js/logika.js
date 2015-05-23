@@ -85,7 +85,6 @@ function reagujNaKlik(klik){
 
 	if(scena.igranje){
 		for(var i=0; i < scena.karakteri.length; i++){
-			// ako je karakter u igri
 			if(scena.karakteri[i].igranje) {
 				mish.proveriPogodak(scena, scena.karakteri[i]);
 			}
