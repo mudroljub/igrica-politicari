@@ -16,7 +16,7 @@
 // kad je presirok ekran, sece pozadinu po visini !
 ********************************************************************/
 
-var likovi = { // nazivi bitni, od njih pravi objekte!
+var likovi = {      // nazivi bitni, od njih pravi objekte!
     vulin: 'slike/vulin.png',
     toma: 'slike/toma.png',
     dacic: 'slike/dacic.png'
@@ -33,14 +33,14 @@ var mish = new Mish(scena);
 var uvod = new Uvod(scena);
 
 ucitavac.ucitajSlike(likovi, uvod.pusti);
-$("#platno").addEventListener('click', uradiNaKlik);
+$("#platno").addEventListener('click', reagujNaKlik);
 
 
 /*************** GLAVNE FUNKCIJE ***************/
 
 function postaviScenu(){
     scena.praviProzore(postavke.ose_prozora);
-    praviKaraktere(likovi);   	// pravi objekte od niza likova
+    ucitavac.praviKaraktere(likovi, scena, vreme, mish);   	// pravi objekte od niza likova
     dacic.kuknjava = "Jaoj";						// dodaje jedinstvene poruke
     vulin.kuknjava = "To boli!";
     toma.kuknjava = "Evropa nema alternativu!";
@@ -72,7 +72,7 @@ function azuriraj(){
 }
 
 
-function uradiNaKlik(klik){
+function reagujNaKlik(klik){
 	mish.x = klik.clientX;   
 	mish.y = klik.clientY;
 	
@@ -91,12 +91,5 @@ function uradiNaKlik(klik){
 			}
 		}
 	}	// kraj ako igranje
-}   // kraj uradiNaKlik
+}   // kraj reagujNaKlik
 
-
-function praviKaraktere(likovi){
-	for (var lik in likovi){
-		window[lik] = new Karakter(lik, likovi[lik], scena, vreme, mish);
-		scena.karakteri.push(window[lik]);
-	}   // kraj for
-}   // kraj praviKaraktere()

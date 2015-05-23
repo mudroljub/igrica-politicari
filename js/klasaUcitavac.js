@@ -17,6 +17,13 @@ function Ucitavac() {
         }	// kraj for
     }	// kraj ucitajSlike
 
+    this.praviKaraktere = function (likovi, scena, vreme, mish){
+        for (var lik in likovi){
+            window[lik] = new Karakter(lik, likovi[lik], scena, vreme, mish);
+            scena.karakteri.push(window[lik]);
+        }   // kraj for
+    }   // kraj praviKaraktere()
+
 
 }   // kraj Ucitavac
 
