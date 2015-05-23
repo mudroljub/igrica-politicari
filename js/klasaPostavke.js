@@ -1,3 +1,4 @@
+// ovo ne treba da bude klasa, samo objekat
 
 function Postavke(){
 	

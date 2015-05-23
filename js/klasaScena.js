@@ -81,13 +81,17 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 	this.proveriKraj = function(){
 		if(vreme.preostalo < 1) {
 			window.cancelAnimationFrame(this.animacija_igre);
+			this.igranje = false;
+			this.odjavnaSlova();
+		}	
+	}	// kraj proveriKraj
+
+	this.odjavnaSlova = function(){
 			this.sadrzaj.fillRect(this.sirina/2 - this.sirina/4, this.visina/2 - this.visina/4, this.sirina/2, this.visina/2);
 			this.sadrzaj.fillStyle="#000";
 			this.sadrzaj.font = "48px Verdana";
-			this.sadrzaj.fillText("Igra je završena!", this.sirina/2 - this.sirina/4 + 100, this.visina/2 - this.visina/4 + 100);
-			this.igranje = false;
-		}
-	}	// kraj proveriKraj
+			this.sadrzaj.fillText("Igra je završena!", this.sirina/2 - this.sirina/4 + 100, this.visina/2 - this.visina/4 + 100);		
+	}	// kraj odjavnaSlova
 
     this.mrdaPozadinu = function(){
 		// kad imamo vecu pozadinu da se pomera
