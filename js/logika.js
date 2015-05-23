@@ -22,11 +22,13 @@ var likovi = { // nazivi bitni, od njih pravi objekte!
     dacic: 'slike/dacic.png'
 }
 
+var postavke = new Postavke();      				// pretvoriti u objekat
+
 /*************** LOGIKA IGRE ***************/
 
-var postavke = new Postavke();      				// racuna pozicije prozora
 var vreme = new Vreme(30);          				// prosledjuje vreme igre
 var scena = new Scena('platno', 'slike/skupstina2.png', vreme);
+// ucitavac
 var mish = new Mish(scena); 
 var uvod = new Uvod(scena);
 
