@@ -2,7 +2,7 @@
 // primiti sirinu i visinu scene od window, nadalje koristiti to
 // prilagodiPozadinu, uzeti u obzir sire i tanje ekrane
 
-function Scena(naziv_platna, izvor_pozadine, vreme) {
+function Scena(naziv_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
     this.igranje = false;
 	this.STANDARDNA_SIRINA = 1280;
@@ -26,7 +26,7 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 		this.sadrzaj.drawImage(this.pozadina, 0, 0, this.sirina, this.pozadina.nova_visina);
 		
 		for(var i=0; i < this.karakteri.length; i++){
-			if(this.karakteri[i].igram){
+			if(this.karakteri[i].igranje){
 				this.karakteri[i].crtaj();
 			}
 		}
@@ -48,13 +48,13 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
 	
 	this.dodeliPozicije = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].igram){
+			if(karakteri[i].igranje){
 				karakteri[i].nadjiSlobodnoMesto(karakteri);
 			}
 		}
 	} // kraj dodeliPozicije
 
-    this.pisiPoene = function(){
+    this.pisiPoene = function(vreme){
         this.sadrzaj.fillStyle="#000";
         this.sadrzaj.fillRect(20,80,180,100);
         this.sadrzaj.stroke();
@@ -64,21 +64,21 @@ function Scena(naziv_platna, izvor_pozadine, vreme) {
         this.sadrzaj.fillText("Vreme: " + vreme.preostalo, 30, 160);
     }	// kraj pisiPoene
 
-	this.pisiPoruke = function(){
+	this.pisiPoruke = function(mish){
 		for(var i=0; i < this.karakteri.length; i++){
-			if(this.karakteri[i].igram && this.karakteri[i].vicem){
-				this.karakteri[i].kuka();
+			if(this.karakteri[i].igranje && this.karakteri[i].kukanje){
+				this.karakteri[i].kuka(mish);
 			}
 		}
 	}	// kraj pisiPoruke
 
 	this.brisiPoruke = function(){
 		for(var i=0; i < this.karakteri.length; i++){
-			this.karakteri[i].vicem = false;
+			this.karakteri[i].kukanje = false;
 		}
 	}	// kraj brisiPoruke
 
-	this.proveriKraj = function(){
+	this.proveriKraj = function(vreme){
 		if(vreme.preostalo < 1) {
 			window.cancelAnimationFrame(this.animacija_igre);
 			this.igranje = false;

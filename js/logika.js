@@ -27,9 +27,9 @@ var postavke = new Postavke();      				// pretvoriti u objekat
 /*************** LOGIKA IGRE ***************/
 
 var vreme = new Vreme(30);          				// prosledjuje vreme igre
-var scena = new Scena('platno', 'slike/skupstina2.png', vreme);
-var ucitavac = new Ucitavac();
-var mish = new Mish(scena); 
+var scena = new Scena('platno', 'slike/skupstina2.png');
+var ucitavac = new Ucitavac();                      // pravi karaktere
+var mish = new Mish();
 var uvod = new Uvod(scena);
 
 ucitavac.ucitajSlike(likovi, uvod.pusti);
@@ -55,9 +55,9 @@ function azuriraj(){
 		vulin.igraj(20);
 		toma.igraj(10);
         scena.crtajSve();
-        scena.pisiPoruke();
-        scena.pisiPoene();
-        scena.proveriKraj();
+        scena.pisiPoruke(mish);
+        scena.pisiPoene(vreme);
+        scena.proveriKraj(vreme);
 
 		// ovo izvrsava svake sekunde
         if(vreme.prethodna_sekunda != vreme.ovaSekunda()) {
@@ -86,10 +86,9 @@ function reagujNaKlik(klik){
 	if(scena.igranje){
 		for(var i=0; i < scena.karakteri.length; i++){
 			// ako je karakter u igri
-			if(scena.karakteri[i].igram) {
-				mish.proveriPogodak(scena.karakteri[i]);
+			if(scena.karakteri[i].igranje) {
+				mish.proveriPogodak(scena, scena.karakteri[i]);
 			}
 		}
 	}	// kraj ako igranje
 }   // kraj reagujNaKlik
-

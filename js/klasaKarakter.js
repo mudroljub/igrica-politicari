@@ -1,7 +1,7 @@
 // izdojiti klasu Politicar iz Karaktera
 // specificnost bacaParole
 
-function Karakter(ime, slika_src, scena, vreme, mish){
+function Karakter(ime, slika_src, scena, vreme){
     this.ime = ime.VelikoSlovo();
 	this.slika = new Image();
     this.slika.src = slika_src;
@@ -11,9 +11,9 @@ function Karakter(ime, slika_src, scena, vreme, mish){
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
 
-    this.igram = false;
-    this.vicem = false;
-    this.spustam = false;
+    this.igranje = false;
+    this.kukanje = false;
+    this.spustanje = false;
     this.spusten = 0;
 
 
@@ -21,7 +21,7 @@ function Karakter(ime, slika_src, scena, vreme, mish){
 
 	this.igraj = function(trenutak_ulaska) {
 		if(vreme.preostalo <= trenutak_ulaska) {
-		this.igram = true;
+		this.igranje = true;
 		}
 	}	// kraj igraj
 
@@ -57,7 +57,7 @@ function Karakter(ime, slika_src, scena, vreme, mish){
         }
     }   // kraj naSlobodnomCrtaj
 
-    this.kuka = function(){
+    this.kuka = function(mish){
         var kuknjava = this.kuknjava || "Jaoj, to boli!";
         scena.sadrzaj.font = "30px Verdana";
         scena.sadrzaj.lineWidth = 1;
@@ -73,11 +73,11 @@ function Karakter(ime, slika_src, scena, vreme, mish){
     this.goreDole = function(){
         // lagano se spusta i dize
         if(this.spusten >= 100) {
-            this.spustam = true;
+            this.spustanje = true;
         } else if (this.spusten <= 0) {
-            this.spustam = false;
+            this.spustanje = false;
         }
-        this.spustam ? this.spusten-- : this.spusten++;
+        this.spustanje ? this.spusten-- : this.spusten++;
     }
 
     this.jelNapustio = function(scena){
