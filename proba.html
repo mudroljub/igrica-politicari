@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proba</title>
+</head>
+<body>
+
+<script>
+
+var slike = {
+    pozadina: 'slike/skupstina2.png',
+    likovi: {      // nazivi bitni, od njih pravi objekte!
+        vulin: 'slike/vulin.png',
+        toma: 'slike/toma.png',
+        dacic: 'slike/dacic.png'
+    },
+    predmeti: {
+        paradajz: "slike/politicar.png",
+        jaje: "slike/politicar.png",
+        krpa: "slike/politicar.png"
+    }
+}
+
+
+var ucitajSlike = function(slike, povratnaRadnja){     // nakon učitavanja obično pušta uvod
+    var brojSlika = Object.keys(slike).length;
+    var ucitaneSlike = 0;
+
+    for (var kljuc in slike) {
+        var ova_slika = new Image();
+        ova_slika.onload = function kadSveUcita() {
+            ucitaneSlike++;
+            if (ucitaneSlike >= brojSlika) {
+                povratnaRadnja();
+            }
+        };  // kraj kadSveUcita()
+        ova_slika.src = slike[kljuc];
+    }	// kraj for
+
+}	// kraj ucitajSlike
+
+
+
+ucitajSlike(slike.likovi, console.log("Sve učitano."));
+
+
+</script>
+
+</body>
+</html>
