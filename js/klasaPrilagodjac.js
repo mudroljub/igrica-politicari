@@ -1,5 +1,0 @@
-
-function Prilagodjac() {
-
-
-} // kraj Prilagodjavac

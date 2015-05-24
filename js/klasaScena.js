@@ -2,7 +2,7 @@
 // primiti sirinu i visinu scene od window, nadalje koristiti to
 // prilagodiPozadinu, uzeti u obzir sire i tanje ekrane
 
-function Scena(naziv_platna, izvor_pozadine) {
+function Scena(id_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
     this.igranje = false;
 	this.STANDARDNA_SIRINA = 1280;
@@ -12,7 +12,7 @@ function Scena(naziv_platna, izvor_pozadine) {
 	this.animacija_igre;		// identifikator animacije
 	this.poeni = 0;
 
-	this.platno = _postaviPlatno(naziv_platna, ova_scena);
+	this.platno = _postaviPlatno(id_platna, ova_scena);
 	this.sadrzaj = _postaviSadrzaj(this.platno);
 	this.pozadina = _ucitajPozadinu(izvor_pozadine);		// dodati povratnu funkciju kao argument
 	this.sirina = this.platno.width;
@@ -95,8 +95,8 @@ function Scena(naziv_platna, izvor_pozadine) {
 		// kad imamo vecu pozadinu da se pomera
     }
 	
-	function _postaviPlatno(naziv_platna, ova_scena){
-		var platno = document.getElementById(naziv_platna);        // ako nema platna, da sam stvara
+	function _postaviPlatno(id_platna, ova_scena){
+		var platno = document.getElementById(id_platna);        // ako nema platna, da sam stvara
 		platno.width = window.innerWidth;
 		platno.height = window.innerHeight;
 		return platno;
@@ -112,14 +112,14 @@ function Scena(naziv_platna, izvor_pozadine) {
 	
 	function _ucitajPozadinu(izvor_pozadine){
 		var pozadina = new Image();
-		pozadina.onload = function povratno() {                                     // this je izvan scena
+		pozadina.onload = function kadUcita() {
 			ova_scena.pozadina = _prilagodiPozadinu(pozadina);
 		};
 		pozadina.src = izvor_pozadine;		
 	}
 	
 	function _prilagodiPozadinu(pozadina){
-			pozadina.nova_visina = (ova_scena.sirina / pozadina.width) * pozadina.height;  // this je unutra pozadina, prilagodjava visinu pozadine
+			pozadina.nova_visina = (ova_scena.sirina / pozadina.width) * pozadina.height;  // prilagodjava visinu pozadine
 			return pozadina;
 	}
 
