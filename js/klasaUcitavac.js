@@ -1,7 +1,8 @@
 
 function Ucitavac() {
 
-    
+    // da spoljnji loop vrti objekte unutar slika
+    // unutrašnji loop vrti slike unutar svakog podobjekta
     this.ucitajSlike = function(slike, povratnaRadnja){     // nakon učitavanja obično pušta uvod
         var brojSlika = Object.keys(slike).length;
         var ucitaneSlike = 0;
