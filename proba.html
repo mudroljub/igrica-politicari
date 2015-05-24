@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Proba</title>
+	<script src="js/alatke.js"></script>
 </head>
 <body>
 
@@ -23,26 +24,38 @@ var slike = {
 }
 
 
-var ucitajSlike = function(slike, povratnaRadnja){     // nakon učitavanja obično pušta uvod
-    var brojSlika = Object.keys(slike).length;
+var ucitajSlike = function(slike, povratnaRadnja){     // nakon učitavanja pušta uvod
+    var glavni_kljucevi = Object.keys(slike);
+	var broj_kljuceva = Object.keys(slike).length;
     var ucitaneSlike = 0;
 
-    for (var kljuc in slike) {
+	// pozadinu ucitati zasebno, ostalo u petlji
+	for(var i=1; i < broj_kljuceva; i++) {
+		
+		kazi(glavni_kljucevi[i])
+		
+	}
+
+    var kljucevi_likova = Object.keys(slike.likovi);
+	kazi(kljucevi_likova[0])
+	kazi(slike.likovi[kljucevi_likova[0]])
+	
+    for (var kljuc in slike.likovi) {
         var ova_slika = new Image();
         ova_slika.onload = function kadSveUcita() {
             ucitaneSlike++;
-            if (ucitaneSlike >= brojSlika) {
+            if (ucitaneSlike >= broj_kljuceva) {
                 povratnaRadnja();
             }
         };  // kraj kadSveUcita()
-        ova_slika.src = slike[kljuc];
+        ova_slika.src = slike.likovi[kljuc];
     }	// kraj for
 
 }	// kraj ucitajSlike
 
 
 
-ucitajSlike(slike.likovi, console.log("Sve učitano."));
+ucitajSlike(slike, function(){kazi("Sve učitano.")});
 
 
 </script>
