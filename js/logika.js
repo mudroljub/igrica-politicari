@@ -22,7 +22,6 @@ var likovi = {      // nazivi bitni, od njih pravi objekte!
     dacic: 'slike/dacic.png'
 }
 
-var postavke = new Postavke();      				// pretvoriti u objekat
 
 /*************** LOGIKA IGRE ***************/
 
@@ -39,7 +38,7 @@ $("#platno").addEventListener('click', reagujNaKlik);
 /*************** GLAVNE FUNKCIJE ***************/
 
 function postaviScenu(){
-    scena.praviProzore(postavke.ose_prozora);
+    scena.praviProzore(ose_prozora);
     ucitavac.praviKaraktere(likovi, scena, vreme, mish);   	// pravi objekte od niza likova
     dacic.kuknjava = "Jaoj";						// dodaje jedinstvene poruke
     vulin.kuknjava = "To boli!";
