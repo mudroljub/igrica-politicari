@@ -23,13 +23,11 @@ ucitajSlike(slike, function(){kazi("Sve učitano.")});
 
 
 /******	FUNKCIJE  *******/
-function ucitajSlike (slike, povratnaRadnja){   // povratno pušta uvod
+function ucitajSlike (slike, povratnoUvod){   // povratno pušta uvod
     var nazivi_grupa = Object.keys(slike);
 	var broj_grupa = Object.keys(slike).length;
 
-	sve_slike++;
-	// ucitajPozadinu(slike.pozadina, proveriUcitano)
-	ucitaneSlike++;
+	ucitajPozadinu(slike.pozadina, proveriUcitano)	// proveriUcitano
 	
 	for(var i=1; i < broj_grupa; i++) { 
 		var naziv_grupe = nazivi_grupa[i];
@@ -42,32 +40,33 @@ function ucitajSlike (slike, povratnaRadnja){   // povratno pušta uvod
 			var ova_slika = new Image()
 			ova_slika.onload = function kadUcitaSliku (){
 				ucitaneSlike++;
-				proveriUcitano(povratnaRadnja);
+				proveriUcitano(povratnoUvod);
 			} // kraj kadUcitaSliku
 			ova_slika.src = likovi[ime_lika]	
 		} // kraj for in
 	}	// kraj for < broj_grupa
 }	// kraj ucitajSlike
 
-function proveriUcitano(povratnaRadnja){
+function proveriUcitano(povratnoUvod){
+	kazi("sve_slike: " + sve_slike)
+	kazi("ucitaneSlike: " + ucitaneSlike)
 	if(ucitaneSlike >= sve_slike) {
-		kazi("ucitaneSlike: "+ucitaneSlike)
-		povratnaRadnja();
+		povratnoUvod();
 	}	
 }	// proveriUcitano
-				
-function ucitajPozadinu(izvor_pozadine, povratnaRadnja){
+
+function ucitajPozadinu(izvor_pozadine, jelSveUcitano){
 	sve_slike++;
 	var pozadina = new Image();
 	pozadina.onload = function kadUcita() {
 		ucitaneSlike++;
-		povratnaRadnja();
+		jelSveUcitano();
 	};
 	pozadina.src = izvor_pozadine;		
 }
 
-function jelSveUcitano(povratnaRadnja){	// povratno da pusti uvod
+function jelSveUcitano(povratnoUvod){		// povratno da pusti uvod
 	if(ucitaneSlike >= sve_slike) {
-		povratnaRadnja();
+		povratnoUvod();
 	}	
 }	// kraj jelSveUcitano

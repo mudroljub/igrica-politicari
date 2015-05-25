@@ -3,7 +3,7 @@ function Ucitavac() {
 
     // da spoljnji loop vrti objekte unutar slika
     // unutrašnji loop vrti slike unutar svakog podobjekta
-    this.ucitajSlike = function(slike, povratnaRadnja){     // nakon učitavanja obično pušta uvod
+    this.ucitajSlike = function(slike, povratnoUvod){     // nakon učitavanja obično pušta uvod
         var brojSlika = Object.keys(slike).length;
         var ucitaneSlike = 0;
 		
@@ -12,7 +12,7 @@ function Ucitavac() {
             ova_slika.onload = function kadSveUcita() {
                 ucitaneSlike++;
                 if (ucitaneSlike >= brojSlika) {
-                    povratnaRadnja();
+                    povratnoUvod();
                 }
             };  // kraj kadSveUcita()
             ova_slika.src = slike[kljuc];
