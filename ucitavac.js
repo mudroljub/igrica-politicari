@@ -1,5 +1,5 @@
 
-/******	VARIJABLE  *******/
+/******	PODACI  *******/
 var slike = {
     pozadina: 'slike/skupstina2.png',
     naziv_grupe: {      // nazivi bitni, od njih pravi objekte!

@@ -1,5 +1,4 @@
 
-// primiti sirinu i visinu scene od window, nadalje koristiti to
 // prilagodiPozadinu, uzeti u obzir sire i tanje ekrane
 
 function Scena(id_platna, izvor_pozadine) {
