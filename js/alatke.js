@@ -26,7 +26,7 @@ function kazi(bilo_sta){
     console.log(bilo_sta);
 }
 
-// radi samo za window objekt, napraviti prvo da proverava kom objektu pripada
+// radi samo za window objekt, napraviti jos da proverava kom objektu atribut pripada
 function otkri(sadrzaj){
     var ime_varijable;
     for (var naziv_objekta in window) {
@@ -34,3 +34,8 @@ function otkri(sadrzaj){
     }
     console.log(ime_varijable + ": " + sadrzaj)
 }   // kraj otkri
+
+
+function otkriObjekt(atribut_objekta) {
+    console.log(objekt);
+}
