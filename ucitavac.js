@@ -3,7 +3,7 @@
 // po nazivima pravi objekte, pozadina mora pozadina
 var slike = {
     pozadina: 'slike/skupstina2.png',
-    likovi: {      
+    ova_grupa_slika: {      
         vulin: 'slike/vulin.png',
         toma: 'slike/toma.png',
         dacic: 'slike/dacic.png'
@@ -31,18 +31,17 @@ function ucitajSlike (slike, povratnaRadnja){ 	// pustiUvod
 
 	for(var i=1; i < broj_grupa_slika; i++) { 
 		var grupe_slika = glavni_kljucevi[i];
-		var likovi = slike[grupe_slika];
-		var imena_likova = Object.keys(likovi);
-		var broj_likova = Object.keys(likovi).length;
-		sve_slike = sve_slike + broj_likova
-		
-		for(var ime_lika in likovi){
+		var ova_grupa_slika = slike[grupe_slika];
+		var broj_ovih_slika = Object.keys(ova_grupa_slika).length;
+		sve_slike += broj_ovih_slika
+
+		for(var ime_slike in ova_grupa_slika){
 			var ova_slika = new Image()
 			ova_slika.onload = function kadUcitaSliku (){
 				ucitaneSlike++;
 				proveriUcitano(povratnaRadnja);
 			} // kraj kadUcitaSliku
-			ova_slika.src = likovi[ime_lika]	
+			ova_slika.src = ova_grupa_slika[ime_slike]	
 		} // kraj for in
 	}	// kraj for 
 }	// kraj ucitajSlike
