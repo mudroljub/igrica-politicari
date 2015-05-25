@@ -1,8 +1,9 @@
 
 /******	PODACI  *******/
+// po nazivima pravi objekte, pozadina mora pozadina
 var slike = {
     pozadina: 'slike/skupstina2.png',
-    naziv_grupe: {      // nazivi bitni, od njih pravi objekte!
+    likovi: {      
         vulin: 'slike/vulin.png',
         toma: 'slike/toma.png',
         dacic: 'slike/dacic.png'
@@ -19,19 +20,18 @@ var ucitaneSlike = 0;
 
 
 /******	POZIVI *******/
-ucitajSlike(slike, function(){kazi("Sve učitano.")});
+ucitajSlike(slike, pustiUvod);
 
 
 /******	FUNKCIJE  *******/
-function ucitajSlike (slike, povratnoUvod){   // povratno pušta uvod
-    var nazivi_grupa = Object.keys(slike);
-	var broj_grupa = Object.keys(slike).length;
+function ucitajSlike (slike, povratnaRadnja){ 	// pustiUvod
+    var glavni_kljucevi = Object.keys(slike)
+	var broj_grupa_slika = Object.keys(slike).length
+	ucitajPozadinu(slike.pozadina, proveriUcitano) // zameniti varijablu indexom
 
-	ucitajPozadinu(slike.pozadina, proveriUcitano)	// proveriUcitano
-	
-	for(var i=1; i < broj_grupa; i++) { 
-		var naziv_grupe = nazivi_grupa[i];
-		var likovi = slike[naziv_grupe];
+	for(var i=1; i < broj_grupa_slika; i++) { 
+		var grupe_slika = glavni_kljucevi[i];
+		var likovi = slike[grupe_slika];
 		var imena_likova = Object.keys(likovi);
 		var broj_likova = Object.keys(likovi).length;
 		sve_slike = sve_slike + broj_likova
@@ -40,33 +40,30 @@ function ucitajSlike (slike, povratnoUvod){   // povratno pušta uvod
 			var ova_slika = new Image()
 			ova_slika.onload = function kadUcitaSliku (){
 				ucitaneSlike++;
-				proveriUcitano(povratnoUvod);
+				proveriUcitano(povratnaRadnja);
 			} // kraj kadUcitaSliku
 			ova_slika.src = likovi[ime_lika]	
 		} // kraj for in
-	}	// kraj for < broj_grupa
+	}	// kraj for 
 }	// kraj ucitajSlike
 
-function proveriUcitano(povratnoUvod){
-	kazi("sve_slike: " + sve_slike)
-	kazi("ucitaneSlike: " + ucitaneSlike)
-	if(ucitaneSlike >= sve_slike) {
-		povratnoUvod();
-	}	
-}	// proveriUcitano
-
-function ucitajPozadinu(izvor_pozadine, jelSveUcitano){
+function ucitajPozadinu(izvor_pozadine, proveriUcitano){
 	sve_slike++;
 	var pozadina = new Image();
 	pozadina.onload = function kadUcita() {
 		ucitaneSlike++;
-		jelSveUcitano();
+		proveriUcitano();
 	};
 	pozadina.src = izvor_pozadine;		
 }
 
-function jelSveUcitano(povratnoUvod){		// povratno da pusti uvod
+function proveriUcitano(povratnaRadnja){
+	kazi("ucitaneSlike: " + ucitaneSlike)
 	if(ucitaneSlike >= sve_slike) {
-		povratnoUvod();
+		povratnaRadnja();
 	}	
-}	// kraj jelSveUcitano
+}	// proveriUcitano
+
+function pustiUvod(){
+	kazi("Pusten uvod.")
+}
