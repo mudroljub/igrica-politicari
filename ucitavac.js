@@ -3,7 +3,7 @@
 // po nazivima pravi objekte, pozadina mora pozadina
 var slike = {
     pozadina: 'slike/skupstina2.png',
-    ova_grupa_slika: {      
+    ova_grupa: {      
         vulin: 'slike/vulin.png',
         toma: 'slike/toma.png',
         dacic: 'slike/dacic.png'
@@ -26,22 +26,22 @@ ucitajSlike(slike, pustiUvod);
 /******	FUNKCIJE  *******/
 function ucitajSlike (slike, povratnaRadnja){ 	// pustiUvod
     var glavni_kljucevi = Object.keys(slike)
-	var broj_grupa_slika = Object.keys(slike).length
+	var ukupno_grupa = Object.keys(slike).length
 	ucitajPozadinu(slike.pozadina, proveriUcitano) // zameniti varijablu indexom
 
-	for(var i=1; i < broj_grupa_slika; i++) { 
+	for(var i=1; i < ukupno_grupa; i++) { 
 		var grupe_slika = glavni_kljucevi[i];
-		var ova_grupa_slika = slike[grupe_slika];
-		var broj_ovih_slika = Object.keys(ova_grupa_slika).length;
-		sve_slike += broj_ovih_slika
+		var ova_grupa = slike[grupe_slika];
+		var slika_u_grupi = Object.keys(ova_grupa).length;
+		sve_slike += slika_u_grupi
 
-		for(var ime_slike in ova_grupa_slika){
+		for(var ime_slike in ova_grupa){
 			var ova_slika = new Image()
 			ova_slika.onload = function kadUcitaSliku (){
 				ucitaneSlike++;
 				proveriUcitano(povratnaRadnja);
 			} // kraj kadUcitaSliku
-			ova_slika.src = ova_grupa_slika[ime_slike]	
+			ova_slika.src = ova_grupa[ime_slike]	
 		} // kraj for in
 	}	// kraj for 
 }	// kraj ucitajSlike
