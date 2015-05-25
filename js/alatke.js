@@ -35,7 +35,6 @@ function otkri(sadrzaj){
     console.log(ime_varijable + ": " + sadrzaj)
 }   // kraj otkri
 
-
 function otkriObjekt(atribut_objekta) {
     console.log(objekt);
 }
