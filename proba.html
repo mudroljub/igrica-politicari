@@ -24,13 +24,17 @@ var slike = {
 }
 
 
+// provrteti kroz glavne kljuceve
+// potom kroz sve podobjekte po njihovim kljucevima
+// pozadinu ucitati zasebno, ostalo u petlji
+
 var ucitajSlike = function(slike, povratnaRadnja){     // nakon učitavanja pušta uvod
     var glavni_kljucevi = Object.keys(slike);
-	var broj_kljuceva = Object.keys(slike).length;
+	var broj_glavnih_kljuceva = Object.keys(slike).length;
     var ucitaneSlike = 0;
 
-	// pozadinu ucitati zasebno, ostalo u petlji
-	for(var i=1; i < broj_kljuceva; i++) {
+
+	for(var i=1; i < broj_glavnih_kljuceva; i++) {      // preskace pozadinu
 		
 		kazi(glavni_kljucevi[i])
 		
@@ -44,7 +48,7 @@ var ucitajSlike = function(slike, povratnaRadnja){     // nakon učitavanja puš
         var ova_slika = new Image();
         ova_slika.onload = function kadSveUcita() {
             ucitaneSlike++;
-            if (ucitaneSlike >= broj_kljuceva) {
+            if (ucitaneSlike >= broj_glavnih_kljuceva) {
                 povratnaRadnja();
             }
         };  // kraj kadSveUcita()
@@ -56,7 +60,6 @@ var ucitajSlike = function(slike, povratnaRadnja){     // nakon učitavanja puš
 
 
 ucitajSlike(slike, function(){kazi("Sve učitano.")});
-
 
 </script>
 

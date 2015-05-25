@@ -26,9 +26,11 @@ function kazi(bilo_sta){
     console.log(bilo_sta);
 }
 
-// napraviti logiku za proveru koja uzima varijablu 
-// i kaze njeno ime u struni + vrednost
-
-function proveri(varijabla){
-    console.log(varijabla);
-}
+// radi samo za window objekt, napraviti prvo da proverava kom objektu pripada
+function otkri(sadrzaj){
+    var ime_varijable;
+    for (var naziv_objekta in window) {
+        if (window[naziv_objekta] == sadrzaj) ime_varijable = naziv_objekta;
+    }
+    console.log(ime_varijable + ": " + sadrzaj)
+}   // kraj otkri
