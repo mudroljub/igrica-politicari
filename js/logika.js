@@ -16,17 +16,20 @@
 // kad je presirok ekran, sece pozadinu po visini !
 ********************************************************************/
 
+// nazivi su bitni, od njih pravi objekte !
 var slike = {
-    pozadina: 'slike/skupstina2.png',
-    likovi: {      // nazivi bitni, od njih pravi objekte!
+    pozadina: {
+        skupstina: 'slike/skupstina2.png'
+    },
+    likovi: {
         vulin: 'slike/vulin.png',
         toma: 'slike/toma.png',
         dacic: 'slike/dacic.png'
     },
     predmeti: {
-        paradajz: "",
-        jaje: "",
-        krpa: ""
+        paradajz: "slike/politicar.png",
+        jaje: "slike/politicar.png",
+        krpa: "slike/politicar.png"
     }
 }
 
@@ -35,11 +38,11 @@ var slike = {
 
 var ucitavac = new Ucitavac();                      // pravi karaktere
 var vreme = new Vreme(30);          				// zadaje vreme igre
-var scena = new Scena('platno', slike.pozadina);
+var scena = new Scena('platno', slike.pozadina.skupstina);
 var mish = new Mish();
 var uvod = new Uvod(scena);
 
-ucitavac.ucitajSlike(slike.likovi, uvod.pusti);
+ucitavac.ucitajSlike(slike, uvod.pusti);
 scena.platno.addEventListener('click', reagujNaKlik);
 
 
