@@ -8,11 +8,9 @@ function Vreme(ukupno) {
 		return new Date().getSeconds();
 	}
 
-	this.proveriKraj = function(scena){
+	this.proveriKraj = function(kraj){
 		if(vreme.preostalo < 1) {
-			window.cancelAnimationFrame(scena.animacija_igre);
-			scena.igranje = false;
-			scena.odjavnaSlova("Igra je završena!");
+			kraj.pusti();
 		}	
 	}	// kraj proveriKraj
 

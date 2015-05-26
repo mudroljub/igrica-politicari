@@ -86,7 +86,7 @@ function Karakter(ime, slika_src, scena, vreme){
     }
 
     function _prilagodiSliku(ovaj_karakter, slika){
-        // prilagodjava sliku standardnoj velicini slike
+        // prilagodjava sliku standardnoj visini slike
         var nova_sirina = slika.width / (slika.height / ovaj_karakter.STANDARDNA_VISINA);
         var nova_visina = ovaj_karakter.STANDARDNA_VISINA;
         // prilagodjava sliku ovom ekranu

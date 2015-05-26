@@ -75,13 +75,6 @@ function Scena(id_platna, izvor_pozadine) {
 		}
 	}	// kraj brisiPoruke
 
-	this.odjavnaSlova = function(poruka){
-			scena.sadrzaj.fillRect(scena.sirina/2 - scena.sirina/4, scena.visina/2 - scena.visina/4, scena.sirina/2, scena.visina/2);
-			scena.sadrzaj.fillStyle="#000";
-			scena.sadrzaj.font = "48px Verdana";
-			scena.sadrzaj.fillText(poruka, scena.sirina/2 - scena.sirina/4 + 100, scena.visina/2 - scena.visina/4 + 100);
-	}	// kraj odjavnaSlova
-	
     this.mrdaPozadinu = function(){
 		// kad imamo vecu pozadinu da se pomera
     }

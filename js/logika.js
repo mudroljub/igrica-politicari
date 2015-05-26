@@ -1,5 +1,6 @@
 /*****************************************************************
     IDEJE:
+// da mrdaju gore dole
 // da ne izlaze uvek, nego da malo sacekaju
 // da menjaju sliku na pogodak
 // da nasumicno ispustaju parole
@@ -9,9 +10,7 @@
 // uvodna animacija uvecavanje skupstina
 
     PROBLEMI:
-// na manjim ekranima prilagodiSlova, mozda klasa Prilagodjavac za pozadinu, slike, slova
-// pozadina se crta prilagodjeno, a delove crta neprilagodjeno
-// resenje: napraviti jedinstveno prilagodjavanje
+// mozda klasa Prilagodjavac za pozadinu, slike, slova
 // kad je presirok ekran, sece pozadinu po visini !
 ********************************************************************/
 
@@ -40,6 +39,7 @@ var vreme = new Vreme(30);          				// zadaje vreme igre
 var scena = new Scena('platno', slike.pozadina.skupstina);
 var mish = new Mish();
 var uvod = new Uvod(scena);
+var kraj = new Kraj(scena);
 
 ucitavac.ucitajSlike(slike, uvod.pusti);
 scena.platno.addEventListener('click', reagujNaKlik);
@@ -66,7 +66,7 @@ function azuriraj(){
         scena.crtajSve();
         scena.pisiPoruke(mish);
         scena.pisiPoene(vreme);
-        vreme.proveriKraj(scena);
+        vreme.proveriKraj(kraj);
 
 		// ovo izvrsava svake sekunde
         if(vreme.prethodna_sekunda != vreme.ovaSekunda()) {
