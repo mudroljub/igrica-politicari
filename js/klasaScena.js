@@ -75,21 +75,13 @@ function Scena(id_platna, izvor_pozadine) {
 		}
 	}	// kraj brisiPoruke
 
-	this.proveriKraj = function(vreme){
-		if(vreme.preostalo < 1) {
-			window.cancelAnimationFrame(this.animacija_igre);
-			this.igranje = false;
-			this.odjavnaSlova();
-		}	
-	}	// kraj proveriKraj
-
-	this.odjavnaSlova = function(){
-			this.sadrzaj.fillRect(this.sirina/2 - this.sirina/4, this.visina/2 - this.visina/4, this.sirina/2, this.visina/2);
-			this.sadrzaj.fillStyle="#000";
-			this.sadrzaj.font = "48px Verdana";
-			this.sadrzaj.fillText("Igra je završena!", this.sirina/2 - this.sirina/4 + 100, this.visina/2 - this.visina/4 + 100);		
+	this.odjavnaSlova = function(poruka){
+			scena.sadrzaj.fillRect(scena.sirina/2 - scena.sirina/4, scena.visina/2 - scena.visina/4, scena.sirina/2, scena.visina/2);
+			scena.sadrzaj.fillStyle="#000";
+			scena.sadrzaj.font = "48px Verdana";
+			scena.sadrzaj.fillText(poruka, scena.sirina/2 - scena.sirina/4 + 100, scena.visina/2 - scena.visina/4 + 100);
 	}	// kraj odjavnaSlova
-
+	
     this.mrdaPozadinu = function(){
 		// kad imamo vecu pozadinu da se pomera
     }

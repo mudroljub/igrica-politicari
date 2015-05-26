@@ -66,7 +66,7 @@ function azuriraj(){
         scena.crtajSve();
         scena.pisiPoruke(mish);
         scena.pisiPoene(vreme);
-        scena.proveriKraj(vreme);
+        vreme.proveriKraj(scena);
 
 		// ovo izvrsava svake sekunde
         if(vreme.prethodna_sekunda != vreme.ovaSekunda()) {
