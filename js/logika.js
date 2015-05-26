@@ -14,7 +14,7 @@
 // kad je presirok ekran, sece pozadinu po visini !
 ********************************************************************/
 
-// nazivi su bitni, od njih pravi objekte !
+// od naziva pravi objekte !
 var slike = {
     pozadina: {
         skupstina: 'slike/skupstina2.png'
