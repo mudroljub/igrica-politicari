@@ -9,7 +9,7 @@ function Ucitavac() {
 		
         for (var kljuc in slike) {
             var ova_slika = new Image();
-            ova_slika.onload = function kadSveUcita() {
+            ova_slika.onload = function kadUcitaSliku() {
                 ucitaneSlike++;
                 if (ucitaneSlike >= brojSlika) {
                     povratnoUvod();

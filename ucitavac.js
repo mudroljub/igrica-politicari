@@ -18,7 +18,7 @@ var slike = {
 }
 
 var sve_slike = 0
-var ucitaneSlike = 0;
+var ucitane_slike = 0;
 
 
 /******	POZIVI *******/
@@ -39,17 +39,18 @@ function ucitajSlike (slike, povratnaRadnja){ 	// pustiUvod
 		for(var ime_slike in ova_grupa){
 			var ova_slika = new Image()
 			ova_slika.onload = function kadUcitaSliku (){
-				ucitaneSlike++;
 				proveriUcitano(povratnaRadnja);
 			} // kraj kadUcitaSliku
 			ova_slika.src = ova_grupa[ime_slike]	
 		} // kraj for in
 	}	// kraj for 
+	
 }	// kraj ucitajSlike
 
 function proveriUcitano(povratnaRadnja){
-	kazi("ucitaneSlike: " + ucitaneSlike)
-	if(ucitaneSlike >= sve_slike) {
+	ucitane_slike++;
+	kazi("ucitane_slike: " + ucitane_slike)
+	if(ucitane_slike >= sve_slike) {
 		povratnaRadnja();
 	}	
 }	// proveriUcitano
