@@ -10,7 +10,6 @@
 
     PROBLEMI:
 // na manjim ekranima prilagodiSlova, mozda klasa Prilagodjavac za pozadinu, slike, slova
-// deo sekunde su u igri, a nisu nacrtani, dodati varijablu nacrtani radi provere
 // pozadina se crta prilagodjeno, a delove crta neprilagodjeno
 // resenje: napraviti jedinstveno prilagodjavanje
 // kad je presirok ekran, sece pozadinu po visini !

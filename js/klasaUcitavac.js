@@ -6,25 +6,33 @@ function Ucitavac() {
     var ucitane_slike = 0;
 
 
-    this.ucitajSlike = function(slike, povratnaRadnja){     // nakon učitavanja obično pušta uvod
+    this.ucitajSlike = function(slike, povratnaRadnja){     // obično posle pušta uvod
         var nazivi_grupa = Object.keys(slike)
         var ukupno_grupa = Object.keys(slike).length
+		sve_slike = ovaj_ucitavac.ukupnoSlika(slike)
 
         for(var i=0; i < ukupno_grupa; i++) {
             var naziv_grupe = nazivi_grupa[i];
             var ova_grupa = slike[naziv_grupe];
-            var broj_slika_u_grupi = Object.keys(ova_grupa).length;
-            sve_slike += broj_slika_u_grupi
-
+            
             for(var ime_slike in ova_grupa){
                 var ova_slika = new Image()
-                ova_slika.onload = function kadUcitaSliku (){
-                    ovaj_ucitavac.proveriUcitano(povratnaRadnja);
-                } 
+                ova_slika.onload = ovaj_ucitavac.proveriUcitano(povratnaRadnja);
                 ova_slika.src = ova_grupa[ime_slike]
             } // kraj for in
         }	// kraj for
     }	// kraj ucitajSlike
+
+
+	this.ukupnoSlika = function(slike){
+		var sve_slike = 0;
+		for(var grupa in slike) {
+			for(var slika in slike[grupa]) {
+				sve_slike++
+			}
+		}
+		return sve_slike;
+	}
 
 
     this.proveriUcitano = function(povratnaRadnja){
