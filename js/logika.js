@@ -4,7 +4,6 @@
 // da ne izlaze uvek, nego da malo sacekaju
 // da menjaju sliku na pogodak
 // da nasumicno ispustaju parole
-// lokalni i globalni hajskor
 // grafiti na skupstini vucicu pederu
 // paradajz pogadja
 // uvodna animacija uvecavanje skupstina
@@ -35,7 +34,7 @@ var slike = {
 /*************** LOGIKA IGRE ***************/
 
 var ucitavac = new Ucitavac();                      // pravi karaktere
-var vreme = new Vreme(3);          				// zadaje vreme igre
+var vreme = new Vreme(30);          				// zadaje vreme igre
 var scena = new Scena('platno', slike.pozadina.skupstina);
 var mish = new Mish();
 var uvod = new Uvod(scena);
