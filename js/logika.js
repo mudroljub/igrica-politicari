@@ -10,8 +10,8 @@
 // uvodna animacija uvecavanje skupstina
 
     PROBLEMI:
-// mozda klasa Prilagodjavac za pozadinu, slike, slova
 // kad je presirok ekran, sece pozadinu po visini !
+// mozda klasa Prilagodjavac za pozadinu, slike, slova
 ********************************************************************/
 
 // od naziva pravi objekte !
@@ -35,7 +35,7 @@ var slike = {
 /*************** LOGIKA IGRE ***************/
 
 var ucitavac = new Ucitavac();                      // pravi karaktere
-var vreme = new Vreme(30);          				// zadaje vreme igre
+var vreme = new Vreme(3);          				// zadaje vreme igre
 var scena = new Scena('platno', slike.pozadina.skupstina);
 var mish = new Mish();
 var uvod = new Uvod(scena);
