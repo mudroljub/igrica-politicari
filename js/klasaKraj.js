@@ -9,7 +9,7 @@ function Kraj(scena) {
 		window.cancelAnimationFrame(scena.animacija_igre);
 		scena.igranje = false;
 		this.zavrsniEkran("Igra je završena!");
-		this.sacuvajRekord(scena.poeni);
+		this.proveriRekord(scena.poeni);
 	}	// kraj pusti
 	
 	
@@ -21,11 +21,10 @@ function Kraj(scena) {
 	}	// kraj zavrsniEkran
 
 
-	this.sacuvajRekord = function(poeni) {
+	this.proveriRekord = function(poeni) {
 		var rekord = localStorage.getItem('rekord') || 0;
 		if (poeni > rekord) {
-			rekord = poeni;
-			localStorage.setItem('rekord', rekord);
+			localStorage.setItem('rekord', poeni);
 		}
 		kazi("Trenutni rekord je: " + rekord)
 	}
