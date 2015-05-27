@@ -13,11 +13,12 @@ function Karakter(ime, slika_src, scena, vreme){
     this.x = 0;         // dodeljuje slucajnaPozicija
     this.y = 0;
 	this.zapamcen_y = 0;
+	this.zapamcena_visina = this.visina;
 
     this.igranje = false;
     this.kukanje = false;
     this.spustanje = false;
-    this.spustenost = 50;
+    this.spustenost = 0;
 
 
 	/*************** FUNKCIJE ***************/
@@ -74,33 +75,18 @@ function Karakter(ime, slika_src, scena, vreme){
     }   // kraj bacaParole
 
 
-    // this.y se resetuje, spustenost se ne resetuje !
-	// zapamtiti prethodni_y izvan funkcije
-	// this.y = zapamcen_y + spustenost
-	// pamti novi prilikom svake dodele pozicije
+    // skracivati visinu za spustenost
 
-    this.goreDole = function(){
-        kazi(this.spustenost)
-
-        if(this.spustenost >= 50) {
+    this.goreDole = function(){ 
+        if(this.spustenost >= 30) {
             this.spustanje = false;
         }
-
         if (this.spustenost <= 0) {
             this.spustanje = true;
         }
-
-        if(this.spustanje){
-            this.spustenost++
-        } else {
-            this.spustenost--;
-        }
-		
-		this.y = this.zapamcen_y + this.spustenost
-		
-        //this.y += this.spustenost;
-        //this.spustanje ? this.y++ : this.y--;
-
+		this.spustanje ? this.spustenost++ : this.spustenost--
+		this.y = this.zapamcen_y + this.spustenost;
+		this.visina = this.zapamcena_visina - this.spustenost;
     }
 
     this.jelNapustio = function(scena){

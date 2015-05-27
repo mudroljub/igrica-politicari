@@ -37,6 +37,8 @@ function Scena(id_platna, izvor_pozadine) {
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igranje){
 				karakteri[i].nadjiSlobodnoMesto(karakteri);
+				// postavlja polazne pozicije za goreDole
+				karakteri[i].spustenost = 30;
 				karakteri[i].zapamcen_y = karakteri[i].y;
 			}
 		}
