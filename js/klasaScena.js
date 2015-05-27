@@ -37,6 +37,7 @@ function Scena(id_platna, izvor_pozadine) {
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igranje){
 				karakteri[i].nadjiSlobodnoMesto(karakteri);
+				karakteri[i].zapamcen_y = karakteri[i].y;
 			}
 		}
 	} // kraj dodeliPozicije

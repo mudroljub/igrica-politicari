@@ -12,6 +12,7 @@ function Karakter(ime, slika_src, scena, vreme){
     this.visina = this.slika.height;
     this.x = 0;         // dodeljuje slucajnaPozicija
     this.y = 0;
+	this.zapamcen_y = 0;
 
     this.igranje = false;
     this.kukanje = false;
@@ -74,6 +75,9 @@ function Karakter(ime, slika_src, scena, vreme){
 
 
     // this.y se resetuje, spustenost se ne resetuje !
+	// zapamtiti prethodni_y izvan funkcije
+	// this.y = zapamcen_y + spustenost
+	// pamti novi prilikom svake dodele pozicije
 
     this.goreDole = function(){
         kazi(this.spustenost)
@@ -91,7 +95,9 @@ function Karakter(ime, slika_src, scena, vreme){
         } else {
             this.spustenost--;
         }
-
+		
+		this.y = this.zapamcen_y + this.spustenost
+		
         //this.y += this.spustenost;
         //this.spustanje ? this.y++ : this.y--;
 

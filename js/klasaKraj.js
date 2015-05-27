@@ -27,7 +27,7 @@ function Kraj(scena) {
 			rekord = poeni;
 			localStorage.setItem('rekord', poeni);
 		}
-		kazi("Trenutni rekord je: " + rekord)
+		kazi("Postavljeni rekord je: " + rekord)
 		// return rekord
 	}	// kraj proveriRekord
 
