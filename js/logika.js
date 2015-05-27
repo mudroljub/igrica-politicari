@@ -35,8 +35,8 @@ var slike = {
 
 var ucitavac = new Ucitavac();                      // pravi karaktere
 var vreme = new Vreme(30);          				// zadaje vreme igre
-var scena = new Scena('platno', slike.pozadina.skupstina);
 var mish = new Mish();
+var scena = new Scena('platno', slike.pozadina.skupstina);
 var uvod = new Uvod(scena);
 var kraj = new Kraj(scena);
 

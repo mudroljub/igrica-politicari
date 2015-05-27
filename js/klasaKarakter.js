@@ -10,11 +10,13 @@ function Karakter(ime, slika_src, scena, vreme){
     this.slika = _prilagodiSliku(this, this.slika);
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
+    this.x = 0;         // dodeljuje slucajnaPozicija
+    this.y = 0;
 
     this.igranje = false;
     this.kukanje = false;
     this.spustanje = false;
-    this.spusten = 0;
+    this.spustenost = 50;
 
 
 	/*************** FUNKCIJE ***************/
@@ -70,14 +72,29 @@ function Karakter(ime, slika_src, scena, vreme){
 		// bacaParole koje ti skidaju energiju
     }   // kraj bacaParole
 
+
+    // this.y se resetuje, spustenost se ne resetuje !
+
     this.goreDole = function(){
-        // lagano se spusta i dize
-        if(this.spusten >= 100) {
-            this.spustanje = true;
-        } else if (this.spusten <= 0) {
+        kazi(this.spustenost)
+
+        if(this.spustenost >= 50) {
             this.spustanje = false;
         }
-        this.spustanje ? this.spusten-- : this.spusten++;
+
+        if (this.spustenost <= 0) {
+            this.spustanje = true;
+        }
+
+        if(this.spustanje){
+            this.spustenost++
+        } else {
+            this.spustenost--;
+        }
+
+        //this.y += this.spustenost;
+        //this.spustanje ? this.y++ : this.y--;
+
     }
 
     this.jelNapustio = function(scena){
