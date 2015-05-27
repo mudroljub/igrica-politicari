@@ -11,8 +11,8 @@ function Kraj(scena) {
 		this.zavrsniEkran("Igra je završena!");
 		this.proveriRekord(scena.poeni);
 	}	// kraj pusti
-	
-	
+
+
 	this.zavrsniEkran = function(poruka){
 		scena.sadrzaj.fillRect(scena.sirina/4, scena.visina/4, scena.sirina/2, scena.visina/2);
 		scena.sadrzaj.fillStyle="#000";
@@ -24,15 +24,18 @@ function Kraj(scena) {
 	this.proveriRekord = function(poeni) {
 		var rekord = localStorage.getItem('rekord') || 0;
 		if (poeni > rekord) {
+			rekord = poeni;
 			localStorage.setItem('rekord', poeni);
 		}
 		kazi("Trenutni rekord je: " + rekord)
-	}
+		// return rekord
+	}	// kraj proveriRekord
 
 
 	function _prilagodiSlova (standard){
 		var nova_velicina = standard * (scena.sirina / scena.STANDARDNA_SIRINA);
 		return nova_velicina;
-	}
+	}	// kraj _prilagodiSlova
+
 
 }	// kraj Kraja
