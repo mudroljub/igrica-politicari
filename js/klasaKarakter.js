@@ -37,6 +37,7 @@ function Karakter(ime, slika_src, scena, vreme){
 
     this.crtaj = function() {
         scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
+		// drawImage(image, sx, sy, sWidth, sHeigh
     }   // kraj crtaj
 
     this.sudar = function(karakter){
@@ -73,9 +74,6 @@ function Karakter(ime, slika_src, scena, vreme){
         var parola = this.parola || "Mi branimo srpski narod!";
 		// bacaParole koje ti skidaju energiju
     }   // kraj bacaParole
-
-
-    // skracivati visinu za spustenost
 
     this.goreDole = function(){ 
         if(this.spustenost >= 30) {
