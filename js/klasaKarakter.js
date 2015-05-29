@@ -36,10 +36,12 @@ function Karakter(ime, slika_src, scena, vreme){
     }   // kraj slucajnaPozicija
 
     this.crtaj = function() {
-        //scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
-		scena.sadrzaj.drawImage(this.slika, 0, 0, this.slika.naturalWidth, this.slika.naturalHeight - this.spustenost * (this.slika.naturalHeight/this.slika.height), this.x, this.y, this.sirina, this.visina)
-		
+        scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
 		}   // kraj crtaj
+
+    this.crtajSpustenost = function() {
+        scena.sadrzaj.drawImage(this.slika, 0, 0, this.slika.naturalWidth, this.slika.naturalHeight - this.spustenost * (this.slika.naturalHeight/this.slika.height), this.x, this.y, this.sirina, this.visina)
+    }   // kraj crtajSpustenost
 
     this.sudar = function(karakter){
         if(this.x == karakter.x && this.y == karakter.y){

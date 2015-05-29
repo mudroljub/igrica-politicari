@@ -50,7 +50,7 @@ function Scena(id_platna, izvor_pozadine) {
         for(var i=0; i < this.karakteri.length; i++){
             if(this.karakteri[i].igranje){
 				this.karakteri[i].goreDole();
-                this.karakteri[i].crtaj();
+                this.karakteri[i].crtajSpustenost();
             }
         }
     } // kraj crtajSve
