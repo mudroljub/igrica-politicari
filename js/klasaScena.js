@@ -34,7 +34,7 @@ function Scena(id_platna, izvor_pozadine) {
     }   // kraj praviProzore
 	
 
-    this.pisiPoene = function(vreme){
+    this.prikaziRezultate = function(vreme){
         this.sadrzaj.fillStyle="#000";
         this.sadrzaj.fillRect(20,80,180,100);
         this.sadrzaj.stroke();
@@ -42,7 +42,7 @@ function Scena(id_platna, izvor_pozadine) {
         this.sadrzaj.font = "24px Verdana";
         this.sadrzaj.fillText("Poeni: " + this.poeni, 30, 120);
         this.sadrzaj.fillText("Vreme: " + vreme.preostalo, 30, 160);
-    }	// kraj pisiPoene
+    }	// kraj prikaziRezultate
 
 	this.pisiPoruke = function(mish){
 		for(var i=0; i < this.karakteri.length; i++){

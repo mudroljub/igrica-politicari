@@ -66,7 +66,7 @@ function azuriraj(){
 		toma.udji(10);
         automat.crtajSve();
         scena.pisiPoruke(mish);
-        scena.pisiPoene(vreme);
+        scena.prikaziRezultate(vreme);
         vreme.proveriKraj(kraj);
 
 		// ovo izvrsava svake sekunde
