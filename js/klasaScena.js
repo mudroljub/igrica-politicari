@@ -1,4 +1,3 @@
-
 // prilagodiPozadinu, uzeti u obzir sire i tanje ekrane
 
 function Scena(id_platna, izvor_pozadine) {
