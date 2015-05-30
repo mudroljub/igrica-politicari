@@ -38,6 +38,7 @@ var ucitavac = new Ucitavac();                      // pravi karaktere
 var vreme = new Vreme(30);          				// zadaje vreme igre
 var mish = new Mish();
 var scena = new Scena('platno', slike.pozadina.skupstina);
+var automat = new Automat(scena);                   // obavlja masovne radnje
 var uvod = new Uvod(scena);
 var kraj = new Kraj(scena);
 
@@ -63,7 +64,7 @@ function azuriraj(){
 		dacic.udji(30);
 		vulin.udji(20);
 		toma.udji(10);
-        scena.crtajSve();
+        automat.crtajSve();
         scena.pisiPoruke(mish);
         scena.pisiPoene(vreme);
         vreme.proveriKraj(kraj);
@@ -71,7 +72,7 @@ function azuriraj(){
 		// ovo izvrsava svake sekunde
         if(vreme.prethodna_sekunda != vreme.ovaSekunda()) {
             scena.brisiPoruke();
-            scena.dodeliPozicije(scena.karakteri);
+            automat.deliPozicije(scena.karakteri);
             vreme.preostalo--;
             vreme.prethodna_sekunda = vreme.ovaSekunda();
         }	// kraj svaki sekund

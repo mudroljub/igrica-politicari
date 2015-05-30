@@ -33,27 +33,6 @@ function Scena(id_platna, izvor_pozadine) {
         ]
     }   // kraj praviProzore
 	
-	this.dodeliPozicije = function(karakteri){
-		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].igranje){
-				karakteri[i].nadjiSlobodnoMesto(karakteri);
-				// postavlja polazne pozicije za proviruje
-				karakteri[i].spustenost = 30;
-				karakteri[i].zapamcen_y = karakteri[i].y;
-			}
-		}
-	} // kraj dodeliPozicije
-
-    this.crtajSve = function(){
-        this.sadrzaj.drawImage(this.pozadina, 0, 0, this.sirina, this.pozadina.nova_visina);
-
-        for(var i=0; i < this.karakteri.length; i++){
-            if(this.karakteri[i].igranje){
-				this.karakteri[i].proviruje();
-                this.karakteri[i].crtajDizanje();
-            }
-        }
-    } // kraj crtajSve
 
     this.pisiPoene = function(vreme){
         this.sadrzaj.fillStyle="#000";
