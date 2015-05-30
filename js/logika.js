@@ -14,7 +14,7 @@
 // mozda klasa Prilagodjavac za pozadinu, slike, slova
 ********************************************************************/
 
-// od naziva pravi objekte !
+// nazivi bitni, od njih pravi objekte
 var slike = {
     pozadina: {
         skupstina: 'slike/skupstina2.png'
@@ -49,51 +49,51 @@ scena.platno.addEventListener('click', reagujNaKlik);
 /*************** GLAVNE FUNKCIJE ***************/
 
 function postaviScenu(){
-    scena.praviProzore(ose_prozora);
-    ucitavac.praviKaraktere(slike.likovi, scena, vreme);   	// pravi objekte od niza likova
+    scena.praviProzore(parametri_prozora);
+    automat.praviKaraktere(slike.likovi, scena, vreme);   	// pravi objekte od niza likova
     dacic.kuknjava = "Jaoj";								// dodaje jedinstvene poruke
     vulin.kuknjava = "To boli!";
     toma.kuknjava = "Evropa nema alternativu!";
-	scena.animacija_igre = requestAnimationFrame(azuriraj); // krace igra
+	scena.animacija = requestAnimationFrame(azuriraj); // krace igra
 }
 
 
 function azuriraj(){
     // radi na svakih 16.6 milisekundi
-    if(scena.igra){
+    if(scena.ide){
 		dacic.ulazi(30);
 		vulin.ulazi(20);
 		toma.ulazi(10);
-        automat.crtajSve();
-        automat.pisiPoruke(mish);
-        scena.prikazujPoene(vreme);
-        vreme.proveriKraj(kraj);
+        automat.crtaSve();
+        automat.pisePoruke(mish);
+        scena.prikazujePoene(vreme);
+        vreme.daPustiKraj(kraj);
 
 		// radi na svaki sekund
-        if(vreme.promenilaSekunda()) {
-            automat.brisiPoruke();
+        if(vreme.proslaSekunda()) {
+            automat.brisePoruke();
             automat.deliPozicije(scena.karakteri);
-            vreme.tece();
-            vreme.prethodna_sekunda = vreme.ovaSekunda();
+            vreme.smanjuje();
+            vreme.azurira();
         }	// kraj svaki sekund
 		
-        scena.animacija_igre = requestAnimationFrame(azuriraj);
+        scena.animacija = requestAnimationFrame(azuriraj);
     }	// kraj svaki frejm
 }
 
 
-function reagujNaKlik(klik){
-	mish.x = klik.clientX;   
-	mish.y = klik.clientY;
+function reagujNaKlik(event){
+	mish.x = event.clientX;   
+	mish.y = event.clientY;
 	
 	if(uvod.ide){
-		uvod.ide = false;
+		uvod.ide = false;	// prekida uvod
 		window.cancelAnimationFrame(uvod.animacija);
 		postaviScenu();
-		scena.igra = true;
+		scena.ide = true;
 	}	// kraj ako ide
 
-	if(scena.igra){
+	if(scena.ide){
 		for(var i=0; i < scena.karakteri.length; i++){
 			if(scena.karakteri[i].igra) {
 				mish.proveriPogodak(scena, scena.karakteri[i]);

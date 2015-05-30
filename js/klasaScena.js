@@ -3,12 +3,12 @@
 
 function Scena(id_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
-    this.igra = false;
+    this.ide = false;
 	this.STANDARDNA_SIRINA = 1280;
 
 	this.karakteri = [];		// popunjava ga funkcija praviKaraktere
     this.pozicije = []  // popunjava ga funkcija praviProzore
-	this.animacija_igre;		// identifikator animacije
+	this.animacija;		// identifikator animacije
 	this.poeni = 0;
 
 	this.platno = _postaviPlatno(id_platna, ova_scena);
@@ -34,7 +34,7 @@ function Scena(id_platna, izvor_pozadine) {
     }   // kraj praviProzore
 	
 
-    this.prikazujPoene = function(vreme){
+    this.prikazujePoene = function(vreme){
         this.sadrzaj.fillStyle="#000";
         this.sadrzaj.fillRect(20,80,180,100);
         this.sadrzaj.stroke();
@@ -42,7 +42,7 @@ function Scena(id_platna, izvor_pozadine) {
         this.sadrzaj.font = "24px Verdana";
         this.sadrzaj.fillText("Poeni: " + this.poeni, 30, 120);
         this.sadrzaj.fillText("Vreme: " + vreme.preostalo, 30, 160);
-    }	// kraj prikazujPoene
+    }	// kraj prikazujePoene
 
 
     this.mrdajPozadinu = function(){

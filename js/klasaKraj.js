@@ -6,8 +6,8 @@ function Kraj(scena) {
 
 
 	this.pusti = function(){
-		window.cancelAnimationFrame(scena.animacija_igre);
-		scena.igranje = false;
+		window.cancelAnimationFrame(scena.animacija);
+		scena.ide = false;
 		this.zavrsniEkran("Igra je završena!");
 		this.proveriRekord(scena.poeni);
 	}	// kraj pusti

@@ -1,25 +1,29 @@
 
-function Vreme(ukupno) {
+function Vreme(zadato) {
 
-    this.preostalo = ukupno || 30;		// podrazumevano vreme
+    this.preostalo = zadato || 30;		// podrazumevano vreme
     this.prethodna_sekunda = 0;
 	
 	this.ovaSekunda = function(){
 		return new Date().getSeconds();
 	}
 
-	this.proveriKraj = function(kraj){
+	this.daPustiKraj = function(kraj){
 		if(vreme.preostalo < 1) {
 			kraj.pusti();
 		}	
-	}	// kraj proveriKraj
+	}	// kraj daPustiKraj
 
-	this.tece = function(){
+	this.smanjuje = function(){
 		this.preostalo--
 	}
 	
-	this.promenilaSekunda = function(){
-		return this.prethodna_sekunda != this.ovaSekunda()	
+	this.proslaSekunda = function(){
+		return this.ovaSekunda() != this.prethodna_sekunda
+	}
+	
+	this.azurira = function(){
+		this.prethodna_sekunda = this.ovaSekunda();		
 	}
 
 
