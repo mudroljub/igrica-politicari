@@ -24,11 +24,11 @@ function Karakter(ime, slika_src, scena, vreme){
 
 	/*************** FUNKCIJE ***************/
 
-	this.igraj = function(trenutak_ulaska) {
+	this.udji = function(trenutak_ulaska) {
 		if(vreme.preostalo <= trenutak_ulaska) {
 		this.igranje = true;
 		}
-	}	// kraj igraj
+	}	// kraj udji
 
     this.slucajnaPozicija = function(pozicije) {
 		var slucajno = Math.floor (Math.random() * pozicije.length);		

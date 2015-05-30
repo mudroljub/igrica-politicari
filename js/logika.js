@@ -35,7 +35,7 @@ var slike = {
 /*************** LOGIKA IGRE ***************/
 
 var ucitavac = new Ucitavac();                      // pravi karaktere
-var vreme = new Vreme(22);          				// zadaje vreme igre
+var vreme = new Vreme(30);          				// zadaje vreme igre
 var mish = new Mish();
 var scena = new Scena('platno', slike.pozadina.skupstina);
 var uvod = new Uvod(scena);
@@ -60,9 +60,9 @@ function postaviScenu(){
 function azuriraj(){
     // ovo izvrsava na svaki frejm
     if(scena.igranje){
-		dacic.igraj(30);
-		vulin.igraj(20);
-		toma.igraj(10);
+		dacic.udji(30);
+		vulin.udji(20);
+		toma.udji(10);
         scena.crtajSve();
         scena.pisiPoruke(mish);
         scena.pisiPoene(vreme);
