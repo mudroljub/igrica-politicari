@@ -1,6 +1,3 @@
-// izdojiti klasu Politicar iz Karaktera
-// specificnost bacaParole
-
 function Karakter(ime, slika_src, scena, vreme){
 	var ovaj_karakter = this;
     this.ime = ime.VelikoSlovo();

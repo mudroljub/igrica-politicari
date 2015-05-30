@@ -1,6 +1,5 @@
 /*****************************************************************
     IDEJE:
-// klasu Automat
 // da ne izlaze uvek, nego da malo sacekaju
 // da menjaju sliku na pogodak
 // da nasumicno ispustaju parole
@@ -9,7 +8,6 @@
 // uvodna animacija uvecavanje skupstina
 
     PROBLEMI:
-// izlaze sekund ranije
 // kad je presirok ekran, sece pozadinu po visini !
 // mozda klasa Prilagodjavac za pozadinu, slike, slova
 ********************************************************************/

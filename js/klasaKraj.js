@@ -1,9 +1,7 @@
-
 function Kraj(scena) {
 
 	this.STANDARNA_VELICINA_SLOVA = 48;
 	this.velicina_slova = _prilagodiSlova(this.STANDARNA_VELICINA_SLOVA);
-
 
 	this.pusti = function(){
 		window.cancelAnimationFrame(scena.animacija);

@@ -1,4 +1,3 @@
-
 function Vreme(zadato) {
 
     this.preostalo = zadato || 30;		// podrazumevano vreme
