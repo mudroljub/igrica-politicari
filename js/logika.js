@@ -35,7 +35,7 @@ var slike = {
 /*************** LOGIKA IGRE ***************/
 
 var ucitavac = new Ucitavac();                      // pravi karaktere
-var vreme = new Vreme(30);          				// zadaje vreme igre
+var vreme = new Vreme(22);          				// zadaje vreme igre
 var mish = new Mish();
 var scena = new Scena('platno', slike.pozadina.skupstina);
 var uvod = new Uvod(scena);
@@ -50,7 +50,7 @@ scena.platno.addEventListener('click', reagujNaKlik);
 function postaviScenu(){
     scena.praviProzore(ose_prozora);
     ucitavac.praviKaraktere(slike.likovi, scena, vreme);   	// pravi objekte od niza likova
-    dacic.kuknjava = "Jaoj";						// dodaje jedinstvene poruke
+    dacic.kuknjava = "Jaoj";								// dodaje jedinstvene poruke
     vulin.kuknjava = "To boli!";
     toma.kuknjava = "Evropa nema alternativu!";
 	scena.animacija_igre = requestAnimationFrame(azuriraj); // krace igra

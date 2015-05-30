@@ -11,8 +11,8 @@ function Karakter(ime, slika_src, scena, vreme){
     this.slika = _prilagodiSliku(this, this.slika);
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
-    this.x = 0;         // dodeljuje slucajnaPozicija
-    this.y = 0;
+    this.x = -100;         // dodeljuje slucajnaPozicija
+    this.y = -100;
 	this.zapamcen_y = 0;
 	this.zapamcena_visina = this.visina;
 
@@ -37,12 +37,16 @@ function Karakter(ime, slika_src, scena, vreme){
     }   // kraj slucajnaPozicija
 
     this.crtaj = function() {
-        scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
+		if (this.x >= 0 && this.y >= 0) {
+			scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
+		}
 	}   // kraj crtaj
 
-    this.crtajProviruje = function() {
-        scena.sadrzaj.drawImage(this.slika, 0, 0, this.slika.naturalWidth, this.slika.naturalHeight - this.spustenost * (this.slika.naturalHeight/this.slika.height), this.x, this.y, this.sirina, this.visina)
-    }   // kraj crtajProviruje
+    this.crtajDizanje = function() {
+		if (this.x >= 0 && this.y >= 0) {
+			scena.sadrzaj.drawImage(this.slika, 0, 0, this.slika.naturalWidth, this.slika.naturalHeight - this.spustenost * (this.slika.naturalHeight/this.slika.height), this.x, this.y, this.sirina, this.visina)			
+		} 
+    }   // kraj crtajDizanje
 
     this.proviruje = function(){ 
         if(this.spustenost >= 30) {
@@ -54,15 +58,15 @@ function Karakter(ime, slika_src, scena, vreme){
 		this.dizanje ? this.dizi() : this.spustaj();
 		this.y = this.zapamcen_y + this.spustenost;
 		this.visina = this.zapamcena_visina - this.spustenost;
-    }
+    }	// kraj proviruje
 
     this.dizi = function(){
 		this.spustenost--
-	}
+	}	// kraj dizi
 	    
     this.spustaj = function(){
 		this.spustenost++
-	}
+	}	// kraj spustaj
 
     this.sudar = function(karakter){
         if(this.x == karakter.x && this.y == karakter.y){
