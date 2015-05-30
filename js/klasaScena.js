@@ -3,7 +3,7 @@
 
 function Scena(id_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
-    this.igranje = false;
+    this.igra = false;
 	this.STANDARDNA_SIRINA = 1280;
 
 	this.karakteri = [];		// popunjava ga funkcija praviKaraktere
@@ -34,7 +34,7 @@ function Scena(id_platna, izvor_pozadine) {
     }   // kraj praviProzore
 	
 
-    this.prikaziRezultate = function(vreme){
+    this.prikazujPoene = function(vreme){
         this.sadrzaj.fillStyle="#000";
         this.sadrzaj.fillRect(20,80,180,100);
         this.sadrzaj.stroke();
@@ -42,23 +42,10 @@ function Scena(id_platna, izvor_pozadine) {
         this.sadrzaj.font = "24px Verdana";
         this.sadrzaj.fillText("Poeni: " + this.poeni, 30, 120);
         this.sadrzaj.fillText("Vreme: " + vreme.preostalo, 30, 160);
-    }	// kraj prikaziRezultate
+    }	// kraj prikazujPoene
 
-	this.pisiPoruke = function(mish){
-		for(var i=0; i < this.karakteri.length; i++){
-			if(this.karakteri[i].igranje && this.karakteri[i].kukanje){
-				this.karakteri[i].kuka(mish);
-			}
-		}
-	}	// kraj pisiPoruke
 
-	this.brisiPoruke = function(){
-		for(var i=0; i < this.karakteri.length; i++){
-			this.karakteri[i].kukanje = false;
-		}
-	}	// kraj brisiPoruke
-
-    this.mrdaPozadinu = function(){
+    this.mrdajPozadinu = function(){
 		// kad imamo vecu pozadinu da se pomera
     }
 	

@@ -59,21 +59,21 @@ function postaviScenu(){
 
 
 function azuriraj(){
-    // ovo izvrsava na svaki frejm
-    if(scena.igranje){
-		dacic.udji(30);
-		vulin.udji(20);
-		toma.udji(10);
+    // radi na svakih 16.6 milisekundi
+    if(scena.igra){
+		dacic.ulazi(30);
+		vulin.ulazi(20);
+		toma.ulazi(10);
         automat.crtajSve();
-        scena.pisiPoruke(mish);
-        scena.prikaziRezultate(vreme);
+        automat.pisiPoruke(mish);
+        scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
 
-		// ovo izvrsava svake sekunde
-        if(vreme.prethodna_sekunda != vreme.ovaSekunda()) {
-            scena.brisiPoruke();
+		// radi na svaki sekund
+        if(vreme.promenilaSekunda()) {
+            automat.brisiPoruke();
             automat.deliPozicije(scena.karakteri);
-            vreme.preostalo--;
+            vreme.tece();
             vreme.prethodna_sekunda = vreme.ovaSekunda();
         }	// kraj svaki sekund
 		
@@ -90,14 +90,14 @@ function reagujNaKlik(klik){
 		uvod.ide = false;
 		window.cancelAnimationFrame(uvod.animacija);
 		postaviScenu();
-		scena.igranje = true;
+		scena.igra = true;
 	}	// kraj ako ide
 
-	if(scena.igranje){
+	if(scena.igra){
 		for(var i=0; i < scena.karakteri.length; i++){
-			if(scena.karakteri[i].igranje) {
+			if(scena.karakteri[i].igra) {
 				mish.proveriPogodak(scena, scena.karakteri[i]);
 			}
 		}
-	}	// kraj ako igranje
+	}	// kraj ako igra
 }   // kraj reagujNaKlik

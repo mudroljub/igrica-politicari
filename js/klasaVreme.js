@@ -14,5 +14,13 @@ function Vreme(ukupno) {
 		}	
 	}	// kraj proveriKraj
 
+	this.tece = function(){
+		this.preostalo--
+	}
+	
+	this.promenilaSekunda = function(){
+		return this.prethodna_sekunda != this.ovaSekunda()	
+	}
+
 
 }   // kraj Vreme

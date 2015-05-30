@@ -16,7 +16,7 @@ function Karakter(ime, slika_src, scena, vreme){
 	this.zapamcen_y = 0;
 	this.zapamcena_visina = this.visina;
 
-    this.igranje = false;
+    this.igra = false;
     this.kukanje = false;
     this.dizanje = false;
     this.spustenost = 0;
@@ -24,11 +24,11 @@ function Karakter(ime, slika_src, scena, vreme){
 
 	/*************** FUNKCIJE ***************/
 
-	this.udji = function(trenutak_ulaska) {
+	this.ulazi = function(trenutak_ulaska) {
 		if(vreme.preostalo <= trenutak_ulaska) {
-		this.igranje = true;
+		this.igra = true;
 		}
-	}	// kraj udji
+	}	// kraj ulazi
 
     this.slucajnaPozicija = function(pozicije) {
 		var slucajno = Math.floor (Math.random() * pozicije.length);		
