@@ -2,6 +2,7 @@
 // specificnost bacaParole
 
 function Karakter(ime, slika_src, scena, vreme){
+	var ovaj_karakter = this;
     this.ime = ime.VelikoSlovo();
 	this.slika = new Image();
     this.slika.src = slika_src;
@@ -17,7 +18,7 @@ function Karakter(ime, slika_src, scena, vreme){
 
     this.igranje = false;
     this.kukanje = false;
-    this.spustanje = false;
+    this.dizanje = false;
     this.spustenost = 0;
 
 
@@ -37,11 +38,31 @@ function Karakter(ime, slika_src, scena, vreme){
 
     this.crtaj = function() {
         scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
-		}   // kraj crtaj
+	}   // kraj crtaj
 
-    this.crtajSpustenost = function() {
+    this.crtajProviruje = function() {
         scena.sadrzaj.drawImage(this.slika, 0, 0, this.slika.naturalWidth, this.slika.naturalHeight - this.spustenost * (this.slika.naturalHeight/this.slika.height), this.x, this.y, this.sirina, this.visina)
-    }   // kraj crtajSpustenost
+    }   // kraj crtajProviruje
+
+    this.proviruje = function(){ 
+        if(this.spustenost >= 30) {
+            this.dizanje = true;
+        }
+        if (this.spustenost <= 0) {
+            this.dizanje = false;
+        }
+		this.dizanje ? this.dizi() : this.spustaj();
+		this.y = this.zapamcen_y + this.spustenost;
+		this.visina = this.zapamcena_visina - this.spustenost;
+    }
+
+    this.dizi = function(){
+		this.spustenost--
+	}
+	    
+    this.spustaj = function(){
+		this.spustenost++
+	}
 
     this.sudar = function(karakter){
         if(this.x == karakter.x && this.y == karakter.y){
@@ -77,18 +98,6 @@ function Karakter(ime, slika_src, scena, vreme){
         var parola = this.parola || "Mi branimo srpski narod!";
 		// bacaParole koje ti skidaju energiju
     }   // kraj bacaParole
-
-    this.goreDole = function(){ 
-        if(this.spustenost >= 30) {
-            this.spustanje = false;
-        }
-        if (this.spustenost <= 0) {
-            this.spustanje = true;
-        }
-		this.spustanje ? this.spustenost++ : this.spustenost--
-		this.y = this.zapamcen_y + this.spustenost;
-		this.visina = this.zapamcena_visina - this.spustenost;
-    }
 
     this.jelNapustio = function(scena){
         // da li je ovaj_lik jos u sceni
