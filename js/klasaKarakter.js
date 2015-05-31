@@ -45,6 +45,7 @@ function Karakter(ime, slika_src, scena, vreme){
 		} 
     }   // kraj crtajDizanje
 
+
     this.proviruje = function(){ 
         if(this.spustenost >= 30) {
             this.dizanje = true;
@@ -56,6 +57,7 @@ function Karakter(ime, slika_src, scena, vreme){
 		this.y = this.zapamcen_y + this.spustenost;
 		this.visina = this.zapamcena_visina - this.spustenost;
     }	// kraj proviruje
+
 
     this.dizi = function(){
 		this.spustenost--

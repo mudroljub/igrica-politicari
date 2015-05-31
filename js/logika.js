@@ -1,5 +1,10 @@
 /*****************************************************************
+- kad deliPozicije dodeljuje i spustenost 			// na svaki sekund
+- kad crtaSve poziva proviruje() i crtajDizanje();	// na svakih 16.6 milisekundi
+
+
     IDEJE:
+// da izlaze sa strane
 // da ne izlaze uvek, nego da malo sacekaju
 // da menjaju sliku na pogodak
 // da nasumicno ispustaju parole
