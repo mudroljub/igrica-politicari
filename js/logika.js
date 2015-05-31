@@ -2,6 +2,8 @@
 - kad deliPozicije dodeljuje i spustenost 			// na svaki sekund
 - kad crtaSve poziva proviruje() i crtajDizanje();	// na svakih 16.6 milisekundi
 
+- odvojiti pozicije od spustenosti
+- odvojiti crtaSve od crtaDizanje
 
     IDEJE:
 // da izlaze sa strane
