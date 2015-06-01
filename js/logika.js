@@ -1,20 +1,13 @@
 /*****************************************************************
-- kad deliPozicije dodeljuje i spustenost 			// na svaki sekund
-- kad crtaSve poziva proviruje() i crtajDizanje();	// na svakih 16.6 milisekundi
-
-- odvojiti dodelu pozicije od spustenosti
-- odvojiti crtaSve od crtaDizanje
-
+- postavljaMrdanje 			// na svaki sekund
+- azuriraMrdanje			// na svakih 16.6 milisekundi
 
     RESENJE:
 postavljaMrdanje:
-  na svaki sekund
-    provrti sve elemente
-    nasumicno im zadaje pocetnu poziciju (nadole ili ulevo)
+    nasumicno zadaje elementima pocetnu poziciju (nadole ili ulevo)
     (poredjati funkcije za izmenu atributa u niz, pa ih pozivati nasumicno)
 
 azuriraMrdanje:
-  na svaki frejm
      ako je pomeren_ulevo, poziva ulaziSleva()
      ako je spusten, poziva dizanje()
 
@@ -89,6 +82,7 @@ function azuriraj(){
 		dacic.ulazi(30);
 		vulin.ulazi(20);
 		toma.ulazi(10);
+		automat.azuriraMrdanje(scena.karakteri);
         automat.crtaSve();
         automat.pisePoruke(mish);
         scena.prikazujePoene(vreme);
@@ -98,6 +92,7 @@ function azuriraj(){
         if(vreme.proslaSekunda()) {
             automat.brisePoruke();
             automat.deliPozicije(scena.karakteri);
+			automat.postaviMrdanje(scena.karakteri);
             vreme.smanjuje();
             vreme.azurira();
         }	// kraj svaki sekund

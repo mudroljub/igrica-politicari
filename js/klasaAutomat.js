@@ -12,22 +12,37 @@ function Automat(scena) {
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){
 				karakteri[i].nadjiSlobodnoMesto(karakteri);
-				
-				// postavlja polazne pozicije za proviruje
-				// napraviti uslov ako viri
-				karakteri[i].spustenost = 30;
-				karakteri[i].zapamcen_y = karakteri[i].y;
-				
 			}
 		}
 	} // kraj deliPozicije
 
+	
+	this.postaviMrdanje = function(karakteri){
+		for(var i=0; i < karakteri.length; i++){
+			if(karakteri[i].igra){ 
+				// da dodeljuje nasumicno odstupanja
+				karakteri[i].spustenost = 30;
+				karakteri[i].zapamcen_x = karakteri[i].x;
+				karakteri[i].zapamcen_y = karakteri[i].y;
+			}
+		}	
+	}	// kraj postaviMrdanje
 
+	
+	this.azuriraMrdanje = function(karakteri) {
+		for(var i=0; i < karakteri.length; i++){
+			if(karakteri[i].igra){ 
+				// da menja i ostale pravce
+				scena.karakteri[i].proviruje();		// dize
+			}
+		}	
+	}	// azuriraMrdanje
+	
+	
     this.crtaSve = function(){
         scena.sadrzaj.drawImage(scena.pozadina, 0, 0, scena.sirina, scena.pozadina.nova_visina);
         for(var i=0; i < scena.karakteri.length; i++){
             if(scena.karakteri[i].igra){
-				scena.karakteri[i].proviruje();
                 scena.karakteri[i].crtajDizanje();
             }
         }

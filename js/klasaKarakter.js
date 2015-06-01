@@ -11,6 +11,7 @@ function Karakter(ime, slika_src, scena, vreme){
     this.x = -100;         // dodeljuje slucajnaPozicija
     this.y = -100;
 	this.zapamcen_y = 0;
+	this.zapamcen_x = 0;
 	this.zapamcena_visina = this.visina;
 
     this.igra = false;
