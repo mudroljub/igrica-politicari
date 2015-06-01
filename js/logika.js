@@ -5,6 +5,7 @@
 - odvojiti dodelu pozicije od spustenosti
 - odvojiti crtaSve od crtaDizanje
 
+
     RESENJE:
 postavljaMrdanje:
   na svaki sekund
