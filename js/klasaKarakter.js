@@ -52,7 +52,7 @@ function Karakter(ime, slika_src, scena, vreme){
 	
     this.crtajUlazenjeSleva = function() {
 		if (this.x >= 0 && this.y >= 0) {
-			scena.sadrzaj.drawImage(this.slika, 0, 0, this.slika.naturalWidth  - this.pomerenost_ulevo * (this.slika.naturalHeight/this.slika.height), this.slika.naturalHeight, this.x, this.y, this.sirina, this.visina)			
+			scena.sadrzaj.drawImage(this.slika, 0, 0, this.slika.naturalWidth  + this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width), this.slika.naturalHeight, this.x, this.y, this.sirina, this.visina)			
 		} 
     }   // kraj crtajUlazenjeSleva
 
@@ -78,7 +78,7 @@ function Karakter(ime, slika_src, scena, vreme){
             this.mrdanje_desno = false;
         }
 		this.mrdanje_desno ? this.mrdajDesno() : this.mrdajLevo();
-		this.x = this.zapamcen_x + this.pomerenost_ulevo;
+		this.x = this.zapamcen_x - this.pomerenost_ulevo;
 		//this.sirina = this.zapamcena_sirina - this.pomerenost_ulevo;
 	}
 	
