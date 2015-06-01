@@ -2,8 +2,27 @@
 - kad deliPozicije dodeljuje i spustenost 			// na svaki sekund
 - kad crtaSve poziva proviruje() i crtajDizanje();	// na svakih 16.6 milisekundi
 
-- odvojiti pozicije od spustenosti
+- odvojiti dodelu pozicije od spustenosti
 - odvojiti crtaSve od crtaDizanje
+
+    RESENJE:
+postavljaMrdanje:
+  na svaki sekund
+    provrti sve elemente
+    nasumicno im zadaje pocetnu poziciju (nadole ili ulevo)
+    (poredjati funkcije za izmenu atributa u niz, pa ih pozivati nasumicno)
+
+azuriraMrdanje:
+  na svaki frejm
+     ako je pomeren_ulevo, poziva ulaziSleva()
+     ako je spusten, poziva dizanje()
+
+dizanje:
+    smanjuje spustenost
+
+ulaziSleva:
+    smanjuje pomerenost_ulevo
+
 
     IDEJE:
 // da izlaze sa strane
