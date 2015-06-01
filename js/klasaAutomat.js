@@ -20,20 +20,29 @@ function Automat(scena) {
 	this.postaviMrdanje = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){ 
-				// da dodeljuje nasumicno odstupanja
-				karakteri[i].spustenost = 30;
 				karakteri[i].zapamcen_x = karakteri[i].x;
 				karakteri[i].zapamcen_y = karakteri[i].y;
+				// da svakom dodeljuje nasumicno odstupanje
+				karakteri[i].spustenost = 30;
+				karakteri[i].pomerenost_ulevo = 30;
 			}
 		}	
 	}	// kraj postaviMrdanje
 
 	
+	function dajOdstupanje(karakteri, i){	
+		return karakteri[i].proviruje();
+	}
+	
+
+	
+	
 	this.azuriraMrdanje = function(karakteri) {
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){ 
 				// da menja i ostale pravce
-				scena.karakteri[i].proviruje();		// dize
+				// dajOdstupanje(karakteri, i);
+				karakteri[i].izlaziSLeva()
 			}
 		}	
 	}	// azuriraMrdanje
@@ -43,7 +52,8 @@ function Automat(scena) {
         scena.sadrzaj.drawImage(scena.pozadina, 0, 0, scena.sirina, scena.pozadina.nova_visina);
         for(var i=0; i < scena.karakteri.length; i++){
             if(scena.karakteri[i].igra){
-                scena.karakteri[i].crtajDizanje();
+                //scena.karakteri[i].crtajDizanje();
+				scena.karakteri[i].crtajUlazenjeSleva();
             }
         }
     } // kraj crtaSve

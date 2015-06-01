@@ -1,6 +1,7 @@
 /*****************************************************************
 - postavljaMrdanje 			// na svaki sekund
 - azuriraMrdanje			// na svakih 16.6 milisekundi
+- simuirati random funkciju za azuriraMrdanje
 
     RESENJE:
 postavljaMrdanje:
@@ -19,6 +20,7 @@ ulaziSleva:
 
 
     IDEJE:
+// napraviti energiju od mase 		
 // da izlaze sa strane
 // da ne izlaze uvek, nego da malo sacekaju
 // da menjaju sliku na pogodak
