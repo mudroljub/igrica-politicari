@@ -52,7 +52,9 @@ function Karakter(ime, slika_src, scena, vreme){
 	
     this.crtaUlazSleva = function() {
 		if (this.x >= 0 && this.y >= 0) {
-			scena.sadrzaj.drawImage(this.slika, 0, 0, this.slika.naturalWidth  + this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width), this.slika.naturalHeight, this.x, this.y, this.sirina, this.visina)			
+			scena.sadrzaj.drawImage(this.slika, 0 - this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width), 0, this.slika.naturalWidth + this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width), this.slika.naturalHeight, this.x - this.pomerenost_ulevo, this.y, this.sirina, this.visina);
+
+            // drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
 		} 
     }   // kraj crtaUlazSleva
 
