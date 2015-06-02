@@ -53,7 +53,7 @@ function Automat(scena) {
         for(var i=0; i < scena.karakteri.length; i++){
             if(scena.karakteri[i].igra){
                 //scena.karakteri[i].crtajDizanje();
-				scena.karakteri[i].crtajUlazenjeSleva();
+				scena.karakteri[i].crtaUlazSleva();
             }
         }
     } // kraj crtaSve

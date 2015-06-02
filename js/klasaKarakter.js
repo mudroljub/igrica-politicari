@@ -50,11 +50,11 @@ function Karakter(ime, slika_src, scena, vreme){
     }   // kraj crtajDizanje
 
 	
-    this.crtajUlazenjeSleva = function() {
+    this.crtaUlazSleva = function() {
 		if (this.x >= 0 && this.y >= 0) {
 			scena.sadrzaj.drawImage(this.slika, 0, 0, this.slika.naturalWidth  + this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width), this.slika.naturalHeight, this.x, this.y, this.sirina, this.visina)			
 		} 
-    }   // kraj crtajUlazenjeSleva
+    }   // kraj crtaUlazSleva
 
 	
     this.proviruje = function(){ 
