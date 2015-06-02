@@ -30,18 +30,17 @@ function Automat(scena) {
 	}	// kraj postaviMrdanje
 
 	
-	function dajOdstupanje(karakteri, i){	
+	function praviOdstupanje(karakteri, i){	
 		return karakteri[i].proviruje();
 	}
 	
 
 	
-	
 	this.azuriraMrdanje = function(karakteri) {
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){ 
 				// da menja i ostale pravce
-				// dajOdstupanje(karakteri, i);
+				// praviOdstupanje(karakteri, i);
 				karakteri[i].izlaziSLeva()
 			}
 		}	
@@ -53,7 +52,7 @@ function Automat(scena) {
         for(var i=0; i < scena.karakteri.length; i++){
             if(scena.karakteri[i].igra){
                 //scena.karakteri[i].crtajDizanje();
-				scena.karakteri[i].crtaUlazSleva();
+				scena.karakteri[i].crtajUlazSleva();
             }
         }
     } // kraj crtaSve

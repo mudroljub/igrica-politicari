@@ -1,3 +1,5 @@
+// spojiti sve funkcije za crtanje u jednu ako je moguce
+
 function Karakter(ime, slika_src, scena, vreme){
 	var ovaj_karakter = this;
     this.ime = ime.VelikoSlovo();
@@ -49,14 +51,21 @@ function Karakter(ime, slika_src, scena, vreme){
 		} 
     }   // kraj crtajDizanje
 
-	
-    this.crtaUlazSleva = function() {
-		if (this.x >= 0 && this.y >= 0) {
-			scena.sadrzaj.drawImage(this.slika, 0 - this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width), 0, this.slika.naturalWidth + this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width), this.slika.naturalHeight, this.x - this.pomerenost_ulevo, this.y, this.sirina, this.visina);
+    this.crtajUlazSleva = function() {
+		var slika = this.slika;
+		var izvor_x = 0 + this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);
+		var izvor_y = 0;
+		var izvor_sirina = this.slika.naturalWidth - this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);
+		var izvor_visina = this.slika.naturalHeight;
+		var platno_x = this.x + this.pomerenost_ulevo;
+		var platno_y = this.y;
+		var na_platnu_sirina = this.sirina - this.pomerenost_ulevo;
+		var na_platnu_visina = this.visina;
 
-            // drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+		if (this.x >= 0 && this.y >= 0) {
+			scena.sadrzaj.drawImage(slika, izvor_x, izvor_y, izvor_sirina, izvor_visina, platno_x, platno_y, na_platnu_sirina, na_platnu_visina);
 		} 
-    }   // kraj crtaUlazSleva
+    }   // kraj crtajUlazSleva
 
 	
     this.proviruje = function(){ 
@@ -86,11 +95,11 @@ function Karakter(ime, slika_src, scena, vreme){
 	
 	
 	this.mrdajDesno = function(){
-		this.pomerenost_ulevo--;
+		this.pomerenost_ulevo -= 0.5;
 	}
 	
 	this.mrdajLevo = function(){
-		this.pomerenost_ulevo++;
+		this.pomerenost_ulevo += 0.5;
 	}
 	
     this.dizi = function(){
