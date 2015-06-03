@@ -1,20 +1,5 @@
 /*****************************************************************
 
-postavljaMrdanje:
-    nasumicno zadaje elementima pocetnu poziciju (nadole ili ulevo)
-    (poredjati funkcije za izmenu atributa u niz, pa ih pozivati nasumicno)
-
-azuriraMrdanje:
-     ako je pomeren_ulevo, poziva ulaziSleva()
-     ako je spusten, poziva dizanje()
-
-dizanje:
-    smanjuje spustenost
-
-ulaziSleva:
-    smanjuje pomerenost_ulevo
-
-
     IDEJE:
 // napraviti energiju od mase 		
 // da izlaze sa strane
@@ -67,9 +52,13 @@ scena.platno.addEventListener('click', reagujNaKlik);
 function postaviScenu(){
     scena.praviProzore(parametri_prozora);
     automat.praviKaraktere(slike.likovi, scena, vreme);   	// pravi objekte od niza likova
-    dacic.kuknjava = "Jaoj";								// dodaje jedinstvene poruke
-    vulin.kuknjava = "To boli!";
-    toma.kuknjava = "Evropa nema alternativu!";
+    dacic.jauk = "Jaoj";								// dodaje jedinstvene poruke
+    vulin.jauk = "To boli!";
+    toma.jauk = "Evropa nema alternativu!";
+    dacic.udji(30);
+    vulin.udji(20);
+    toma.udji(10);
+    automat.deliPozicije(scena.karakteri);
 	scena.animacija = requestAnimationFrame(azuriraj); // krace igra
 }   // kraj postaviScenu
 
@@ -80,6 +69,7 @@ function azuriraj(){
     if(vreme.proslaSekunda()) {
         automat.brisePoruke();
         automat.deliPozicije(scena.karakteri);
+        automat.zaustavljaMrdanje(scena.karakteri);
         automat.postavljaMrdanje(scena.karakteri);
         vreme.smanjuje();
         vreme.azurira();
@@ -87,9 +77,6 @@ function azuriraj(){
 
     // radi na svakih 16.6 milisekundi
     if(scena.ide){
-		dacic.ulazi(30);
-		vulin.ulazi(20);
-		toma.ulazi(10);
 		automat.azuriraMrdanje(scena.karakteri);
         automat.crtaSve();
         automat.pisePoruke(mish);

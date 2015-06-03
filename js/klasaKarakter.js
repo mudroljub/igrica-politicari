@@ -10,10 +10,10 @@ function Karakter(ime, slika_src, scena, vreme){
     this.slika = _prilagodiSliku(this, this.slika);
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
-    this.x = -100;         // dodeljuje slucajnaPozicija
-    this.y = -100;
-	this.zapamcen_y = 0;
-	this.zapamcen_x = 0;
+    this.x = 0;         // dodeljuje slucajnaPozicija
+    this.y = 0;
+	this.pre_mrdanja_y = 0;    // dodeljuje postavljaMrdanje
+	this.pre_mrdanja_x = 0;
 	this.zapamcena_visina = this.visina;
 	this.zapamcena_sirina = this.sirina;
 
@@ -29,11 +29,11 @@ function Karakter(ime, slika_src, scena, vreme){
 
 	/*************** FUNKCIJE ***************/
 
-	this.ulazi = function(trenutak_ulaska) {
+	this.udji = function(trenutak_ulaska) {
 		if(vreme.preostalo <= trenutak_ulaska) {
 		this.igra = true;
 		}
-	}	// kraj ulazi
+	}	// kraj udji
 
     this.slucajnaPozicija = function(pozicije) {
 		var slucajno = Math.floor (Math.random() * pozicije.length);		
@@ -69,7 +69,7 @@ function Karakter(ime, slika_src, scena, vreme){
         }
     }   // kraj crtajUlazSleva
 
-    this.UlaziSLeva = function(){
+    this.mrdajLevoDesno = function(){
         this.pokret_levo_desno = true;
         if(this.pomerenost_ulevo >= 30) {
             this.mrdanje_desno = true;
@@ -78,7 +78,7 @@ function Karakter(ime, slika_src, scena, vreme){
             this.mrdanje_desno = false;
         }
         this.mrdanje_desno ? this.mrdajDesno() : this.mrdajLevo();
-        this.x = this.zapamcen_x - this.pomerenost_ulevo;
+        this.x = this.pre_mrdanja_x - this.pomerenost_ulevo;
         //this.sirina = this.zapamcena_sirina - this.pomerenost_ulevo;
     }
 
@@ -90,7 +90,7 @@ function Karakter(ime, slika_src, scena, vreme){
 		this.pomerenost_ulevo += 0.5;
 	}
 
-    this.proviruje = function(){
+    this.mrdajDoleGore = function(){
         if(this.spustenost >= 30) {
             this.dizanje = true;
         }
@@ -98,9 +98,9 @@ function Karakter(ime, slika_src, scena, vreme){
             this.dizanje = false;
         }
         this.dizanje ? this.dizi() : this.spustaj();
-        this.y = this.zapamcen_y + this.spustenost;
+        this.y = this.pre_mrdanja_y + this.spustenost;
         this.visina = this.zapamcena_visina - this.spustenost;
-    }	// kraj proviruje
+    }	// kraj mrdajDoleGore
 
     this.dizi = function(){
 		this.spustenost--
@@ -133,11 +133,11 @@ function Karakter(ime, slika_src, scena, vreme){
     }   // kraj naSlobodnomCrtaj
 
     this.kuka = function(mish){
-        var kuknjava = this.kuknjava || "Jaoj, to boli!";
+        var jauk = this.jauk || "Jaoj, to boli!";
         scena.sadrzaj.font = "30px Verdana";
         scena.sadrzaj.lineWidth = 1;
-        scena.sadrzaj.fillText(kuknjava, mish.x+30, mish.y, 250);           // poslednji argument je maksimalna shirina teksta
-        scena.sadrzaj.strokeText(kuknjava, mish.x+30, mish.y, 250);
+        scena.sadrzaj.fillText(jauk, mish.x+30, mish.y, 250);           // poslednji argument je maksimalna shirina teksta
+        scena.sadrzaj.strokeText(jauk, mish.x+30, mish.y, 250);
     }   // kraj kuka
 
 	this.bacaParole = function(){
