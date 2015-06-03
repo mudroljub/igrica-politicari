@@ -1,10 +1,6 @@
 /*****************************************************************
-- postavljaMrdanje 			// na svaki sekund
-- azuriraMrdanje			// na svakih 16.6 milisekundi
-- simuirati random funkciju za azuriraMrdanje
 
-    RESENJE:
-postaviMrdanje:
+postavljaMrdanje:
     nasumicno zadaje elementima pocetnu poziciju (nadole ili ulevo)
     (poredjati funkcije za izmenu atributa u niz, pa ih pozivati nasumicno)
 
@@ -75,10 +71,20 @@ function postaviScenu(){
     vulin.kuknjava = "To boli!";
     toma.kuknjava = "Evropa nema alternativu!";
 	scena.animacija = requestAnimationFrame(azuriraj); // krace igra
-}
+}   // kraj postaviScenu
 
 
 function azuriraj(){
+
+    // radi na svaki sekund
+    if(vreme.proslaSekunda()) {
+        automat.brisePoruke();
+        automat.deliPozicije(scena.karakteri);
+        automat.postavljaMrdanje(scena.karakteri);
+        vreme.smanjuje();
+        vreme.azurira();
+    }	// kraj svaki sekund
+
     // radi na svakih 16.6 milisekundi
     if(scena.ide){
 		dacic.ulazi(30);
@@ -89,19 +95,10 @@ function azuriraj(){
         automat.pisePoruke(mish);
         scena.prikazujePoene(vreme);
         vreme.daPustiKraj(kraj);
-
-		// radi na svaki sekund
-        if(vreme.proslaSekunda()) {
-            automat.brisePoruke();
-            automat.deliPozicije(scena.karakteri);
-			automat.postaviMrdanje(scena.karakteri);
-            vreme.smanjuje();
-            vreme.azurira();
-        }	// kraj svaki sekund
-		
         scena.animacija = requestAnimationFrame(azuriraj);
     }	// kraj svaki frejm
-}
+
+}   // kraj azuriraj
 
 
 function reagujNaKlik(event){

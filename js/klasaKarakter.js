@@ -24,7 +24,7 @@ function Karakter(ime, slika_src, scena, vreme){
     this.spustenost = 0;
 	this.pomerenost_ulevo = 0;
 	this.pokret_levo_desno = false;
-	this.pokret_gore_dole = false;
+	this.pokret_dole_gore = false;
 	
 
 	/*************** FUNKCIJE ***************/

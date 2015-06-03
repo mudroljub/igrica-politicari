@@ -17,22 +17,21 @@ function Automat(scena) {
 	} // kraj deliPozicije
 
 	
-	this.postaviMrdanje = function(karakteri){
+	this.postavljaMrdanje = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){ 
 				// slucajni broj od jedan do 3
 				var slucajno = Math.floor((Math.random() * 3) + 1);
-				slucajno = 1
 				
 				switch(slucajno) {
 					case 1:
 						karakteri[i].pokret_levo_desno = true
 						break;
 					case 2:
-						karakteri[i].pokret_gore_dole = true
+						karakteri[i].pokret_dole_gore = true
 						break;
 					default:
-						kazi("dobio si 3")
+						karakteri[i].pokret_levo_desno = true
 				}	// kraj switch			
 				
 				karakteri[i].zapamcen_x = karakteri[i].x;
@@ -41,18 +40,19 @@ function Automat(scena) {
 				karakteri[i].pomerenost_ulevo = 30;
 			}
 		}	
-	}	// kraj postaviMrdanje
+	}	// kraj postavljaMrdanje
 
 	
 	this.azuriraMrdanje = function(karakteri) {
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){ 
 				if(karakteri[i].pokret_levo_desno) {
-					log(this)
+					log(karakteri[i].ime)
 					log("Ide levo desno")										
 					karakteri[i].UlaziSLeva()
 				}
-				if(karakteri[i].pokret_gore_dole) {
+				if(karakteri[i].pokret_dole_gore) {
+					log(karakteri[i].ime)
 					log("Ide gore dole")					
 				}				
 			}	// kraj ako su u igri
