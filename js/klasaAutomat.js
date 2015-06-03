@@ -44,19 +44,13 @@ function Automat(scena) {
 	}	// kraj postaviMrdanje
 
 	
-	function praviOdstupanje(karakteri, i){	
-		return karakteri[i].proviruje();
-	}
-	
-
-	
 	this.azuriraMrdanje = function(karakteri) {
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){ 
 				if(karakteri[i].pokret_levo_desno) {
 					log(this)
 					log("Ide levo desno")										
-					karakteri[i].izlaziSLeva()					
+					karakteri[i].UlaziSLeva()
 				}
 				if(karakteri[i].pokret_gore_dole) {
 					log("Ide gore dole")					

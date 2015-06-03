@@ -54,49 +54,34 @@ function Karakter(ime, slika_src, scena, vreme){
     }   // kraj crtajDizanje
 
     this.crtajUlazSleva = function() {
-		var slika = this.slika;
-		var izvor_x = 0 + this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);
-		var izvor_y = 0;
-		var izvor_sirina = this.slika.naturalWidth - this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);
-		var izvor_visina = this.slika.naturalHeight;
-		var platno_x = this.x + this.pomerenost_ulevo;
-		var platno_y = this.y;
-		var na_platnu_sirina = this.sirina - this.pomerenost_ulevo;
-		var na_platnu_visina = this.visina;
+        var slika = this.slika;
+        var izvor_x = 0 + this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);
+        var izvor_y = 0;
+        var izvor_sirina = this.slika.naturalWidth - this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);
+        var izvor_visina = this.slika.naturalHeight;
+        var platno_x = this.x + this.pomerenost_ulevo;
+        var platno_y = this.y;
+        var na_platnu_sirina = this.sirina - this.pomerenost_ulevo;
+        var na_platnu_visina = this.visina;
 
-		if (this.x >= 0 && this.y >= 0) {
-			scena.sadrzaj.drawImage(slika, izvor_x, izvor_y, izvor_sirina, izvor_visina, platno_x, platno_y, na_platnu_sirina, na_platnu_visina);
-		} 
+        if (this.x >= 0 && this.y >= 0) {
+            scena.sadrzaj.drawImage(slika, izvor_x, izvor_y, izvor_sirina, izvor_visina, platno_x, platno_y, na_platnu_sirina, na_platnu_visina);
+        }
     }   // kraj crtajUlazSleva
 
-	
-    this.proviruje = function(){ 
-        if(this.spustenost >= 30) {
-            this.dizanje = true;
-        }
-        if (this.spustenost <= 0) {
-            this.dizanje = false;
-        }
-		this.dizanje ? this.dizi() : this.spustaj();
-		this.y = this.zapamcen_y + this.spustenost;
-		this.visina = this.zapamcena_visina - this.spustenost;
-    }	// kraj proviruje
-
-	
-	this.izlaziSLeva = function(){	
-		this.pokret_levo_desno = true;
+    this.UlaziSLeva = function(){
+        this.pokret_levo_desno = true;
         if(this.pomerenost_ulevo >= 30) {
             this.mrdanje_desno = true;
         }
         if (this.pomerenost_ulevo <= 0) {
             this.mrdanje_desno = false;
         }
-		this.mrdanje_desno ? this.mrdajDesno() : this.mrdajLevo();
-		this.x = this.zapamcen_x - this.pomerenost_ulevo;
-		//this.sirina = this.zapamcena_sirina - this.pomerenost_ulevo;
-	}
-	
-	
+        this.mrdanje_desno ? this.mrdajDesno() : this.mrdajLevo();
+        this.x = this.zapamcen_x - this.pomerenost_ulevo;
+        //this.sirina = this.zapamcena_sirina - this.pomerenost_ulevo;
+    }
+
 	this.mrdajDesno = function(){
 		this.pomerenost_ulevo -= 0.5;
 	}
@@ -104,7 +89,19 @@ function Karakter(ime, slika_src, scena, vreme){
 	this.mrdajLevo = function(){
 		this.pomerenost_ulevo += 0.5;
 	}
-	
+
+    this.proviruje = function(){
+        if(this.spustenost >= 30) {
+            this.dizanje = true;
+        }
+        if (this.spustenost <= 0) {
+            this.dizanje = false;
+        }
+        this.dizanje ? this.dizi() : this.spustaj();
+        this.y = this.zapamcen_y + this.spustenost;
+        this.visina = this.zapamcena_visina - this.spustenost;
+    }	// kraj proviruje
+
     this.dizi = function(){
 		this.spustenost--
 	}	// kraj dizi
@@ -147,11 +144,6 @@ function Karakter(ime, slika_src, scena, vreme){
         var parola = this.parola || "Mi branimo srpski narod!";
 		// bacaParole koje ti skidaju energiju
     }   // kraj bacaParole
-
-    this.jelNapustio = function(scena){
-        // da li je ovaj_lik jos u sceni
-		// ako je napustio, radi nesto, unistava ga, pamti
-    }
 
     function _prilagodiSliku(ovaj_karakter, slika){
         // prilagodjava sliku standardnoj visini slike

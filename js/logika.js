@@ -4,7 +4,7 @@
 - simuirati random funkciju za azuriraMrdanje
 
     RESENJE:
-postavljaMrdanje:
+postaviMrdanje:
     nasumicno zadaje elementima pocetnu poziciju (nadole ili ulevo)
     (poredjati funkcije za izmenu atributa u niz, pa ih pozivati nasumicno)
 
