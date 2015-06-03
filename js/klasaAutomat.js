@@ -62,17 +62,16 @@ function Automat(scena) {
 		}	
 	}	// azuriraMrdanje
 	
-	// dodeliti odgovarajuce crtajUlazSleva ili crtajDizanje
-
-    this.crtaSve = function(){
+	// pozvati odgovarajucu funkciju: crtajUlazSleva ili crtajDizanje
+    this.crtaSve = function(scena, karakteri){
         scena.sadrzaj.drawImage(scena.pozadina, 0, 0, scena.sirina, scena.pozadina.nova_visina);
-        for(var i=0; i < scena.karakteri.length; i++){
-            if(scena.karakteri[i].igra){
+        for(var i=0; i < karakteri.length; i++){
+            if(karakteri[i].igra){
                 //scena.karakteri[i].crtajDizanje();
-				scena.karakteri[i].crtajUlazSleva();
+				karakteri[i].crtajUlazSleva();
             }
-        }
-    } // kraj crtaSve
+        }	// kraj for
+    }	// kraj crtaSve
 
 	this.pisePoruke = function(mish){
 		for(var i=0; i < scena.karakteri.length; i++){

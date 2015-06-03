@@ -65,8 +65,8 @@ function postaviScenu(){
 
 function azuriraj(){
 
-    // radi na svaki sekund
-    if(vreme.proslaSekunda()) {
+    // radi svaki sekund
+    if(vreme.prodjeSekunda()) {
         automat.brisePoruke();
         automat.deliPozicije(scena.karakteri);
         automat.zaustavljaMrdanje(scena.karakteri);
@@ -75,13 +75,13 @@ function azuriraj(){
         vreme.azurira();
     }	// kraj svaki sekund
 
-    // radi na svakih 16.6 milisekundi
+    // radi svakih 16.6 milisekundi
     if(scena.ide){
 		automat.azuriraMrdanje(scena.karakteri);
-        automat.crtaSve();
+        automat.crtaSve(scena, scena.karakteri);
         automat.pisePoruke(mish);
         scena.prikazujePoene(vreme);
-        vreme.daPustiKraj(kraj);
+        vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
     }	// kraj svaki frejm
 

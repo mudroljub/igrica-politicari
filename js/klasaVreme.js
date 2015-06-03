@@ -7,17 +7,17 @@ function Vreme(zadato) {
 		return new Date().getSeconds();
 	}
 
-	this.daPustiKraj = function(kraj){
+	this.proveriKraj = function(kraj){
 		if(vreme.preostalo < 1) {
 			kraj.pusti();
 		}	
-	}	// kraj daPustiKraj
+	}	// kraj proveriKraj
 
 	this.smanjuje = function(){
 		this.preostalo--
 	}
 	
-	this.proslaSekunda = function(){
+	this.prodjeSekunda = function(){
 		return this.ovaSekunda() != this.prethodna_sekunda
 	}
 	
