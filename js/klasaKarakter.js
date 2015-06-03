@@ -23,7 +23,9 @@ function Karakter(ime, slika_src, scena, vreme){
 	this.mrdanje_desno = false;
     this.spustenost = 0;
 	this.pomerenost_ulevo = 0;
-
+	this.pokret_levo_desno = false;
+	this.pokret_gore_dole = false;
+	
 
 	/*************** FUNKCIJE ***************/
 
@@ -81,7 +83,8 @@ function Karakter(ime, slika_src, scena, vreme){
     }	// kraj proviruje
 
 	
-	this.izlaziSLeva = function(){		
+	this.izlaziSLeva = function(){	
+		this.pokret_levo_desno = true;
         if(this.pomerenost_ulevo >= 30) {
             this.mrdanje_desno = true;
         }

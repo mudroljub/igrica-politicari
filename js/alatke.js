@@ -26,6 +26,10 @@ function kazi(bilo_sta){
     console.log(bilo_sta);
 }
 
+function log(bilo_sta){
+    console.log(bilo_sta);
+}
+
 // radi samo za window objekt, napraviti jos da proverava kom objektu atribut pripada
 function otkri(sadrzaj){
     var ime_varijable;

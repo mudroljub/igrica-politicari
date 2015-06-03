@@ -20,9 +20,23 @@ function Automat(scena) {
 	this.postaviMrdanje = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){ 
+				// slucajni broj od jedan do 3
+				var slucajno = Math.floor((Math.random() * 3) + 1);
+				slucajno = 1
+				
+				switch(slucajno) {
+					case 1:
+						karakteri[i].pokret_levo_desno = true
+						break;
+					case 2:
+						karakteri[i].pokret_gore_dole = true
+						break;
+					default:
+						kazi("dobio si 3")
+				}	// kraj switch			
+				
 				karakteri[i].zapamcen_x = karakteri[i].x;
 				karakteri[i].zapamcen_y = karakteri[i].y;
-				// da svakom dodeljuje nasumicno odstupanje
 				karakteri[i].spustenost = 30;
 				karakteri[i].pomerenost_ulevo = 30;
 			}
@@ -39,10 +53,15 @@ function Automat(scena) {
 	this.azuriraMrdanje = function(karakteri) {
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){ 
-				// da menja i ostale pravce
-				// praviOdstupanje(karakteri, i);
-				karakteri[i].izlaziSLeva()
-			}
+				if(karakteri[i].pokret_levo_desno) {
+					log(this)
+					log("Ide levo desno")										
+					karakteri[i].izlaziSLeva()					
+				}
+				if(karakteri[i].pokret_gore_dole) {
+					log("Ide gore dole")					
+				}				
+			}	// kraj ako su u igri
 		}	
 	}	// azuriraMrdanje
 	
