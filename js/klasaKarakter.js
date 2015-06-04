@@ -72,13 +72,15 @@ function Karakter(ime, slika_src, scena, vreme){
         this.sirina = this.zapamcena_sirina - this.pomerenost_ulevo;
     }
 
-    this.crtajDizanje = function() {
+    this.crtajMrdanje = function() {
+		var pomerenost_x = this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);			
+		var smanjena_sirina = this.slika.naturalWidth - pomerenost_x;
 		var smanjena_visina = this.slika.naturalHeight - this.spustenost * (this.slika.naturalHeight/this.slika.height);
-
+		
         var slika = this.slika;
-        var izvor_x = 0;
+        var izvor_x = 0 + pomerenost_x;
         var izvor_y = 0;
-        var izvor_sirina = this.slika.naturalWidth;
+        var izvor_sirina = smanjena_sirina;
         var izvor_visina = smanjena_visina;
         var platno_x = this.x;
         var platno_y = this.y;
@@ -86,30 +88,7 @@ function Karakter(ime, slika_src, scena, vreme){
         var na_platnu_visina = this.visina;
 		
 		scena.sadrzaj.drawImage(slika, izvor_x, izvor_y, izvor_sirina, izvor_visina, platno_x, platno_y, na_platnu_sirina, na_platnu_visina);
-    }   // kraj crtajDizanje
-
-    /*
-     crta sliku od y, x do smanjena sirina, puna visina
-     uzima izvor slike od x += pomerenost, y
-     do smanjena sirina, visina
-     */
-
-    this.crtajUlazSleva = function() {
-		var smanjena_sirina = this.slika.naturalWidth - this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);
-		var pomerenost_x = this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);
-		
-        var slika = this.slika;
-        var izvor_x = 0 + pomerenost_x;
-        var izvor_y = 0;
-        var izvor_sirina = smanjena_sirina;
-        var izvor_visina = this.slika.naturalHeight;
-        var platno_x = this.x;
-        var platno_y = this.y;
-        var na_platnu_sirina = this.sirina;
-        var na_platnu_visina = this.visina;
-
-		scena.sadrzaj.drawImage(slika, izvor_x, izvor_y, izvor_sirina, izvor_visina, platno_x, platno_y, na_platnu_sirina, na_platnu_visina);
-    }   // kraj crtajUlazSleva
+    }   // kraj crtajMrdanje
 
 	this.mrdajDesno = function(){
 		this.pomerenost_ulevo -= 0.5;

@@ -34,8 +34,8 @@ function Automat(scena) {
 				karakteri[i].zapamcen_x = karakteri[i].x;
 				karakteri[i].zapamcen_y = karakteri[i].y;
 
-				var slucajno = Math.floor((Math.random() * 3) + 1);
-				switch(1) {
+				var slucaj = Math.floor((Math.random() * 2) + 1);
+				switch(slucaj) {
 					case 1:
 						karakteri[i].pomerenost_ulevo = 30;
 						karakteri[i].pokret_levo_desno = true
@@ -44,8 +44,6 @@ function Automat(scena) {
 						karakteri[i].spustenost = 30;
 						karakteri[i].pokret_dole_gore = true
 						break;
-					default:
-						// nista
 				}	// kraj switch
 			}	// kraj if igra
 		}	
@@ -69,8 +67,8 @@ function Automat(scena) {
         for(var i=0; i < karakteri.length; i++){
             if(karakteri[i].igra){
 				//karakteri[i].crtaj();
-				//karakteri[i].crtajDizanje();
-				karakteri[i].crtajUlazSleva();
+				karakteri[i].crtajMrdanje();
+				//karakteri[i].crtajUlazSleva();
             }
         }	// kraj for
     }	// kraj crtaSve
