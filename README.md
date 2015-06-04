@@ -1,5 +1,4 @@
 # igrica
-pravimo browser igricu
 
 Prva srpska igrica otvorenog koda. 
 
