@@ -67,8 +67,8 @@ function azuriraj(){
     // radi svaki sekund
     if(vreme.prodjeSekunda()) {
         automat.brisePoruke();
-        automat.deliPozicije(scena.karakteri);
         automat.zaustavljaMrdanje(scena.karakteri);
+        automat.deliPozicije(scena.karakteri);
         automat.postavljaMrdanje(scena.karakteri);
         vreme.smanjuje();
         vreme.azurira();
