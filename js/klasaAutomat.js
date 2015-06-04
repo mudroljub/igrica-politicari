@@ -68,9 +68,9 @@ function Automat(scena) {
         scena.sadrzaj.drawImage(scena.pozadina, 0, 0, scena.sirina, scena.pozadina.nova_visina);
         for(var i=0; i < karakteri.length; i++){
             if(karakteri[i].igra){
-				karakteri[i].crtaj();
+				//karakteri[i].crtaj();
 				//karakteri[i].crtajDizanje();
-				//karakteri[i].crtajUlazSleva();
+				karakteri[i].crtajUlazSleva();
             }
         }	// kraj for
     }	// kraj crtaSve

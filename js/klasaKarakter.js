@@ -69,33 +69,8 @@ function Karakter(ime, slika_src, scena, vreme){
         }
         this.mrdanje_desno ? this.mrdajDesno() : this.mrdajLevo();
 
-        //this.sirina = this.zapamcena_sirina - this.pomerenost_ulevo;
-        this.x = this.zapamcen_x - this.pomerenost_ulevo;
-
-        log(this.slika)
+        this.sirina = this.zapamcena_sirina - this.pomerenost_ulevo;
     }
-
-    /*
-    KAD JE LIK SPUSTEN:
-        smanjuje visinu lika za spustenost
-        pomera y += spustenost
-
-        crta sliku od x, y do sirina, smanjena visina
-
-        uzima izvor slike od x, y
-        do sirina, smanjena visina
-
-
-    KAD JE LIK POMEREN ULEVO:
-        smanjuje sirinu lika za spustenost
-        pomera x += spustenost
-
-        crta sliku od y, x do smanjena sirina, visina
-
-        uzima izvor slike od x += spustenost, y
-        do smanjena sirina, visina
-
-    */
 
     this.crtajDizanje = function() {
 		var smanjena_visina = this.slika.naturalHeight - this.spustenost * (this.slika.naturalHeight/this.slika.height);
@@ -112,6 +87,13 @@ function Karakter(ime, slika_src, scena, vreme){
 		
 		scena.sadrzaj.drawImage(slika, izvor_x, izvor_y, izvor_sirina, izvor_visina, platno_x, platno_y, na_platnu_sirina, na_platnu_visina);
     }   // kraj crtajDizanje
+
+    /*
+     crtajUlazSleva:
+     crta sliku od y, x do smanjena sirina, visina
+     uzima izvor slike od x += spustenost, y
+     do smanjena sirina, visina
+     */
 
     this.crtajUlazSleva = function() {
 		var smanjena_sirina = this.slika.naturalWidth - this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);
@@ -131,11 +113,11 @@ function Karakter(ime, slika_src, scena, vreme){
     }   // kraj crtajUlazSleva
 
 	this.mrdajDesno = function(){
-		//this.pomerenost_ulevo -= 0.5;
+		this.pomerenost_ulevo -= 0.5;
 	}
 	
 	this.mrdajLevo = function(){
-		//this.pomerenost_ulevo += 0.5;
+		this.pomerenost_ulevo += 0.5;
 	}
 
     this.dizi = function(){
