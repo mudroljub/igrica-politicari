@@ -1,5 +1,3 @@
-// spojiti sve funkcije za crtanje u jednu ako je moguce
-
 function Karakter(ime, slika_src, scena, vreme){
 	var ovaj_karakter = this;
     this.ime = ime.VelikoSlovo();
@@ -10,7 +8,7 @@ function Karakter(ime, slika_src, scena, vreme){
     this.slika = _prilagodiSliku(this, this.slika);
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
-    this.x = 0;         // dodeljuje slucajnaPozicija
+    this.x = 0;         	// dodeljuje slucajnaPozicija
     this.y = 0;
 	this.zapamcen_y = 0;    // dodeljuje postavljaMrdanje
 	this.zapamcen_x = 0;
