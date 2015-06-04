@@ -47,6 +47,56 @@ function Karakter(ime, slika_src, scena, vreme){
 		}
 	}   // kraj crtaj
 
+    this.mrdajDoleGore = function(){
+        if(this.spustenost >= 30) {
+            this.dizanje = true;
+        }
+        if (this.spustenost <= 0) {
+            this.dizanje = false;
+        }
+        this.dizanje ? this.dizi() : this.spustaj();
+        this.y = this.pre_mrdanja_y + this.spustenost;
+        this.visina = this.zapamcena_visina - this.spustenost;
+        log(this.slika)
+        log(this.slika.width)
+        log(this.slika.naturalWidth)
+    }	// kraj mrdajDoleGore
+
+    this.mrdajLevoDesno = function(){
+        this.pokret_levo_desno = true;
+        if(this.pomerenost_ulevo >= 30) {
+            this.mrdanje_desno = true;
+        }
+        if (this.pomerenost_ulevo <= 0) {
+            this.mrdanje_desno = false;
+        }
+        this.mrdanje_desno ? this.mrdajDesno() : this.mrdajLevo();
+        this.x = this.pre_mrdanja_x - this.pomerenost_ulevo;
+        //this.sirina = this.zapamcena_sirina - this.pomerenost_ulevo;
+    }
+
+    /*
+        KAD JE LIK SPUSTEN:
+            smanjuje visinu lika za spustenost
+            pomera y += spustenost
+
+            crta sliku od x, y do sirina, smanjena visina
+
+            uzima izvor slike od x, y
+            do sirina, smanjena visina
+
+
+        KAD JE LIK POMEREN ULEVO:
+            smanjuje sirinu lika za spustenost
+            pomera x += spustenost
+
+            crta sliku od y, x do smanjena sirina, visina
+
+            uzima izvor slike od x += spustenost, y
+            do smanjena sirina, visina
+
+    */
+
     this.crtajDizanje = function() {
 		var smanjena_visina = this.slika.naturalHeight - this.spustenost * (this.slika.naturalHeight/this.slika.height);
 
@@ -65,10 +115,10 @@ function Karakter(ime, slika_src, scena, vreme){
 
     this.crtajUlazSleva = function() {
 		var smanjena_sirina = this.slika.naturalWidth - this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);
-		var odstupanje_x = this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);
+		var pomerenost_x = this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);
 		
         var slika = this.slika;
-        var izvor_x = 0 + odstupanje_x;
+        var izvor_x = 0 + pomerenost_x;
         var izvor_y = 0;
         var izvor_sirina = smanjena_sirina;
         var izvor_visina = this.slika.naturalHeight;
@@ -80,19 +130,6 @@ function Karakter(ime, slika_src, scena, vreme){
 		scena.sadrzaj.drawImage(slika, izvor_x, izvor_y, izvor_sirina, izvor_visina, platno_x, platno_y, na_platnu_sirina, na_platnu_visina);
     }   // kraj crtajUlazSleva
 
-    this.mrdajLevoDesno = function(){
-        this.pokret_levo_desno = true;
-        if(this.pomerenost_ulevo >= 30) {
-            this.mrdanje_desno = true;
-        }
-        if (this.pomerenost_ulevo <= 0) {
-            this.mrdanje_desno = false;
-        }
-        this.mrdanje_desno ? this.mrdajDesno() : this.mrdajLevo();
-        this.x = this.pre_mrdanja_x - this.pomerenost_ulevo;
-        //this.sirina = this.zapamcena_sirina - this.pomerenost_ulevo;
-    }
-
 	this.mrdajDesno = function(){
 		this.pomerenost_ulevo -= 0.5;
 	}
@@ -100,18 +137,6 @@ function Karakter(ime, slika_src, scena, vreme){
 	this.mrdajLevo = function(){
 		this.pomerenost_ulevo += 0.5;
 	}
-
-    this.mrdajDoleGore = function(){
-        if(this.spustenost >= 30) {
-            this.dizanje = true;
-        }
-        if (this.spustenost <= 0) {
-            this.dizanje = false;
-        }
-        this.dizanje ? this.dizi() : this.spustaj();
-        this.y = this.pre_mrdanja_y + this.spustenost;
-        this.visina = this.zapamcena_visina - this.spustenost;
-    }	// kraj mrdajDoleGore
 
     this.dizi = function(){
 		this.spustenost--

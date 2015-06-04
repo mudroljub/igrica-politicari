@@ -1,5 +1,4 @@
 /*****************************************************************
-
     IDEJE:
 // napraviti energiju od mase 		
 // da izlaze sa strane
