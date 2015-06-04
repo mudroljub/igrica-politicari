@@ -61,7 +61,6 @@ function Karakter(ime, slika_src, scena, vreme){
     }	// kraj mrdajDoleGore
 
     this.mrdajLevoDesno = function(){
-        this.pokret_levo_desno = true;
         if(this.pomerenost_ulevo >= 30) {
             this.mrdanje_desno = true;
         }
@@ -69,29 +68,32 @@ function Karakter(ime, slika_src, scena, vreme){
             this.mrdanje_desno = false;
         }
         this.mrdanje_desno ? this.mrdajDesno() : this.mrdajLevo();
-        this.x = this.zapamcen_x - this.pomerenost_ulevo;
+
         //this.sirina = this.zapamcena_sirina - this.pomerenost_ulevo;
+        this.x = this.zapamcen_x - this.pomerenost_ulevo;
+
+        log(this.slika)
     }
 
     /*
-        KAD JE LIK SPUSTEN:
-            smanjuje visinu lika za spustenost
-            pomera y += spustenost
+    KAD JE LIK SPUSTEN:
+        smanjuje visinu lika za spustenost
+        pomera y += spustenost
 
-            crta sliku od x, y do sirina, smanjena visina
+        crta sliku od x, y do sirina, smanjena visina
 
-            uzima izvor slike od x, y
-            do sirina, smanjena visina
+        uzima izvor slike od x, y
+        do sirina, smanjena visina
 
 
-        KAD JE LIK POMEREN ULEVO:
-            smanjuje sirinu lika za spustenost
-            pomera x += spustenost
+    KAD JE LIK POMEREN ULEVO:
+        smanjuje sirinu lika za spustenost
+        pomera x += spustenost
 
-            crta sliku od y, x do smanjena sirina, visina
+        crta sliku od y, x do smanjena sirina, visina
 
-            uzima izvor slike od x += spustenost, y
-            do smanjena sirina, visina
+        uzima izvor slike od x += spustenost, y
+        do smanjena sirina, visina
 
     */
 
@@ -129,11 +131,11 @@ function Karakter(ime, slika_src, scena, vreme){
     }   // kraj crtajUlazSleva
 
 	this.mrdajDesno = function(){
-		this.pomerenost_ulevo -= 0.5;
+		//this.pomerenost_ulevo -= 0.5;
 	}
 	
 	this.mrdajLevo = function(){
-		this.pomerenost_ulevo += 0.5;
+		//this.pomerenost_ulevo += 0.5;
 	}
 
     this.dizi = function(){

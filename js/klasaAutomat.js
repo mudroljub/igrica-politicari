@@ -22,6 +22,8 @@ function Automat(scena) {
 				karakteri[i].pokret_dole_gore = false
 				karakteri[i].spustenost = 0;
 				karakteri[i].pomerenost_ulevo = 0;
+				karakteri[i].visina = karakteri[i].zapamcena_visina;
+				karakteri[i].sirina = karakteri[i].zapamcena_sirina;
 			}
 		}
 	} // kraj deliPozicije
@@ -31,19 +33,19 @@ function Automat(scena) {
 			if(karakteri[i].igra){
 				karakteri[i].zapamcen_x = karakteri[i].x;
 				karakteri[i].zapamcen_y = karakteri[i].y;
-				karakteri[i].spustenost = 30;
-				karakteri[i].pomerenost_ulevo = 30;
 
 				var slucajno = Math.floor((Math.random() * 3) + 1);
-				switch(slucajno) {
+				switch(1) {
 					case 1:
+						karakteri[i].pomerenost_ulevo = 30;
 						karakteri[i].pokret_levo_desno = true
 						break;
 					case 2:
+						karakteri[i].spustenost = 30;
 						karakteri[i].pokret_dole_gore = true
 						break;
 					default:
-						karakteri[i].pokret_levo_desno = true
+						// nista
 				}	// kraj switch
 			}	// kraj if igra
 		}	
@@ -61,14 +63,14 @@ function Automat(scena) {
 			}	// kraj ako su u igri
 		}	
 	}	// azuriraMrdanje
-	
-	// pozvati odgovarajucu funkciju: crtajUlazSleva ili crtajDizanje
+
     this.crtaSve = function(scena, karakteri){
         scena.sadrzaj.drawImage(scena.pozadina, 0, 0, scena.sirina, scena.pozadina.nova_visina);
         for(var i=0; i < karakteri.length; i++){
             if(karakteri[i].igra){
-                //karakteri[i].crtajDizanje();
-				karakteri[i].crtajUlazSleva();
+				karakteri[i].crtaj();
+				//karakteri[i].crtajDizanje();
+				//karakteri[i].crtajUlazSleva();
             }
         }	// kraj for
     }	// kraj crtaSve
