@@ -89,9 +89,8 @@ function Karakter(ime, slika_src, scena, vreme){
     }   // kraj crtajDizanje
 
     /*
-     crtajUlazSleva:
-     crta sliku od y, x do smanjena sirina, visina
-     uzima izvor slike od x += spustenost, y
+     crta sliku od y, x do smanjena sirina, puna visina
+     uzima izvor slike od x += pomerenost, y
      do smanjena sirina, visina
      */
 
@@ -104,9 +103,9 @@ function Karakter(ime, slika_src, scena, vreme){
         var izvor_y = 0;
         var izvor_sirina = smanjena_sirina;
         var izvor_visina = this.slika.naturalHeight;
-        var platno_x = this.x + this.pomerenost_ulevo;
+        var platno_x = this.x;
         var platno_y = this.y;
-        var na_platnu_sirina = this.sirina - this.pomerenost_ulevo;
+        var na_platnu_sirina = this.sirina;
         var na_platnu_visina = this.visina;
 
 		scena.sadrzaj.drawImage(slika, izvor_x, izvor_y, izvor_sirina, izvor_visina, platno_x, platno_y, na_platnu_sirina, na_platnu_visina);
