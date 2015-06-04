@@ -12,8 +12,8 @@ function Karakter(ime, slika_src, scena, vreme){
     this.visina = this.slika.height;
     this.x = 0;         // dodeljuje slucajnaPozicija
     this.y = 0;
-	this.pre_mrdanja_y = 0;    // dodeljuje postavljaMrdanje
-	this.pre_mrdanja_x = 0;
+	this.zapamcen_y = 0;    // dodeljuje postavljaMrdanje
+	this.zapamcen_x = 0;
 	this.zapamcena_visina = this.visina;
 	this.zapamcena_sirina = this.sirina;
 
@@ -55,11 +55,9 @@ function Karakter(ime, slika_src, scena, vreme){
             this.dizanje = false;
         }
         this.dizanje ? this.dizi() : this.spustaj();
-        this.y = this.pre_mrdanja_y + this.spustenost;
+
         this.visina = this.zapamcena_visina - this.spustenost;
-        log(this.slika)
-        log(this.slika.width)
-        log(this.slika.naturalWidth)
+        this.y = this.zapamcen_y + this.spustenost;
     }	// kraj mrdajDoleGore
 
     this.mrdajLevoDesno = function(){
@@ -71,7 +69,7 @@ function Karakter(ime, slika_src, scena, vreme){
             this.mrdanje_desno = false;
         }
         this.mrdanje_desno ? this.mrdajDesno() : this.mrdajLevo();
-        this.x = this.pre_mrdanja_x - this.pomerenost_ulevo;
+        this.x = this.zapamcen_x - this.pomerenost_ulevo;
         //this.sirina = this.zapamcena_sirina - this.pomerenost_ulevo;
     }
 

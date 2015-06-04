@@ -29,8 +29,8 @@ function Automat(scena) {
 	this.postavljaMrdanje = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){
-				karakteri[i].pre_mrdanja_x = karakteri[i].x;
-				karakteri[i].pre_mrdanja_y = karakteri[i].y;
+				karakteri[i].zapamcen_x = karakteri[i].x;
+				karakteri[i].zapamcen_y = karakteri[i].y;
 				karakteri[i].spustenost = 30;
 				karakteri[i].pomerenost_ulevo = 30;
 
