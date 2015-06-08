@@ -1,6 +1,5 @@
 /*****************************************************************
     IDEJE:
-// nestali vulin i toma!
 // da ne izlaze uvek, nego da malo sacekaju
 // da menjaju sliku na pogodak
 // da nasumicno ispustaju parole
@@ -76,7 +75,11 @@ function azuriraj(){
         vreme.azurira();
     }	// kraj svaki sekund
 
-    // radi svakih 16.6 milisekundi
+	if(vreme.prodjeNasumicno()){
+		log("Treba da sacekam: " + vreme.prodjeNasumicno() )
+	}	// kraj prodjeNasumicno
+
+    // svakih 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
 		automat.azuriraMrdanje(scena.karakteri);
         automat.crtaSve(scena, scena.karakteri);
