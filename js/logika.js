@@ -11,6 +11,9 @@
     PROBLEMI:
 // kad je presirok ekran, sece pozadinu po visini !
 // mozda klasa Prilagodjavac za pozadinu, slike, slova
+
+    DOBRA PRAKSA:
+    * zaokruziti crtanje na pun piksel, bez decimala
 ********************************************************************/
 
 // nazivi bitni, od njih pravi objekte
@@ -53,7 +56,6 @@ function postaviScenu(){
     dacic.jauk = "Jaoj";								// dodaje jedinstvene poruke
     vulin.jauk = "To boli!";
     toma.jauk = "Evropa nema alternativu!";
-
     automat.deliPozicije(scena.karakteri);
 	scena.animacija = requestAnimationFrame(azuriraj); // krace igra
 }   // kraj postaviScenu
@@ -61,6 +63,16 @@ function postaviScenu(){
 
 function azuriraj(){
 
+    // svakih 16.6 milisekundi (60 herca/sekund)
+    if(scena.ide){
+		automat.azuriraMrdanje(scena.karakteri);
+        automat.crtaSve(scena, scena.karakteri);
+        automat.pisePoruke(mish);
+        scena.prikazujePoene(vreme);
+        vreme.proveriKraj(kraj);
+        scena.animacija = requestAnimationFrame(azuriraj);
+    }	// kraj svaki frejm
+    
     // radi svaki sekund
     if(vreme.prodjeSekunda()) {
 	    dacic.udji(30);
@@ -75,19 +87,10 @@ function azuriraj(){
         vreme.azurira();
     }	// kraj svaki sekund
 
-	if(vreme.prodjeNasumicno()){
-		log("Treba da sacekam: " + vreme.prodjeNasumicno() )
+	// log trajanje_slucaja
+	if(vreme.ovaSekunda() % 10 == 0) {
+		log("Treba da sacekam: " + vreme.trajanjeSlucajno() )
 	}	// kraj prodjeNasumicno
-
-    // svakih 16.6 milisekundi (60 herca/sekund)
-    if(scena.ide){
-		automat.azuriraMrdanje(scena.karakteri);
-        automat.crtaSve(scena, scena.karakteri);
-        automat.pisePoruke(mish);
-        scena.prikazujePoene(vreme);
-        vreme.proveriKraj(kraj);
-        scena.animacija = requestAnimationFrame(azuriraj);
-    }	// kraj svaki frejm
 
 }   // kraj azuriraj
 

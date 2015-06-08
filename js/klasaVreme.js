@@ -22,10 +22,15 @@ function Vreme(zadato) {
 		return this.ovaSekunda() != this.prethodna_sekunda
 	}
 	
-	this.prodjeNasumicno = function(){
+	this.prodjeSlucajno = function(){
+		// return ovaj_trenutak == zapamceno_vreme + trajanjeSlucajno()
+	}
+	
+	this.trajanjeSlucajno = function(){
 		var slucaj = Math.random() * 2;
+		slucaj = Math.round(slucaj * 100) / 100
 		return slucaj;
-	}	// kraj prodjeNasumicno
+	}	// kraj trajanjeSlucajno
 	
 	this.azurira = function(){
 		this.prethodna_sekunda = this.ovaSekunda();		
