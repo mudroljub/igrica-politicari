@@ -1,3 +1,4 @@
+
 function Automat(scena) {
 
     this.praviKaraktere = function (likovi, scena, vreme){

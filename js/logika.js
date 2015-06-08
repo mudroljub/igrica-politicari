@@ -1,13 +1,13 @@
 /*****************************************************************
     IDEJE:
-// napraviti energiju od mase 		
-// da izlaze sa strane
+// nestali vulin i toma!
 // da ne izlaze uvek, nego da malo sacekaju
 // da menjaju sliku na pogodak
 // da nasumicno ispustaju parole
 // grafiti na skupstini vucicu pederu
 // paradajz pogadja
 // uvodna animacija uvecavanje skupstina
+// napraviti energiju od mase 
 
     PROBLEMI:
 // kad je presirok ekran, sece pozadinu po visini !
@@ -54,9 +54,7 @@ function postaviScenu(){
     dacic.jauk = "Jaoj";								// dodaje jedinstvene poruke
     vulin.jauk = "To boli!";
     toma.jauk = "Evropa nema alternativu!";
-    dacic.udji(30);
-    vulin.udji(20);
-    toma.udji(10);
+
     automat.deliPozicije(scena.karakteri);
 	scena.animacija = requestAnimationFrame(azuriraj); // krace igra
 }   // kraj postaviScenu
@@ -66,6 +64,10 @@ function azuriraj(){
 
     // radi svaki sekund
     if(vreme.prodjeSekunda()) {
+	    dacic.udji(30);
+		vulin.udji(20);
+		toma.udji(10);
+
         automat.brisePoruke();
         automat.zaustavljaMrdanje(scena.karakteri);
         automat.deliPozicije(scena.karakteri);
