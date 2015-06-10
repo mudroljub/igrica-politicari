@@ -1,21 +1,21 @@
 /*****************************************************************
     IDEJE:
-// da ne izlaze uvek, nego da malo sacekaju
-* da ne odlaze odmah, nego da malo sacekaju
-// da menjaju sliku na pogodak
-// da nasumicno ispustaju parole
-// grafiti na skupstini vucicu pederu
-// paradajz pogadja
-// uvodna animacija uvecavanje skupstina
-// napraviti energiju od mase 
+* svrstati metode po poglavljima
+* da ne izlaze odma, nego da malo sacekaju
+* da ne odlaze odma, nego da malo sacekaju
+* da menjaju sliku na pogodak
+* da nasumicno ispustaju parole
+* grafiti na skupstini vucicu pederu
+* paradajz pogadja
+* uvodna animacija uvecavanje skupstina
+* napraviti energiju od mase 
 
     PROBLEMI:
-// kad je presirok ekran, sece pozadinu po visini !
-// mozda klasa Prilagodjavac za pozadinu, slike, slova
+* kad je presirok ekran, sece pozadinu po visini !
+* mozda klasa Prilagodjavac za pozadinu, slike, slova
 
     DOBRA PRAKSA:
-    * zaokruziti crtanje na pun piksel, bez decimala
-    * 
+* zaokruziti crtanje na pun piksel, bez decimala
 ********************************************************************/
 
 // nazivi bitni, od njih pravi objekte
