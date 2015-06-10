@@ -16,6 +16,22 @@ function Automat(scena) {
 		}
 	} // kraj deliPozicije
 
+	this.odrediPauzuSvima = function(karakteri){
+		for(var i=0; i < karakteri.length; i++){
+			if(karakteri[i].igra){
+				karakteri[i].odrediPauzu(vreme);
+			}
+		}			
+	}	// odrediPauzuSvima
+
+	this.jesuProslePauze = function(karakteri){
+		for(var i=0; i < karakteri.length; i++){
+			if(karakteri[i].trajanje_pauze){
+				karakteri[i].jelProslaPauza(vreme);
+			}
+		}			
+	}	// jesuProslePauze
+
 	this.zaustavljaMrdanje = function(karakteri){			// prima niz karaktera
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){
@@ -69,7 +85,6 @@ function Automat(scena) {
             if(karakteri[i].igra){
 				//karakteri[i].crtaj();
 				karakteri[i].crtajMrdanje();
-				//karakteri[i].crtajUlazSleva();
             }
         }	// kraj for
     }	// kraj crtaSve

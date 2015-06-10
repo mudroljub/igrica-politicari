@@ -1,6 +1,7 @@
 /*****************************************************************
     IDEJE:
 // da ne izlaze uvek, nego da malo sacekaju
+* da ne odlaze odmah, nego da malo sacekaju
 // da menjaju sliku na pogodak
 // da nasumicno ispustaju parole
 // grafiti na skupstini vucicu pederu
@@ -14,6 +15,7 @@
 
     DOBRA PRAKSA:
     * zaokruziti crtanje na pun piksel, bez decimala
+    * 
 ********************************************************************/
 
 // nazivi bitni, od njih pravi objekte
@@ -66,6 +68,7 @@ function azuriraj(){
     // svakih 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
 		automat.azuriraMrdanje(scena.karakteri);
+		automat.jesuProslePauze(scena.karakteri)
         automat.crtaSve(scena, scena.karakteri);
         automat.pisePoruke(mish);
         scena.prikazujePoene(vreme);
@@ -75,22 +78,19 @@ function azuriraj(){
     
     // radi svaki sekund
     if(vreme.prodjeSekunda()) {
-	    dacic.udji(30);
-		vulin.udji(20);
-		toma.udji(10);
+	    dacic.igraj(30);
+		vulin.igraj(20);
+		toma.igraj(10);
 
         automat.brisePoruke();
         automat.zaustavljaMrdanje(scena.karakteri);
         automat.deliPozicije(scena.karakteri);
+        automat.odrediPauzuSvima(scena.karakteri);
+        
         automat.postavljaMrdanje(scena.karakteri);
         vreme.smanjuje();
         vreme.azurira();
     }	// kraj svaki sekund
-
-	// log trajanje_slucaja
-	if(vreme.ovaSekunda() % 10 == 0) {
-		log("Treba da sacekam: " + vreme.trajanjeSlucajno() )
-	}	// kraj prodjeNasumicno
 
 }   // kraj azuriraj
 
