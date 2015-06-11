@@ -84,12 +84,10 @@ function azuriraj(){
 	    dacic.igraj(30);
 		vulin.igraj(20);
 		toma.igraj(10);
-
         automat.brisePoruke();
         automat.zaustavljaMrdanje(scena.karakteri);
         automat.deliPozicije(scena.karakteri);
         automat.odrediPauzuSvima(scena.karakteri);
-        
         automat.postavljaMrdanje(scena.karakteri);
         vreme.smanjuje();
         vreme.azurira();

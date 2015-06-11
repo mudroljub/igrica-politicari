@@ -1,4 +1,4 @@
-// mozda preimenovati u klasa Vrteska ili Karakteri
+// mozda preimenovati u klasa Vrteska ili Karakteri ili jednostavno vratiti u funkcije
 
 function Automat(scena) {
 
