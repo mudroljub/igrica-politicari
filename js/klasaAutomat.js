@@ -1,3 +1,4 @@
+// mozda preimenovati u klasa Petlja, Vrteska ili Karakteri
 
 function Automat(scena) {
 
@@ -16,6 +17,17 @@ function Automat(scena) {
 		}
 	} // kraj deliPozicije
 
+	this.crtaSve = function(scena, karakteri){
+		scena.sadrzaj.drawImage(scena.pozadina, 0, 0, scena.sirina, scena.pozadina.nova_visina);
+		for(var i=0; i < karakteri.length; i++){
+			if(karakteri[i].igra){
+				//karakteri[i].crtaj();
+				karakteri[i].crtajMrdanje();
+			}
+		}	// kraj for
+	}	// kraj crtaSve
+
+	/* PAUZA */
 	this.odrediPauzuSvima = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){
@@ -32,6 +44,7 @@ function Automat(scena) {
 		}			
 	}	// jesuProslePauze
 
+	/* MRDANJE */
 	this.zaustavljaMrdanje = function(karakteri){			// prima niz karaktera
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){
@@ -79,16 +92,7 @@ function Automat(scena) {
 		}	
 	}	// azuriraMrdanje
 
-    this.crtaSve = function(scena, karakteri){
-        scena.sadrzaj.drawImage(scena.pozadina, 0, 0, scena.sirina, scena.pozadina.nova_visina);
-        for(var i=0; i < karakteri.length; i++){
-            if(karakteri[i].igra){
-				//karakteri[i].crtaj();
-				karakteri[i].crtajMrdanje();
-            }
-        }	// kraj for
-    }	// kraj crtaSve
-
+	/* PORUKE */
 	this.pisePoruke = function(mish){
 		for(var i=0; i < scena.karakteri.length; i++){
 			if(scena.karakteri[i].igra && scena.karakteri[i].kukanje){
@@ -102,6 +106,5 @@ function Automat(scena) {
 			scena.karakteri[i].kukanje = false;
 		}
 	}	// kraj brisePoruke
-
 
 }	// kraj Automat
