@@ -2,8 +2,9 @@ function Vreme(zadato) {
 
     this.preostalo = zadato || 30;		// podrazumevano vreme
     this.prethodna_sekunda = 0;
-    this.prethodno_nasumicno = 0;
-	
+
+	/*************** METODE ***************/
+
 	this.ovajTren = function(){
 		var od_pocetka_sekunde = new Date().getTime() / 1000	// sekunde od 1. jan 1970
 		return Math.round(od_pocetka_sekunde) 					// zaokruzuje decimale
@@ -36,6 +37,5 @@ function Vreme(zadato) {
 	this.azurira = function(){
 		this.prethodna_sekunda = this.ovaSekunda();		
 	}
-
 
 }   // kraj Vreme

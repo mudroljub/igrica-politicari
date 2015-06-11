@@ -5,6 +5,7 @@ function Ucitavac() {
     var sve_slike = 0;
     var ucitane_slike = 0;
 
+    /*************** METODE ***************/
 
     this.ucitajSlike = function(slike, povratnaRadnja){     // obično posle pušta uvod
         var nazivi_grupa = Object.keys(slike)
@@ -23,7 +24,6 @@ function Ucitavac() {
         }	// kraj for
     }	// kraj ucitajSlike
 
-
 	this.ukupnoSlika = function(slike){
 		var sve_slike = 0;
 		for(var grupa in slike) {
@@ -34,15 +34,13 @@ function Ucitavac() {
 		return sve_slike;
 	}
 
-
     this.proveriUcitano = function(povratnaRadnja){
         ucitane_slike++;
         if(ucitane_slike >= sve_slike) {
             povratnaRadnja();
         }
     }	// proveriUcitano
-
-
+    
 }   // kraj Ucitavac
 
 

@@ -75,7 +75,10 @@ function azuriraj(){
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
     }	// kraj svaki frejm
-    
+
+    // napraviti drukciju logiku koja ne zavisi od sekunde
+    // vec od stanja svakog karaktera, jel igra ili ne
+
     // radi svaki sekund
     if(vreme.prodjeSekunda()) {
 	    dacic.igraj(30);

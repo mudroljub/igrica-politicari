@@ -1,4 +1,4 @@
-// mozda preimenovati u klasa Petlja, Vrteska ili Karakteri
+// mozda preimenovati u klasa Vrteska ili Karakteri
 
 function Automat(scena) {
 
@@ -28,6 +28,7 @@ function Automat(scena) {
 	}	// kraj crtaSve
 
 	/* PAUZA */
+
 	this.odrediPauzuSvima = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){
@@ -45,6 +46,7 @@ function Automat(scena) {
 	}	// jesuProslePauze
 
 	/* MRDANJE */
+
 	this.zaustavljaMrdanje = function(karakteri){			// prima niz karaktera
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){
@@ -93,6 +95,7 @@ function Automat(scena) {
 	}	// azuriraMrdanje
 
 	/* PORUKE */
+
 	this.pisePoruke = function(mish){
 		for(var i=0; i < scena.karakteri.length; i++){
 			if(scena.karakteri[i].igra && scena.karakteri[i].kukanje){

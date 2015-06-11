@@ -1,14 +1,14 @@
 
 function Uvod(scena){
+
 	var ovaj_uvod = this;       	// hvata sebe, za niže funkcije
-	this.ide = true;       	// podrazumevano odma krece
+	this.ide = true;       			// podrazumevano odma krece
 	this.slova_x = -100;	
 	this.slova_y = 200;
-	this.animacija;			// identifikator animacije
+	this.animacija;					// identifikator animacije
 	scena.sadrzaj.font = "48px Verdana";
-	
-	
-	/*************** FUNKCIJE ***************/
+
+	/*************** METODE ***************/
 	
 	this.pusti = function(){            // this je unutra window
 		scena.sadrzaj.fillStyle = "black";
@@ -24,6 +24,5 @@ function Uvod(scena){
 		}
 		ovaj_uvod.animacija = window.requestAnimationFrame(ovaj_uvod.pusti);
 	}	// kraj pusti
-	
 
 }	// kraj Uvod

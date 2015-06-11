@@ -1,7 +1,7 @@
 
 function Karakter(ime, slika_src, scena, vreme){
 	
-	var ovaj_karakter = this;
+	var ovaj = this;
     this.ime = ime.VelikoSlovo();
 	this.slika = new Image();
     this.slika.src = slika_src;
@@ -29,7 +29,7 @@ function Karakter(ime, slika_src, scena, vreme){
 	this.kraj_pauze; 
 
 
-	/*************** FUNKCIJE ***************/
+	/*************** METODE ***************/
 
 	this.igraj = function(trenutak_ulaska) {
 		if(vreme.preostalo <= trenutak_ulaska) {
@@ -65,6 +65,8 @@ function Karakter(ime, slika_src, scena, vreme){
 		
 		scena.sadrzaj.drawImage(slika, izvor_x, izvor_y, izvor_sirina, izvor_visina, platno_x, platno_y, na_platnu_sirina, na_platnu_visina);		
     }   // kraj crtajMrdanje
+
+    /* MRDANJE */
 
     this.mrdajDoleGore = function(){
         if(this.spustenost >= 30) {
@@ -107,6 +109,8 @@ function Karakter(ime, slika_src, scena, vreme){
 		this.spustenost++
 	}	// kraj spustaj
 
+    /* PAUZA */
+
     this.odrediPauzu = function(vreme){		
 		this.trajanje_pauze = vreme.trajanjeSlucajno()
 		this.kraj_pauze = vreme.ovajTren() + this.trajanje_pauze; 
@@ -121,6 +125,8 @@ log(this.ime + " pauza prošla")
 			this.igra = false;
 		}	
 	}	// jelProslaPauza
+
+    /* KOLIZIJA */
 
     this.sudar = function(karakter){
         if(this.x == karakter.x && this.y == karakter.y){
@@ -144,6 +150,8 @@ log(this.ime + " pauza prošla")
         }
     }   // kraj naSlobodnomCrtaj
 
+    /* GOVOR */
+
     this.kuka = function(mish){
         var jauk = this.jauk || "Jaoj, to boli!";
         scena.sadrzaj.font = "30px Verdana";
@@ -157,15 +165,16 @@ log(this.ime + " pauza prošla")
 		// bacaParole koje ti skidaju energiju
     }   // kraj bacaParole
 
-    function _prilagodiSliku(ovaj_karakter, slika){
+    /*************** POMOCNE FUNKCIJE ***************/
+
+    function _prilagodiSliku(ovaj, slika){
         // prilagodjava sliku standardnoj visini slike
-        var nova_sirina = slika.width / (slika.height / ovaj_karakter.STANDARDNA_VISINA);
-        var nova_visina = ovaj_karakter.STANDARDNA_VISINA;
+        var nova_sirina = slika.width / (slika.height / ovaj.STANDARDNA_VISINA);
+        var nova_visina = ovaj.STANDARDNA_VISINA;
         // prilagodjava sliku ovom ekranu
         slika.width = nova_sirina * (window.innerWidth / scena.STANDARDNA_SIRINA);
         slika.height = nova_visina * (window.innerWidth / scena.STANDARDNA_SIRINA);
         return slika;
     }
-
 
 }   // kraj Karakter

@@ -4,20 +4,18 @@ function Scena(id_platna, izvor_pozadine) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
     this.ide = false;
 	this.STANDARDNA_SIRINA = 1280;
-
 	this.karakteri = [];		// popunjava ga funkcija praviKaraktere
     this.pozicije = []  // popunjava ga funkcija praviProzore
 	this.animacija;		// identifikator animacije
 	this.poeni = 0;
-
 	this.platno = _postaviPlatno(id_platna, ova_scena);
 	this.sadrzaj = _postaviSadrzaj(this.platno);
 	this.pozadina = _ucitajPozadinu(izvor_pozadine);		// dodati povratnu funkciju kao argument
 	this.sirina = this.platno.width;
-    this.visina = this.platno.height;	
-	
-	
-	/*************** FUNKCIJE ***************/
+    this.visina = this.platno.height;
+
+
+	/*************** METODE ***************/
 
     this.praviProzore = function(ose_prozora){
         var gornji_red = this.pozadina.nova_visina / ose_prozora.gornja_horizontala;
@@ -31,7 +29,6 @@ function Scena(id_platna, izvor_pozadine) {
             [prvi_prozor, donji_red], [drugi_prozor, donji_red], [treci_prozor, donji_red]
         ]
     }   // kraj praviProzore
-	
 
     this.prikazujePoene = function(vreme){
         this.sadrzaj.fillStyle="#000";
@@ -43,11 +40,12 @@ function Scena(id_platna, izvor_pozadine) {
         this.sadrzaj.fillText("Vreme: " + vreme.preostalo, 30, 160);
     }	// kraj prikazujePoene
 
-
     this.mrdajPozadinu = function(){
 		// kad imamo vecu pozadinu da se pomera
     }
-	
+
+	/*************** POMOCNE FUNKCIJE ***************/
+
 	function _postaviPlatno(id_platna, ova_scena){
 		var platno = document.getElementById(id_platna);        // ako nema platna, da sam stvara
 		platno.width = window.innerWidth;
@@ -75,6 +73,5 @@ function Scena(id_platna, izvor_pozadine) {
 			pozadina.nova_visina = (ova_scena.sirina / pozadina.width) * pozadina.height;  // prilagodjava visinu pozadine
 			return pozadina;
 	}
-
 
 }	// kraj Scena
