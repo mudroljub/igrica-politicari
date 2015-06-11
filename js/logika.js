@@ -65,7 +65,7 @@ function postaviScenu(){
 
 function azuriraj(){
 
-    // svakih 16.6 milisekundi (60 herca/sekund)
+    // izvrsava svakih 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
 		automat.azuriraMrdanje(scena.karakteri);
 		automat.jesuProslePauze(scena.karakteri)
@@ -78,8 +78,10 @@ function azuriraj(){
 
     // napraviti drukciju logiku koja ne zavisi od sekunde
     // vec od stanja svakog karaktera, jel igra ili ne
+    // if(karakter.igra) crtaj, pisiporuke, itd
+    // mozda odvojiti azuriranje od crtanja?
 
-    // radi svaki sekund
+    // izvrsava svaki sekund
     if(vreme.prodjeSekunda()) {
 	    dacic.igraj(30);
 		vulin.igraj(20);
