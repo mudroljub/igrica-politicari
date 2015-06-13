@@ -1,8 +1,11 @@
 /*****************************************************************
     IDEJE:
-* svrstati metode po poglavljima
-* da ne izlaze odma, nego da malo sacekaju
 * da ne odlaze odma, nego da malo sacekaju
+	- kad izadju, dobiju vreme ostanka i igraj
+	- crtaj
+	- kad prodje ostanak, aktivirati im pauzu
+	- iskljuciti im igranje na period pauze
+	- kad prodje pauza, ponovo iz pocetka (odredi duzinu ostanka, igraj)
 * da menjaju sliku na pogodak
 * da nasumicno ispustaju parole
 * grafiti na skupstini vucicu pederu
