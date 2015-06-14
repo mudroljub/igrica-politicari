@@ -18,13 +18,14 @@ function Karakter(ime, slika_src, scena, vreme){
 	this.zapamcena_sirina = this.sirina;
 
     this.igra = false;
-    this.dizanje = false;
-	this.mrdanje_desno = false;
+    this.pogodjen = false;
     this.spustenost = 0;
 	this.pomerenost_ulevo = 0;
+    //this.dizanje = false;
+	//this.mrdanje_desno = false;	
 	this.pokret_levo_desno = false;
 	this.pokret_dole_gore = false;
-	this.pauza = 0;
+	this.traje_pauza = 0;
 	this.traje_izlaz = 0;
 	this.kraj_pauze; 
 	this.kraj_izlaska; 	
@@ -121,10 +122,10 @@ function Karakter(ime, slika_src, scena, vreme){
 
 	/* OSTANCI I PAUZE */
 
-    this.izlazi = function(vreme){
+    this.odrediIzlaz = function(vreme){
 		this.traje_izlaz = vreme.trajanjeSlucajno();
 		this.kraj_izlaska = vreme.ovajTren() + this.traje_izlaz; 
-	}	// kraj izlazi
+	}	// kraj odrediIzlaz
 
 	this.kadProdjeResetujIzlaz = function(vreme){
 		if(this.kraj_izlaska <= vreme.ovajTren()) {				
@@ -132,19 +133,19 @@ function Karakter(ime, slika_src, scena, vreme){
 		}
 	}	// kadProdjeResetujIzlaz
 	
-    this.pauziraj = function(vreme){	
-		this.pauza = vreme.trajanjeSlucajno();
-		this.kraj_pauze = vreme.ovajTren() + this.pauza; 
-	}	// kraj pauziraj
+    this.odrediPauzu = function(vreme){	
+		this.traje_pauza = vreme.trajanjeSlucajno();
+		this.kraj_pauze = vreme.ovajTren() + this.traje_pauza; 
+	}	// kraj odrediPauzu
 	
 	this.kadProdjeResetujPauzu = function(vreme){
 		if(this.kraj_pauze <= vreme.ovajTren()) {
-			this.pauza = 0;
+			this.traje_pauza = 0;
 		} 
 	}	// kadProdjeResetujPauzu
 
-	this.niIzlazNiPauza = function(){
-		return !this.traje_izlaz && !this.pauza;
+	this.nemaNiPauzuNiIzlaz = function(){
+		return !this.traje_izlaz && !this.traje_pauza;
 	}
 	
     /* KOLIZIJA */

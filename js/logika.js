@@ -1,14 +1,13 @@
 /*****************************************************************
     IDEJE:
 * da menjaju sliku na pogodak
+* napraviti energiju od mase 
 * da nasumicno ispustaju parole
 * grafiti na skupstini vucicu pederu
 * paradajz pogadja
 * uvodna animacija uvecavanje skupstina
-* napraviti energiju od mase 
 
     PROBLEMI:
-* pogadja ga i kad je na pauzi
 * kad je presirok ekran, sece pozadinu po visini !
 * mozda klasa Prilagodjavac za pozadinu, slike, slova
 
@@ -73,30 +72,28 @@ function azuriraj(){
 		for(var i=0; i < karakteri.length; i++) {
 			if(karakteri[i].igra) {	
 
-				if(karakteri[i].niIzlazNiPauza()){
+				if(karakteri[i].nemaNiPauzuNiIzlaz()){
 					karakteri[i].nadjiSlobodnoMesto(karakteri);	
-					karakteri[i].izlazi(vreme);				
+					karakteri[i].odrediIzlaz(vreme);			
 				}
-				if(karakteri[i].traje_izlaz) {
-					karakteri[i].kadProdjeResetujIzlaz(vreme);
+				if(karakteri[i].traje_izlaz && !karakteri[i].traje_pauza) {
+					karakteri[i].crtajMrdanje();
+					karakteri[i].kadProdjeResetujIzlaz(vreme);					
 				}
-				if(karakteri[i].niIzlazNiPauza()){
-					karakteri[i].pauziraj(vreme);
-				}
-				if(karakteri[i].pauza){
+				if(karakteri[i].nemaNiPauzuNiIzlaz()){
+					karakteri[i].odrediPauzu(vreme);		
+				}				
+				if(karakteri[i].traje_pauza && !karakteri[i].traje_izlaz){
 					karakteri[i].kadProdjeResetujPauzu(vreme);					
 				}
-				if(karakteri[i].traje_izlaz){
-					karakteri[i].crtajMrdanje();
-				}
-				if(mish.naKarakteru(karakteri[i])) {
+				if(karakteri[i].pogodjen) {
 					karakteri[i].crtaKukanje(mish);
 				}
 				
 			} // kraj ako karakter igra
-		} // kraj petlje karaktera
+		} // kraj for karakteri
 		
-        // nakon izlazi
+        // nakon odrediIzlaz
         //automat.postavljaMrdanje(scena.karakteri);			
 		//automat.azuriraMrdanje(scena.karakteri);
         //automat.zaustavljaMrdanje(scena.karakteri);
@@ -128,9 +125,10 @@ function reagujNaKlik(event){
 	}	// kraj ako ide
 
 	if(scena.ide){	
-		for(var i=0; i < scena.karakteri.length; i++){
-			if(scena.karakteri[i].igra && scena.karakteri[i].traje_izlaz) { 
-				mish.proveriPogodak(scena, scena.karakteri[i]);
+		for(var i=0; i < karakteri.length; i++){
+			karakteri[i].pogodjen = false;			// da ne pogadja nevidljive
+			if(karakteri[i].traje_izlaz  && !karakteri[i].pauza) { 
+				mish.proveriPogodak(scena, karakteri[i]);
 			}
 		}
 	}	// kraj ako igra

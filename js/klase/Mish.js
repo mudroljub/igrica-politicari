@@ -10,7 +10,9 @@ function Mish(scena){
 	}	// naKarakteru()
 	
     this.proveriPogodak = function(scena, karakter) {
-        if(this.naKarakteru(karakter) && !karakter.pauza){ 
+        if(this.naKarakteru(karakter)){ 
+			karakter.pogodjen = true;
+			log(karakter.ime + " pogodjen! " + karakter.pogodjen)			
             scena.poeni++;
         }
     }   // kraj proveriPogodak
