@@ -25,7 +25,7 @@ function Karakter(ime, slika_src, scena, vreme){
 	this.pokret_levo_desno = false;
 	this.pokret_dole_gore = false;
 	this.pauza = 0;
-	this.izlaz = 0;
+	this.traje_izlaz = 0;
 	this.kraj_pauze; 
 	this.kraj_izlaska; 	
 
@@ -121,30 +121,30 @@ function Karakter(ime, slika_src, scena, vreme){
 
 	/* OSTANCI I PAUZE */
 
-    this.odrediIzlazak = function(vreme){
-		this.izlaz = vreme.trajanjeSlucajno();
-		this.kraj_izlaska = vreme.ovajTren() + this.izlaz; 
-	}	// kraj odrediIzlazak
+    this.izlazi = function(vreme){
+		this.traje_izlaz = vreme.trajanjeSlucajno();
+		this.kraj_izlaska = vreme.ovajTren() + this.traje_izlaz; 
+	}	// kraj izlazi
 
-	this.jelProsaoIzlaz = function(vreme){
+	this.kadProdjeResetujIzlaz = function(vreme){
 		if(this.kraj_izlaska <= vreme.ovajTren()) {				
-			this.izlaz = 0;	
+			this.traje_izlaz = 0;	
 		}
-	}	// jelProsaoIzlaz
+	}	// kadProdjeResetujIzlaz
 	
-    this.odrediPauzu = function(vreme){	
+    this.pauziraj = function(vreme){	
 		this.pauza = vreme.trajanjeSlucajno();
 		this.kraj_pauze = vreme.ovajTren() + this.pauza; 
-	}	// kraj odrediPauzu
+	}	// kraj pauziraj
 	
-	this.jelProslaPauza = function(vreme){
+	this.kadProdjeResetujPauzu = function(vreme){
 		if(this.kraj_pauze <= vreme.ovajTren()) {
 			this.pauza = 0;
 		} 
-	}	// jelProslaPauza
+	}	// kadProdjeResetujPauzu
 
 	this.niIzlazNiPauza = function(){
-		return !this.izlaz && !this.pauza;
+		return !this.traje_izlaz && !this.pauza;
 	}
 	
     /* KOLIZIJA */

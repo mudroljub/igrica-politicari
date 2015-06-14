@@ -75,18 +75,18 @@ function azuriraj(){
 
 				if(karakteri[i].niIzlazNiPauza()){
 					karakteri[i].nadjiSlobodnoMesto(karakteri);	
-					karakteri[i].odrediIzlazak(vreme);				
+					karakteri[i].izlazi(vreme);				
 				}
-				if(karakteri[i].izlaz) {
-					karakteri[i].jelProsaoIzlaz(vreme);
+				if(karakteri[i].traje_izlaz) {
+					karakteri[i].kadProdjeResetujIzlaz(vreme);
 				}
 				if(karakteri[i].niIzlazNiPauza()){
-					karakteri[i].odrediPauzu(vreme);
+					karakteri[i].pauziraj(vreme);
 				}
 				if(karakteri[i].pauza){
-					karakteri[i].jelProslaPauza(vreme);					
+					karakteri[i].kadProdjeResetujPauzu(vreme);					
 				}
-				if(karakteri[i].izlaz){
+				if(karakteri[i].traje_izlaz){
 					karakteri[i].crtajMrdanje();
 				}
 				if(mish.naKarakteru(karakteri[i])) {
@@ -96,7 +96,7 @@ function azuriraj(){
 			} // kraj ako karakter igra
 		} // kraj petlje karaktera
 		
-        // nakon odrediIzlazak
+        // nakon izlazi
         //automat.postavljaMrdanje(scena.karakteri);			
 		//automat.azuriraMrdanje(scena.karakteri);
         //automat.zaustavljaMrdanje(scena.karakteri);
@@ -129,7 +129,7 @@ function reagujNaKlik(event){
 
 	if(scena.ide){	
 		for(var i=0; i < scena.karakteri.length; i++){
-			if(scena.karakteri[i].igra && scena.karakteri[i].izlaz) { 
+			if(scena.karakteri[i].igra && scena.karakteri[i].traje_izlaz) { 
 				mish.proveriPogodak(scena, scena.karakteri[i]);
 			}
 		}
