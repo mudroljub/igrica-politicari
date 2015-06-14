@@ -109,7 +109,12 @@ function Karakter(ime, slika_src, scena, vreme){
 		this.spustenost++
 	}	// kraj spustaj
 
-    /* PAUZA */
+    /* PAUZE */
+
+    this.odrediOstanak = function(vreme){		
+		this.trajanje_ostanka = vreme.trajanjeSlucajno()
+		this.kraj_ostanka = vreme.ovajTren() + this.trajanje_ostanka; 
+	}	// kraj odrediOstanak
 
     this.odrediPauzu = function(vreme){		
 		this.trajanje_pauze = vreme.trajanjeSlucajno()
@@ -122,6 +127,7 @@ log(this.ime + " pauza prošla")
 			this.igra = true;
 			this.trajanje_pauze = 0;
 		} else {
+log(this.ime + " na pauzi")			
 			this.igra = false;
 		}	
 	}	// jelProslaPauza

@@ -1,11 +1,6 @@
 /*****************************************************************
     IDEJE:
 * da ne odlaze odma, nego da malo sacekaju
-	- kad izadju, dobiju vreme ostanka i igraj
-	- crtaj
-	- kad prodje ostanak, aktivirati im pauzu
-	- iskljuciti im igranje na period pauze
-	- kad prodje pauza, ponovo iz pocetka (odredi duzinu ostanka, igraj)
 * da menjaju sliku na pogodak
 * da nasumicno ispustaju parole
 * grafiti na skupstini vucicu pederu
@@ -70,7 +65,11 @@ function azuriraj(){
 
     // izvrsava svakih 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
+		dacic.igraj(30);
+		vulin.igraj(20);
+		toma.igraj(10);
 		automat.azuriraMrdanje(scena.karakteri);
+        automat.odrediPauzuSvima(scena.karakteri);		
 		automat.jesuProslePauze(scena.karakteri)
         automat.crtaSve(scena, scena.karakteri);
         automat.pisePoruke(mish);
@@ -79,20 +78,19 @@ function azuriraj(){
         scena.animacija = requestAnimationFrame(azuriraj);
     }	// kraj svaki frejm
 
-    // napraviti drukciju logiku koja ne zavisi od sekunde
-    // vec od stanja svakog karaktera, jel igra ili ne
-    // if(karakter.igra) crtaj, pisiporuke, itd
-    // mozda odvojiti azuriranje od crtanja?
+/* 
+	- kad izadju, dobiju vreme ostanka i igraj
+	- if(karakter.igra) crtaj, pisiporuke, itd
+	- kad prodje ostanak, aktivirati im pauzu
+	- iskljuciti im igranje na period pauze
+	- kad prodje pauza, ponovo iz pocetka (odredi duzinu ostanka, igraj)
+*/	
 
     // izvrsava svaki sekund
     if(vreme.prodjeSekunda()) {
-	    dacic.igraj(30);
-		vulin.igraj(20);
-		toma.igraj(10);
         automat.brisePoruke();
         automat.zaustavljaMrdanje(scena.karakteri);
         automat.deliPozicije(scena.karakteri);
-        automat.odrediPauzuSvima(scena.karakteri);
         automat.postavljaMrdanje(scena.karakteri);
         vreme.smanjuje();
         vreme.azurira();

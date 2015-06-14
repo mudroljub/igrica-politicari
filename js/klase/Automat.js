@@ -27,11 +27,11 @@ function Automat(scena) {
 		}	// kraj for
 	}	// kraj crtaSve
 
-	/* PAUZA */
+	/* PAUZE */
 
 	this.odrediPauzuSvima = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].igra){
+			if(karakteri[i].igra && !karakteri[i].trajanje_pauze){
 				karakteri[i].odrediPauzu(vreme);
 			}
 		}			
