@@ -30,7 +30,7 @@ function Vreme(zadato) {
 	}
 	
 	this.trajanjeSlucajno = function(){
-		var slucaj = Math.random() * 5;
+		var slucaj = Math.random() * 3;
 		slucaj = Math.round(slucaj * 10) / 10
 		return slucaj;
 	}	// kraj trajanjeSlucajno

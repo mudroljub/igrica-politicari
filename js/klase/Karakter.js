@@ -39,12 +39,6 @@ function Karakter(ime, slika_src, scena, vreme){
 		}
 	}	// kraj igraj
 
-    this.slucajnaPozicija = function(pozicije) {
-		var slucajno = Math.floor (Math.random() * pozicije.length);		
-        this.x = pozicije[slucajno][0];
-        this.y = pozicije[slucajno][1];
-    }   // kraj slucajnaPozicija
-
     this.crtaj = function() {
 		if (this.x >= 0 && this.y >= 0) {
 			scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
@@ -68,6 +62,21 @@ function Karakter(ime, slika_src, scena, vreme){
 		scena.sadrzaj.drawImage(slika, izvor_x, izvor_y, izvor_sirina, izvor_visina, platno_x, platno_y, na_platnu_sirina, na_platnu_visina);		
     }   // kraj crtajMrdanje
 
+	/* POZICIJE */
+	
+    this.slucajnaPozicija = function(pozicije) {
+		var slucajno = Math.floor (Math.random() * pozicije.length);		
+        this.x = pozicije[slucajno][0];
+        this.y = pozicije[slucajno][1];
+    }   // kraj slucajnaPozicija
+	
+    this.nadjiSlobodnoMesto = function (karakteri) {
+        this.slucajnaPozicija(scena.pozicije)
+        while ( this.proveriSveSudare(karakteri) ) {
+            this.slucajnaPozicija(scena.pozicije)
+        }
+    }   // kraj naSlobodnomCrtaj
+	
     /* MRDANJE */
 
     this.mrdajDoleGore = function(){
@@ -114,11 +123,9 @@ function Karakter(ime, slika_src, scena, vreme){
 	/* OSTANCI I PAUZE */
 
     this.odrediOstanak = function(vreme){
-		if(!this.trajanje_ostanka && !this.trajanje_pauze){
-			this.trajanje_ostanka = vreme.trajanjeSlucajno();
-			this.kraj_ostanka = vreme.ovajTren() + this.trajanje_ostanka; 
+		this.trajanje_ostanka = vreme.trajanjeSlucajno();
+		this.kraj_ostanka = vreme.ovajTren() + this.trajanje_ostanka; 
 log(this.ime + " poceo ostanak u " + vreme.ovaSekunda() + " koji traje " + this.trajanje_ostanka)
-		}		
 	}	// kraj odrediOstanak
 
 	this.jelProsaoOstanak = function(vreme){
@@ -166,13 +173,6 @@ log(this.ime + " pocela pauza koja traja " + this.trajanje_pauze)
         }  // kraj petlje
 		return sudari;
     }   // kraj proveriSveSudare
-
-    this.nadjiSlobodnoMesto = function (karakteri) {
-        this.slucajnaPozicija(scena.pozicije)
-        while ( this.proveriSveSudare(karakteri) ) {
-            this.slucajnaPozicija(scena.pozicije)
-        }
-    }   // kraj naSlobodnomCrtaj
 
     /* GOVOR */
 

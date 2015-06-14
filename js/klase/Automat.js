@@ -9,14 +9,6 @@ function Automat(scena) {
         }   // kraj for
     }   // kraj praviKaraktere()
 
-	this.deliPozicije = function(karakteri){			// prima niz karaktera
-		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].igra){
-				karakteri[i].nadjiSlobodnoMesto(karakteri);
-			}
-		}
-	} // kraj deliPozicije
-
 	this.crtaSve = function(scena, karakteri){
 		scena.sadrzaj.drawImage(scena.pozadina, 0, 0, scena.sirina, scena.pozadina.nova_visina);
 		for(var i=0; i < karakteri.length; i++){
@@ -27,17 +19,16 @@ function Automat(scena) {
 		}	// kraj for
 	}	// kraj crtaSve
 
-	/* OSTANCI I PAUZE */
-
-	// da ostanak i pauza ne mogu biti istovremeno
+	/* OSTANCI I PAUZE (ne mogu istovremeno) */
 	
-	this.odrediOstanakSvima = function(karakteri){
+	this.deliPozicijeIOstanke = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].igra){
+			if(karakteri[i].igra && !karakteri[i].trajanje_ostanka && !karakteri[i].trajanje_pauze){
 				karakteri[i].odrediOstanak(vreme);
+				karakteri[i].nadjiSlobodnoMesto(scena.karakteri);
 			}
 		}			
-	}	// odrediOstanakSvima
+	}	// deliPozicijeIOstanke
 
 	this.jesuProsliOstanci = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
@@ -47,7 +38,6 @@ function Automat(scena) {
 		}			
 	}	// jesuProsliOstanci
 
-	
 	this.odrediPauzuSvima = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){
@@ -66,7 +56,7 @@ function Automat(scena) {
 
 	/* MRDANJE */
 
-	this.zaustavljaMrdanje = function(karakteri){			// prima niz karaktera
+	this.zaustavljaMrdanje = function(karakteri){ 
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){
 				karakteri[i].pokret_levo_desno = false

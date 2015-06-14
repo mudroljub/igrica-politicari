@@ -52,11 +52,10 @@ scena.platno.addEventListener('click', reagujNaKlik);
 
 function postaviScenu(){
     scena.praviProzore(parametri_prozora);
-    automat.praviKaraktere(slike.likovi, scena, vreme);   	// pravi objekte od niza likova
-    dacic.jauk = "Jaoj";								// dodaje jedinstvene poruke
+    automat.praviKaraktere(slike.likovi, scena, vreme); 
+    dacic.jauk = "Jaoj";
     vulin.jauk = "To boli!";
     toma.jauk = "Evropa nema alternativu!";
-    automat.deliPozicije(scena.karakteri);
 	scena.animacija = requestAnimationFrame(azuriraj); // krace igra
 }   // kraj postaviScenu
 
@@ -70,20 +69,19 @@ function azuriraj(){
 	- kad prodje pauza, ponovo iz pocetka (odredi duzinu ostanka, igraj)
 */	
 
+// document.querySelectorAll(".pretplLow_fl")[0].style.display = "none"; document.querySelector("body").style.height = "auto"
+
     // izvrsava svakih 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
 		dacic.igraj(30);
 		vulin.igraj(20);
 		toma.igraj(10);
-		automat.deliPozicije(scena.karakteri);
-        automat.odrediOstanakSvima(scena.karakteri);
-			// dok je ostanak u toku, mora da ga crta
+        automat.deliPozicijeIOstanke(scena.karakteri);
 		automat.jesuProsliOstanci(scena.karakteri);		
         //automat.postavljaMrdanje(scena.karakteri);			
 		//automat.azuriraMrdanje(scena.karakteri);
         //automat.zaustavljaMrdanje(scena.karakteri);
         automat.odrediPauzuSvima(scena.karakteri);	
-			// dok je pauza u toku, ne sme da crta
 		automat.jesuProslePauze(scena.karakteri);
 		
         automat.crtaSve(scena, scena.karakteri);
