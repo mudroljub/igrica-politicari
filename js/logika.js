@@ -76,11 +76,12 @@ function azuriraj(){
 		dacic.igraj(30);
 		vulin.igraj(20);
 		toma.igraj(10);
-        automat.deliPozicijeIOstanke(scena.karakteri);
-		automat.jesuProsliOstanci(scena.karakteri);		
+        automat.deliPozicije(scena.karakteri);
+		automat.odrediOstanke(scena.karakteri);
         //automat.postavljaMrdanje(scena.karakteri);			
 		//automat.azuriraMrdanje(scena.karakteri);
         //automat.zaustavljaMrdanje(scena.karakteri);
+		automat.jesuProsliOstanci(scena.karakteri);				
         automat.odrediPauzuSvima(scena.karakteri);	
 		automat.jesuProslePauze(scena.karakteri);
 		

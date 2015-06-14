@@ -122,11 +122,11 @@ function Karakter(ime, slika_src, scena, vreme){
 
 	/* OSTANCI I PAUZE */
 
-    this.odrediOstanak = function(vreme){
+    this.nasumicnoOstaje = function(vreme){
 		this.trajanje_ostanka = vreme.trajanjeSlucajno();
 		this.kraj_ostanka = vreme.ovajTren() + this.trajanje_ostanka; 
 log(this.ime + " poceo ostanak u " + vreme.ovaSekunda() + " koji traje " + this.trajanje_ostanka)
-	}	// kraj odrediOstanak
+	}	// kraj nasumicnoOstaje
 
 	this.jelProsaoOstanak = function(vreme){
 		if(this.trajanje_ostanka) {
@@ -138,13 +138,13 @@ log(this.ime + " ostanak prošao " + vreme.ovaSekunda())
 	}	// jelProsaoOstanak
 	
 	
-    this.odrediPauzu = function(vreme){	
+    this.nasumicnaPauza = function(vreme){	
 		if(!this.trajanje_ostanka && !this.trajanje_pauze){
 			this.trajanje_pauze = vreme.trajanjeSlucajno();
 			this.kraj_pauze = vreme.ovajTren() + this.trajanje_pauze; 
 log(this.ime + " pocela pauza koja traja " + this.trajanje_pauze)
 		}
-	}	// kraj odrediPauzu
+	}	// kraj nasumicnaPauza
 	
 	this.jelProslaPauza = function(vreme){
 		if(this.kraj_pauze <= vreme.ovajTren()) {

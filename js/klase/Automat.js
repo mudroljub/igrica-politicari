@@ -21,15 +21,22 @@ function Automat(scena) {
 
 	/* OSTANCI I PAUZE (ne mogu istovremeno) */
 	
-	this.deliPozicijeIOstanke = function(karakteri){
+	this.deliPozicije = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].igra && !karakteri[i].trajanje_ostanka && !karakteri[i].trajanje_pauze){
-				karakteri[i].odrediOstanak(vreme);
-				karakteri[i].nadjiSlobodnoMesto(scena.karakteri);
+			if(karakteri[i].igra && !karakteri[i].trajanje_ostanka){
+				karakteri[i].nadjiSlobodnoMesto(karakteri);		
 			}
-		}			
-	}	// deliPozicijeIOstanke
+		}	
+	}	// deliPozicije
 
+	this.odrediOstanke = function(karakteri){
+		for(var i=0; i < karakteri.length; i++){
+			if(karakteri[i].igra && !karakteri[i].trajanje_ostanka){
+				karakteri[i].nasumicnoOstaje(vreme);				
+			}
+		}	
+	}	// odrediOstanke	
+	
 	this.jesuProsliOstanci = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){
@@ -41,7 +48,7 @@ function Automat(scena) {
 	this.odrediPauzuSvima = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){
-				karakteri[i].odrediPauzu(vreme);
+				karakteri[i].nasumicnaPauza(vreme);
 			}
 		}			
 	}	// odrediPauzuSvima
