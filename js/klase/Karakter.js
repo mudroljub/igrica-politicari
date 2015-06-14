@@ -79,6 +79,47 @@ function Karakter(ime, slika_src, scena, vreme){
 	
     /* MRDANJE */
 
+	this.postaviMrdanje = function(){	
+		this.zapamcen_x = this.x;
+		this.zapamcen_y = this.y;
+
+		var slucaj = Math.floor((Math.random() * 2) + 1);
+		switch(slucaj) {
+			case 1:
+				this.pomerenost_ulevo = 30;
+				this.pokret_levo_desno = true
+				break;
+			case 2:
+				this.spustenost = 30;
+				this.pokret_dole_gore = true
+				break;
+			// napraviti treci slucaj kombinovano levo_desno_gore_dole
+		}	// kraj switch		
+	}
+
+	this.azurirajMrdanje = function(){
+		if(this.pokret_levo_desno) {
+			this.resetujDoleGore()
+			this.mrdajLevoDesno()
+		}
+		if(this.pokret_dole_gore) {
+			this.resetujLevoDesno()
+			this.mrdajDoleGore()
+		}		
+	}	// azurirajMrdanje()
+
+	this.resetujDoleGore = function(){
+			this.pokret_dole_gore = false	
+			this.spustenost = 0;
+			this.visina = this.zapamcena_visina;
+			this.sirina = this.zapamcena_sirina;		
+	} 
+
+	this.resetujLevoDesno = function(){
+		this.pokret_levo_desno = false
+		this.pomerenost_ulevo = 0;	
+	}
+
     this.mrdajDoleGore = function(){
         if(this.spustenost >= 30) {
             this.dizanje = true;
@@ -127,11 +168,11 @@ function Karakter(ime, slika_src, scena, vreme){
 		this.kraj_izlaska = vreme.ovajTren() + this.traje_izlaz; 
 	}	// kraj odrediIzlaz
 
-	this.kadProdjeResetujIzlaz = function(vreme){
+	this.kadOdeResetujIzlaz = function(vreme){
 		if(this.kraj_izlaska <= vreme.ovajTren()) {				
 			this.traje_izlaz = 0;	
 		}
-	}	// kadProdjeResetujIzlaz
+	}	// kadOdeResetujIzlaz
 	
     this.odrediPauzu = function(vreme){	
 		this.traje_pauza = vreme.trajanjeSlucajno();

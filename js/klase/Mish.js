@@ -1,6 +1,6 @@
 
 function Mish(scena){
-	this.x = 0;				// na reagujNaKlik primaju trenutnu koordinatu
+	this.x = 0;				// od reagujNaKlik primaju trenutnu koordinatu
     this.y = 0;
 
 	/*************** METODE ***************/
@@ -12,7 +12,6 @@ function Mish(scena){
     this.proveriPogodak = function(scena, karakter) {
         if(this.naKarakteru(karakter)){ 
 			karakter.pogodjen = true;
-			log(karakter.ime + " pogodjen! " + karakter.pogodjen)			
             scena.poeni++;
         }
     }   // kraj proveriPogodak

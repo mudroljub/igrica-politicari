@@ -74,17 +74,19 @@ function azuriraj(){
 
 				if(karakteri[i].nemaNiPauzuNiIzlaz()){
 					karakteri[i].nadjiSlobodnoMesto(karakteri);	
-					karakteri[i].odrediIzlaz(vreme);			
+					karakteri[i].odrediIzlaz(vreme);
+			        karakteri[i].postaviMrdanje();	
 				}
 				if(karakteri[i].traje_izlaz && !karakteri[i].traje_pauza) {
+					karakteri[i].azurirajMrdanje();
 					karakteri[i].crtajMrdanje();
-					karakteri[i].kadProdjeResetujIzlaz(vreme);					
+					karakteri[i].kadOdeResetujIzlaz(vreme);
 				}
 				if(karakteri[i].nemaNiPauzuNiIzlaz()){
-					karakteri[i].odrediPauzu(vreme);		
-				}				
+					karakteri[i].odrediPauzu(vreme);
+				}
 				if(karakteri[i].traje_pauza && !karakteri[i].traje_izlaz){
-					karakteri[i].kadProdjeResetujPauzu(vreme);					
+					karakteri[i].kadProdjeResetujPauzu(vreme);
 				}
 				if(karakteri[i].pogodjen) {
 					karakteri[i].crtaKukanje(mish);
@@ -92,11 +94,6 @@ function azuriraj(){
 				
 			} // kraj ako karakter igra
 		} // kraj for karakteri
-		
-        // nakon odrediIzlaz
-        //automat.postavljaMrdanje(scena.karakteri);			
-		//automat.azuriraMrdanje(scena.karakteri);
-        //automat.zaustavljaMrdanje(scena.karakteri);
 		
         scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
