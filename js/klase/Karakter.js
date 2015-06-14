@@ -1,5 +1,5 @@
 
-function Karakter(ime, slika_src, scena, vreme){
+function Karakter(ime, slika_src, scena){
 	
 	var ovaj = this;
     this.ime = ime.VelikoSlovo();

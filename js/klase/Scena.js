@@ -30,9 +30,9 @@ function Scena(id_platna, izvor_pozadine) {
         ]
     }   // kraj praviProzore
 
-    this.praviKaraktere = function (likovi, vreme){
+    this.praviKaraktere = function (likovi){
         for (var lik in likovi){
-            window[lik] = new Karakter(lik, likovi[lik], this, vreme);
+            window[lik] = new Karakter(lik, likovi[lik], this);
             this.karakteri.push(window[lik]);
         }   // kraj for
     }   // kraj praviKaraktere()
