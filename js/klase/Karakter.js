@@ -21,8 +21,6 @@ function Karakter(ime, slika_src, scena){
     this.pogodjen = false;
     this.spustenost = 0;
 	this.pomerenost_ulevo = 0;
-    //this.dizanje = false;
-	//this.mrdanje_desno = false;	
 	this.pokret_levo_desno = false;
 	this.pokret_dole_gore = false;
 	this.traje_pauza = 0;
@@ -33,9 +31,9 @@ function Karakter(ime, slika_src, scena){
 
 	/*************** METODE ***************/
 
-	this.igraj = function(trenutak_ulaska) {
+	this.igraj = function(vreme, trenutak_ulaska) {
 		if(vreme.preostalo <= trenutak_ulaska) {
-		this.igra = true;
+			this.igra = true;
 		}
 	}	// kraj igraj
 

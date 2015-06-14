@@ -1,18 +1,5 @@
 /*****************************************************************
     IDEJE:
-<<<<<<< HEAD
-<<<<<<< HEAD
-* da ne izlaze odma, nego da malo sacekaju
-=======
->>>>>>> e3beefb9b2c31c18702d01b2ca07f1bce0b4d1b6
-* da ne odlaze odma, nego da malo sacekaju
-	- kad izadju, dobiju vreme ostanka i igraj
-	- crtaj
-	- kad prodje ostanak, aktivirati im pauzu
-	- iskljuciti im igranje na period pauze
-	- kad prodje pauza, ponovo iz pocetka (odredi duzinu ostanka, igraj)
-=======
->>>>>>> zadrzavanje
 * da menjaju sliku na pogodak
 * napraviti energiju od mase 
 * da nasumicno ispustaju parole
@@ -63,7 +50,7 @@ scena.platno.addEventListener('click', reagujNaKlik);
 
 function postaviScenu(){
     scena.praviProzore(parametri_prozora);
-    scena.praviKaraktere(slike.likovi, vreme); 
+    scena.praviKaraktere(slike.likovi); 
     dacic.jauk = "Jaoj";
     vulin.jauk = "To boli!";
     toma.jauk = "Evropa nema alternativu!";
@@ -76,9 +63,9 @@ function azuriraj(){
     // izvrsava svakih 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
 		scena.crtajPozadinu();
-		dacic.igraj(30);
-		vulin.igraj(20);
-		toma.igraj(10);
+		dacic.igraj(vreme, 30);
+		vulin.igraj(vreme, 20);
+		toma.igraj(vreme, 10);
 				
 		for(var i=0; i < karakteri.length; i++) {
 			if(karakteri[i].igra) {	
