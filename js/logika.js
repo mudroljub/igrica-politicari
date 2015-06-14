@@ -1,6 +1,5 @@
 /*****************************************************************
     IDEJE:
-* svrstati metode po poglavljima
 * da ne izlaze odma, nego da malo sacekaju
 * da ne odlaze odma, nego da malo sacekaju
 * da menjaju sliku na pogodak
