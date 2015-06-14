@@ -126,23 +126,27 @@ function Karakter(ime, slika_src, scena, vreme){
 		this.kraj_izlaska = vreme.ovajTren() + this.izlaz; 
 	}	// kraj odrediIzlazak
 
-	this.kadProdjeIzlazResetuj = function(vreme){
+	this.dalProlaziIzlaz = function(vreme){
 		if(this.kraj_izlaska <= vreme.ovajTren()) {				
 			this.izlaz = 0;	
 		}
-	}	// kadProdjeIzlazResetuj
+	}	// dalProlaziIzlaz
 	
     this.odrediPauzu = function(vreme){	
 		this.pauza = vreme.trajanjeSlucajno();
 		this.kraj_pauze = vreme.ovajTren() + this.pauza; 
 	}	// kraj odrediPauzu
 	
-	this.kadProdjePauzaResetuj = function(vreme){
+	this.dalProlaziPauza = function(vreme){
 		if(this.kraj_pauze <= vreme.ovajTren()) {
 			this.pauza = 0;
 		} 
-	}	// kadProdjePauzaResetuj
+	}	// dalProlaziPauza
 
+	this.niIzlazNiPauza = function(){
+		return !this.izlaz && !this.pauza;
+	}
+	
     /* KOLIZIJA */
 
     this.sudar = function(karakter){

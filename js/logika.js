@@ -68,34 +68,38 @@ function azuriraj(){
 		dacic.igraj(30);
 		vulin.igraj(20);
 		toma.igraj(10);
-		
+		scena.sadrzaj.drawImage(scena.pozadina, 0, 0, scena.sirina, scena.pozadina.nova_visina);
+				
 		for(var i=0; i < karakteri.length; i++) {
 			if(karakteri[i].igra) {	
-			
-				if(!karakteri[i].izlaz && !karakteri[i].pauza){
+
+				if(karakteri[i].niIzlazNiPauza()){
 					karakteri[i].nadjiSlobodnoMesto(karakteri);	
 					karakteri[i].odrediIzlazak(vreme);				
 				}
 				if(karakteri[i].izlaz) {
-					karakteri[i].kadProdjeIzlazResetuj(vreme);
+					karakteri[i].dalProlaziIzlaz(vreme);
 				}
-				if(!karakteri[i].izlaz && !karakteri[i].pauza){
+				if(karakteri[i].niIzlazNiPauza()){
 					karakteri[i].odrediPauzu(vreme);
 				}
-				karakteri[i].kadProdjePauzaResetuj(vreme);
-			
+				if(karakteri[i].pauza){
+					karakteri[i].dalProlaziPauza(vreme);					
+				}
+				if(karakteri[i].izlaz){
+					karakteri[i].crtajMrdanje();
+				}
+				if(mish.naKarakteru(karakteri[i])) {
+					karakteri[i].crtaKukanje(mish);
+				}
+				
 			} // kraj ako karakter igra
 		} // kraj petlje karaktera
-		
 		
         // nakon odrediIzlazak
         //automat.postavljaMrdanje(scena.karakteri);			
 		//automat.azuriraMrdanje(scena.karakteri);
         //automat.zaustavljaMrdanje(scena.karakteri);
-		
-        automat.crtaSve(scena, scena.karakteri);
-        automat.ostavljaPoruke(mish);
-        //automat.prestajuPoruke(scena.karakteri);		
 		
         scena.prikazujePoene(vreme);
         vreme.proveriKraj(kraj);
@@ -126,7 +130,6 @@ function reagujNaKlik(event){
 	if(scena.ide){	
 		for(var i=0; i < scena.karakteri.length; i++){
 			if(scena.karakteri[i].igra && scena.karakteri[i].izlaz) { 
-log(scena.karakteri[i].ime + " izlaz: " + scena.karakteri[i].izlaz)
 				mish.proveriPogodak(scena, scena.karakteri[i]);
 			}
 		}
