@@ -10,8 +10,7 @@ function Mish(scena){
 	}	// naKarakteru()
 	
     this.proveriPogodak = function(scena, karakter) {
-        if(this.naKarakteru(karakter)){ 
-			karakter.kukanje = true;
+        if(this.naKarakteru(karakter) && !karakter.pauza){ 
             scena.poeni++;
         }
     }   // kraj proveriPogodak

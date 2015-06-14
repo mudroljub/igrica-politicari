@@ -13,7 +13,7 @@ function Automat(scena) {
 	this.crtaSve = function(scena, karakteri){
 		scena.sadrzaj.drawImage(scena.pozadina, 0, 0, scena.sirina, scena.pozadina.nova_visina);
 		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].trajanje_ostanka && !karakteri[i].trajanje_pauze){
+			if(karakteri[i].izlaz && !karakteri[i].pauza){
 				//karakteri[i].crtaj();
 				karakteri[i].crtajMrdanje();
 			}
@@ -24,7 +24,7 @@ function Automat(scena) {
 	
 	this.deliPozicije = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].igra && !karakteri[i].trajanje_ostanka){
+			if(karakteri[i].igra && !karakteri[i].izlaz){
 				karakteri[i].nadjiSlobodnoMesto(karakteri);		
 			}
 		}	
@@ -32,24 +32,28 @@ function Automat(scena) {
 
 	this.odrediOstanke = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].igra && !karakteri[i].trajanje_ostanka){
-				karakteri[i].nasumicnoOstaje(vreme);				
+			if(karakteri[i].igra && !karakteri[i].izlaz && !karakteri[i].pauza){
+				karakteri[i].odrediIzlazak(vreme);				
 			}
 		}	
 	}	// odrediOstanke	
 	
 	this.jesuProsliOstanci = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].igra){
-				karakteri[i].jelProsaoOstanak(vreme);
+			if(karakteri[i].izlaz) {
+				if(karakteri[i].igra){
+					karakteri[i].kadProdjeIzlazResetuj(vreme);
+				}
 			}
 		}			
 	}	// jesuProsliOstanci
 
 	this.odrediPauzuSvima = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].igra){
-				karakteri[i].nasumicnaPauza(vreme);
+			if(!karakteri[i].izlaz && !karakteri[i].pauza){
+				if(karakteri[i].igra){
+					karakteri[i].odrediPauzu(vreme);
+				}				
 			}
 		}			
 	}	// odrediPauzuSvima
@@ -57,7 +61,7 @@ function Automat(scena) {
 	this.jesuProslePauze = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
 			if(karakteri[i].igra){
-				karakteri[i].jelProslaPauza(vreme);
+				karakteri[i].kadProdjePauzaResetuj(vreme);
 			}
 		}			
 	}	// jesuProslePauze
@@ -115,7 +119,7 @@ function Automat(scena) {
 
 	this.ostavljaPoruke = function(mish){
 		for(var i=0; i < scena.karakteri.length; i++){	
-			if(scena.karakteri[i].igra && scena.karakteri[i].kukanje){ 
+			if(scena.karakteri[i].igra){ 
 				if(mish.naKarakteru(scena.karakteri[i])) {
 					scena.karakteri[i].crtaKukanje(mish);
 				}
@@ -123,12 +127,5 @@ function Automat(scena) {
 		}
 	}	// kraj ostavljaPoruke
 
-	this.prestajuPoruke = function(karakteri){
-		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].igra && !karakteri[i].trajanje_ostanka){
-				karakteri[i].kukanje = false;
-			}
-		}
-	}	// kraj prestajuPoruke
-
+	
 }	// kraj Automat

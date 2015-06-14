@@ -18,17 +18,16 @@ function Karakter(ime, slika_src, scena, vreme){
 	this.zapamcena_sirina = this.sirina;
 
     this.igra = false;
-    this.kukanje = true;
     this.dizanje = false;
 	this.mrdanje_desno = false;
     this.spustenost = 0;
 	this.pomerenost_ulevo = 0;
 	this.pokret_levo_desno = false;
 	this.pokret_dole_gore = false;
-	this.trajanje_pauze = 0;
-	this.trajanje_ostanka;
+	this.pauza = 0;
+	this.izlaz = 0;
 	this.kraj_pauze; 
-	this.kraj_ostanka; 	
+	this.kraj_izlaska; 	
 
 
 	/*************** METODE ***************/
@@ -122,35 +121,27 @@ function Karakter(ime, slika_src, scena, vreme){
 
 	/* OSTANCI I PAUZE */
 
-    this.nasumicnoOstaje = function(vreme){
-		this.trajanje_ostanka = vreme.trajanjeSlucajno();
-		this.kraj_ostanka = vreme.ovajTren() + this.trajanje_ostanka; 
-	}	// kraj nasumicnoOstaje
+    this.odrediIzlazak = function(vreme){
+		this.izlaz = vreme.trajanjeSlucajno();
+		this.kraj_izlaska = vreme.ovajTren() + this.izlaz; 
+	}	// kraj odrediIzlazak
 
-	this.jelProsaoOstanak = function(vreme){
-		if(this.trajanje_ostanka) {
-			if(this.kraj_ostanka <= vreme.ovajTren()) {
-				this.trajanje_ostanka = 0;
-			} 			
+	this.kadProdjeIzlazResetuj = function(vreme){
+		if(this.kraj_izlaska <= vreme.ovajTren()) {				
+			this.izlaz = 0;	
 		}
-	}	// jelProsaoOstanak
+	}	// kadProdjeIzlazResetuj
 	
+    this.odrediPauzu = function(vreme){	
+		this.pauza = vreme.trajanjeSlucajno();
+		this.kraj_pauze = vreme.ovajTren() + this.pauza; 
+	}	// kraj odrediPauzu
 	
-    this.nasumicnaPauza = function(vreme){	
-		if(!this.trajanje_ostanka && !this.trajanje_pauze){
-			this.trajanje_pauze = vreme.trajanjeSlucajno();
-			this.kraj_pauze = vreme.ovajTren() + this.trajanje_pauze; 
-		}
-	}	// kraj nasumicnaPauza
-	
-	this.jelProslaPauza = function(vreme){
+	this.kadProdjePauzaResetuj = function(vreme){
 		if(this.kraj_pauze <= vreme.ovajTren()) {
-			this.igra = true;
-			this.trajanje_pauze = 0;
-		} else {		
-			this.igra = false;
-		}	
-	}	// jelProslaPauza
+			this.pauza = 0;
+		} 
+	}	// kadProdjePauzaResetuj
 
     /* KOLIZIJA */
 

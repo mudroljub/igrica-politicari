@@ -1,6 +1,5 @@
 /*****************************************************************
     IDEJE:
-* da ne odlaze odma, nego da malo sacekaju
 * da menjaju sliku na pogodak
 * da nasumicno ispustaju parole
 * grafiti na skupstini vucicu pederu
@@ -9,8 +8,7 @@
 * napraviti energiju od mase 
 
     PROBLEMI:
-* karakter prvi put izlazi iako ne igra
-* ne reaguje na pogodak na prvoj poziciji
+* pogadja ga i kad je na pauzi
 * kad je presirok ekran, sece pozadinu po visini !
 * mozda klasa Prilagodjavac za pozadinu, slike, slova
 
@@ -63,30 +61,37 @@ function postaviScenu(){
 
 
 function azuriraj(){
-/* 
-	- kad izadju, dobiju vreme ostanka i igraj
-	- if(karakter.igra) crtaj, pisiporuke, itd
-	- kad prodje ostanak, aktivirati im pauzu
-	- iskljuciti im igranje na period pauze
-	- kad prodje pauza, ponovo iz pocetka (odredi duzinu ostanka, igraj)
-*/	
-
-// document.querySelectorAll(".pretplLow_fl")[0].style.display = "none"; document.querySelector("body").style.height = "auto"
+	var karakteri = scena.karakteri;
 
     // izvrsava svakih 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
 		dacic.igraj(30);
 		vulin.igraj(20);
 		toma.igraj(10);
-        automat.deliPozicije(scena.karakteri);
-		automat.odrediOstanke(scena.karakteri);
-
+		
+		for(var i=0; i < karakteri.length; i++) {
+			if(karakteri[i].igra) {	
+			
+				if(!karakteri[i].izlaz && !karakteri[i].pauza){
+					karakteri[i].nadjiSlobodnoMesto(karakteri);	
+					karakteri[i].odrediIzlazak(vreme);				
+				}
+				if(karakteri[i].izlaz) {
+					karakteri[i].kadProdjeIzlazResetuj(vreme);
+				}
+				if(!karakteri[i].izlaz && !karakteri[i].pauza){
+					karakteri[i].odrediPauzu(vreme);
+				}
+				karakteri[i].kadProdjePauzaResetuj(vreme);
+			
+			} // kraj ako karakter igra
+		} // kraj petlje karaktera
+		
+		
+        // nakon odrediIzlazak
         //automat.postavljaMrdanje(scena.karakteri);			
 		//automat.azuriraMrdanje(scena.karakteri);
         //automat.zaustavljaMrdanje(scena.karakteri);
-		automat.jesuProsliOstanci(scena.karakteri);				
-        automat.odrediPauzuSvima(scena.karakteri);	
-		automat.jesuProslePauze(scena.karakteri);
 		
         automat.crtaSve(scena, scena.karakteri);
         automat.ostavljaPoruke(mish);
@@ -120,7 +125,8 @@ function reagujNaKlik(event){
 
 	if(scena.ide){	
 		for(var i=0; i < scena.karakteri.length; i++){
-			if(scena.karakteri[i].igra) {
+			if(scena.karakteri[i].igra && scena.karakteri[i].izlaz) { 
+log(scena.karakteri[i].ime + " izlaz: " + scena.karakteri[i].izlaz)
 				mish.proveriPogodak(scena, scena.karakteri[i]);
 			}
 		}
