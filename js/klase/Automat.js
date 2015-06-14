@@ -1,4 +1,4 @@
-// mozda preimenovati u klasa Vrteska ili Karakteri ili jednostavno vratiti u funkcije
+// mozda preimenovati u klasa SviKarakteri, Vrteska ili Karakteri ili jednostavno vratiti u funkcije
 
 function Automat(scena) {
 
@@ -20,18 +20,37 @@ function Automat(scena) {
 	this.crtaSve = function(scena, karakteri){
 		scena.sadrzaj.drawImage(scena.pozadina, 0, 0, scena.sirina, scena.pozadina.nova_visina);
 		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].igra){
+			if(karakteri[i].trajanje_ostanka && !karakteri[i].trajanje_pauze){
 				//karakteri[i].crtaj();
 				karakteri[i].crtajMrdanje();
 			}
 		}	// kraj for
 	}	// kraj crtaSve
 
-	/* PAUZE */
+	/* OSTANCI I PAUZE */
 
+	// da ostanak i pauza ne mogu biti istovremeno
+	
+	this.odrediOstanakSvima = function(karakteri){
+		for(var i=0; i < karakteri.length; i++){
+			if(karakteri[i].igra){
+				karakteri[i].odrediOstanak(vreme);
+			}
+		}			
+	}	// odrediOstanakSvima
+
+	this.jesuProsliOstanci = function(karakteri){
+		for(var i=0; i < karakteri.length; i++){
+			if(karakteri[i].igra){
+				karakteri[i].jelProsaoOstanak(vreme);
+			}
+		}			
+	}	// jesuProsliOstanci
+
+	
 	this.odrediPauzuSvima = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].igra && !karakteri[i].trajanje_pauze){
+			if(karakteri[i].igra){
 				karakteri[i].odrediPauzu(vreme);
 			}
 		}			
@@ -39,7 +58,7 @@ function Automat(scena) {
 
 	this.jesuProslePauze = function(karakteri){
 		for(var i=0; i < karakteri.length; i++){
-			if(karakteri[i].trajanje_pauze){
+			if(karakteri[i].igra){
 				karakteri[i].jelProslaPauza(vreme);
 			}
 		}			

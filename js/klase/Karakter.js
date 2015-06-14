@@ -25,8 +25,10 @@ function Karakter(ime, slika_src, scena, vreme){
 	this.pomerenost_ulevo = 0;
 	this.pokret_levo_desno = false;
 	this.pokret_dole_gore = false;
-	this.trajanje_pauze;
+	this.trajanje_pauze = 0;
+	this.trajanje_ostanka;
 	this.kraj_pauze; 
+	this.kraj_ostanka; 	
 
 
 	/*************** METODE ***************/
@@ -109,25 +111,41 @@ function Karakter(ime, slika_src, scena, vreme){
 		this.spustenost++
 	}	// kraj spustaj
 
-    /* PAUZE */
+	/* OSTANCI I PAUZE */
 
-    this.odrediOstanak = function(vreme){		
-		this.trajanje_ostanka = vreme.trajanjeSlucajno()
-		this.kraj_ostanka = vreme.ovajTren() + this.trajanje_ostanka; 
+    this.odrediOstanak = function(vreme){
+		if(!this.trajanje_ostanka && !this.trajanje_pauze){
+			this.trajanje_ostanka = vreme.trajanjeSlucajno();
+			this.kraj_ostanka = vreme.ovajTren() + this.trajanje_ostanka; 
+log(this.ime + " poceo ostanak u " + vreme.ovaSekunda() + " koji traje " + this.trajanje_ostanka)
+		}		
 	}	// kraj odrediOstanak
 
-    this.odrediPauzu = function(vreme){		
-		this.trajanje_pauze = vreme.trajanjeSlucajno()
-		this.kraj_pauze = vreme.ovajTren() + this.trajanje_pauze; 
+	this.jelProsaoOstanak = function(vreme){
+		if(this.trajanje_ostanka) {
+			if(this.kraj_ostanka <= vreme.ovajTren()) {
+log(this.ime + " ostanak prošao " + vreme.ovaSekunda())
+				this.trajanje_ostanka = 0;
+			} 			
+		}
+	}	// jelProsaoOstanak
+	
+	
+    this.odrediPauzu = function(vreme){	
+		if(!this.trajanje_ostanka && !this.trajanje_pauze){
+			this.trajanje_pauze = vreme.trajanjeSlucajno();
+			this.kraj_pauze = vreme.ovajTren() + this.trajanje_pauze; 
+log(this.ime + " pocela pauza koja traja " + this.trajanje_pauze)
+		}
 	}	// kraj odrediPauzu
 	
 	this.jelProslaPauza = function(vreme){
 		if(this.kraj_pauze <= vreme.ovajTren()) {
-log(this.ime + " pauza prošla")
+//log(this.ime + " pauza prošla")
 			this.igra = true;
 			this.trajanje_pauze = 0;
 		} else {
-log(this.ime + " na pauzi")			
+//log(this.ime + " na pauzi koja pocinje " + vreme.ovaSekunda() + " a traje " +this.trajanje_pauze)			
 			this.igra = false;
 		}	
 	}	// jelProslaPauza

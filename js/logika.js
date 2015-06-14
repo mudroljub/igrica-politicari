@@ -62,22 +62,6 @@ function postaviScenu(){
 
 
 function azuriraj(){
-
-    // izvrsava svakih 16.6 milisekundi (60 herca/sekund)
-    if(scena.ide){
-		dacic.igraj(30);
-		vulin.igraj(20);
-		toma.igraj(10);
-		automat.azuriraMrdanje(scena.karakteri);
-        automat.odrediPauzuSvima(scena.karakteri);		
-		automat.jesuProslePauze(scena.karakteri)
-        automat.crtaSve(scena, scena.karakteri);
-        automat.pisePoruke(mish);
-        scena.prikazujePoene(vreme);
-        vreme.proveriKraj(kraj);
-        scena.animacija = requestAnimationFrame(azuriraj);
-    }	// kraj svaki frejm
-
 /* 
 	- kad izadju, dobiju vreme ostanka i igraj
 	- if(karakter.igra) crtaj, pisiporuke, itd
@@ -86,12 +70,32 @@ function azuriraj(){
 	- kad prodje pauza, ponovo iz pocetka (odredi duzinu ostanka, igraj)
 */	
 
+    // izvrsava svakih 16.6 milisekundi (60 herca/sekund)
+    if(scena.ide){
+		dacic.igraj(30);
+		vulin.igraj(20);
+		toma.igraj(10);
+		automat.deliPozicije(scena.karakteri);
+        automat.odrediOstanakSvima(scena.karakteri);
+			// dok je ostanak u toku, mora da ga crta
+		automat.jesuProsliOstanci(scena.karakteri);		
+        //automat.postavljaMrdanje(scena.karakteri);			
+		//automat.azuriraMrdanje(scena.karakteri);
+        //automat.zaustavljaMrdanje(scena.karakteri);
+        automat.odrediPauzuSvima(scena.karakteri);	
+			// dok je pauza u toku, ne sme da crta
+		automat.jesuProslePauze(scena.karakteri);
+		
+        automat.crtaSve(scena, scena.karakteri);
+        //automat.pisePoruke(mish);
+        //automat.brisePoruke();		
+        scena.prikazujePoene(vreme);
+        vreme.proveriKraj(kraj);
+        scena.animacija = requestAnimationFrame(azuriraj);
+    }	// kraj svaki frejm
+
     // izvrsava svaki sekund
     if(vreme.prodjeSekunda()) {
-        automat.brisePoruke();
-        automat.zaustavljaMrdanje(scena.karakteri);
-        automat.deliPozicije(scena.karakteri);
-        automat.postavljaMrdanje(scena.karakteri);
         vreme.smanjuje();
         vreme.azurira();
     }	// kraj svaki sekund
