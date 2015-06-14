@@ -3,7 +3,6 @@
 * da menjaju sliku na pogodak
 * napraviti energiju od mase 
 * da nasumicno ispustaju parole
-* grafiti na skupstini vucicu pederu
 * paradajz pogadja
 * uvodna animacija uvecavanje skupstina
 
@@ -91,9 +90,9 @@ function azuriraj(){
 					karakteri[i].kadProdjeResetujPauzu(vreme);
 				}
 
-			} // kraj ako karakter igra
+			} // kraj if karakter igra
 		} // kraj for karakteri
-		
+
         scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
@@ -123,7 +122,7 @@ function reagujNaKlik(event){
 	if(scena.ide){	
 		for(var i=0; i < karakteri.length; i++){
 			karakteri[i].pogodjen = false;			// da ne pogadja nevidljive
-			if(karakteri[i].traje_izlaz  && !karakteri[i].pauza) { 
+			if(karakteri[i].iskljucivoIzlaz()) { 
 				mish.proveriPogodak(scena, karakteri[i]);
 			}
 		}
