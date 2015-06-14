@@ -9,6 +9,8 @@
 * napraviti energiju od mase 
 
     PROBLEMI:
+* karakter prvi put izlazi iako ne igra
+* ne reaguje na pogodak na prvoj poziciji
 * kad je presirok ekran, sece pozadinu po visini !
 * mozda klasa Prilagodjavac za pozadinu, slike, slova
 
@@ -38,8 +40,8 @@ var slike = {
 
 var ucitavac = new Ucitavac();                      // pravi karaktere
 var vreme = new Vreme(30);          				// zadaje vreme igre
-var mish = new Mish();
 var scena = new Scena('platno', slike.pozadina.skupstina);
+var mish = new Mish(scena);
 var automat = new Automat(scena);                   // obavlja masovne radnje
 var uvod = new Uvod(scena);
 var kraj = new Kraj(scena);
@@ -78,6 +80,7 @@ function azuriraj(){
 		toma.igraj(10);
         automat.deliPozicije(scena.karakteri);
 		automat.odrediOstanke(scena.karakteri);
+
         //automat.postavljaMrdanje(scena.karakteri);			
 		//automat.azuriraMrdanje(scena.karakteri);
         //automat.zaustavljaMrdanje(scena.karakteri);
@@ -86,8 +89,9 @@ function azuriraj(){
 		automat.jesuProslePauze(scena.karakteri);
 		
         automat.crtaSve(scena, scena.karakteri);
-        //automat.pisePoruke(mish);
-        //automat.brisePoruke();		
+        automat.ostavljaPoruke(mish);
+        //automat.prestajuPoruke(scena.karakteri);		
+		
         scena.prikazujePoene(vreme);
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
@@ -102,6 +106,7 @@ function azuriraj(){
 }   // kraj azuriraj
 
 
+// nije u petlji, ovo je on click
 function reagujNaKlik(event){
 	mish.x = event.clientX;   
 	mish.y = event.clientY;
@@ -113,7 +118,7 @@ function reagujNaKlik(event){
 		scena.ide = true;
 	}	// kraj ako ide
 
-	if(scena.ide){
+	if(scena.ide){	
 		for(var i=0; i < scena.karakteri.length; i++){
 			if(scena.karakteri[i].igra) {
 				mish.proveriPogodak(scena, scena.karakteri[i]);

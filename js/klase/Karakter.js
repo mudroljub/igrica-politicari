@@ -18,7 +18,7 @@ function Karakter(ime, slika_src, scena, vreme){
 	this.zapamcena_sirina = this.sirina;
 
     this.igra = false;
-    this.kukanje = false;
+    this.kukanje = true;
     this.dizanje = false;
 	this.mrdanje_desno = false;
     this.spustenost = 0;
@@ -125,13 +125,11 @@ function Karakter(ime, slika_src, scena, vreme){
     this.nasumicnoOstaje = function(vreme){
 		this.trajanje_ostanka = vreme.trajanjeSlucajno();
 		this.kraj_ostanka = vreme.ovajTren() + this.trajanje_ostanka; 
-log(this.ime + " poceo ostanak u " + vreme.ovaSekunda() + " koji traje " + this.trajanje_ostanka)
 	}	// kraj nasumicnoOstaje
 
 	this.jelProsaoOstanak = function(vreme){
 		if(this.trajanje_ostanka) {
 			if(this.kraj_ostanka <= vreme.ovajTren()) {
-log(this.ime + " ostanak prošao " + vreme.ovaSekunda())
 				this.trajanje_ostanka = 0;
 			} 			
 		}
@@ -142,17 +140,14 @@ log(this.ime + " ostanak prošao " + vreme.ovaSekunda())
 		if(!this.trajanje_ostanka && !this.trajanje_pauze){
 			this.trajanje_pauze = vreme.trajanjeSlucajno();
 			this.kraj_pauze = vreme.ovajTren() + this.trajanje_pauze; 
-log(this.ime + " pocela pauza koja traja " + this.trajanje_pauze)
 		}
 	}	// kraj nasumicnaPauza
 	
 	this.jelProslaPauza = function(vreme){
 		if(this.kraj_pauze <= vreme.ovajTren()) {
-//log(this.ime + " pauza prošla")
 			this.igra = true;
 			this.trajanje_pauze = 0;
-		} else {
-//log(this.ime + " na pauzi koja pocinje " + vreme.ovaSekunda() + " a traje " +this.trajanje_pauze)			
+		} else {		
 			this.igra = false;
 		}	
 	}	// jelProslaPauza
@@ -176,13 +171,14 @@ log(this.ime + " pocela pauza koja traja " + this.trajanje_pauze)
 
     /* GOVOR */
 
-    this.kuka = function(mish){
+    this.crtaKukanje = function(mish){
         var jauk = this.jauk || "Jaoj, to boli!";
+		var max_sirina_teksta = 250;
         scena.sadrzaj.font = "30px Verdana";
         scena.sadrzaj.lineWidth = 1;
-        scena.sadrzaj.fillText(jauk, mish.x+30, mish.y, 250);           // poslednji argument je maksimalna shirina teksta
-        scena.sadrzaj.strokeText(jauk, mish.x+30, mish.y, 250);
-    }   // kraj kuka
+		scena.sadrzaj.fillText(jauk, mish.x+30, mish.y, max_sirina_teksta);
+		scena.sadrzaj.strokeText(jauk, mish.x+30, mish.y, max_sirina_teksta);
+    }   // kraj crtaKukanje
 
 	this.bacaParole = function(){
         var parola = this.parola || "Mi branimo srpski narod!";

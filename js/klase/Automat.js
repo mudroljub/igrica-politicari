@@ -1,4 +1,5 @@
 // mozda preimenovati u klasa SviKarakteri, Vrteska ili Karakteri ili jednostavno vratiti u funkcije
+// preseliti uslovnu logiku na jedno mesto, u Automat ili u Karakter
 
 function Automat(scena) {
 
@@ -112,18 +113,22 @@ function Automat(scena) {
 
 	/* PORUKE */
 
-	this.pisePoruke = function(mish){
-		for(var i=0; i < scena.karakteri.length; i++){
-			if(scena.karakteri[i].igra && scena.karakteri[i].kukanje){
-				scena.karakteri[i].kuka(mish);
+	this.ostavljaPoruke = function(mish){
+		for(var i=0; i < scena.karakteri.length; i++){	
+			if(scena.karakteri[i].igra && scena.karakteri[i].kukanje){ 
+				if(mish.naKarakteru(scena.karakteri[i])) {
+					scena.karakteri[i].crtaKukanje(mish);
+				}
 			}
 		}
-	}	// kraj pisePoruke
+	}	// kraj ostavljaPoruke
 
-	this.brisePoruke = function(){
-		for(var i=0; i < scena.karakteri.length; i++){
-			scena.karakteri[i].kukanje = false;
+	this.prestajuPoruke = function(karakteri){
+		for(var i=0; i < karakteri.length; i++){
+			if(karakteri[i].igra && !karakteri[i].trajanje_ostanka){
+				karakteri[i].kukanje = false;
+			}
 		}
-	}	// kraj brisePoruke
+	}	// kraj prestajuPoruke
 
 }	// kraj Automat
