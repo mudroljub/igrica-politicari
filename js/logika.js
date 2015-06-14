@@ -1,7 +1,15 @@
 /*****************************************************************
     IDEJE:
+<<<<<<< HEAD
 * da ne izlaze odma, nego da malo sacekaju
+=======
+>>>>>>> e3beefb9b2c31c18702d01b2ca07f1bce0b4d1b6
 * da ne odlaze odma, nego da malo sacekaju
+	- kad izadju, dobiju vreme ostanka i igraj
+	- crtaj
+	- kad prodje ostanak, aktivirati im pauzu
+	- iskljuciti im igranje na period pauze
+	- kad prodje pauza, ponovo iz pocetka (odredi duzinu ostanka, igraj)
 * da menjaju sliku na pogodak
 * da nasumicno ispustaju parole
 * grafiti na skupstini vucicu pederu
