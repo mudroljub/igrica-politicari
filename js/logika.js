@@ -77,21 +77,20 @@ function azuriraj(){
 					karakteri[i].odrediIzlaz(vreme);
 			        karakteri[i].postaviMrdanje();	
 				}
-				if(karakteri[i].traje_izlaz && !karakteri[i].traje_pauza) {
+				if(karakteri[i].iskljucivoIzlaz()) {
 					karakteri[i].azurirajMrdanje();
 					karakteri[i].crtajMrdanje();
+					karakteri[i].kukaAkoJePogodjen(mish);
 					karakteri[i].kadOdeResetujIzlaz(vreme);
 				}
 				if(karakteri[i].nemaNiPauzuNiIzlaz()){
 					karakteri[i].odrediPauzu(vreme);
 				}
-				if(karakteri[i].traje_pauza && !karakteri[i].traje_izlaz){
+				if(karakteri[i].iskljucivoPauza()){
+					karakteri[i].pogodjen = false
 					karakteri[i].kadProdjeResetujPauzu(vreme);
 				}
-				if(karakteri[i].pogodjen) {
-					karakteri[i].crtaKukanje(mish);
-				}
-				
+
 			} // kraj ako karakter igra
 		} // kraj for karakteri
 		

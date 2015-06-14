@@ -189,6 +189,14 @@ function Karakter(ime, slika_src, scena, vreme){
 		return !this.traje_izlaz && !this.traje_pauza;
 	}
 	
+	this.iskljucivoIzlaz = function(){
+		return this.traje_izlaz && !this.traje_pauza
+	}
+
+	this.iskljucivoPauza = function(){
+		return this.traje_pauza && !this.traje_izlaz
+	}
+	
     /* KOLIZIJA */
 
     this.sudar = function(karakter){
@@ -216,6 +224,12 @@ function Karakter(ime, slika_src, scena, vreme){
 		scena.sadrzaj.fillText(jauk, mish.x+30, mish.y, max_sirina_teksta);
 		scena.sadrzaj.strokeText(jauk, mish.x+30, mish.y, max_sirina_teksta);
     }   // kraj crtaKukanje
+
+	this.kukaAkoJePogodjen = function(mish){
+		if(this.pogodjen) {
+			this.crtaKukanje(mish);
+		}		
+	}
 
 	this.bacaParole = function(){
         var parola = this.parola || "Mi branimo srpski narod!";
