@@ -38,7 +38,6 @@ var ucitavac = new Ucitavac();                      // pravi karaktere
 var vreme = new Vreme(30);          				// zadaje vreme igre
 var scena = new Scena('platno', slike.pozadina.skupstina);
 var mish = new Mish(scena);
-var automat = new Automat(scena);                   // obavlja masovne radnje
 var uvod = new Uvod(scena);
 var kraj = new Kraj(scena);
 var karakteri = scena.karakteri;
@@ -51,7 +50,7 @@ scena.platno.addEventListener('click', reagujNaKlik);
 
 function postaviScenu(){
     scena.praviProzore(parametri_prozora);
-    automat.praviKaraktere(slike.likovi, scena, vreme); 
+    scena.praviKaraktere(slike.likovi, vreme); 
     dacic.jauk = "Jaoj";
     vulin.jauk = "To boli!";
     toma.jauk = "Evropa nema alternativu!";
