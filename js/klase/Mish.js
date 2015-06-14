@@ -1,12 +1,17 @@
 
-function Mish(){
-	this.x = 0;				// na reagujNaKlik primaju trenutnu koordinatu
+function Mish(scena){
+	this.x = 0;				// od reagujNaKlik primaju trenutnu koordinatu
     this.y = 0;
 
+	/*************** METODE ***************/
+
+	this.naKarakteru = function(karakter) {
+		return (this.x > karakter.x && this.x < karakter.x + karakter.sirina) && (this.y > karakter.y && this.y < karakter.y + karakter.visina);
+	}	// naKarakteru()
+	
     this.proveriPogodak = function(scena, karakter) {
-		var mishNaKarakteru = (this.x > karakter.x && this.x < karakter.x + karakter.sirina) && (this.y > karakter.y && this.y < karakter.y + karakter.visina)
-        if(mishNaKarakteru){ 
-			karakter.kukanje = true;
+        if(this.naKarakteru(karakter)){ 
+			karakter.pogodjen = true;
             scena.poeni++;
         }
     }   // kraj proveriPogodak

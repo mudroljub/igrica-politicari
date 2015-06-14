@@ -1,6 +1,7 @@
 /*****************************************************************
     IDEJE:
 <<<<<<< HEAD
+<<<<<<< HEAD
 * da ne izlaze odma, nego da malo sacekaju
 =======
 >>>>>>> e3beefb9b2c31c18702d01b2ca07f1bce0b4d1b6
@@ -10,12 +11,13 @@
 	- kad prodje ostanak, aktivirati im pauzu
 	- iskljuciti im igranje na period pauze
 	- kad prodje pauza, ponovo iz pocetka (odredi duzinu ostanka, igraj)
+=======
+>>>>>>> zadrzavanje
 * da menjaju sliku na pogodak
+* napraviti energiju od mase 
 * da nasumicno ispustaju parole
-* grafiti na skupstini vucicu pederu
 * paradajz pogadja
 * uvodna animacija uvecavanje skupstina
-* napraviti energiju od mase 
 
     PROBLEMI:
 * kad je presirok ekran, sece pozadinu po visini !
@@ -47,12 +49,12 @@ var slike = {
 
 var ucitavac = new Ucitavac();                      // pravi karaktere
 var vreme = new Vreme(30);          				// zadaje vreme igre
-var mish = new Mish();
 var scena = new Scena('platno', slike.pozadina.skupstina);
-var automat = new Automat(scena);                   // obavlja masovne radnje
+var mish = new Mish(scena);
 var uvod = new Uvod(scena);
 var kraj = new Kraj(scena);
-
+var karakteri = scena.karakteri;
+	
 ucitavac.ucitajSlike(slike, uvod.pusti);
 scena.platno.addEventListener('click', reagujNaKlik);
 
@@ -61,11 +63,10 @@ scena.platno.addEventListener('click', reagujNaKlik);
 
 function postaviScenu(){
     scena.praviProzore(parametri_prozora);
-    automat.praviKaraktere(slike.likovi, scena, vreme);   	// pravi objekte od niza likova
-    dacic.jauk = "Jaoj";								// dodaje jedinstvene poruke
+    scena.praviKaraktere(slike.likovi, vreme); 
+    dacic.jauk = "Jaoj";
     vulin.jauk = "To boli!";
     toma.jauk = "Evropa nema alternativu!";
-    automat.deliPozicije(scena.karakteri);
 	scena.animacija = requestAnimationFrame(azuriraj); // krace igra
 }   // kraj postaviScenu
 
@@ -74,30 +75,43 @@ function azuriraj(){
 
     // izvrsava svakih 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
-		automat.azuriraMrdanje(scena.karakteri);
-		automat.jesuProslePauze(scena.karakteri)
-        automat.crtaSve(scena, scena.karakteri);
-        automat.pisePoruke(mish);
-        scena.prikazujePoene(vreme);
+		scena.crtajPozadinu();
+		dacic.igraj(30);
+		vulin.igraj(20);
+		toma.igraj(10);
+				
+		for(var i=0; i < karakteri.length; i++) {
+			if(karakteri[i].igra) {	
+
+				if(karakteri[i].nemaNiPauzuNiIzlaz()){
+					karakteri[i].nadjiSlobodnoMesto(karakteri);	
+					karakteri[i].odrediIzlaz(vreme);
+			        karakteri[i].postaviMrdanje();	
+				}
+				if(karakteri[i].iskljucivoIzlaz()) {
+					karakteri[i].azurirajMrdanje();
+					karakteri[i].crtajMrdanje();
+					karakteri[i].kukaAkoJePogodjen(mish);
+					karakteri[i].kadOdeResetujIzlaz(vreme);
+				}
+				if(karakteri[i].nemaNiPauzuNiIzlaz()){
+					karakteri[i].odrediPauzu(vreme);
+				}
+				if(karakteri[i].iskljucivoPauza()){
+					karakteri[i].pogodjen = false
+					karakteri[i].kadProdjeResetujPauzu(vreme);
+				}
+
+			} // kraj if karakter igra
+		} // kraj for karakteri
+
+        scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
     }	// kraj svaki frejm
 
-    // napraviti drukciju logiku koja ne zavisi od sekunde
-    // vec od stanja svakog karaktera, jel igra ili ne
-    // if(karakter.igra) crtaj, pisiporuke, itd
-    // mozda odvojiti azuriranje od crtanja?
-
     // izvrsava svaki sekund
     if(vreme.prodjeSekunda()) {
-	    dacic.igraj(30);
-		vulin.igraj(20);
-		toma.igraj(10);
-        automat.brisePoruke();
-        automat.zaustavljaMrdanje(scena.karakteri);
-        automat.deliPozicije(scena.karakteri);
-        automat.odrediPauzuSvima(scena.karakteri);
-        automat.postavljaMrdanje(scena.karakteri);
         vreme.smanjuje();
         vreme.azurira();
     }	// kraj svaki sekund
@@ -105,6 +119,7 @@ function azuriraj(){
 }   // kraj azuriraj
 
 
+// nije u petlji, ovo je on click
 function reagujNaKlik(event){
 	mish.x = event.clientX;   
 	mish.y = event.clientY;
@@ -116,10 +131,11 @@ function reagujNaKlik(event){
 		scena.ide = true;
 	}	// kraj ako ide
 
-	if(scena.ide){
-		for(var i=0; i < scena.karakteri.length; i++){
-			if(scena.karakteri[i].igra) {
-				mish.proveriPogodak(scena, scena.karakteri[i]);
+	if(scena.ide){	
+		for(var i=0; i < karakteri.length; i++){
+			karakteri[i].pogodjen = false;			// da ne pogadja nevidljive
+			if(karakteri[i].iskljucivoIzlaz()) { 
+				mish.proveriPogodak(scena, karakteri[i]);
 			}
 		}
 	}	// kraj ako igra

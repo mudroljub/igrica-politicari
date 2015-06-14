@@ -3,6 +3,7 @@ function Vreme(zadato) {
     this.preostalo = zadato || 30;		// podrazumevano vreme
     this.prethodna_sekunda = 0;
 
+	
 	/*************** METODE ***************/
 
 	this.ovajTren = function(){
@@ -29,7 +30,7 @@ function Vreme(zadato) {
 	}
 	
 	this.trajanjeSlucajno = function(){
-		var slucaj = Math.random() * 2;
+		var slucaj = Math.random() * 3;
 		slucaj = Math.round(slucaj * 10) / 10
 		return slucaj;
 	}	// kraj trajanjeSlucajno
