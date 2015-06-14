@@ -43,7 +43,8 @@ var mish = new Mish(scena);
 var automat = new Automat(scena);                   // obavlja masovne radnje
 var uvod = new Uvod(scena);
 var kraj = new Kraj(scena);
-
+var karakteri = scena.karakteri;
+	
 ucitavac.ucitajSlike(slike, uvod.pusti);
 scena.platno.addEventListener('click', reagujNaKlik);
 
@@ -61,14 +62,13 @@ function postaviScenu(){
 
 
 function azuriraj(){
-	var karakteri = scena.karakteri;
 
     // izvrsava svakih 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
+		scena.crtajPozadinu();
 		dacic.igraj(30);
 		vulin.igraj(20);
 		toma.igraj(10);
-		scena.sadrzaj.drawImage(scena.pozadina, 0, 0, scena.sirina, scena.pozadina.nova_visina);
 				
 		for(var i=0; i < karakteri.length; i++) {
 			if(karakteri[i].igra) {	
@@ -78,13 +78,13 @@ function azuriraj(){
 					karakteri[i].odrediIzlazak(vreme);				
 				}
 				if(karakteri[i].izlaz) {
-					karakteri[i].dalProlaziIzlaz(vreme);
+					karakteri[i].jelProsaoIzlaz(vreme);
 				}
 				if(karakteri[i].niIzlazNiPauza()){
 					karakteri[i].odrediPauzu(vreme);
 				}
 				if(karakteri[i].pauza){
-					karakteri[i].dalProlaziPauza(vreme);					
+					karakteri[i].jelProslaPauza(vreme);					
 				}
 				if(karakteri[i].izlaz){
 					karakteri[i].crtajMrdanje();
@@ -101,7 +101,7 @@ function azuriraj(){
 		//automat.azuriraMrdanje(scena.karakteri);
         //automat.zaustavljaMrdanje(scena.karakteri);
 		
-        scena.prikazujePoene(vreme);
+        scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
     }	// kraj svaki frejm
