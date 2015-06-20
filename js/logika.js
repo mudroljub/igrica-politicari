@@ -72,7 +72,7 @@ function azuriraj(){
 
 				if(karakteri[i].nemaNiPauzuNiIzlaz()){
 					karakteri[i].nadjiSlobodnoMesto(karakteri);	
-					karakteri[i].odrediIzlaz(vreme);
+					karakteri[i].odrediIzlaz(vreme, 2, 3);
 			        karakteri[i].postaviMrdanje();	
 				}
 				if(karakteri[i].iskljucivoIzlaz()) {
@@ -82,7 +82,7 @@ function azuriraj(){
 					karakteri[i].kadOdeResetujIzlaz(vreme);
 				}
 				if(karakteri[i].nemaNiPauzuNiIzlaz()){
-					karakteri[i].odrediPauzu(vreme);
+					karakteri[i].odrediPauzu(vreme, 1, 2);
 				}
 				if(karakteri[i].iskljucivoPauza()){
 					karakteri[i].pogodjen = false
