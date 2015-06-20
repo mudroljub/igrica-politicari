@@ -29,10 +29,10 @@ function Vreme(zadato) {
 		return this.ovaSekunda() != this.prethodna_sekunda
 	}
 	
-	this.trajanjeSlucajno = function(){
-		var slucaj = Math.random() * 3;
-		slucaj = Math.round(slucaj * 10) / 10
-		return slucaj;
+	this.trajanjeSlucajno = function(min, max){
+		//var slucaj = Math.random() * 3;
+		//return slucaj;
+		return Math.random() * (max - min) + min;
 	}	// kraj trajanjeSlucajno
 	
 	this.azurira = function(){
