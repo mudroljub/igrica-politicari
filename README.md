@@ -2,6 +2,6 @@
 
 Prva srpska igrica otvorenog koda. 
 
-Dozvoljeno je prepravljanje, kopiranje, igranje i svaka druga upotreba osim komercijalne. 
+Dozvoljeno je slobodno igranje, prepravljanje i kopiranje. 
 
 Autori zadržavaju isključivo pravo na komercijalizaciju dela.
