@@ -161,8 +161,8 @@ function Karakter(ime, slika_src, scena){
 
 	/* OSTANCI I PAUZE */
 
-    this.odrediIzlaz = function(vreme){
-		this.traje_izlaz = vreme.trajanjeSlucajno();
+    this.odrediIzlaz = function(vreme, min, max){
+		this.traje_izlaz = vreme.trajanjeSlucajno(min, max);
 		this.kraj_izlaska = vreme.ovajTren() + this.traje_izlaz; 
 	}	// kraj odrediIzlaz
 
@@ -172,8 +172,8 @@ function Karakter(ime, slika_src, scena){
 		}
 	}	// kadOdeResetujIzlaz
 	
-    this.odrediPauzu = function(vreme){	
-		this.traje_pauza = vreme.trajanjeSlucajno();
+    this.odrediPauzu = function(vreme, min, max){	
+		this.traje_pauza = vreme.trajanjeSlucajno(min, max);
 		this.kraj_pauze = vreme.ovajTren() + this.traje_pauza; 
 	}	// kraj odrediPauzu
 	
