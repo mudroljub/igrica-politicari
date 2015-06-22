@@ -16,4 +16,8 @@ function Mish(scena){
         }
     }   // kraj proveriPogodak
 
+	this.crtaParadajz = function(){
+		scena.sadrzaj.drawImage(paradajz, this.x, this.y);
+	}
+	
 }	// kraj Mish

@@ -25,7 +25,7 @@ var slike = {
         dacic: 'slike/dacic.png'
     },
     predmeti: {
-        paradajz: "slike/politicar.png",
+        paradajz: "slike/paradajz.png",
         jaje: "slike/politicar.png",
         krpa: "slike/politicar.png"
     }
@@ -41,6 +41,9 @@ var mish = new Mish(scena);
 var uvod = new Uvod(scena);
 var kraj = new Kraj(scena);
 var karakteri = scena.karakteri;
+
+var paradajz = new Image();
+paradajz.src = "slike/paradajz.png";
 	
 ucitavac.ucitajSlike(slike, uvod.pusti);
 scena.platno.addEventListener('click', reagujNaKlik);
@@ -51,6 +54,7 @@ scena.platno.addEventListener('click', reagujNaKlik);
 function postaviScenu(){
     scena.praviProzore(parametri_prozora);
     scena.praviKaraktere(slike.likovi); 
+    //scena.praviPredmete(slike.predmeti); 	
     dacic.jauk = "Jaoj";
     vulin.jauk = "To boli!";
     toma.jauk = "Evropa nema alternativu!";
@@ -78,6 +82,7 @@ function azuriraj(){
 				if(karakteri[i].iskljucivoIzlaz()) {
 					karakteri[i].azurirajMrdanje();
 					karakteri[i].crtajMrdanje();
+					mish.crtaParadajz();
 					karakteri[i].kukaAkoJePogodjen(mish);
 					karakteri[i].kadOdeResetujIzlaz(vreme);
 				}
