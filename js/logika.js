@@ -1,5 +1,6 @@
 /*****************************************************************
     IDEJE:
+* nišan kao fokus, tri paradajza random pogađaju unutar kruga
 * da menjaju sliku na pogodak
 * napraviti energiju od mase 
 * da nasumicno ispustaju parole
