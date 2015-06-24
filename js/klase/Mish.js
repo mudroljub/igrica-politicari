@@ -37,7 +37,7 @@ function Mish(scena){
 	}	// paradajzNaLiku
 	
 	this.crtaParadajz = function(){
-		scena.sadrzaj.drawImage(paradajz, this.x, this.y);
+		scena.sadrzaj.drawImage(paradajz, mish.zapamcen_x, mish.zapamcen_y);
 	}	// crtaParadajz
 	
 }	// kraj Mish

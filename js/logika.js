@@ -99,6 +99,7 @@ function azuriraj(){
 			} // kraj if karakter igra
 		} // kraj for karakteri
 
+		mish.crtaParadajz();
         scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
@@ -117,8 +118,7 @@ function azuriraj(){
 function reagujNaKlik(event){
 
 	mish.azurirajZapamcenuPoziciju(event); 
-		mish.crtaParadajz();
-			
+	
 	if(uvod.ide){
 		uvod.ide = false;	// prekida uvod
 		window.cancelAnimationFrame(uvod.animacija);
@@ -134,4 +134,9 @@ function reagujNaKlik(event){
 			}
 		}
 	}	// kraj ako igra
+	
+	if(!scena.ide){
+		mish.crtaParadajz();
+	 }
+	 
 }   // kraj reagujNaKlik
