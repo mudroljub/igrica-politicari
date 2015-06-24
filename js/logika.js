@@ -8,6 +8,7 @@
 * uvodna animacija uvecavanje skupstina
 
     PROBLEMI:
+* srediti proveru sudara, sada se oslanja samo na jednu tacku!
 * kad je presirok ekran, sece pozadinu po visini !
 * mozda klasa Prilagodjavac za pozadinu, slike, slova
 
@@ -48,7 +49,7 @@ paradajz.src = "slike/paradajz.png";
 	
 ucitavac.ucitajSlike(slike, uvod.pusti);
 scena.platno.addEventListener('click', reagujNaKlik);
-
+scena.platno.addEventListener('mousemove', mish.azurirajPoziciju);
 
 /*************** GLAVNE FUNKCIJE ***************/
 
@@ -83,9 +84,9 @@ function azuriraj(){
 				if(karakteri[i].iskljucivoIzlaz()) {
 					karakteri[i].azurirajMrdanje();
 					karakteri[i].crtajMrdanje();
-					mish.crtaParadajz();
 					karakteri[i].kukaAkoJePogodjen(mish);
 					karakteri[i].kadOdeResetujIzlaz(vreme);
+					mish.paradajzNaLiku(karakteri[i]);					
 				}
 				if(karakteri[i].nemaNiPauzuNiIzlaz()){
 					karakteri[i].odrediPauzu(vreme, 1, 2);
@@ -98,6 +99,7 @@ function azuriraj(){
 			} // kraj if karakter igra
 		} // kraj for karakteri
 
+		//mish.crtaParadajz();
         scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
@@ -114,8 +116,8 @@ function azuriraj(){
 
 // nije u petlji, ovo je on click
 function reagujNaKlik(event){
-	mish.x = event.clientX;   
-	mish.y = event.clientY;
+
+	mish.azurirajZapamcenuPoziciju(event); 
 	
 	if(uvod.ide){
 		uvod.ide = false;	// prekida uvod

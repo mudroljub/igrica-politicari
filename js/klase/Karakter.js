@@ -12,15 +12,15 @@ function Karakter(ime, slika_src, scena){
     this.visina = this.slika.height;
     this.x = 0;         	// dodeljuje slucajnaPozicija
     this.y = 0;
-	this.zapamcen_y = 0;    // dodeljuje postavljaMrdanje
 	this.zapamcen_x = 0;
+	this.zapamcen_y = 0;    // dodeljuje postavljaMrdanje
 	this.zapamcena_visina = this.visina;
 	this.zapamcena_sirina = this.sirina;
 
     this.igra = false;
     this.pogodjen = false;
-    this.spustenost = 0;
 	this.pomerenost_ulevo = 0;
+    this.spustenost = 0;
 	this.pokret_levo_desno = false;
 	this.pokret_dole_gore = false;
 	this.traje_pauza = 0;
@@ -219,8 +219,8 @@ function Karakter(ime, slika_src, scena){
 		var max_sirina_teksta = 250;
         scena.sadrzaj.font = "30px Verdana";
         scena.sadrzaj.lineWidth = 1;
-		scena.sadrzaj.fillText(jauk, mish.x+30, mish.y, max_sirina_teksta);
-		scena.sadrzaj.strokeText(jauk, mish.x+30, mish.y, max_sirina_teksta);
+		scena.sadrzaj.fillText(jauk, mish.zapamcen_x+30, mish.zapamcen_y, max_sirina_teksta);
+		scena.sadrzaj.strokeText(jauk, mish.zapamcen_x+30, mish.zapamcen_y, max_sirina_teksta);
     }   // kraj crtaKukanje
 
 	this.kukaAkoJePogodjen = function(mish){
