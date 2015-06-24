@@ -19,7 +19,7 @@
 // nazivi bitni, od njih pravi objekte
 var slike = {
     pozadina: {
-        skupstina: 'slike/skupstina2.png'
+        skupstina: 'slike/skupstina3d.png'
     },
     likovi: {
         vulin: 'slike/vulin.png',
@@ -99,7 +99,6 @@ function azuriraj(){
 			} // kraj if karakter igra
 		} // kraj for karakteri
 
-		//mish.crtaParadajz();
         scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
@@ -118,7 +117,8 @@ function azuriraj(){
 function reagujNaKlik(event){
 
 	mish.azurirajZapamcenuPoziciju(event); 
-	
+		mish.crtaParadajz();
+			
 	if(uvod.ide){
 		uvod.ide = false;	// prekida uvod
 		window.cancelAnimationFrame(uvod.animacija);
