@@ -6,7 +6,7 @@ function Karakter(ime, slika_src, scena){
 	this.slika = new Image();
     this.slika.src = slika_src;
 
-    this.STANDARDNA_VISINA = 118;
+    this.STANDARDNA_VISINA = 99;
     this.slika = _prilagodiSliku(this, this.slika);
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
