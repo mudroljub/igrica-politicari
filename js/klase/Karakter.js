@@ -160,7 +160,7 @@ function Karakter(ime, slika_src, scena){
 		this.spustenost++
 	}	// kraj spustaj
 
-	/* OSTANCI I PAUZE */
+	/* IZLAZ I PAUZA */
 
     this.odrediIzlaz = function(vreme, min, max){
 		this.traje_izlaz = vreme.trajanjeSlucajno(min, max);
@@ -195,45 +195,6 @@ function Karakter(ime, slika_src, scena){
 	this.upravoPauzira = function(){
 		return this.traje_pauza && !this.traje_izlaz
 	}
-	
-    /* KOLIZIJA */
-
-    this.sudar = function(karakter){
-        if(this.x == karakter.x && this.y == karakter.y){
-            return true
-        } else return false
-    }   // kraj sudar
-
-    this.proveriSveSudare = function (karakteri) {
-        var sudari = false
-        for (var i = 0; i < karakteri.length; i++) {
-			if( i == karakteri.indexOf(this) ) continue;		// preskoci sebe
-            sudari = sudari || this.sudar(karakteri[i])
-        }  // kraj petlje
-		return sudari;
-    }   // kraj proveriSveSudare
-
-    /* GOVOR */
-
-    this.crtaKukanje = function(mish){
-        var jauk = this.jauk || "Jaoj, to boli!";
-		var max_sirina_teksta = 250;
-        scena.sadrzaj.font = "30px Verdana";
-        scena.sadrzaj.lineWidth = 1;
-		scena.sadrzaj.fillText(jauk, mish.zapamcen_x+30, mish.zapamcen_y, max_sirina_teksta);
-		scena.sadrzaj.strokeText(jauk, mish.zapamcen_x+30, mish.zapamcen_y, max_sirina_teksta);
-    }   // kraj crtaKukanje
-
-	this.kukaAkoJePogodjen = function(mish){
-		if(this.pogodjen) {
-			this.crtaKukanje(mish);
-		}		
-	}
-
-	this.bacaParole = function(){
-        var parola = this.parola || "Mi branimo srpski narod!";
-		// bacaParole koje ti skidaju energiju
-    }   // kraj bacaParole
 
     /*************** POMOCNE FUNKCIJE ***************/
 
@@ -248,3 +209,43 @@ function Karakter(ime, slika_src, scena){
     }
 
 }   // kraj Karakter
+
+
+/* KOLIZIJA */
+
+Karakter.prototype.sudar = function(karakter){
+	if(this.x == karakter.x && this.y == karakter.y){
+		return true
+	} else return false
+}   // kraj sudar
+
+Karakter.prototype.proveriSveSudare = function (karakteri) {
+	var sudari = false
+	for (var i = 0; i < karakteri.length; i++) {
+		if( i == karakteri.indexOf(this) ) continue;		// preskoci sebe
+		sudari = sudari || this.sudar(karakteri[i])
+	}  // kraj petlje
+	return sudari;
+}   // kraj proveriSveSudare
+
+/* GOVOR */
+
+Karakter.prototype.crtaKukanje = function(mish){
+	var jauk = this.jauk || "Jaoj, to boli!";
+	var max_sirina_teksta = 250;
+	scena.sadrzaj.font = "30px Verdana";
+	scena.sadrzaj.lineWidth = 1;
+	scena.sadrzaj.fillText(jauk, mish.zapamcen_x+30, mish.zapamcen_y, max_sirina_teksta);
+	scena.sadrzaj.strokeText(jauk, mish.zapamcen_x+30, mish.zapamcen_y, max_sirina_teksta);
+}   // kraj crtaKukanje
+
+Karakter.prototype.kukaAkoJePogodjen = function(mish){
+	if(this.pogodjen) {
+		this.crtaKukanje(mish);
+	}		
+}
+
+Karakter.prototype.bacaParole = function(){
+	var parola = this.parola || "Mi branimo srpski narod!";
+	// bacaParole koje ti skidaju energiju
+}   // kraj bacaParole

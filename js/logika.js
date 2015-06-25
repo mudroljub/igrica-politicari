@@ -1,6 +1,5 @@
 /*****************************************************************
     IDEJE:
-* prvi paradajz ne treba da puca
 * tri paradajza random pogađaju unutar kruga
 * menjanje oruzja
 * indikator ucitavanja, da ne moze da pocne pre nego ucita
@@ -11,6 +10,8 @@
 * politicari nasumicno ispustaju parole
 
     PROBLEMI:
+* na kraju se ne vidi miš
+* prvi paradajz ne treba da puca
 * da ne crta dva paradajza na istom (crtaParadajzOkolo)
 * da crtaParadajzNaLiku ne napusta prozor
 * kad je presirok ekran, sece pozadinu po visini !
