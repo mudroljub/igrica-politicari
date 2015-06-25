@@ -19,15 +19,16 @@ function Scena(id_platna, izvor_pozadine) {
 	/*************** METODE ***************/
 
     this.praviProzore = function(ose_prozora){
-        var gornji_red = this.pozadina.nova_visina / ose_prozora.gornja_horizontala;
-        var donji_red = this.pozadina.nova_visina / ose_prozora.donja_horizontala;
-        var prvi_prozor = this.sirina / ose_prozora.prva_vertikala;			// promeniti u scena.sirina
-        var drugi_prozor = this.sirina / ose_prozora.druga_vertikala;
-        var treci_prozor = this.sirina / ose_prozora.treca_vertikala;
+        var gornji_red = this.pozadina.nova_visina / ose_prozora.gornji_red;
+        var donji_red = this.pozadina.nova_visina / ose_prozora.donji_red;
+        var prvi_niz = this.sirina / ose_prozora.prvi_niz;			// promeniti u scena.sirina
+        var drugi_niz = this.sirina / ose_prozora.drugi_niz;
+        var treci_niz = this.sirina / ose_prozora.treci_niz;
+        var cetvrti_niz = this.sirina / ose_prozora.cetvrti_niz;
 
         this.pozicije = [
-            [prvi_prozor, gornji_red], [drugi_prozor, gornji_red], [treci_prozor, gornji_red],
-            [prvi_prozor, donji_red], [drugi_prozor, donji_red], [treci_prozor, donji_red]
+            [prvi_niz, gornji_red], [drugi_niz, gornji_red], [treci_niz, gornji_red], [cetvrti_niz, gornji_red],
+            [prvi_niz, donji_red], [drugi_niz, donji_red], [treci_niz, donji_red], [cetvrti_niz, donji_red]
         ]
     }   // kraj praviProzore
 

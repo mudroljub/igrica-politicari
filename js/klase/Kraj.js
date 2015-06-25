@@ -1,5 +1,6 @@
 function Kraj(scena) {
 
+	this.ide = false;
 	this.STANDARNA_VELICINA_SLOVA = 48;
 	this.velicina_slova = _prilagodiSlova(this.STANDARNA_VELICINA_SLOVA);
 
@@ -8,6 +9,7 @@ function Kraj(scena) {
 	this.pusti = function(){
 		window.cancelAnimationFrame(scena.animacija);
 		scena.ide = false;
+		this.ide = true;
 		this.zavrsniEkran("Igra je završena!");
 		this.proveriRekord(scena.poeni);
 	}	// kraj pusti

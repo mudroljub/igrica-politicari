@@ -1,7 +1,9 @@
 var parametri_prozora = {
-    gornja_horizontala: 4,
-    donja_horizontala: 1.53,
-    prva_vertikala: 5.9,
-    druga_vertikala: 2.2,
-    treca_vertikala: 1.35
+    gornji_red: 3.45,
+    donji_red: 1.82,
+    
+    prvi_niz: 3.4,
+    drugi_niz: 2.45,
+    treci_niz: 1.95,
+    cetvrti_niz: 1.6
 }

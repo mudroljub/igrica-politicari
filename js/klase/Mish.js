@@ -9,12 +9,12 @@ function Mish(scena){
 
 	/*************** METODE ***************/
 
-	this.azurirajPoziciju = function(event){
+	this.azuriraPoziciju = function(event){
 		mish.x = event.clientX;   
 		mish.y = event.clientY;
 	}
 
-	this.azurirajZapamcenuPoziciju = function(event){
+	this.azuriraZapamcenuPoziciju = function(event){
 		mish.zapamcen_x = event.clientX;   
 		mish.zapamcen_y = event.clientY;
 	}
@@ -30,14 +30,14 @@ function Mish(scena){
         }
     }   // kraj proveriPogodak
 
-	this.paradajzNaLiku = function(karakter){
+	this.crtaParadajzNaLiku = function(karakter){
 		if(karakter.pogodjen){ 
 			scena.sadrzaj.drawImage(paradajz, mish.zapamcen_x - karakter.pomerenost_ulevo, mish.zapamcen_y + karakter.spustenost - 20);
 		}
-	}	// paradajzNaLiku
+	}	// crtaParadajzNaLiku
 	
 	this.crtaParadajz = function(){
-		scena.sadrzaj.drawImage(paradajz, this.x, this.y);
+		scena.sadrzaj.drawImage(paradajz, mish.zapamcen_x, mish.zapamcen_y);
 	}	// crtaParadajz
 	
 }	// kraj Mish
