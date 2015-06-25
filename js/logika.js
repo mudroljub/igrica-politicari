@@ -1,5 +1,7 @@
 /*****************************************************************
     IDEJE:
+* da se ne pojavljuju dva paradajza kada pogodi
+* klasa paradajz ili predmet
 * nišan kao fokus, tri paradajza random pogađaju unutar kruga
 * da menjaju sliku na pogodak
 * napraviti energiju od mase 
@@ -49,7 +51,8 @@ paradajz.src = "slike/paradajz.png";
 	
 ucitavac.ucitajSlike(slike, uvod.pusti);
 scena.platno.addEventListener('click', reagujNaKlik);
-scena.platno.addEventListener('mousemove', mish.azurirajPoziciju);
+scena.platno.addEventListener('mousemove', mish.azuriraPoziciju);
+
 
 /*************** GLAVNE FUNKCIJE ***************/
 
@@ -86,7 +89,7 @@ function azuriraj(){
 					karakteri[i].crtajMrdanje();
 					karakteri[i].kukaAkoJePogodjen(mish);
 					karakteri[i].kadOdeResetujIzlaz(vreme);
-					mish.paradajzNaLiku(karakteri[i]);					
+					mish.crtaParadajzNaLiku(karakteri[i]);					
 				}
 				if(karakteri[i].nemaNiPauzuNiIzlaz()){
 					karakteri[i].odrediPauzu(vreme, 1, 2);
@@ -116,8 +119,7 @@ function azuriraj(){
 
 // nije u petlji, ovo je on click
 function reagujNaKlik(event){
-
-	mish.azurirajZapamcenuPoziciju(event); 
+	mish.azuriraZapamcenuPoziciju(event); 
 	
 	if(uvod.ide){
 		uvod.ide = false;	// prekida uvod
@@ -128,14 +130,14 @@ function reagujNaKlik(event){
 
 	if(scena.ide){	
 		for(var i=0; i < karakteri.length; i++){
-			karakteri[i].pogodjen = false;			// da ne pogadja nevidljive
-			if(karakteri[i].iskljucivoIzlaz()) { 
+			karakteri[i].pogodjen = false;	
+			if(karakteri[i].iskljucivoIzlaz()) { 			// da ne pogadja nevidljive
 				mish.proveriPogodak(scena, karakteri[i]);
 			}
 		}
 	}	// kraj ako igra
 	
-	if(!scena.ide){
+	if(kraj.ide){
 		mish.crtaParadajz();
 	 }
 	 
