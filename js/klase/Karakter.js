@@ -1,4 +1,5 @@
 
+// ukinuti zavisnost klase od scene
 function Karakter(ime, slika_src, scena){
 	
 	var ovaj = this;

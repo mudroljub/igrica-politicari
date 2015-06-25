@@ -1,16 +1,15 @@
 /*****************************************************************
     IDEJE:
-* da se ne pojavljuju dva paradajza kada pogodi
-* popraviti da paradajz gadja u centar
-* klasa paradajz ili predmet
 * nišan kao fokus, tri paradajza random pogađaju unutar kruga
 * da menjaju sliku na pogodak
 * napraviti energiju od mase 
+* klasa predmet, instancirati
 * da nasumicno ispustaju parole
-* paradajz pogadja
 * uvodna animacija uvecavanje skupstina
 
     PROBLEMI:
+* da ne crta dva paradajza na istom (crtaParadajzOkolo)
+* da crtaParadajzNaLiku ne napusta prozor
 * srediti proveru sudara, sada se oslanja samo na jednu tacku!
 * kad je presirok ekran, sece pozadinu po visini !
 * mozda klasa Prilagodjavac za pozadinu, slike, slova
@@ -105,7 +104,7 @@ function azuriraj(){
 				}
 
 			} // kraj if karakter igra
-		mish.crtaParadajzVanLika(karakteri[i]);
+		mish.crtaParadajzOkolo(karakteri[i]);
 		} // kraj for karakteri
 
         scena.prikazujPoene(vreme);

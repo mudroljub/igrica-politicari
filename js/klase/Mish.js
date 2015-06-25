@@ -39,13 +39,12 @@ function Mish(scena){
 		}
 	}	// crtaParadajzNaLiku
 
-	this.crtaParadajzVanLika = function(karakter){
-		if(!karakter.pogodjen){
-			var centriranX = mish.zapamcen_x - (paradajz.width / 2);
-			var centriranY = mish.zapamcen_y - (paradajz.height / 2);
-			scena.sadrzaj.drawImage(paradajz, centriranX, centriranY);
+	// da ne crta ako je na istom prozoru pogodjen političar
+	this.crtaParadajzOkolo = function(karakter){
+		if(!karakter.pogodjen && !this.naKarakteru(karakter)){
+			this.crtaParadajz();
 		}	
-	}	// crtaParadajzVanLika
+	}	// crtaParadajzOkolo
 
 	this.crtaParadajz = function(){
 		var centriranX = mish.zapamcen_x - (paradajz.width / 2);
