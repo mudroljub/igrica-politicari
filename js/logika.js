@@ -1,6 +1,7 @@
 /*****************************************************************
     IDEJE:
 * da se ne pojavljuju dva paradajza kada pogodi
+* popraviti da paradajz gadja u centar
 * klasa paradajz ili predmet
 * nišan kao fokus, tri paradajza random pogađaju unutar kruga
 * da menjaju sliku na pogodak
@@ -51,8 +52,12 @@ paradajz.src = "slike/paradajz.png";
 	
 ucitavac.ucitajSlike(slike, uvod.pusti);
 scena.platno.addEventListener('click', reagujNaKlik);
-scena.platno.addEventListener('mousemove', mish.azuriraPoziciju);
+scena.platno.addEventListener('mousemove', mishSeMrda);
 
+
+function mishSeMrda(event){
+	mish.azuriraPoziciju(event)
+}
 
 /*************** GLAVNE FUNKCIJE ***************/
 
@@ -100,9 +105,9 @@ function azuriraj(){
 				}
 
 			} // kraj if karakter igra
+		mish.crtaParadajzVanLika(karakteri[i]);
 		} // kraj for karakteri
 
-		mish.crtaParadajz();
         scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
@@ -131,7 +136,7 @@ function reagujNaKlik(event){
 	if(scena.ide){	
 		for(var i=0; i < karakteri.length; i++){
 			karakteri[i].pogodjen = false;	
-			if(karakteri[i].iskljucivoIzlaz()) { 			// da ne pogadja nevidljive
+			if(karakteri[i].upravoIzlazi()) { 			// da ne pogadja nevidljive
 				mish.proveriPogodak(scena, karakteri[i]);
 			}
 		}

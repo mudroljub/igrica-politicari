@@ -10,14 +10,17 @@ function Mish(scena){
 	/*************** METODE ***************/
 
 	this.azuriraPoziciju = function(event){
-		mish.x = event.clientX;   
-		mish.y = event.clientY;
+		var rect = platno.getBoundingClientRect();
+		mish.x = event.clientX - rect.left; 
+		mish.y = event.clientY - rect.top;
 	}
-
+	// spojiti
 	this.azuriraZapamcenuPoziciju = function(event){
-		mish.zapamcen_x = event.clientX;   
-		mish.zapamcen_y = event.clientY;
-	}
+		var rect = platno.getBoundingClientRect();
+		mish.zapamcen_x = event.clientX - rect.left; 
+		mish.zapamcen_y = event.clientY - rect.top;
+	}	// azuriraZapamcenuPoziciju
+
 
 	this.naKarakteru = function(karakter) {
 		return (this.x > karakter.x && this.x < karakter.x + karakter.sirina) && (this.y > karakter.y && this.y < karakter.y + karakter.visina);
@@ -32,12 +35,22 @@ function Mish(scena){
 
 	this.crtaParadajzNaLiku = function(karakter){
 		if(karakter.pogodjen){ 
-			scena.sadrzaj.drawImage(paradajz, mish.zapamcen_x - karakter.pomerenost_ulevo, mish.zapamcen_y + karakter.spustenost - 20);
+			scena.sadrzaj.drawImage(paradajz, mish.zapamcen_x - (paradajz.width/2) - karakter.pomerenost_ulevo, mish.zapamcen_y -(paradajz.height/2) + karakter.spustenost );
 		}
 	}	// crtaParadajzNaLiku
-	
+
+	this.crtaParadajzVanLika = function(karakter){
+		if(!karakter.pogodjen){
+			var centriranX = mish.zapamcen_x - (paradajz.width / 2);
+			var centriranY = mish.zapamcen_y - (paradajz.height / 2);
+			scena.sadrzaj.drawImage(paradajz, centriranX, centriranY);
+		}	
+	}	// crtaParadajzVanLika
+
 	this.crtaParadajz = function(){
-		scena.sadrzaj.drawImage(paradajz, mish.zapamcen_x, mish.zapamcen_y);
+		var centriranX = mish.zapamcen_x - (paradajz.width / 2);
+		var centriranY = mish.zapamcen_y - (paradajz.height / 2);
+		scena.sadrzaj.drawImage(paradajz, centriranX, centriranY);
 	}	// crtaParadajz
-	
+
 }	// kraj Mish
