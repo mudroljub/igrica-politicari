@@ -183,15 +183,15 @@ function Karakter(ime, slika_src, scena){
 		} 
 	}	// kadProdjeResetujPauzu
 
-	this.nemaNiPauzuNiIzlaz = function(){
+	this.neIzlaziNiPauzira = function(){
 		return !this.traje_izlaz && !this.traje_pauza;
 	}
 	
-	this.iskljucivoIzlaz = function(){
+	this.upravoIzlazi = function(){
 		return this.traje_izlaz && !this.traje_pauza
 	}
 
-	this.iskljucivoPauza = function(){
+	this.upravoPauzira = function(){
 		return this.traje_pauza && !this.traje_izlaz
 	}
 	
