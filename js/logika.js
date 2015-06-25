@@ -75,22 +75,22 @@ function azuriraj(){
 		for(var i=0; i < karakteri.length; i++) {
 			if(karakteri[i].igra) {	
 
-				if(karakteri[i].nemaNiPauzuNiIzlaz()){
+				if(karakteri[i].neIzlaziNiPauzira()){
 					karakteri[i].nadjiSlobodnoMesto(karakteri);	
 					karakteri[i].odrediIzlaz(vreme, 2, 3);
 			        karakteri[i].postaviMrdanje();	
 				}
-				if(karakteri[i].iskljucivoIzlaz()) {
+				if(karakteri[i].upravoIzlazi()) {
 					karakteri[i].azurirajMrdanje();
 					karakteri[i].crtajMrdanje();
 					mish.crtaParadajz();
 					karakteri[i].kukaAkoJePogodjen(mish);
 					karakteri[i].kadOdeResetujIzlaz(vreme);
 				}
-				if(karakteri[i].nemaNiPauzuNiIzlaz()){
+				if(karakteri[i].neIzlaziNiPauzira()){
 					karakteri[i].odrediPauzu(vreme, 1, 2);
 				}
-				if(karakteri[i].iskljucivoPauza()){
+				if(karakteri[i].upravoPauzira()){
 					karakteri[i].pogodjen = false
 					karakteri[i].kadProdjeResetujPauzu(vreme);
 				}
@@ -127,7 +127,7 @@ function reagujNaKlik(event){
 	if(scena.ide){	
 		for(var i=0; i < karakteri.length; i++){
 			karakteri[i].pogodjen = false;			// da ne pogadja nevidljive
-			if(karakteri[i].iskljucivoIzlaz()) { 
+			if(karakteri[i].upravoIzlazi()) {
 				mish.proveriPogodak(scena, karakteri[i]);
 			}
 		}
