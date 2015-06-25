@@ -38,7 +38,7 @@ function Mish(scena){
 			scena.sadrzaj.drawImage(paradajz, mish.zapamcen_x - (paradajz.width/2) - karakter.pomerenost_ulevo, mish.zapamcen_y -(paradajz.height/2) + karakter.spustenost );
 		}
 	}	// crtaParadajzNaLiku
-
+	// spojiti
 	// da ne crta ako je na istom prozoru pogodjen političar
 	this.crtaParadajzOkolo = function(karakter){
 		if(!karakter.pogodjen && !this.naKarakteru(karakter)){
@@ -51,5 +51,12 @@ function Mish(scena){
 		var centriranY = mish.zapamcen_y - (paradajz.height / 2);
 		scena.sadrzaj.drawImage(paradajz, centriranX, centriranY);
 	}	// crtaParadajz
+
+	this.crtaKrug = function(){	
+		var krug = new Path2D();
+		krug.arc(mish.x, mish.y, 25, 0, 2 * Math.PI);
+		scena.sadrzaj.fillStyle = "rgba(255, 255, 255, 0.2)";		
+		scena.sadrzaj.fill(krug);		
+	}
 
 }	// kraj Mish

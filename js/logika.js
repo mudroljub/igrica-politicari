@@ -1,16 +1,18 @@
 /*****************************************************************
     IDEJE:
-* nišan kao fokus, tri paradajza random pogađaju unutar kruga
-* da menjaju sliku na pogodak
+* prvi paradajz ne treba da puca
+* tri paradajza random pogađaju unutar kruga
+* menjanje oruzja
+* indikator ucitavanja, da ne moze da pocne pre nego ucita
+* srediti proveru sudara, sada se oslanja samo na jednu tacku! 
 * napraviti energiju od mase 
-* klasa predmet, instancirati
-* da nasumicno ispustaju parole
+* praviti predmete
 * uvodna animacija uvecavanje skupstina
+* politicari nasumicno ispustaju parole
 
     PROBLEMI:
 * da ne crta dva paradajza na istom (crtaParadajzOkolo)
 * da crtaParadajzNaLiku ne napusta prozor
-* srediti proveru sudara, sada se oslanja samo na jednu tacku!
 * kad je presirok ekran, sece pozadinu po visini !
 * mozda klasa Prilagodjavac za pozadinu, slike, slova
 
@@ -81,6 +83,8 @@ function azuriraj(){
 		toma.igraj(vreme, 10);
 				
 		for(var i=0; i < karakteri.length; i++) {
+			mish.crtaParadajzOkolo(karakteri[i]);
+
 			if(karakteri[i].igra) {	
 
 				if(karakteri[i].neIzlaziNiPauzira()){
@@ -103,10 +107,10 @@ function azuriraj(){
 					karakteri[i].kadProdjeResetujPauzu(vreme);
 				}
 
-			} // kraj if karakter igra
-		mish.crtaParadajzOkolo(karakteri[i]);
+			} // kraj if karakter igra		
 		} // kraj for karakteri
 
+		mish.crtaKrug()
         scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
