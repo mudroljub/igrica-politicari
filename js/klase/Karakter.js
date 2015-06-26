@@ -44,13 +44,13 @@ function Karakter(ime, slika_src, scena){
 }   // kraj Karakter
 
 
-/*************** METODE ***************/
-
 Karakter.prototype.igraj = function(vreme, trenutak_ulaska) {
 	if(vreme.preostalo <= trenutak_ulaska) {
 		this.igra = true;
 	}
 }	// kraj igraj
+
+/* CRTANJE */
 
 Karakter.prototype.crtaj = function() {
 	if (this.x >= 0 && this.y >= 0) {

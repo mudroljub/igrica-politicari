@@ -51,7 +51,7 @@ var karakteri = scena.karakteri;
 
 var paradajz = new Image();
 paradajz.src = "slike/paradajz.png";
-	
+
 ucitavac.ucitajSlike(slike, uvod.pusti);
 scena.platno.addEventListener('click', reagujNaKlik);
 scena.platno.addEventListener('mousemove', mishSeMrda);
