@@ -8,6 +8,7 @@
 * praviti predmete
 * uvodna animacija uvecavanje skupstina
 * politicari nasumicno ispustaju parole
+* prikazati najbolji rezultat u tabeli (napraviti upisivanje)
 
     PROBLEMI:
 * prvi paradajz ne treba da puca
@@ -43,7 +44,7 @@ var slike = {
 var ucitavac = new Ucitavac();                      // pravi karaktere
 var vreme = new Vreme(30);          				// zadaje vreme igre
 var scena = new Scena('platno', slike.pozadina.skupstina);
-var mish = new Mish(scena);
+var kursor = new Kursor(scena);
 var uvod = new Uvod(scena);
 var kraj = new Kraj(scena);
 var karakteri = scena.karakteri;
@@ -57,7 +58,7 @@ scena.platno.addEventListener('mousemove', mishSeMrda);
 
 // mozda smesiti u azuriraj
 function mishSeMrda(event){
-	mish.azuriraPoziciju(event)
+	kursor.azuriraPoziciju(event)
 }
 
 /*************** GLAVNE FUNKCIJE ***************/
@@ -84,7 +85,7 @@ function azuriraj(){
 		toma.igraj(vreme, 10);
 				
 		for(var i=0; i < karakteri.length; i++) {
-			mish.crtaParadajzOkolo(karakteri[i]);
+			kursor.crtaParadajzOkolo(karakteri[i]);
 
 			if(karakteri[i].igra) {	
 
@@ -96,9 +97,9 @@ function azuriraj(){
 				if(karakteri[i].upravoIzlazi()) {
 					karakteri[i].azurirajMrdanje();
 					karakteri[i].crtajMrdanje();
-					karakteri[i].kukaAkoJePogodjen(mish);
+					karakteri[i].kukaAkoJePogodjen(kursor);
 					karakteri[i].kadOdeResetujIzlaz(vreme);
-					mish.crtaParadajzNaLiku(karakteri[i]);					
+					kursor.crtaParadajzNaLiku(karakteri[i]);
 				}
 				if(karakteri[i].neIzlaziNiPauzira()){
 					karakteri[i].odrediPauzu(vreme, 1, 2);
@@ -111,7 +112,7 @@ function azuriraj(){
 			} // kraj if karakter igra		
 		} // kraj for karakteri
 
-		mish.crtaKrug()
+		kursor.crtaKrug()
         scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
@@ -128,7 +129,7 @@ function azuriraj(){
 
 // nije u petlji, ovo je on click
 function reagujNaKlik(event){
-	mish.azuriraZapamcenuPoziciju(event); 
+	kursor.azuriraZapamcenuPoziciju(event);
 	
 	if(uvod.ide){
 		uvod.ide = false;	// prekida uvod
@@ -141,13 +142,13 @@ function reagujNaKlik(event){
 		for(var i=0; i < karakteri.length; i++){
 			karakteri[i].pogodjen = false;	
 			if(karakteri[i].upravoIzlazi()) { 			// da ne pogadja nevidljive
-				mish.proveriPogodak(scena, karakteri[i]);
+				kursor.proveriPogodak(scena, karakteri[i]);
 			}
 		}
 	}	// kraj ako igra
 	
 	if(kraj.ide){
-		mish.crtaParadajz();
+		kursor.crtaParadajz();
 	 }
 	 
 }   // kraj reagujNaKlik
