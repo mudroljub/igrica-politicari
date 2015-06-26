@@ -1,5 +1,5 @@
 /*****************************************************************
-    IDEJE:
+    URADITI:
 * tri paradajza random pogađaju unutar kruga
 * menjanje oruzja
 * indikator ucitavanja, da ne moze da pocne pre nego ucita
@@ -7,15 +7,13 @@
 * napraviti energiju od mase 
 * praviti predmete
 * uvodna animacija uvecavanje skupstina
-* politicari nasumicno ispustaju parole
 * prikazati najbolji rezultat u tabeli (napraviti upisivanje)
+* funkcije za prilagodjavanje pozadine, slike, slova
 
     PROBLEMI:
 * prvi paradajz ne treba da puca
-* da ne crta dva paradajza na istom (crtaParadajzOkolo)
-* da crtaParadajzNaLiku ne napusta prozor
+* da crtaParadajzNaLiku ne napusta prozor, a crtaParadajzOkolo ne ulazu u zauzet prozor
 * kad je presirok ekran, sece pozadinu po visini !
-* mozda klasa Prilagodjavac za pozadinu, slike, slova
 
     DOBRA PRAKSA:
 * zaokruziti crtanje na pun piksel, bez decimala
