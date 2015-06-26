@@ -1,14 +1,19 @@
 /*****************************************************************
     IDEJE:
-* nišan kao fokus, tri paradajza random pogađaju unutar kruga
-* da menjaju sliku na pogodak
+* tri paradajza random pogađaju unutar kruga
+* menjanje oruzja
+* indikator ucitavanja, da ne moze da pocne pre nego ucita
+* srediti proveru sudara, sada se oslanja samo na jednu tacku! 
 * napraviti energiju od mase 
-* da nasumicno ispustaju parole
-* paradajz pogadja
+* praviti predmete
 * uvodna animacija uvecavanje skupstina
+* politicari nasumicno ispustaju parole
 
     PROBLEMI:
-* srediti proveru sudara, sada se oslanja samo na jednu tacku!
+* na kraju se ne vidi miš
+* prvi paradajz ne treba da puca
+* da ne crta dva paradajza na istom (crtaParadajzOkolo)
+* da crtaParadajzNaLiku ne napusta prozor
 * kad je presirok ekran, sece pozadinu po visini !
 * mozda klasa Prilagodjavac za pozadinu, slike, slova
 
@@ -49,7 +54,12 @@ paradajz.src = "slike/paradajz.png";
 	
 ucitavac.ucitajSlike(slike, uvod.pusti);
 scena.platno.addEventListener('click', reagujNaKlik);
-scena.platno.addEventListener('mousemove', mish.azurirajPoziciju);
+scena.platno.addEventListener('mousemove', mishSeMrda);
+
+
+function mishSeMrda(event){
+	mish.azuriraPoziciju(event)
+}
 
 /*************** GLAVNE FUNKCIJE ***************/
 
@@ -74,6 +84,8 @@ function azuriraj(){
 		toma.igraj(vreme, 10);
 				
 		for(var i=0; i < karakteri.length; i++) {
+			mish.crtaParadajzOkolo(karakteri[i]);
+
 			if(karakteri[i].igra) {	
 
 				if(karakteri[i].neIzlaziNiPauzira()){
@@ -86,7 +98,7 @@ function azuriraj(){
 					karakteri[i].crtajMrdanje();
 					karakteri[i].kukaAkoJePogodjen(mish);
 					karakteri[i].kadOdeResetujIzlaz(vreme);
-					mish.paradajzNaLiku(karakteri[i]);					
+					mish.crtaParadajzNaLiku(karakteri[i]);					
 				}
 				if(karakteri[i].neIzlaziNiPauzira()){
 					karakteri[i].odrediPauzu(vreme, 1, 2);
@@ -96,10 +108,10 @@ function azuriraj(){
 					karakteri[i].kadProdjeResetujPauzu(vreme);
 				}
 
-			} // kraj if karakter igra
+			} // kraj if karakter igra		
 		} // kraj for karakteri
 
-		mish.crtaParadajz();
+		mish.crtaKrug()
         scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
@@ -116,8 +128,7 @@ function azuriraj(){
 
 // nije u petlji, ovo je on click
 function reagujNaKlik(event){
-
-	mish.azurirajZapamcenuPoziciju(event); 
+	mish.azuriraZapamcenuPoziciju(event); 
 	
 	if(uvod.ide){
 		uvod.ide = false;	// prekida uvod
@@ -128,14 +139,14 @@ function reagujNaKlik(event){
 
 	if(scena.ide){	
 		for(var i=0; i < karakteri.length; i++){
-			karakteri[i].pogodjen = false;			// da ne pogadja nevidljive
-			if(karakteri[i].upravoIzlazi()) {
+			karakteri[i].pogodjen = false;	
+			if(karakteri[i].upravoIzlazi()) { 			// da ne pogadja nevidljive
 				mish.proveriPogodak(scena, karakteri[i]);
 			}
 		}
 	}	// kraj ako igra
 	
-	if(!scena.ide){
+	if(kraj.ide){
 		mish.crtaParadajz();
 	 }
 	 

@@ -9,15 +9,18 @@ function Mish(scena){
 
 	/*************** METODE ***************/
 
-	this.azurirajPoziciju = function(event){
-		mish.x = event.clientX;   
-		mish.y = event.clientY;
+	this.azuriraPoziciju = function(event){
+		var rect = platno.getBoundingClientRect();
+		mish.x = event.clientX - rect.left; 
+		mish.y = event.clientY - rect.top;
 	}
+	// spojiti
+	this.azuriraZapamcenuPoziciju = function(event){
+		var rect = platno.getBoundingClientRect();
+		mish.zapamcen_x = event.clientX - rect.left; 
+		mish.zapamcen_y = event.clientY - rect.top;
+	}	// azuriraZapamcenuPoziciju
 
-	this.azurirajZapamcenuPoziciju = function(event){
-		mish.zapamcen_x = event.clientX;   
-		mish.zapamcen_y = event.clientY;
-	}
 
 	this.naKarakteru = function(karakter) {
 		return (this.x > karakter.x && this.x < karakter.x + karakter.sirina) && (this.y > karakter.y && this.y < karakter.y + karakter.visina);
@@ -30,14 +33,30 @@ function Mish(scena){
         }
     }   // kraj proveriPogodak
 
-	this.paradajzNaLiku = function(karakter){
+	this.crtaParadajzNaLiku = function(karakter){
 		if(karakter.pogodjen){ 
-			scena.sadrzaj.drawImage(paradajz, mish.zapamcen_x - karakter.pomerenost_ulevo, mish.zapamcen_y + karakter.spustenost - 20);
+			scena.sadrzaj.drawImage(paradajz, mish.zapamcen_x - (paradajz.width/2) - karakter.pomerenost_ulevo, mish.zapamcen_y -(paradajz.height/2) + karakter.spustenost );
 		}
-	}	// paradajzNaLiku
-	
+	}	// crtaParadajzNaLiku
+	// spojiti
+	// da ne crta ako je na istom prozoru pogodjen političar
+	this.crtaParadajzOkolo = function(karakter){
+		if(!karakter.pogodjen && !this.naKarakteru(karakter)){
+			this.crtaParadajz();
+		}	
+	}	// crtaParadajzOkolo
+
 	this.crtaParadajz = function(){
-		scena.sadrzaj.drawImage(paradajz, mish.zapamcen_x, mish.zapamcen_y);
+		var centriranX = mish.zapamcen_x - (paradajz.width / 2);
+		var centriranY = mish.zapamcen_y - (paradajz.height / 2);
+		scena.sadrzaj.drawImage(paradajz, centriranX, centriranY);
 	}	// crtaParadajz
-	
+
+	this.crtaKrug = function(){	
+		var krug = new Path2D();
+		krug.arc(mish.x, mish.y, 25, 0, 2 * Math.PI);
+		scena.sadrzaj.fillStyle = "rgba(255, 255, 255, 0.2)";		
+		scena.sadrzaj.fill(krug);		
+	}
+
 }	// kraj Mish
