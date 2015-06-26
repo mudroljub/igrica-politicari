@@ -8,6 +8,7 @@ function Kraj(scena) {
 
 	this.pusti = function(){
 		window.cancelAnimationFrame(scena.animacija);
+		platno.style.cursor = 'crosshair';
 		scena.ide = false;
 		this.ide = true;
 		this.zavrsniEkran("Igra je završena!");

@@ -10,7 +10,6 @@
 * politicari nasumicno ispustaju parole
 
     PROBLEMI:
-* na kraju se ne vidi miš
 * prvi paradajz ne treba da puca
 * da ne crta dva paradajza na istom (crtaParadajzOkolo)
 * da crtaParadajzNaLiku ne napusta prozor
@@ -56,7 +55,7 @@ ucitavac.ucitajSlike(slike, uvod.pusti);
 scena.platno.addEventListener('click', reagujNaKlik);
 scena.platno.addEventListener('mousemove', mishSeMrda);
 
-
+// mozda smesiti u azuriraj
 function mishSeMrda(event){
 	mish.azuriraPoziciju(event)
 }
@@ -64,8 +63,9 @@ function mishSeMrda(event){
 /*************** GLAVNE FUNKCIJE ***************/
 
 function postaviScenu(){
+	platno.style.cursor = 'none';
     scena.praviProzore(parametri_prozora);
-    scena.praviKaraktere(slike.likovi); 
+    scena.praviKaraktere(slike.likovi);
     //scena.praviPredmete(slike.predmeti); 	
     dacic.jauk = "Jaoj";
     vulin.jauk = "To boli!";
@@ -76,7 +76,7 @@ function postaviScenu(){
 
 function azuriraj(){
 
-    // izvrsava svakih 16.6 milisekundi (60 herca/sekund)
+    // izvrsava svaki frejm, tj. 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
 		scena.crtajPozadinu();
 		dacic.igraj(vreme, 30);

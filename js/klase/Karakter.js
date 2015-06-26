@@ -160,41 +160,6 @@ function Karakter(ime, slika_src, scena){
 		this.spustenost++
 	}	// kraj spustaj
 
-	/* IZLAZ I PAUZA */
-
-    this.odrediIzlaz = function(vreme, min, max){
-		this.traje_izlaz = vreme.trajanjeSlucajno(min, max);
-		this.kraj_izlaska = vreme.ovajTren() + this.traje_izlaz; 
-	}	// kraj odrediIzlaz
-
-	this.kadOdeResetujIzlaz = function(vreme){
-		if(this.kraj_izlaska <= vreme.ovajTren()) {				
-			this.traje_izlaz = 0;	
-		}
-	}	// kadOdeResetujIzlaz
-	
-    this.odrediPauzu = function(vreme, min, max){	
-		this.traje_pauza = vreme.trajanjeSlucajno(min, max);
-		this.kraj_pauze = vreme.ovajTren() + this.traje_pauza; 
-	}	// kraj odrediPauzu
-	
-	this.kadProdjeResetujPauzu = function(vreme){
-		if(this.kraj_pauze <= vreme.ovajTren()) {
-			this.traje_pauza = 0;
-		} 
-	}	// kadProdjeResetujPauzu
-
-	this.neIzlaziNiPauzira = function(){
-		return !this.traje_izlaz && !this.traje_pauza;
-	}
-	
-	this.upravoIzlazi = function(){
-		return this.traje_izlaz && !this.traje_pauza
-	}
-
-	this.upravoPauzira = function(){
-		return this.traje_pauza && !this.traje_izlaz
-	}
 
     /*************** POMOCNE FUNKCIJE ***************/
 
@@ -210,6 +175,42 @@ function Karakter(ime, slika_src, scena){
 
 }   // kraj Karakter
 
+
+/* IZLAZ I PAUZA */
+
+Karakter.prototype.odrediIzlaz = function(vreme, min, max){
+	this.traje_izlaz = vreme.trajanjeSlucajno(min, max);
+	this.kraj_izlaska = vreme.ovajTren() + this.traje_izlaz;
+}	// kraj odrediIzlaz
+
+Karakter.prototype.kadOdeResetujIzlaz = function(vreme){
+	if(this.kraj_izlaska <= vreme.ovajTren()) {
+		this.traje_izlaz = 0;
+	}
+}	// kadOdeResetujIzlaz
+
+Karakter.prototype.odrediPauzu = function(vreme, min, max){
+	this.traje_pauza = vreme.trajanjeSlucajno(min, max);
+	this.kraj_pauze = vreme.ovajTren() + this.traje_pauza;
+}	// kraj odrediPauzu
+
+Karakter.prototype.kadProdjeResetujPauzu = function(vreme){
+	if(this.kraj_pauze <= vreme.ovajTren()) {
+		this.traje_pauza = 0;
+	}
+}	// kadProdjeResetujPauzu
+
+Karakter.prototype.neIzlaziNiPauzira = function(){
+	return !this.traje_izlaz && !this.traje_pauza;
+}	// neIzlaziNiPauzira
+
+Karakter.prototype.upravoIzlazi = function(){
+	return this.traje_izlaz && !this.traje_pauza
+}	// upravoIzlazi
+
+Karakter.prototype.upravoPauzira = function(){
+	return this.traje_pauza && !this.traje_izlaz
+}	// upravoPauzira
 
 /* KOLIZIJA */
 
