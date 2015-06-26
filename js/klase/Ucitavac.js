@@ -1,4 +1,5 @@
 // mozda dodati praviKaraktere i praviPredmete
+// napraviti vizuelizaciju ucitavanja
 
 function Ucitavac() {
     this.sve_slike = 0;
@@ -14,7 +15,6 @@ Ucitavac.prototype.ucitajSlike = function(slike, povratnaRadnja){     // povratn
     for(var i=0; i < ukupno_grupa; i++) {
         var naziv_grupe = nazivi_grupa[i];
         var ova_grupa = slike[naziv_grupe];
-
         for(var ime_slike in ova_grupa){
             var ova_slika = new Image()
             ova_slika.onload = this.proveriUcitano(povratnaRadnja);
@@ -34,7 +34,6 @@ Ucitavac.prototype.ukupnoSlika = function(slike){
 }   // ukupnoSlika
 
 Ucitavac.prototype.proveriUcitano = function(povratnaRadnja){
-    log('proveravam')
     this.ucitane_slike++;
     if(this.ucitane_slike >= this.sve_slike) {
         povratnaRadnja();
