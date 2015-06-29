@@ -1,18 +1,17 @@
 /*****************************************************************
     URADITI:
-* tri paradajza random pogađaju unutar kruga
+* praviPredmete
 * menjanje oruzja
-* indikator ucitavanja, da ne moze da pocne pre nego ucita
 * srediti proveru sudara, sada se oslanja samo na jednu tacku! 
 * napraviti energiju od mase 
-* praviti predmete
 * uvodna animacija uvecavanje skupstina
 * prikazati najbolji rezultat u tabeli (napraviti upisivanje)
 * funkcije za prilagodjavanje pozadine, slike, slova
 
     PROBLEMI:
+* moze da pocne pre nego sto ucita
 * prvi paradajz ne treba da puca
-* da crtaParadajzNaLiku ne napusta prozor, a crtaParadajzOkolo ne ulazu u zauzet prozor
+* da crtaProjektilNaLiku ne napusta prozor, a crtaParadajzOkolo ne ulazu u zauzet prozor
 * kad je presirok ekran, sece pozadinu po visini !
 
     DOBRA PRAKSA:
@@ -21,7 +20,7 @@
 
 // nazivi bitni, od njih pravi objekte
 var slike = {
-    pozadina: {
+    pozadine: {
         skupstina: 'slike/skupstina3d.png'
     },
     likovi: {
@@ -39,30 +38,28 @@ var slike = {
 
 /*************** LOGIKA IGRE ***************/
 
-var ucitavac = new Ucitavac();                      // pravi karaktere
+var ucitavac = new Ucitavac(slike);                      // pravi karaktere
 var vreme = new Vreme(30);          				// zadaje vreme igre
-var scena = new Scena('platno', slike.pozadina.skupstina);
-var kursor = new Kursor(scena);
-var uvod = new Uvod(scena);
-var kraj = new Kraj(scena);
-var karakteri = scena.karakteri;
+var uvod = new Uvod('platno');
+var kursor = new Kursor();
+var scena, karakteri, kraj;
+ucitavac.ucitajSlike(slike, uvod.pusti);			// takodje praviSlike
 
-var paradajz = new Image();
-paradajz.src = "slike/paradajz.png";
+		// praviPredmete
+		var paradajz = new Image();
+		paradajz.src = "slike/paradajz.png";
 
-ucitavac.ucitajSlike(slike, uvod.pusti);
-scena.platno.addEventListener('click', reagujNaKlik);
-scena.platno.addEventListener('mousemove', mishSeMrda);
-
-// mozda smesiti u azuriraj
-function mishSeMrda(event){
-	kursor.azuriraPoziciju(event)
-}
+$("#platno").addEventListener('click', reagujNaKlik);
+$("#platno").addEventListener('mousemove', reagujNaPokret);
 
 /*************** GLAVNE FUNKCIJE ***************/
 
 function postaviScenu(){
-	platno.style.cursor = 'none';
+	var slika_pozadine = ucitavac.dajPrvuPozadinu();
+	scena = new Scena('platno', slika_pozadine, ucitavac.prilagodjena_visina);
+	karakteri = scena.karakteri;
+	kraj = new Kraj(scena);
+	$("#platno").style.cursor = 'none';
     scena.praviProzore(parametri_prozora);
     scena.praviKaraktere(slike.likovi);
     //scena.praviPredmete(slike.predmeti); 	
@@ -77,13 +74,13 @@ function azuriraj(){
 
     // izvrsava svaki frejm, tj. 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
-		scena.crtajPozadinu();
+		scena.crtaPozadinu();
 		dacic.igraj(vreme, 30);
 		vulin.igraj(vreme, 20);
 		toma.igraj(vreme, 10);
 				
 		for(var i=0; i < karakteri.length; i++) {
-			kursor.crtaParadajzOkolo(karakteri[i]);
+			kursor.crtaTriProjektile(scena, paradajz);
 
 			if(karakteri[i].igra) {	
 
@@ -97,7 +94,7 @@ function azuriraj(){
 					karakteri[i].crtajMrdanje();
 					karakteri[i].kukaAkoJePogodjen(kursor);
 					karakteri[i].kadOdeResetujIzlaz(vreme);
-					kursor.crtaParadajzNaLiku(karakteri[i]);
+					kursor.crtaProjektilNaLiku(scena, karakteri[i], paradajz);
 				}
 				if(karakteri[i].neIzlaziNiPauzira()){
 					karakteri[i].odrediPauzu(vreme, 1, 2);
@@ -110,7 +107,7 @@ function azuriraj(){
 			} // kraj if karakter igra		
 		} // kraj for karakteri
 
-		kursor.crtaKrug()
+		kursor.crtaKrug(scena)
         scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
@@ -125,10 +122,10 @@ function azuriraj(){
 }   // kraj azuriraj
 
 
-// nije u petlji, ovo je on click
 function reagujNaKlik(event){
-	kursor.azuriraZapamcenuPoziciju(event);
-	
+	kursor.pamtiKliknutuPoziciju(event);			// koristi da crtaProjektil
+	kursor.dodeliPozicijeProjektila(paradajz);
+
 	if(uvod.ide){
 		uvod.ide = false;	// prekida uvod
 		window.cancelAnimationFrame(uvod.animacija);
@@ -146,7 +143,12 @@ function reagujNaKlik(event){
 	}	// kraj ako igra
 	
 	if(kraj.ide){
-		kursor.crtaParadajz();
+		kursor.crtaProjektil(scena, paradajz);
 	 }
 	 
 }   // kraj reagujNaKlik
+
+
+function reagujNaPokret(event){
+	kursor.azuriraPoziciju(event)
+}

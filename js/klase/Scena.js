@@ -1,6 +1,4 @@
-// prilagodiPozadinu, uzeti u obzir sire i tanje ekrane
-
-function Scena(id_platna, izvor_pozadine) {
+function Scena(platno_id, slika_pozadine, prilagodjena_visina) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
     this.ide = false;
 	this.STANDARDNA_SIRINA = 1280;
@@ -9,50 +7,19 @@ function Scena(id_platna, izvor_pozadine) {
     this.pozicije = []  // popunjava ga funkcija praviProzore
 	this.animacija;		// identifikator animacije
 	this.poeni = 0;
-	this.platno = _razvuciPlatno(id_platna);
-	this.sadrzaj = _postaviSadrzaj(this.platno);
-	this.pozadina = _ucitajPozadinu(izvor_pozadine, ova_scena);		// dodati povratnu funkciju kao argument
+	this.platno = razvuciPlatno(platno_id);
+	this.sadrzaj = postaviSadrzaj(this.platno);
+	this.pozadina = slika_pozadine;
+	this.prilagodjena_visina = prilagodjena_visina;
 	this.sirina = this.platno.width;
     this.visina = this.platno.height;
-
-
-	/*************** POMOCNE FUNKCIJE ***************/
-
-	function _razvuciPlatno(id_platna){
-		var platno = document.getElementById(id_platna);        // ako nema platna, da sam stvara
-		platno.width = window.innerWidth;
-		platno.height = window.innerHeight;
-		return platno;
-	}
-	
-	function _postaviSadrzaj(platno) {
-		var sadrzaj = platno.getContext('2d');
-		sadrzaj.font = "30px Verdana";
-		sadrzaj.fillStyle = "white";
-		sadrzaj.strokeStyle = 'black';
-		return sadrzaj;		
-	}
-
-    // pripojiti Ucitavacu
-	function _ucitajPozadinu(izvor_pozadine, ova_scena){
-		var pozadina = new Image();
-		pozadina.onload = function kadUcita() {
-			ova_scena.pozadina = _prilagodiPozadinu(pozadina, ova_scena);
-		};
-		pozadina.src = izvor_pozadine;		
-	}
-	
-	function _prilagodiPozadinu(pozadina, ova_scena){
-			pozadina.nova_visina = (ova_scena.sirina / pozadina.width) * pozadina.height;  // prilagodjava visinu pozadine
-			return pozadina;
-	}
 
 }	// kraj Scena
 
 
 Scena.prototype.praviProzore = function(ose_prozora){
-    var gornji_red = this.pozadina.nova_visina / ose_prozora.gornji_red;
-    var donji_red = this.pozadina.nova_visina / ose_prozora.donji_red;
+    var gornji_red = this.prilagodjena_visina / ose_prozora.gornji_red;
+    var donji_red = this.prilagodjena_visina / ose_prozora.donji_red;
     var prvi_niz = this.sirina / ose_prozora.prvi_niz;			// promeniti u scena.sirina
     var drugi_niz = this.sirina / ose_prozora.drugi_niz;
     var treci_niz = this.sirina / ose_prozora.treci_niz;
@@ -88,10 +55,10 @@ Scena.prototype.prikazujPoene = function(vreme){
     this.sadrzaj.fillText("Vreme: " + vreme.preostalo, 30, 160);
 }	// prikazujPoene
 
-Scena.prototype.crtajPozadinu = function(){
-    this.sadrzaj.drawImage(this.pozadina, 0, 0, this.sirina, this.pozadina.nova_visina);
+Scena.prototype.crtaPozadinu = function(){
+    this.sadrzaj.drawImage(this.pozadina, 0, 0, this.sirina, this.prilagodjena_visina);
 }
 
-Scena.prototype.mrdajPozadinu = function(){
+Scena.prototype.mrdaPozadinu = function(){
     // kad imamo vecu pozadinu da se pomera
 }

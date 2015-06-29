@@ -1,20 +1,11 @@
 function Kraj(scena) {
 
 	this.ide = false;
-	this.STANDARNA_VELICINA_SLOVA = 48;
-	this.velicina_slova = _prilagodiSlova(this.STANDARNA_VELICINA_SLOVA);
+	this.OSNOVNA_VELICINA_SLOVA = 48;
+	this.velicina_slova = prilagodiSlova(this.OSNOVNA_VELICINA_SLOVA);
 
+}	// Kraj
 
-	/*************** POMOCNE FUNKCIJE ***************/
-	function _prilagodiSlova (standard){
-		var nova_velicina = standard * (scena.sirina / scena.STANDARDNA_SIRINA);
-		return nova_velicina;
-	}	// kraj _prilagodiSlova
-
-}	// kraj Kraja
-
-
-/*************** METODE ***************/
 
 Kraj.prototype.pusti = function(){
 	window.cancelAnimationFrame(scena.animacija);
@@ -38,6 +29,6 @@ Kraj.prototype.proveriRekord = function(poeni) {
 		rekord = poeni;
 		localStorage.setItem('rekord', poeni);
 	}
-	kazi("Najbolji rezultat je: " + rekord)
+	log("Najbolji rezultat je: " + rekord)
 	// return rekord
 }	// kraj proveriRekord

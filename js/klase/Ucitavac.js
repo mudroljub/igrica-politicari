@@ -1,9 +1,11 @@
-// mozda dodati praviKaraktere i praviPredmete
-// napraviti vizuelizaciju ucitavanja
+// prilagodiPozadinu, uzeti u obzir sire i tanje ekrane
 
-function Ucitavac() {
+function Ucitavac(slike) {
+	
     this.sve_slike = 0;
     this.ucitane_slike = 0;
+	this.prilagodjena_visina = 0;
+	
 }   // kraj Ucitavac
 
 
@@ -16,9 +18,9 @@ Ucitavac.prototype.ucitajSlike = function(slike, povratnaRadnja){     // povratn
         var naziv_grupe = nazivi_grupa[i];
         var ova_grupa = slike[naziv_grupe];
         for(var ime_slike in ova_grupa){
-            var ova_slika = new Image()
-            ova_slika.onload = this.proveriUcitano(povratnaRadnja);
-            ova_slika.src = ova_grupa[ime_slike]
+			window[ime_slike + "_slika"] = new Image()
+			window[ime_slike + "_slika"].onload  = this.kadUcitasPusti(povratnaRadnja);
+			window[ime_slike + "_slika"].src = ova_grupa[ime_slike]
         } // kraj for in
     }	// kraj for
 }	// ucitajSlike
@@ -33,9 +35,25 @@ Ucitavac.prototype.ukupnoSlika = function(slike){
     return ukupno;
 }   // ukupnoSlika
 
-Ucitavac.prototype.proveriUcitano = function(povratnaRadnja){
+Ucitavac.prototype.kadUcitasPusti = function(povratnaRadnja){
     this.ucitane_slike++;
     if(this.ucitane_slike >= this.sve_slike) {
+		var slika_pozadine = this.dajPrvuPozadinu();
+		this.prilagodjena_visina = this.prilagodiPozadinu(slika_pozadine); 
         povratnaRadnja();
     }
-}	// proveriUcitano
+}	// kadUcitasPusti
+
+Ucitavac.prototype.prilagodiPozadinu  = function(slika_pozadine){
+	return (window.innerWidth / slika_pozadine.width) * slika_pozadine.height; 
+}	// prilagodiPozadinu
+
+Ucitavac.prototype.dajPrvuPozadinu  = function(){
+	var nazivi_grupa = Object.keys(slike);
+	var kljuc_pozadine = nazivi_grupa[0];
+	var pozadina_objekt = slike[kljuc_pozadine];
+	var sve_pozadine = Object.keys(pozadina_objekt);
+	var prva_pozadina = sve_pozadine[0];
+	var prva_pozadina_slika = window[prva_pozadina + "_slika"];	
+	return prva_pozadina_slika;
+}	// dajPrvuPozadinu
