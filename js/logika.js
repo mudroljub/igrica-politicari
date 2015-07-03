@@ -1,6 +1,6 @@
 /*****************************************************************
     URADITI:
-* praviPredmete
+* vratiti jedan paradajz, puca random
 * menjanje oruzja
 * srediti proveru sudara, sada se oslanja samo na jednu tacku! 
 * napraviti energiju od mase 
@@ -9,7 +9,6 @@
 * funkcije za prilagodjavanje pozadine, slike, slova
 
     PROBLEMI:
-* moze da pocne pre nego sto ucita
 * prvi paradajz ne treba da puca
 * da crtaProjektilNaLiku ne napusta prozor, a crtaParadajzOkolo ne ulazu u zauzet prozor
 * kad je presirok ekran, sece pozadinu po visini !
@@ -43,7 +42,7 @@ var vreme = new Vreme(30);          				// zadaje vreme igre
 var uvod = new Uvod('platno');
 var kursor = new Kursor();
 var scena, karakteri, kraj;
-ucitavac.ucitajSlike(slike, uvod.pusti);			// takodje praviSlike
+ucitavac.ucitajSlike(slike, uvod.pusti);	
 
 		// praviPredmete
 		var paradajz = new Image();
@@ -55,8 +54,9 @@ $("#platno").addEventListener('mousemove', reagujNaPokret);
 /*************** GLAVNE FUNKCIJE ***************/
 
 function postaviScenu(){
-	var slika_pozadine = ucitavac.dajPrvuPozadinu();
-	scena = new Scena('platno', slika_pozadine, ucitavac.prilagodjena_visina);
+	var slika_pozadine = ucitavac.nadjiPozadinu();
+	var prilagodjena_visina = prilagodiPozadinu(slika_pozadine); 
+	scena = new Scena('platno', slika_pozadine, prilagodjena_visina);
 	karakteri = scena.karakteri;
 	kraj = new Kraj(scena);
 	$("#platno").style.cursor = 'none';

@@ -10,8 +10,8 @@ function Uvod(platno_id){
 	this.slova_y = 200;
 	this.animacija;					// identifikator animacije
 
-	// this je unutra window!
-	this.pusti = function(){ 
+	
+	this.pusti = function(){ 		// this je unutra window!
 		piseSlova(uvod, "Spremi se za obračun!", uvod.slova_x, uvod.slova_y);
 		mrdaSlova(uvod, 5);
 		uvod.animacija = window.requestAnimationFrame(uvod.pusti);
