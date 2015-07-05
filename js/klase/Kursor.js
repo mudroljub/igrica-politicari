@@ -71,10 +71,10 @@ Kursor.prototype.proveriPogodak = function(scena, karakter) {
 }   // kraj proveriPogodak
 
 Kursor.prototype.crtaProjektilNaLiku = function(scena, karakter, slika){
-	if(karakter.pogodjen){
+	//if(karakter.pogodjen){
 		var centriran = this.centriraProjektil(slika)
 		scena.sadrzaj.drawImage(slika, centriran.x - karakter.pomerenost_ulevo, centriran.y + karakter.spustenost );
-	}
+	//}
 }	// crtaProjektilNaLiku
 
 // da ne crta ako je na istom prozoru pogodjen političar
@@ -89,6 +89,14 @@ Kursor.prototype.crtaProjektil = function(scena, slika){
 	var centriran = this.centriraProjektil(slika)
 	scena.sadrzaj.drawImage(slika, centriran.x, centriran.y);
 }	// crtaProjektil
+
+Kursor.prototype.azurirajProjektil = function(scena, karakter, slika){
+	if(karakter.pogodjen){
+		this.crtaProjektilNaLiku(scena, karakter, slika)
+	} else {
+		this.crtaProjektil(scena, slika)	
+	}
+}	// azurirajProjektil
 
 Kursor.prototype.centriraProjektil = function(slika){
 	var centriranX = this.kliknut_x - (slika.width / 2);

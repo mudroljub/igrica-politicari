@@ -1,6 +1,6 @@
 /*****************************************************************
     URADITI:
-* vratiti jedan paradajz, puca random
+* da paradajz puca random
 * menjanje oruzja
 * srediti proveru sudara, sada se oslanja samo na jednu tacku! 
 * napraviti energiju od mase 
@@ -78,12 +78,9 @@ function azuriraj(){
 		dacic.igraj(vreme, 30);
 		vulin.igraj(vreme, 20);
 		toma.igraj(vreme, 10);
-				
+
 		for(var i=0; i < karakteri.length; i++) {
-			kursor.crtaTriProjektile(scena, paradajz);
-
 			if(karakteri[i].igra) {	
-
 				if(karakteri[i].neIzlaziNiPauzira()){
 					karakteri[i].nadjiSlobodnoMesto(karakteri);	
 					karakteri[i].odrediIzlaz(vreme, 2, 3);
@@ -94,7 +91,6 @@ function azuriraj(){
 					karakteri[i].crtajMrdanje();
 					karakteri[i].kukaAkoJePogodjen(kursor);
 					karakteri[i].kadOdeResetujIzlaz(vreme);
-					kursor.crtaProjektilNaLiku(scena, karakteri[i], paradajz);
 				}
 				if(karakteri[i].neIzlaziNiPauzira()){
 					karakteri[i].odrediPauzu(vreme, 1, 2);
@@ -103,8 +99,8 @@ function azuriraj(){
 					karakteri[i].pogodjen = false
 					karakteri[i].kadProdjeResetujPauzu(vreme);
 				}
-
-			} // kraj if karakter igra		
+			} // kraj if karakter igra
+		kursor.azurirajProjektil(scena, karakteri[i], paradajz);
 		} // kraj for karakteri
 
 		kursor.crtaKrug(scena)
