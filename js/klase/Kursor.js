@@ -58,7 +58,6 @@ Kursor.prototype.dodeliPozicijeProjektila = function(slika){
 	this.pozicijeProjektila = pozicije;
 }	// dodeliPozicijeProjektila
 
-
 Kursor.prototype.naKarakteru = function(karakter) {
 	return (this.x > karakter.x && this.x < karakter.x + karakter.sirina) && (this.y > karakter.y && this.y < karakter.y + karakter.visina);
 }	// naKarakteru()
@@ -77,19 +76,19 @@ Kursor.prototype.crtaProjektilNaLiku = function(scena, karakter, slika){
 	//}
 }	// crtaProjektilNaLiku
 
-// da ne crta ako je na istom prozoru pogodjen političar
-Kursor.prototype.crtaTriProjektile = function(scena, slika){
+Kursor.prototype.crtaTriProjektila = function(scena, slika){
 	var pozicije = this.pozicijeProjektila;
 	scena.sadrzaj.drawImage(slika, pozicije.x1, pozicije.y1);
 	scena.sadrzaj.drawImage(slika, pozicije.x2, pozicije.y2);
 	scena.sadrzaj.drawImage(slika, pozicije.x3, pozicije.y3);
-}	// crtaTriProjektile
+}	// crtaTriProjektila
 
 Kursor.prototype.crtaProjektil = function(scena, slika){
 	var centriran = this.centriraProjektil(slika)
 	scena.sadrzaj.drawImage(slika, centriran.x, centriran.y);
 }	// crtaProjektil
 
+// iskoristiti dodeliPozicijeProjektila, deli random
 Kursor.prototype.azurirajProjektil = function(scena, karakter, slika){
 	if(karakter.pogodjen){
 		this.crtaProjektilNaLiku(scena, karakter, slika)

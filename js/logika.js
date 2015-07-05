@@ -1,9 +1,8 @@
 /*****************************************************************
     URADITI:
-* da paradajz puca random
-* menjanje oruzja
 * srediti proveru sudara, sada se oslanja samo na jednu tacku! 
 * napraviti energiju od mase 
+* menjanje oruzja
 * uvodna animacija uvecavanje skupstina
 * prikazati najbolji rezultat u tabeli (napraviti upisivanje)
 * funkcije za prilagodjavanje pozadine, slike, slova
@@ -120,7 +119,6 @@ function azuriraj(){
 
 function reagujNaKlik(event){
 	kursor.pamtiKliknutuPoziciju(event);			// koristi da crtaProjektil
-	kursor.dodeliPozicijeProjektila(paradajz);
 
 	if(uvod.ide){
 		uvod.ide = false;	// prekida uvod
