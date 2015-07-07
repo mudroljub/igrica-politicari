@@ -40,3 +40,7 @@ function prilagodiSlova (velicina){
 	var nova_velicina = velicina * (scena.sirina / scena.STANDARDNA_SIRINA);
 	return nova_velicina;
 }	// kraj prilagodiSlova
+
+function proveriSudar(objekt1, objekt2){
+	return (objekt1.x > objekt2.x && objekt1.x < objekt2.x + objekt2.sirina) && (objekt1.y > objekt2.y && objekt1.y < objekt2.y + objekt2.visina);
+}	// proveriSudar

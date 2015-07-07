@@ -1,7 +1,6 @@
 /*****************************************************************
     URADITI:
-* srediti proveru sudara, sada se oslanja samo na jednu tacku! 
-* napraviti energiju od mase 
+* napraviti energiju od mase (i ceo sistem za skidanje energ)
 * menjanje oruzja
 * uvodna animacija uvecavanje skupstina
 * prikazati najbolji rezultat u tabeli (napraviti upisivanje)
@@ -40,7 +39,7 @@ var ucitavac = new Ucitavac(slike);                      // pravi karaktere
 var vreme = new Vreme(30);          				// zadaje vreme igre
 var uvod = new Uvod('platno');
 var kursor = new Kursor();
-var scena, karakteri, kraj;
+var scena, karakteri, igrac, kraj;
 ucitavac.ucitajSlike(slike, uvod.pusti);	
 
 		// praviPredmete
@@ -57,6 +56,7 @@ function postaviScenu(){
 	var prilagodjena_visina = prilagodiPozadinu(slika_pozadine); 
 	scena = new Scena('platno', slika_pozadine, prilagodjena_visina);
 	karakteri = scena.karakteri;
+	igrac = new Igrac(scena);
 	kraj = new Kraj(scena);
 	$("#platno").style.cursor = 'none';
     scena.praviProzore(parametri_prozora);
@@ -113,7 +113,7 @@ function azuriraj(){
         vreme.smanjuje();
         vreme.azurira();
     }	// kraj svaki sekund
-
+	igrac.crtaEnergiju();
 }   // kraj azuriraj
 
 

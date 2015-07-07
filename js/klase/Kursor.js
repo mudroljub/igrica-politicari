@@ -58,8 +58,10 @@ Kursor.prototype.dodeliPozicijeProjektila = function(slika){
 	this.pozicijeProjektila = pozicije;
 }	// dodeliPozicijeProjektila
 
+
+// preimenovati u proveriSudar
 Kursor.prototype.naKarakteru = function(karakter) {
-	return (this.x > karakter.x && this.x < karakter.x + karakter.sirina) && (this.y > karakter.y && this.y < karakter.y + karakter.visina);
+	return proveriSudar(this, karakter)
 }	// naKarakteru()
 
 Kursor.prototype.proveriPogodak = function(scena, karakter) {

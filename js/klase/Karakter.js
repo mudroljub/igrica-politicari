@@ -50,6 +50,7 @@ Karakter.prototype.igraj = function(vreme, trenutak_ulaska) {
 	}
 }	// kraj igraj
 
+
 /* CRTANJE */
 
 Karakter.prototype.crtaj = function() {
@@ -57,6 +58,7 @@ Karakter.prototype.crtaj = function() {
 		scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
 	}
 }   // kraj crtaj
+
 
 Karakter.prototype.crtajMrdanje = function() {
 	var odstupanje_x = this.pomerenost_ulevo * (this.slika.naturalWidth/this.slika.width);
@@ -75,6 +77,7 @@ Karakter.prototype.crtajMrdanje = function() {
 	scena.sadrzaj.drawImage(slika, izvor_x, izvor_y, izvor_sirina, izvor_visina, platno_x, platno_y, na_platnu_sirina, na_platnu_visina);
 }   // kraj crtajMrdanje
 
+
 /* POZICIJE */
 
 Karakter.prototype.slucajnaPozicija = function(pozicije) {
@@ -83,12 +86,14 @@ Karakter.prototype.slucajnaPozicija = function(pozicije) {
 	this.y = pozicije[slucajno][1];
 }   // kraj slucajnaPozicija
 
+
 Karakter.prototype.nadjiSlobodnoMesto = function (karakteri) {
 	this.slucajnaPozicija(scena.pozicije)
 	while ( this.proveriSveSudare(karakteri) ) {
 		this.slucajnaPozicija(scena.pozicije)
 	}
 }   // kraj naSlobodnomCrtaj
+
 
 /* MRDANJE */
 
@@ -110,6 +115,7 @@ Karakter.prototype.postaviMrdanje = function(){
 	}	// kraj switch
 }	// postaviMrdanje
 
+
 Karakter.prototype.azurirajMrdanje = function(){
 	if(this.pokret_levo_desno) {
 		this.resetujDoleGore()
@@ -120,6 +126,7 @@ Karakter.prototype.azurirajMrdanje = function(){
 		this.mrdajDoleGore()
 	}
 }	// azurirajMrdanje()
+
 
 Karakter.prototype.resetujDoleGore = function(){
 	this.pokret_dole_gore = false
@@ -132,6 +139,7 @@ Karakter.prototype.resetujLevoDesno = function(){
 	this.pokret_levo_desno = false
 	this.pomerenost_ulevo = 0;
 }	// resetujLevoDesno
+
 
 Karakter.prototype.mrdajDoleGore = function(){
 	if(this.spustenost >= 30) {
@@ -146,6 +154,7 @@ Karakter.prototype.mrdajDoleGore = function(){
 	this.y = this.zapamcen_y + this.spustenost;
 }	// kraj mrdajDoleGore
 
+
 Karakter.prototype.mrdajLevoDesno = function(){
 	if(this.pomerenost_ulevo >= 30) {
 		this.mrdanje_desno = true;
@@ -157,21 +166,26 @@ Karakter.prototype.mrdajLevoDesno = function(){
 	this.sirina = this.zapamcena_sirina - this.pomerenost_ulevo;
 }	// mrdajLevoDesno
 
+
 Karakter.prototype.mrdajDesno = function(){
 	this.pomerenost_ulevo -= 0.5
 }	// mrdajDesno
+
 
 Karakter.prototype.mrdajLevo = function(){
 	this.pomerenost_ulevo += 0.5
 }	// mrdajLevo
 
+
 Karakter.prototype.dizi = function(){
 	this.spustenost--
 }	// dizi
 
+
 Karakter.prototype.spustaj = function(){
 	this.spustenost++
 }	// spustaj
+
 
 /* IZLAZ I PAUZA */
 
@@ -180,16 +194,19 @@ Karakter.prototype.odrediIzlaz = function(vreme, min, max){
 	this.kraj_izlaska = vreme.ovajTren() + this.traje_izlaz;
 }	// kraj odrediIzlaz
 
+
 Karakter.prototype.kadOdeResetujIzlaz = function(vreme){
 	if(this.kraj_izlaska <= vreme.ovajTren()) {
 		this.traje_izlaz = 0;
 	}
 }	// kadOdeResetujIzlaz
 
+
 Karakter.prototype.odrediPauzu = function(vreme, min, max){
 	this.traje_pauza = vreme.trajanjeSlucajno(min, max);
 	this.kraj_pauze = vreme.ovajTren() + this.traje_pauza;
 }	// kraj odrediPauzu
+
 
 Karakter.prototype.kadProdjeResetujPauzu = function(vreme){
 	if(this.kraj_pauze <= vreme.ovajTren()) {
@@ -197,25 +214,29 @@ Karakter.prototype.kadProdjeResetujPauzu = function(vreme){
 	}
 }	// kadProdjeResetujPauzu
 
+
 Karakter.prototype.neIzlaziNiPauzira = function(){
 	return !this.traje_izlaz && !this.traje_pauza;
 }	// neIzlaziNiPauzira
+
 
 Karakter.prototype.upravoIzlazi = function(){
 	return this.traje_izlaz && !this.traje_pauza
 }	// upravoIzlazi
 
+
 Karakter.prototype.upravoPauzira = function(){
 	return this.traje_pauza && !this.traje_izlaz
 }	// upravoPauzira
 
+
 /* KOLIZIJA */
 
+// preimenovati u proveriSudar
 Karakter.prototype.sudar = function(karakter){
-	if(this.x == karakter.x && this.y == karakter.y){
-		return true
-	} else return false
+	return proveriSudar(this, karakter)
 }   // kraj sudar
+
 
 Karakter.prototype.proveriSveSudare = function (karakteri) {
 	var sudari = false
@@ -238,11 +259,13 @@ Karakter.prototype.crtaKukanje = function(kursor){
 	scena.sadrzaj.strokeText(jauk, kursor.zapamcen_x+30, kursor.zapamcen_y, max_sirina_teksta);
 }   // kraj crtaKukanje
 
+
 Karakter.prototype.kukaAkoJePogodjen = function(kursor){
 	if(this.pogodjen) {
 		this.crtaKukanje(kursor);
 	}		
 }
+
 
 Karakter.prototype.bacaParole = function(){
 	var parola = this.parola || "Mi branimo srpski narod!";
