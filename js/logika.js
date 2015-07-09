@@ -113,7 +113,7 @@ function azuriraj(){
         vreme.smanjuje();
         vreme.azurira();
     }	// kraj svaki sekund
-	igrac.crtaEnergiju();
+	igrac.crtaMasu();
 }   // kraj azuriraj
 
 

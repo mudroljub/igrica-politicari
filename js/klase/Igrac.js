@@ -4,30 +4,30 @@
 function Igrac(scena) {
 	this.energija = 10;
 	this.sadrzaj = scena.sadrzaj;
-	this.masa = this.praviMasu();
+	this.ljudi = this.praviMasu();
 	this.VISINA_MASE = 113;	
 	this.sirinaPojedinca = window.innerWidth/this.energija;
 	this.dnoEkrana = window.innerHeight - this.VISINA_MASE;
 }	// Igrac
 
 
-Igrac.prototype.crtaEnergiju = function() {	
-	for(var i = 0; i < this.masa.length; i++){
-
-		this.sadrzaj.drawImage(this.masa[i].slika, i * this.sirinaPojedinca + this.masa[i].odstupanje, this.dnoEkrana);
-	}
-}	// crtaEnergiju()
+Igrac.prototype.crtaMasu = function() {	
+	for(var i = 0; i < this.ljudi.length; i++){
+		var polozajX = i * this.sirinaPojedinca + this.ljudi[i].slucajnoOdstupanje;
+		this.sadrzaj.drawImage(this.ljudi[i].slika, polozajX, this.dnoEkrana)
+	}	
+}	// crtaMasu()
 
 
 Igrac.prototype.praviMasu = function() {
-	var masa = [];
+	var ljudi = [];
 	for(var i = 0; i < this.energija; i++){
 		var pojedinac = new Image();
 		pojedinac.src = "slike/politicar.png";
 		// prilagodi sliku
-		var odstupanje = Math.random() * 60 - 30;
-		masa.push({slika: pojedinac, odstupanje: odstupanje})
+		var slucaj = Math.random() * 60 - 30;
+		ljudi.push( {slika: pojedinac, slucajnoOdstupanje: slucaj} )
 	}
-	return masa;
-}	// crtaEnergiju()
+	return ljudi;
+}	// praviMasu()
 

@@ -3,7 +3,8 @@ function razvuciPlatno(platno_id){
 	platno.width = window.innerWidth;
 	platno.height = window.innerHeight;
 	return platno;
-}
+}	// razvuciPlatno
+
 
 function postaviSadrzaj(platno) {
 	var sadrzaj = platno.getContext('2d');
@@ -11,7 +12,8 @@ function postaviSadrzaj(platno) {
 	sadrzaj.fillStyle = "white";
 	sadrzaj.strokeStyle = 'black';
 	return sadrzaj;		
-}
+}	// postaviSadrzaj
+
 
 function piseSlova(nivo, tekst, slova_x, slova_y){
 	nivo.sadrzaj.font = "48px Verdana";
@@ -20,6 +22,7 @@ function piseSlova(nivo, tekst, slova_x, slova_y){
 	nivo.sadrzaj.fillStyle="#fff";
 	nivo.sadrzaj.fillText(tekst, slova_x, slova_y);
 }	// _piseSlova
+
 
 function mrdaSlova (nivo, brzinaX) {
 	nivo.slova_x += brzinaX;
@@ -32,14 +35,27 @@ function mrdaSlova (nivo, brzinaX) {
 	}
 }	// _mrdaSlova
 
+
 function prilagodiPozadinu (slika_pozadine){
 	return (window.innerWidth / slika_pozadine.width) * slika_pozadine.height; 
 }	// prilagodiPozadinu
+
 
 function prilagodiSlova (velicina){
 	var nova_velicina = velicina * (scena.sirina / scena.STANDARDNA_SIRINA);
 	return nova_velicina;
 }	// kraj prilagodiSlova
+
+
+function prilagodiSliku(STANDARDNA_VISINA, slika){
+	var nova_sirina = slika.width / (slika.height / STANDARDNA_VISINA);
+	var nova_visina = STANDARDNA_VISINA;
+	// prilagodjava sliku ovom ekranu
+	slika.width = nova_sirina * (window.innerWidth / scena.STANDARDNA_SIRINA);
+	slika.height = nova_visina * (window.innerWidth / scena.STANDARDNA_SIRINA);
+	return slika;
+}	// prilagodiSliku
+
 
 function proveriSudar(objekt1, objekt2){
 	return (objekt1.x > objekt2.x && objekt1.x < objekt2.x + objekt2.sirina) && (objekt1.y > objekt2.y && objekt1.y < objekt2.y + objekt2.visina);

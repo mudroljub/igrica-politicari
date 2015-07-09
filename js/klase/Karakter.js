@@ -8,7 +8,7 @@ function Karakter(ime, slika_src, scena){
     this.slika.src = slika_src;
 
     this.STANDARDNA_VISINA = 99;
-    this.slika = _prilagodiSliku(this, this.slika);
+    this.slika = prilagodiSliku(this.STANDARDNA_VISINA, this.slika);
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
     this.x = 0;         	// dodeljuje slucajnaPozicija
@@ -31,15 +31,7 @@ function Karakter(ime, slika_src, scena){
 
 
     /*************** POMOCNE FUNKCIJE ***************/
-    function _prilagodiSliku(karakter, slika){
-        // prilagodjava sliku standardnoj visini slike
-        var nova_sirina = slika.width / (slika.height / karakter.STANDARDNA_VISINA);
-        var nova_visina = karakter.STANDARDNA_VISINA;
-        // prilagodjava sliku ovom ekranu
-        slika.width = nova_sirina * (window.innerWidth / scena.STANDARDNA_SIRINA);
-        slika.height = nova_visina * (window.innerWidth / scena.STANDARDNA_SIRINA);
-        return slika;
-    }
+
 
 }   // kraj Karakter
 
