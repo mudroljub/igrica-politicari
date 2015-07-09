@@ -1,9 +1,8 @@
-// napraviti interfejs da menja varijable
-// energiju skida kada politicari bacaju parole
-// 100 energije je 50 ljudi
+
 function Igrac(scena) {
 	this.energija = 10;
-	this.standard = 160;	
+	this.VISINA = 140;
+	this.OPSEG = 30;	// za slucajnoOdstupanje
 	this.sadrzaj = scena.sadrzaj;
 	this.ljudi = this.praviMasu();
 	this.sirinaPojedinca = window.innerWidth/this.energija;	
@@ -12,11 +11,11 @@ function Igrac(scena) {
 
 Igrac.prototype.praviMasu = function() {
 	var ljudi = [];
-	for(var i = 0; i < this.energija; i++){
+	for(var i = 0; i < this.energija; i++) {
 		var slikaPojedinca = new Image();
 		slikaPojedinca.src = "slike/politicar.png";
-		slikaPojedinca = prilagodiSliku(this.standard, slikaPojedinca)
-		var slucaj = Math.random() * 60 - 30;
+		slikaPojedinca = prilagodiSliku(this.VISINA, slikaPojedinca)
+		var slucaj = (Math.random() * this.OPSEG * 2) - this.OPSEG;
 		ljudi.push({
 			slika: slikaPojedinca, 
 			slucajnoOdstupanje: slucaj
