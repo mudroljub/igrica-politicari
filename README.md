@@ -1,6 +1,6 @@
 # igrica
 
-Prva srpska igrica otvorenog koda. 
+Javascript igrica otvorenog koda. 
 
 Dozvoljeno je slobodno igranje, prepravljanje i kopiranje. 
 
