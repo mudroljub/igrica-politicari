@@ -1,6 +1,5 @@
 /*****************************************************************
     URADITI:
-// interfejs da menja varijable
 * napraviti energiju od mase (i ceo sistem za skidanje energ)
 * energiju skida kada politicari bacaju parole
 * menjanje oruzja
