@@ -1,5 +1,5 @@
 // podeliti na klase Politicar i Karakter
-// ukinuti zavisnost klase od scene
+// ukinuti zavisnost klase od scene?
 
 function Karakter(ime, slika_src, scena){
 
@@ -34,7 +34,7 @@ function Karakter(ime, slika_src, scena){
 		"Mi branimo srpski narod!", 
 		"Smanjićemo plate i penzije!", 
 		"Privućemo investitore", 
-		"Vlast radnicima!",
+		"Vlast narodu!",
 		"Sve je manje nezaposlenih!",
 		"Bolje vrabac u ruci",
 		"Izgradićemo svemirsku stanicu",
@@ -42,7 +42,7 @@ function Karakter(ime, slika_src, scena){
 		"Raspisaćemo referendum",
 		"Raspisaćemo izbore",
 		"Dobićete po sto maraka",		
-		"Dobićete po hiljadu maraka"
+		"Dobićete po hiljadu eura"
 	]
 	this.parola = "Smrt sirotinji!"	// defaul
 
@@ -281,9 +281,41 @@ Karakter.prototype.promeniParolu = function(){
 
 
 Karakter.prototype.bacaParole = function(kursor){
-	// parole skidaju energiju	
-	var parola = this.parola;
-	scena.sadrzaj.font = "30px Verdana";
-	scena.sadrzaj.fillText(parola, this.x, this.y);
-
+	var sirina = 200;
+    crtaBaloncic(scena.sadrzaj, this.x-10, this.y-100, sirina+20, 90, 50)
+    piseTekst(this.parola, this.x, this.y-50, sirina)
 }   // kraj bacaParole
+
+
+/* POMOĆNE */
+
+function piseTekst(parola, x, y, sirina){
+    scena.sadrzaj.fillStyle = "#000";
+	scena.sadrzaj.font = "30px Verdana";
+	scena.sadrzaj.fillText(parola, x, y, sirina);	
+}
+
+function crtaBaloncic(sadrzaj, startX, startY, sirina, visina, radius) {
+	var krajX = startX + sirina;
+	var krajY = startY + visina;
+	var putanja = new Path2D();
+	
+	putanja.moveTo(startX+radius, startY);
+	putanja.lineTo(startX+radius*2, startY);
+	putanja.lineTo(krajX-radius, startY);
+	putanja.quadraticCurveTo(krajX, startY, krajX, startY+radius);
+	putanja.lineTo(krajX, startY+visina-radius);
+	putanja.quadraticCurveTo(krajX, krajY, krajX-radius, krajY);
+	putanja.lineTo(startX+sirina/2, krajY);
+	putanja.lineTo(startX+radius, krajY+radius/2);		// špic
+	putanja.lineTo(startX+radius+10, krajY);
+	putanja.quadraticCurveTo(startX, krajY, startX, krajY-radius);
+	putanja.lineTo(startX, startY+radius);
+	putanja.quadraticCurveTo(startX, startY, startX+radius, startY);
+	
+	sadrzaj.strokeStyle = "black";
+	sadrzaj.lineWidth = "2";
+	sadrzaj.stroke(putanja);
+	scena.sadrzaj.fillStyle="#fff";
+	sadrzaj.fill(putanja);
+}	// crtaBaloncic

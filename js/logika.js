@@ -1,11 +1,16 @@
 /*****************************************************************
     URADITI:
 * politicari bacaju parole
+* da crtabalon posle paradajza
+// parola da skida energiju
+// bacaParolu malo nakon izlaska, a nekad ne baca
+// politicar izadje, malo odstoji, pa ode
 * sistem za skidanje energije od mase
 * menjanje oruzja
 * uvodna animacija uvecavanje skupstina
 * prikazati najbolji rezultat u tabeli (napraviti upisivanje)
 * funkcije za prilagodjavanje pozadine, slike, slova
+* izdvojiti klasu Politicar
 
     PROBLEMI:
 * parole se preklapaju jer izadje po jedna za svakog politicara
