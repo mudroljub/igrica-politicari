@@ -1,13 +1,14 @@
 /*****************************************************************
     URADITI:
-* napraviti energiju od mase (i ceo sistem za skidanje energ)
-* energiju skida kada politicari bacaju parole
+* politicari bacaju parole
+* sistem za skidanje energije od mase
 * menjanje oruzja
 * uvodna animacija uvecavanje skupstina
 * prikazati najbolji rezultat u tabeli (napraviti upisivanje)
 * funkcije za prilagodjavanje pozadine, slike, slova
 
     PROBLEMI:
+* parole se preklapaju jer izadje po jedna za svakog politicara
 * prvi paradajz ne treba da puca
 * da crtaProjektilNaLiku ne napusta prozor, a crtaParadajzOkolo ne ulazu u zauzet prozor
 * kad je presirok ekran, sece pozadinu po visini !
@@ -89,7 +90,8 @@ function azuriraj(){
 				if(karakteri[i].upravoIzlazi()) {
 					karakteri[i].azurirajMrdanje();
 					karakteri[i].crtajMrdanje();
-					karakteri[i].kukaAkoJePogodjen(kursor);
+					karakteri[i].bacaParole(kursor);
+					karakteri[i].crtaKukanje(kursor);
 					karakteri[i].kadOdeResetujIzlaz(vreme);
 				}
 				if(karakteri[i].neIzlaziNiPauzira()){
@@ -97,6 +99,7 @@ function azuriraj(){
 				}
 				if(karakteri[i].upravoPauzira()){
 					karakteri[i].pogodjen = false
+					karakteri[i].promeniParolu();
 					karakteri[i].kadProdjeResetujPauzu(vreme);
 				}
 			} // kraj if karakter igra

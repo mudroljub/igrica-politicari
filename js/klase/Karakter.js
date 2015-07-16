@@ -1,7 +1,8 @@
-
+// podeliti na klase Politicar i Karakter
 // ukinuti zavisnost klase od scene
+
 function Karakter(ime, slika_src, scena){
-	
+
 	var ovaj = this;
     this.ime = ime.VelikoSlovo();
 	this.slika = new Image();
@@ -28,10 +29,22 @@ function Karakter(ime, slika_src, scena){
 	this.traje_izlaz = 0;
 	this.kraj_pauze = 0; 			// odrediPauzu
 	this.kraj_izlaska = 0;			// odrediIzlaz
-
-
-    /*************** POMOCNE FUNKCIJE ***************/
-
+	
+	this.parole = [
+		"Mi branimo srpski narod!", 
+		"Smanjićemo plate i penzije!", 
+		"Privućemo investitore", 
+		"Vlast radnicima!",
+		"Sve je manje nezaposlenih!",
+		"Bolje vrabac u ruci",
+		"Izgradićemo svemirsku stanicu",
+		"Donećemo novi ustav",
+		"Raspisaćemo referendum",
+		"Raspisaćemo izbore",
+		"Dobićete po sto maraka",		
+		"Dobićete po hiljadu maraka"
+	]
+	this.parola = "Smrt sirotinji!"	// defaul
 
 }   // kraj Karakter
 
@@ -242,24 +255,35 @@ Karakter.prototype.proveriSveSudare = function (karakteri) {
 
 /* GOVOR */
 
+// ne radi crtaKukanje!
 Karakter.prototype.crtaKukanje = function(kursor){
 	var jauk = this.jauk || "Jaoj, to boli!";
 	var max_sirina_teksta = 250;
-	scena.sadrzaj.font = "30px Verdana";
+	scena.sadrzaj.font = "30px Verdana";	
 	scena.sadrzaj.lineWidth = 1;
 	scena.sadrzaj.fillText(jauk, kursor.zapamcen_x+30, kursor.zapamcen_y, max_sirina_teksta);
 	scena.sadrzaj.strokeText(jauk, kursor.zapamcen_x+30, kursor.zapamcen_y, max_sirina_teksta);
 }   // kraj crtaKukanje
 
 
-Karakter.prototype.kukaAkoJePogodjen = function(kursor){
+/*
+Karakter.prototype.kukaPogodjen = function(kursor){
 	if(this.pogodjen) {
 		this.crtaKukanje(kursor);
 	}		
 }
+*/
+
+Karakter.prototype.promeniParolu = function(){
+	var slucaj = Math.floor( Math.random() * this.parole.length )
+	this.parola = this.parole[slucaj];
+}	// promeniParolu
 
 
-Karakter.prototype.bacaParole = function(){
-	var parola = this.parola || "Mi branimo srpski narod!";
-	// bacaParole koje ti skidaju energiju
+Karakter.prototype.bacaParole = function(kursor){
+	// parole skidaju energiju	
+	var parola = this.parola;
+	scena.sadrzaj.font = "30px Verdana";
+	scena.sadrzaj.fillText(parola, this.x, this.y);
+
 }   // kraj bacaParole
