@@ -1,11 +1,11 @@
 /*****************************************************************
     URADITI:
 * politicari bacaju parole
-* da crtabalon posle paradajza
+* sistem za skidanje energije od mase
 // parola da skida energiju
 // bacaParolu malo nakon izlaska, a nekad ne baca
 // politicar izadje, malo odstoji, pa ode
-* sistem za skidanje energije od mase
+* da crta balon posle paradajza, kao masu
 * menjanje oruzja
 * uvodna animacija uvecavanje skupstina
 * prikazati najbolji rezultat u tabeli (napraviti upisivanje)
