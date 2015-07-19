@@ -97,7 +97,7 @@ function crtaBalonce(sadrzaj, startX, startY, sirina, visina, radius) {
 	putanja.quadraticCurveTo(krajX, krajY, krajX-radius, krajY);
 	putanja.lineTo(startX+sirina/2, krajY);
 	putanja.lineTo(startX+radius, krajY+radius/2);		// špic
-	putanja.lineTo(startX+radius+10, krajY);
+	putanja.lineTo(startX+radius*1.2, krajY);
 	putanja.quadraticCurveTo(startX, krajY, startX, krajY-radius);
 	putanja.lineTo(startX, startY+radius);
 	putanja.quadraticCurveTo(startX, startY, startX+radius, startY);

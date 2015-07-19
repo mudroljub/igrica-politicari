@@ -282,6 +282,6 @@ Karakter.prototype.promeniParolu = function(){
 
 Karakter.prototype.bacaParole = function(kursor){
 	var sirina = 200;
-    crtaBalonce(scena.sadrzaj, this.x * 0.96, this.y - this.zapamcena_visina, sirina * 1.2, 90, 50)
-    piseTekst(scena.sadrzaj, this.parola, this.x, this.y - this.zapamcena_visina*0.6, "#000", 30, sirina)
+    crtaBalonce(scena.sadrzaj, this.x * 0.96, this.y - this.zapamcena_visina, sirina * 1.2, 80, 40)
+    piseTekst(scena.sadrzaj, this.parola, this.x, this.y - this.zapamcena_visina * 0.6, "#000", 30, sirina)
 }   // kraj bacaParole
