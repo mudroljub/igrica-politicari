@@ -14,8 +14,10 @@ function Uvod(platno_id){
 
 	
 	this.pusti = function(){ 		// this je unutra window!
-		piseSlova(uvod, "Spremi se za obračun!", uvod.slova_x, uvod.slova_y);
+		crnEkran(uvod)
+		piseTekst(uvod.sadrzaj, "Spremi se za obračun!", uvod.slova_x, uvod.slova_y, "#fff", 60, 1000);
 		mrdaSlova(uvod, 5);
+		
 		uvod.animacija = window.requestAnimationFrame(uvod.pusti);
 	}	// pusti
 

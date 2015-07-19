@@ -283,5 +283,5 @@ Karakter.prototype.promeniParolu = function(){
 Karakter.prototype.bacaParole = function(kursor){
 	var sirina = 200;
     crtaBaloncic(scena.sadrzaj, this.x-10, this.y-100, sirina+20, 90, 50)
-    piseTekst(scena.sadrzaj, this.parola, this.x, this.y-50, sirina)
+    piseTekst(scena.sadrzaj, this.parola, this.x, this.y-50, "#000", 30, sirina)
 }   // kraj bacaParole

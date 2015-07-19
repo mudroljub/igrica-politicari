@@ -53,20 +53,26 @@ function proveriSudar(objekt1, objekt2){
 }	// proveriSudar
 
 
-function piseSlova(nivo, tekst, slova_x, slova_y){
+function crnEkran(nivo){
 	nivo.sadrzaj.fillStyle = "#000";
 	nivo.sadrzaj.fillRect(0, 0, nivo.platno.width, nivo.platno.height);
-	
-	nivo.sadrzaj.fillStyle="#fff";
+}	// crnEkran
+
+
+function piseSlova(sadrzaj, tekst, slova_x, slova_y){
+	sadrzaj.fillStyle="#fff";
     var velicinaSlova = prilagodiSlova(60)
-	nivo.sadrzaj.font = velicinaSlova + "px Verdana";
-	nivo.sadrzaj.fillText(tekst, slova_x, slova_y);
+	sadrzaj.font = velicinaSlova + "px Verdana";
+	sadrzaj.fillText(tekst, slova_x, slova_y);
 }	// _piseSlova
 
 
-function piseTekst(sadrzaj, tekst, x, y, maxSirina){
-    sadrzaj.fillStyle = "#000";
-    var velicinaSlova = prilagodiSlova(30)
+function piseTekst(sadrzaj, tekst, x, y, boja, velicina, maxSirina){
+	if(!maxSirina) maxSirina = 250;
+	if(!boja) boja = "#000";
+	if(!velicina) velicina = 30;
+    var velicinaSlova = prilagodiSlova(velicina)
+    sadrzaj.fillStyle = boja;
 	sadrzaj.font = velicinaSlova + "px Verdana";
 	sadrzaj.fillText(tekst, x, y, maxSirina);	
 }	// piseTekst

@@ -11,6 +11,7 @@
 * prikazati najbolji rezultat u tabeli (napraviti upisivanje)
 * funkcije za prilagodjavanje pozadine, slike, slova
 * izdvojiti klasu Politicar
+* prilagoditi tablu s poenima
 
     PROBLEMI:
 * parole se preklapaju jer izadje po jedna za svakog politicara
