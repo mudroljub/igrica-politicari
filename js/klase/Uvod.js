@@ -1,7 +1,5 @@
-// napraviti uvodu sopstveno platno, da bude nezavisan od scene
-
 function Uvod(platno_id){
-	
+
 	var uvod = this;       	// hvata sebe, za niže funkcije
 	this.platno = razvuciPlatno(platno_id);
 	this.sadrzaj = postaviSadrzaj(this.platno);	
@@ -17,7 +15,6 @@ function Uvod(platno_id){
 		crnEkran(uvod)
 		piseTekst(uvod.sadrzaj, "Spremi se za obračun!", uvod.slova_x, uvod.slova_y, "#fff", 60, 1000);
 		mrdaSlova(uvod, 5);
-		
 		uvod.animacija = window.requestAnimationFrame(uvod.pusti);
 	}	// pusti
 

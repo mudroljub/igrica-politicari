@@ -35,7 +35,7 @@ function Karakter(ime, slika_src, scena){
 		"Smanjićemo plate i penzije!", 
 		"Privućemo investitore", 
 		"Vlast narodu!",
-		"Sve je manje nezaposlenih!",
+		"Smanjićemo nezaposlenost!",
 		"Bolje vrabac u ruci",
 		"Izgradićemo svemirsku stanicu",
 		"Donećemo novi ustav",
@@ -282,6 +282,6 @@ Karakter.prototype.promeniParolu = function(){
 
 Karakter.prototype.bacaParole = function(kursor){
 	var sirina = 200;
-    crtaBaloncic(scena.sadrzaj, this.x-10, this.y-100, sirina+20, 90, 50)
-    piseTekst(scena.sadrzaj, this.parola, this.x, this.y-50, "#000", 30, sirina)
+    crtaBalonce(scena.sadrzaj, this.x * 0.96, this.y - this.zapamcena_visina, sirina * 1.2, 90, 50)
+    piseTekst(scena.sadrzaj, this.parola, this.x, this.y - this.zapamcena_visina*0.6, "#000", 30, sirina)
 }   // kraj bacaParole

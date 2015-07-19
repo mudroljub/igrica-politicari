@@ -1,3 +1,5 @@
+/* PLATNO */
+
 function razvuciPlatno(platno_id){
 	var platno = document.getElementById(platno_id);        // ako nema platna, da sam stvara
 	platno.width = window.innerWidth;
@@ -15,26 +17,16 @@ function postaviSadrzaj(platno) {
 }	// postaviSadrzaj
 
 
-function mrdaSlova (nivo, brzinaX) {
-	nivo.slova_x += brzinaX;
-	if(nivo.slova_x > window.innerWidth - 100) {
-		nivo.slova_x = nivo.slova_x_pocetno; 
-		nivo.slova_y += nivo.slova_y_pocetno;
-	}
-	if(nivo.slova_y > window.innerHeight - 100) {
-		nivo.slova_y = nivo.slova_y_pocetno;
-	}
-}	// _mrdaSlova
-
+/* PRILAGOĐAVA */
 
 function prilagodiPozadinu (slika_pozadine){
 	return (window.innerWidth / slika_pozadine.width) * slika_pozadine.height; 
 }	// prilagodiPozadinu
 
 
-function prilagodiSlova (velicina){
-	var nova_velicina = velicina * (window.innerWidth / STANDARDNA_SIRINA_EKRANA);
-	return nova_velicina;
+// preimenovati u prilagodiVelicinu
+function prilagodiSlova (visina){
+	return (window.innerWidth / STANDARDNA_SIRINA_EKRANA) * visina;
 }	// kraj prilagodiSlova
 
 
@@ -48,10 +40,28 @@ function prilagodiSliku(STANDARDNA_VISINA, slika){
 }	// prilagodiSliku
 
 
+/* MRDA */
+
+function mrdaSlova (nivo, brzinaX) {
+	nivo.slova_x += brzinaX;
+	if(nivo.slova_x > window.innerWidth - 100) {
+		nivo.slova_x = nivo.slova_x_pocetno; 
+		nivo.slova_y += nivo.slova_y_pocetno;
+	}
+	if(nivo.slova_y > window.innerHeight - 100) {
+		nivo.slova_y = nivo.slova_y_pocetno;
+	}
+}	// _mrdaSlova
+
+
+/* SUDAR */
+
 function proveriSudar(objekt1, objekt2){
 	return (objekt1.x > objekt2.x && objekt1.x < objekt2.x + objekt2.sirina) && (objekt1.y > objekt2.y && objekt1.y < objekt2.y + objekt2.visina);
 }	// proveriSudar
 
+
+/* CRTA */
 
 function crnEkran(nivo){
 	nivo.sadrzaj.fillStyle = "#000";
@@ -63,14 +73,18 @@ function piseTekst(sadrzaj, tekst, x, y, boja, velicina, maxSirina){
 	if(!maxSirina) maxSirina = 250;
 	if(!boja) boja = "#000";
 	if(!velicina) velicina = 30;
-    var velicinaSlova = prilagodiSlova(velicina)
+	var maxSirina = prilagodiSlova(maxSirina)
+    var velicina = prilagodiSlova(velicina)
     sadrzaj.fillStyle = boja;
-	sadrzaj.font = velicinaSlova + "px Verdana";
+	sadrzaj.font = velicina + "px Verdana";
 	sadrzaj.fillText(tekst, x, y, maxSirina);	
 }	// piseTekst
 
 
-function crtaBaloncic(sadrzaj, startX, startY, sirina, visina, radius) {
+function crtaBalonce(sadrzaj, startX, startY, sirina, visina, radius) {
+	var sirina = prilagodiSlova(sirina)
+	var visina = prilagodiSlova(visina)
+	var radius = prilagodiSlova(radius)
 	var krajX = startX + sirina;
 	var krajY = startY + visina;
 	var putanja = new Path2D();
@@ -93,4 +107,4 @@ function crtaBaloncic(sadrzaj, startX, startY, sirina, visina, radius) {
 	sadrzaj.stroke(putanja);
 	sadrzaj.fillStyle="#fff";
 	sadrzaj.fill(putanja);
-}	// crtaBaloncic
+}	// crtaBalonce
