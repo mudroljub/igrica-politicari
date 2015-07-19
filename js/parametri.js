@@ -7,3 +7,5 @@ var parametri_prozora = {
     treci_niz: 1.95,
     cetvrti_niz: 1.6
 }
+
+var STANDARDNA_SIRINA_EKRANA = 1280;

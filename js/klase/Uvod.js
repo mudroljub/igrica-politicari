@@ -6,8 +6,10 @@ function Uvod(platno_id){
 	this.platno = razvuciPlatno(platno_id);
 	this.sadrzaj = postaviSadrzaj(this.platno);	
 	this.ide = true;       			// podrazumevano odma krece
+	this.slova_x_pocetno = -100;	
+	this.slova_y_pocetno = 100;		
 	this.slova_x = -100;	
-	this.slova_y = 200;
+	this.slova_y = 100;
 	this.animacija;					// identifikator animacije
 
 	

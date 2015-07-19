@@ -283,39 +283,5 @@ Karakter.prototype.promeniParolu = function(){
 Karakter.prototype.bacaParole = function(kursor){
 	var sirina = 200;
     crtaBaloncic(scena.sadrzaj, this.x-10, this.y-100, sirina+20, 90, 50)
-    piseTekst(this.parola, this.x, this.y-50, sirina)
+    piseTekst(scena.sadrzaj, this.parola, this.x, this.y-50, sirina)
 }   // kraj bacaParole
-
-
-/* POMOĆNE */
-
-function piseTekst(parola, x, y, sirina){
-    scena.sadrzaj.fillStyle = "#000";
-	scena.sadrzaj.font = "30px Verdana";
-	scena.sadrzaj.fillText(parola, x, y, sirina);	
-}
-
-function crtaBaloncic(sadrzaj, startX, startY, sirina, visina, radius) {
-	var krajX = startX + sirina;
-	var krajY = startY + visina;
-	var putanja = new Path2D();
-	
-	putanja.moveTo(startX+radius, startY);
-	putanja.lineTo(startX+radius*2, startY);
-	putanja.lineTo(krajX-radius, startY);
-	putanja.quadraticCurveTo(krajX, startY, krajX, startY+radius);
-	putanja.lineTo(krajX, startY+visina-radius);
-	putanja.quadraticCurveTo(krajX, krajY, krajX-radius, krajY);
-	putanja.lineTo(startX+sirina/2, krajY);
-	putanja.lineTo(startX+radius, krajY+radius/2);		// špic
-	putanja.lineTo(startX+radius+10, krajY);
-	putanja.quadraticCurveTo(startX, krajY, startX, krajY-radius);
-	putanja.lineTo(startX, startY+radius);
-	putanja.quadraticCurveTo(startX, startY, startX+radius, startY);
-	
-	sadrzaj.strokeStyle = "black";
-	sadrzaj.lineWidth = "2";
-	sadrzaj.stroke(putanja);
-	scena.sadrzaj.fillStyle="#fff";
-	sadrzaj.fill(putanja);
-}	// crtaBaloncic

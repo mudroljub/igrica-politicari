@@ -1,6 +1,6 @@
 /*****************************************************************
     URADITI:
-* politicari bacaju parole
+* politicari bacaju parole responsive
 * da crtabalon posle paradajza
 // parola da skida energiju
 // bacaParolu malo nakon izlaska, a nekad ne baca
