@@ -59,14 +59,6 @@ function crnEkran(nivo){
 }	// crnEkran
 
 
-function piseSlova(sadrzaj, tekst, slova_x, slova_y){
-	sadrzaj.fillStyle="#fff";
-    var velicinaSlova = prilagodiSlova(60)
-	sadrzaj.font = velicinaSlova + "px Verdana";
-	sadrzaj.fillText(tekst, slova_x, slova_y);
-}	// _piseSlova
-
-
 function piseTekst(sadrzaj, tekst, x, y, boja, velicina, maxSirina){
 	if(!maxSirina) maxSirina = 250;
 	if(!boja) boja = "#000";
