@@ -1,5 +1,7 @@
 /*****************************************************************
     URADITI:
+* ubaciti sirinu i visinu ekrana medju parametre, da se ne menja tokom igre
+	* prvo mora da ucita pozadinu da bi prilagodio
 * da crtabalon posle paradajza
 // parola da skida energiju
 // bacaParolu malo nakon izlaska, a nekad ne baca
@@ -41,13 +43,14 @@ var slike = {
 
 
 /*************** LOGIKA IGRE ***************/
+var slika_pozadine
 
 var ucitavac = new Ucitavac(slike);                      // pravi karaktere
 var vreme = new Vreme(30);          				// zadaje vreme igre
 var uvod = new Uvod('platno');
 var kursor = new Kursor();
 var scena, karakteri, igrac, kraj;
-ucitavac.ucitajSlike(slike, uvod.pusti);	
+ucitavac.ucitajSlike(slike, pripremiScenu);	
 
 		// praviPredmete
 		var paradajz = new Image();
@@ -58,9 +61,21 @@ $("#platno").addEventListener('mousemove', reagujNaPokret);
 
 /*************** GLAVNE FUNKCIJE ***************/
 
-function postaviScenu(){
-	var slika_pozadine = ucitavac.nadjiPozadinu();
+
+function pripremiScenu(){
+	slika_pozadine = ucitavac.nadjiPozadinu();
 	var prilagodjena_visina = prilagodiPozadinu(slika_pozadine); 
+
+	uvod.pusti()
+
+}	// pripremiScenu
+
+
+function postaviScenu(){			// postavlja je reagujNaKlik()
+	
+	slika_pozadine = ucitavac.nadjiPozadinu();
+	var prilagodjena_visina = prilagodiPozadinu(slika_pozadine); 
+	
 	scena = new Scena('platno', slika_pozadine, prilagodjena_visina);
 	karakteri = scena.karakteri;
 	igrac = new Igrac(scena);
@@ -77,7 +92,6 @@ function postaviScenu(){
 
 
 function azuriraj(){
-
     // izvrsava svaki frejm, tj. 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
 		scena.crtaPozadinu();

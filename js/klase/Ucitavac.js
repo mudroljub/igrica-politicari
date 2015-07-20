@@ -1,6 +1,8 @@
 // prilagodiPozadinu, uzeti u obzir sire i tanje ekrane
 
 function Ucitavac(slike) {
+	var ucitavac = this
+	
     this.ucitane_slike = 0;	
 	this.sve_slike = this.ukupnoSlika(slike)
 	this.sirinaUcitavaca = window.innerWidth / 2;
@@ -27,14 +29,16 @@ Ucitavac.prototype.ucitajSlike = function(slike, povratnaRadnja){     // povratn
         var ova_grupa = slike[naziv_grupe];
         for(var ime_slike in ova_grupa){
 			window[ime_slike + "_slika"] = new Image()
-			window[ime_slike + "_slika"].onload  = this.proveriUcitano(ime_slike, povratnaRadnja);
+			window[ime_slike + "_slika"].onload = function(){
+				ucitavac.proveriUcitano(ime_slike, povratnaRadnja);	
+			}
 			//window[ime_slike + "_slika"].onerror = this.javiGresku(ime_slike);
 			window[ime_slike + "_slika"].src = ova_grupa[ime_slike]
         } // kraj for in
     }	// kraj for
 }	// ucitajSlike
 
-Ucitavac.prototype.proveriUcitano = function(ime_slike, povratnaRadnja){
+Ucitavac.prototype.proveriUcitano = function(ime_slike, povratnaRadnja){	
     this.ucitane_slike++;
 	this.crtajProgres(this.sve_slike, this.ucitane_slike)	
     if(this.ucitane_slike >= this.sve_slike) {
