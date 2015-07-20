@@ -8,8 +8,7 @@ function Karakter(ime, slika_src, scena){
 	this.slika = new Image();
     this.slika.src = slika_src;
 
-    this.STANDARDNA_VISINA = 99;
-    this.slika = prilagodiSliku(this.STANDARDNA_VISINA, this.slika);
+    this.slika = prilagodiSliku(STANDARDNA_VISINA_SLIKE, this.slika);
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
     this.x = 0;         	// dodeljuje slucajnaPozicija
@@ -36,7 +35,6 @@ function Karakter(ime, slika_src, scena){
 		"Privućemo investitore", 
 		"Vlast narodu!",
 		"Smanjićemo nezaposlenost!",
-		"Bolje vrabac u ruci",
 		"Izgradićemo svemirsku stanicu",
 		"Donećemo novi ustav",
 		"Raspisaćemo referendum",

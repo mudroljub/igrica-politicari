@@ -1,7 +1,6 @@
 function Scena(platno_id, slika_pozadine, prilagodjena_visina) {
     var ova_scena = this;       // hvata sebe, za niže funkcije
     this.ide = false;
-	this.STANDARDNA_SIRINA = 1280;
 	this.karakteri = [];		// popunjava ga funkcija praviKaraktere
 	this.predmeti = [];			// popunjava ga funkcija praviPredmete	
     this.pozicije = []  // popunjava ga funkcija praviProzore

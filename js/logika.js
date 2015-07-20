@@ -1,6 +1,6 @@
 /*****************************************************************
     URADITI:
-* ubaciti sirinu i visinu ekrana medju parametre, da se ne menja tokom igre
+* ubaciti sirinu i visinu ekrana medju parametre, da se ne uzima window.innerHeight tokom igre
 	* prvo mora da ucita pozadinu da bi prilagodio
 * da crtabalon posle paradajza
 // parola da skida energiju
@@ -10,7 +10,7 @@
 * menjanje oruzja
 * uvodna animacija uvecavanje skupstina
 * prikazati najbolji rezultat u tabeli (napraviti upisivanje)
-* funkcije za prilagodjavanje pozadine, slike, slova
+* prilagodiPozadinu, uzeti u obzir sire i tanje ekrane
 * izdvojiti klasu Politicar
 * prilagoditi tablu s poenima
 
@@ -43,7 +43,6 @@ var slike = {
 
 
 /*************** LOGIKA IGRE ***************/
-var slika_pozadine
 
 var ucitavac = new Ucitavac(slike);                      // pravi karaktere
 var vreme = new Vreme(30);          				// zadaje vreme igre
@@ -63,20 +62,14 @@ $("#platno").addEventListener('mousemove', reagujNaPokret);
 
 
 function pripremiScenu(){
-	slika_pozadine = ucitavac.nadjiPozadinu();
+	var slika_pozadine = ucitavac.nadjiPozadinu();
 	var prilagodjena_visina = prilagodiPozadinu(slika_pozadine); 
-
+	scena = new Scena('platno', slika_pozadine, prilagodjena_visina);	
 	uvod.pusti()
-
 }	// pripremiScenu
 
 
 function postaviScenu(){			// postavlja je reagujNaKlik()
-	
-	slika_pozadine = ucitavac.nadjiPozadinu();
-	var prilagodjena_visina = prilagodiPozadinu(slika_pozadine); 
-	
-	scena = new Scena('platno', slika_pozadine, prilagodjena_visina);
 	karakteri = scena.karakteri;
 	igrac = new Igrac(scena);
 	kraj = new Kraj(scena);

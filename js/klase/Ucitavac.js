@@ -1,5 +1,3 @@
-// prilagodiPozadinu, uzeti u obzir sire i tanje ekrane
-
 function Ucitavac(slike) {
 	var ucitavac = this
 	

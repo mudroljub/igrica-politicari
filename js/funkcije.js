@@ -34,8 +34,8 @@ function prilagodiSliku(STANDARDNA_VISINA, slika){
 	var nova_sirina = slika.width / (slika.height / STANDARDNA_VISINA);
 	var nova_visina = STANDARDNA_VISINA;
 	// prilagodjava sliku ekranu
-	slika.width = nova_sirina * (window.innerWidth / scena.STANDARDNA_SIRINA);
-	slika.height = nova_visina * (window.innerWidth / scena.STANDARDNA_SIRINA);
+	slika.width = nova_sirina * (window.innerWidth / STANDARDNA_SIRINA_EKRANA);
+	slika.height = nova_visina * (window.innerWidth / STANDARDNA_SIRINA_EKRANA);
 	return slika;
 }	// prilagodiSliku
 
