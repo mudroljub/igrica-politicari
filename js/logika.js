@@ -89,7 +89,6 @@ function azuriraj(){
     // izvrsava svaki frejm, tj. 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
 		scena.crtaIzaPozadine();
-		scena.crtaPozadinu();
 		dacic.igraj(vreme, 30);
 		vulin.igraj(vreme, 20);
 		toma.igraj(vreme, 10);
@@ -116,7 +115,8 @@ function azuriraj(){
 					karakteri[i].promeniParolu();
 					karakteri[i].kadProdjeResetujPauzu(vreme);
 				}
-			} // kraj if karakter igra
+			} // kraj if karakter igra	
+		scena.crtaPozadinu();
 		kursor.azurirajProjektil(scena, karakteri[i], paradajz);
 		} // kraj for karakteri
 
