@@ -27,17 +27,18 @@
 // nazivi bitni, od njih pravi objekte
 var slike = {
     pozadine: {
-        skupstina: 'slike/skupstina3d.png'
+        "skupstina": 'slike/pozadina_bez_prozora.png',
+        "iza_prozora": 'slike/pozadina_iza_prozora.png'
     },
     likovi: {
-        vulin: 'slike/vulin.png',
-        toma: 'slike/toma.png',
-        dacic: 'slike/dacic.png'
+        "vulin": 'slike/vulin.png',
+        "toma": 'slike/toma.png',
+        "dacic": 'slike/dacic.png'
     },
     predmeti: {
-        paradajz: "slike/paradajz.png",
-        jaje: "slike/politicar.png",
-        krpa: "slike/politicar.png"
+        "paradajz": "slike/paradajz.png",
+        "jaje": "slike/politicar.png",
+        "krpa": "slike/politicar.png"
     }
 }
 
@@ -87,6 +88,7 @@ function postaviScenu(){			// postavlja je reagujNaKlik()
 function azuriraj(){
     // izvrsava svaki frejm, tj. 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
+		scena.crtaIzaPozadine();
 		scena.crtaPozadinu();
 		dacic.igraj(vreme, 30);
 		vulin.igraj(vreme, 20);

@@ -58,6 +58,10 @@ Scena.prototype.crtaPozadinu = function(){
     this.sadrzaj.drawImage(this.pozadina, 0, 0, this.sirina, this.prilagodjena_visina);
 }
 
+Scena.prototype.crtaIzaPozadine = function(){
+    this.sadrzaj.drawImage(iza_prozora_slika, 0, 0, this.sirina, this.prilagodjena_visina);
+}
+
 Scena.prototype.mrdaPozadinu = function(){
     // kad imamo vecu pozadinu da se pomera
 }

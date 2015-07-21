@@ -25,18 +25,18 @@ Ucitavac.prototype.ucitajSlike = function(slike, povratnaRadnja){     // povratn
     for(var i=0; i < ukupno_grupa; i++) {
         var naziv_grupe = nazivi_grupa[i];
         var ova_grupa = slike[naziv_grupe];
-        for(var ime_slike in ova_grupa){
-			window[ime_slike + "_slika"] = new Image()
-			window[ime_slike + "_slika"].onload = function(){
-				ucitavac.proveriUcitano(ime_slike, povratnaRadnja);	
+        for(var kljuc in ova_grupa){
+			window[kljuc + "_slika"] = new Image()
+			window[kljuc + "_slika"].onload = function(){
+				ucitavac.proveriUcitano(povratnaRadnja);	
 			}
-			//window[ime_slike + "_slika"].onerror = this.javiGresku(ime_slike);
-			window[ime_slike + "_slika"].src = ova_grupa[ime_slike]
+			//window[kljuc + "_slika"].onerror = this.javiGresku(kljuc);
+			window[kljuc + "_slika"].src = ova_grupa[kljuc]
         } // kraj for in
     }	// kraj for
 }	// ucitajSlike
 
-Ucitavac.prototype.proveriUcitano = function(ime_slike, povratnaRadnja){	
+Ucitavac.prototype.proveriUcitano = function(povratnaRadnja){	
     this.ucitane_slike++;
 	this.crtajProgres(this.sve_slike, this.ucitane_slike)	
     if(this.ucitane_slike >= this.sve_slike) {
@@ -65,6 +65,6 @@ Ucitavac.prototype.nadjiPozadinu  = function(){
 	return prva_pozadina_slika;
 }	// nadjiPozadinu
 
-Ucitavac.prototype.javiGresku = function(ime_slike){
-	console.log("Slika " + ime_slike + " je slomljena.")
+Ucitavac.prototype.javiGresku = function(kljuc){
+	console.log("Slika " + kljuc + " je slomljena.")
 }
