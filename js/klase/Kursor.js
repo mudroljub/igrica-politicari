@@ -91,13 +91,13 @@ Kursor.prototype.crtaProjektil = function(scena, slika){
 }	// crtaProjektil
 
 // iskoristiti dodeliPozicijeProjektila, deli random
-Kursor.prototype.azurirajProjektil = function(scena, karakter, slika){
+Kursor.prototype.crtaProjektil2 = function(scena, karakter, slika){
 	if(karakter.pogodjen){
 		this.crtaProjektilNaLiku(scena, karakter, slika)
 	} else {
 		this.crtaProjektil(scena, slika)	
 	}
-}	// azurirajProjektil
+}	// crtaProjektil2
 
 Kursor.prototype.centriraProjektil = function(slika){
 	var centriranX = this.kliknut_x - (slika.width / 2);

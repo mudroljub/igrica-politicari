@@ -22,7 +22,15 @@
 
     DOBRA PRAKSA:
 * zaokruziti crtanje na pun piksel, bez decimala
+* prikaciti varijable i funkcije za igrica objekat, ne zagadjivati globalno
 ********************************************************************/
+
+/*
+// izdvojiti osnovne stvari iz scene - platno, sadrzaj, visina, sirina, rezolucija i sl
+var igra = {
+  sadrzaj: platno.getContext('2d')
+};
+*/
 
 // nazivi bitni, od njih pravi objekte
 var slike = {
@@ -86,41 +94,54 @@ function postaviScenu(){			// postavlja je reagujNaKlik()
 
 
 // izvrsava svaki frejm, tj. na 16.6 milisekundi (60 herca/sekund)
-function glavniLup(){
+function glavniLup(trenutnoVremeAnimacije){
+	scena.animacija = requestAnimationFrame(glavniLup);	// zakazuje povratnu funkciju, izvršava je prilikom osvežavanja
+	
 	azuriraj()
     crtaj()
 
+
+	/**
+	 * azurira:
+	 * dodeljuje duzinu izlaza
+	 * dodeljuje poziciju
+	 * izlazi, tj kreće mrdanje
+	 * baca ili ne baca parole
+	 * odlazi, tj ponovo mrdanje
+	 * dodeljuje duzinu pauze
+	 * pauzira 
+	 */
+
+
 	for(var i=0; i < karakteri.length; i++) {
 		if(karakteri[i].igra) {	
-			if(karakteri[i].neIzlaziNiPauzira()){
-				karakteri[i].nadjiSlobodnoMesto(karakteri);	
-				karakteri[i].odrediIzlaz(vreme, 2, 3);
-		        karakteri[i].postaviMrdanje();	
-			}
-			if(karakteri[i].upravoIzlazi()) {
-				karakteri[i].azurirajMrdanje();
-				karakteri[i].crtajMrdanje();
-				karakteri[i].bacaParole(kursor);
-				karakteri[i].crtaKukanje(kursor);
-				karakteri[i].kadOdeResetujIzlaz(vreme);
-			}
-			if(karakteri[i].neIzlaziNiPauzira()){
-				karakteri[i].odrediPauzu(vreme, 1, 2);
-			}
-			if(karakteri[i].upravoPauzira()){
-				karakteri[i].pogodjen = false
-				karakteri[i].promeniParolu();
-				karakteri[i].kadProdjeResetujPauzu(vreme);
-			}
+			karakteri[i].nadjiSlobodnoMesto(karakteri);	
+			karakteri[i].odrediIzlaz(vreme, 2, 3);
+	        karakteri[i].postaviMrdanje();				
+			karakteri[i].azurirajMrdanje();
+			karakteri[i].crtajMrdanje();
+			karakteri[i].bacaParole(kursor);
+			karakteri[i].crtaKukanje(kursor);
+			karakteri[i].kadOdeResetujIzlaz(vreme);
+			karakteri[i].odrediPauzu(vreme, 1, 2);
+			karakteri[i].pogodjen = false
+			karakteri[i].promeniParolu();
+			karakteri[i].kadProdjeResetujPauzu(vreme);
+
+			// karakteri[i].neIzlaziNiPauzira()
+			// if(karakteri[i].upravoIzlazi()
+			// if(karakteri[i].neIzlaziNiPauzira()
+			// if(karakteri[i].upravoPauzira()
+
 		} // kraj if karakter igra	
-	scena.crtaPozadinu();
-	kursor.azurirajProjektil(scena, karakteri[i], paradajz);
 	} // kraj for karakteri
 
+ 	scena.crtaPozadinu();
+	kursor.crtaProjektil(scena, paradajz);				// crtaProjektil2 ili crtaProjektilNaLiku je bolji
 	kursor.crtaKrug(scena)
 	scena.prikazujPoene(vreme);		
 	igrac.crtaMasu();
-	scena.animacija = requestAnimationFrame(glavniLup);	// poziva glavniLup iznova
+
 	vreme.proveriKraj(kraj);							// mora posle animacije, ili vrti kraj	
 }   // kraj glavniLup
 

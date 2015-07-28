@@ -11,11 +11,13 @@ function Uvod(platno_id){
 	this.animacija;					// identifikator animacije
 
 	
-	this.pusti = function(){ 		// this je unutra window!
+	this.pusti = function(vremeAnimacije){ 		// this je unutra window!
+		// log(vremeAnimacije)			// ne resetuje se po prekidu animacije
 		crnEkran(uvod)
 		piseTekst(uvod.sadrzaj, "Spremi se za obračun!", uvod.slova_x, uvod.slova_y, "#fff", 60, 1000);
 		mrdaSlova(uvod, 5);
 		uvod.animacija = window.requestAnimationFrame(uvod.pusti);
+		prethodnoVremeAnimacije = vremeAnimacije;
 	}	// pusti
 
 }	// kraj Uvod
