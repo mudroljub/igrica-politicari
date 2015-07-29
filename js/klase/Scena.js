@@ -54,11 +54,11 @@ Scena.prototype.prikazujPoene = function(vreme){
     this.sadrzaj.fillText("Vreme: " + vreme.preostalo, 30, 160);
 }	// prikazujPoene
 
-Scena.prototype.crtaPozadinu = function(){
+Scena.prototype.crtaFasadu = function(){
     this.sadrzaj.drawImage(this.pozadina, 0, 0, this.sirina, this.prilagodjena_visina);
 }
 
-Scena.prototype.crtaIzaPozadine = function(){
+Scena.prototype.crtaPodlogu = function(){
     this.sadrzaj.drawImage(iza_prozora_slika, 0, 0, this.sirina, this.prilagodjena_visina);
 }
 

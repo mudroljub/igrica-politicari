@@ -108,7 +108,7 @@ Kursor.prototype.centriraProjektil = function(slika){
 	}
 }	// centriraProjektil
 
-Kursor.prototype.crtaKrug = function(scena){
+Kursor.prototype.crtaReflektor = function(scena){
 	var krug = new Path2D();
 	krug.arc(this.x, this.y, this.poluprecnik, 0, 2*Math.PI);
 	scena.sadrzaj.fillStyle = "rgba(255, 255, 255, 0.2)";
