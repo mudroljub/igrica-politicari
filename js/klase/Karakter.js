@@ -3,7 +3,7 @@
 
 function Karakter(ime, slika_src, scena){
 
-	var ovaj = this;
+	var karakter = this;
     this.ime = ime.VelikoSlovo();
 	this.slika = new Image();
     this.slika.src = slika_src;
@@ -11,7 +11,7 @@ function Karakter(ime, slika_src, scena){
     this.slika = prilagodiSliku(STANDARDNA_VISINA_SLIKE, this.slika);
     this.sirina = this.slika.width;
     this.visina = this.slika.height;
-    this.x = 0;         	// dodeljuje slucajnaPozicija
+    this.x = 0;         	// dodeljuje dodeliPoziciju
     this.y = 0;
 	this.zapamcen_x = 0;
 	this.zapamcen_y = 0;    // dodeljuje postavljaMrdanje
@@ -25,7 +25,7 @@ function Karakter(ime, slika_src, scena){
 	this.pokret_levo_desno = false;
 	this.pokret_dole_gore = false;
 	this.traje_pauza = 0;
-	this.traje_izlaz = 0;
+	this.trajanjeIzlaska = 0;
 	this.kraj_pauze = 0; 			// odrediPauzu
 	this.kraj_izlaska = 0;			// odrediIzlaz
 	
@@ -57,9 +57,8 @@ Karakter.prototype.igraj = function(vreme, trenutak_ulaska) {
 /* CRTANJE */
 
 Karakter.prototype.crtaj = function() {
-	if (this.x >= 0 && this.y >= 0) {
-		scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
-	}
+	console.log("this.x " + this.x, "this.y " + this.y)
+	scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
 }   // kraj crtaj
 
 
@@ -83,19 +82,75 @@ Karakter.prototype.crtajMrdanje = function() {
 
 /* POZICIJE */
 
-Karakter.prototype.slucajnaPozicija = function(pozicije) {
+Karakter.prototype.dodeliPoziciju = function(pozicije) {
 	var slucajno = Math.floor (Math.random() * pozicije.length);
 	this.x = pozicije[slucajno][0];
 	this.y = pozicije[slucajno][1];
-}   // kraj slucajnaPozicija
+	//log(this.x, this.y)
+}   // kraj dodeliPoziciju
 
 
 Karakter.prototype.nadjiSlobodnoMesto = function (karakteri) {
-	this.slucajnaPozicija(scena.pozicije)
+	this.dodeliPoziciju(scena.pozicije)
 	while ( this.proveriSveSudare(karakteri) ) {
-		this.slucajnaPozicija(scena.pozicije)
+		this.dodeliPoziciju(scena.pozicije)
 	}
 }   // kraj naSlobodnomCrtaj
+
+
+/* IZLAZ I PAUZA */
+
+Karakter.prototype.odrediIzlaz = function(vreme, min, max){
+	if(!this.trajanjeIzlaska) {
+		this.odrediDuzinuIzlaska(vreme, min, max)
+		//log(this.trajanjeIzlaska)
+		this.dodeliPoziciju(scena.pozicije)
+		console.log("this.x " + this.x, "this.y " + this.y)
+	}
+}	// kraj odrediIzlaz
+
+
+Karakter.prototype.odrediDuzinuIzlaska = function(vreme, min, max){
+	this.trajanjeIzlaska = vreme.trajanjeSlucajno(min, max);
+	this.kraj_izlaska = vreme.ovajTren() + this.trajanjeIzlaska;	
+}	// odrediDuzinuIzlaska
+
+
+//dodeliPoziciju(scena.pozicije)
+
+Karakter.prototype.azurirajIzlaz = function(vreme){
+	if(this.kraj_izlaska <= vreme.ovajTren()) {
+		this.trajanjeIzlaska = 0;
+	}
+}	// azurirajIzlaz
+
+
+Karakter.prototype.odrediPauzu = function(vreme, min, max){
+	this.traje_pauza = vreme.trajanjeSlucajno(min, max);
+	this.kraj_pauze = vreme.ovajTren() + this.traje_pauza;
+}	// kraj odrediPauzu
+
+
+Karakter.prototype.kadProdjeResetujPauzu = function(vreme){
+	if(this.kraj_pauze <= vreme.ovajTren()) {
+		this.traje_pauza = 0;
+	}
+}	// kadProdjeResetujPauzu
+
+
+Karakter.prototype.neIzlaziNiPauzira = function(){
+	return !this.trajanjeIzlaska && !this.traje_pauza;
+}	// neIzlaziNiPauzira
+
+
+Karakter.prototype.upravoIzlazi = function(){
+	return this.trajanjeIzlaska && !this.traje_pauza
+}	// upravoIzlazi
+
+
+Karakter.prototype.upravoPauzira = function(){
+	return this.traje_pauza && !this.trajanjeIzlaska
+}	// upravoPauzira
 
 
 /* MRDANJE */
@@ -188,49 +243,6 @@ Karakter.prototype.dizi = function(){
 Karakter.prototype.spustaj = function(){
 	this.spustenost++
 }	// spustaj
-
-
-/* IZLAZ I PAUZA */
-
-Karakter.prototype.odrediIzlaz = function(vreme, min, max){
-	this.traje_izlaz = vreme.trajanjeSlucajno(min, max);
-	this.kraj_izlaska = vreme.ovajTren() + this.traje_izlaz;
-}	// kraj odrediIzlaz
-
-
-Karakter.prototype.kadOdeResetujIzlaz = function(vreme){
-	if(this.kraj_izlaska <= vreme.ovajTren()) {
-		this.traje_izlaz = 0;
-	}
-}	// kadOdeResetujIzlaz
-
-
-Karakter.prototype.odrediPauzu = function(vreme, min, max){
-	this.traje_pauza = vreme.trajanjeSlucajno(min, max);
-	this.kraj_pauze = vreme.ovajTren() + this.traje_pauza;
-}	// kraj odrediPauzu
-
-
-Karakter.prototype.kadProdjeResetujPauzu = function(vreme){
-	if(this.kraj_pauze <= vreme.ovajTren()) {
-		this.traje_pauza = 0;
-	}
-}	// kadProdjeResetujPauzu
-
-
-Karakter.prototype.neIzlaziNiPauzira = function(){
-	return !this.traje_izlaz && !this.traje_pauza;
-}	// neIzlaziNiPauzira
-
-
-Karakter.prototype.upravoIzlazi = function(){
-	return this.traje_izlaz && !this.traje_pauza
-}	// upravoIzlazi
-
-
-Karakter.prototype.upravoPauzira = function(){
-	return this.traje_pauza && !this.traje_izlaz
-}	// upravoPauzira
 
 
 /* KOLIZIJA */

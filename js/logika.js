@@ -32,7 +32,7 @@ var igra = {
 };
 */
 
-// nazivi bitni, od njih pravi objekte
+// prevesti u json
 var slike = {
     pozadine: {
         "skupstina": 'slike/pozadina_bez_prozora.png',
@@ -89,55 +89,65 @@ function postaviScenu(){			// postavlja je reagujNaKlik()
     dacic.jauk = "Jaoj";
     vulin.jauk = "To boli!";
     toma.jauk = "Evropa nema alternativu!";
-	scena.animacija = requestAnimationFrame(sveUkrug); // startuje animaciju
+	scena.animacija = requestAnimationFrame(glavniUkrug); // startuje animaciju
 }   // kraj postaviScenu
 
 
 // Ukrug
 // izvrsava svaki frejm na 16.6 milisekundi (60 herca/sekund)
-function sveUkrug(trenutnoVremeAnimacije){
-	scena.animacija = requestAnimationFrame(sveUkrug);		// zakazuje povratnu funkciju, izvršava je prilikom osvežavanja	
+function glavniUkrug(trenutnoVremeAnimacije){
+	scena.animacija = requestAnimationFrame(glavniUkrug);		// zakazuje povratnu funkciju, izvršava je prilikom osvežavanja	
 	azurirajSve();
     crtajSve();
-}   // kraj sveUkrug
+}   // kraj glavniUkrug
 
 
 function azurirajSve(){
-    azurirajSekundu()
-	dacic.igraj(vreme, 30);
-	vulin.igraj(vreme, 20);
-	toma.igraj(vreme, 10);	
+    //azurirajSekundu()
+	//dacic.igraj(vreme, 30);
+	//vulin.igraj(vreme, 20);
+	//toma.igraj(vreme, 10);
+
+	dacic.odrediIzlaz(vreme, 2, 3);
+	dacic.azurirajIzlaz(vreme);
+	
 	for(var i=0; i < karakteri.length; i++) {
+		// karakteri[i].nadjiSlobodnoMesto(karakteri);
+		// karakteri[i].odrediIzlaz(vreme, 2, 3);
+		// karakteri[i].azurirajIzlaz(vreme);
 		/*
-		karakteri[i].nadjiSlobodnoMesto(karakteri);
-		karakteri[i].odrediIzlaz(vreme, 2, 3);
-		karakteri[i].postaviMrdanje();				
+		karakteri[i].postaviMrdanje();
 		karakteri[i].azurirajMrdanje();
 		karakteri[i].bacaParole(kursor);
-		karakteri[i].kadOdeResetujIzlaz(vreme);
 		karakteri[i].odrediPauzu(vreme, 1, 2);
 		karakteri[i].pogodjen = false
 		karakteri[i].promeniParolu();
 		karakteri[i].kadProdjeResetujPauzu(vreme);
 		*/
 	}	// karakteri
-	scena.prikazujPoene(vreme);		// racunajPoene() 
-	vreme.proveriKraj(kraj);
+	//scena.prikazujPoene(vreme);		// racunaPoene() i pisePoene()
+	//vreme.proveriKraj(kraj);
 }	// azurirajSve
 
 
 function crtajSve(){
 	scena.crtaPodlogu();
-	for(var i=0; i < karakteri.length; i++) {	
-		//karakteri[i].crtajMrdanje();
-		//karakteri[i].crtaKukanje(kursor);
-	}
+	crtajKaraktere()
  	scena.crtaFasadu();
 	kursor.crtaReflektor(scena)
 	kursor.crtaProjektil(scena, paradajz);				// crtaProjektil2 ili crtaProjektilNaLiku je bolji
 	igrac.crtaMasu();
 	
 }	// crtajSve
+
+
+function crtajKaraktere(){
+	dacic.crtaj();
+	for(var i=0; i < karakteri.length; i++) {	
+		//karakteri[i].crtaj();
+		//karakteri[i].crtaKukanje(kursor);
+	}
+}	// crtajKaraktere
 
 
 function azurirajSekundu(){
