@@ -110,6 +110,8 @@ function azurirajSve(){
 
 	dacic.odrediIzlaz(vreme, 2, 3);
 	dacic.azurirajIzlaz(vreme);
+	dacic.odrediPauzu(vreme, 1, 2);
+	dacic.azurirajPauzu(vreme);
 	
 	for(var i=0; i < karakteri.length; i++) {
 		// karakteri[i].nadjiSlobodnoMesto(karakteri);
@@ -122,7 +124,7 @@ function azurirajSve(){
 		karakteri[i].odrediPauzu(vreme, 1, 2);
 		karakteri[i].pogodjen = false
 		karakteri[i].promeniParolu();
-		karakteri[i].kadProdjeResetujPauzu(vreme);
+		karakteri[i].azurirajPauzu(vreme);
 		*/
 	}	// karakteri
 	//scena.prikazujPoene(vreme);		// racunaPoene() i pisePoene()
@@ -142,9 +144,9 @@ function crtajSve(){
 
 
 function crtajKaraktere(){
-	dacic.crtaj();
+	dacic.crtajIzlazak();
 	for(var i=0; i < karakteri.length; i++) {	
-		//karakteri[i].crtaj();
+		//karakteri[i].crtajIzlazak();
 		//karakteri[i].crtaKukanje(kursor);
 	}
 }	// crtajKaraktere

@@ -6,9 +6,9 @@ function Vreme(zadato) {
 }   // kraj Vreme
 
 
-Vreme.prototype.ovajTren = function(){
-	var od_pocetka_sekunde = new Date().getTime() / 1000	// sekunde od 1. jan 1970
-	return Math.round(od_pocetka_sekunde) 					// zaokruzuje decimale
+Vreme.prototype.sadasnje = function(){
+	var sekundeOdStvaranja = new Date().getTime() / 1000	// sekunde od 1. jan 1970
+	return Math.round(sekundeOdStvaranja) 					// zaokruzuje decimale
 }
 
 Vreme.prototype.ovaSekunda = function(){

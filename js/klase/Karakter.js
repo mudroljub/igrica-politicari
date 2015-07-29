@@ -24,10 +24,10 @@ function Karakter(ime, slika_src, scena){
     this.spustenost = 0;
 	this.pokret_levo_desno = false;
 	this.pokret_dole_gore = false;
-	this.traje_pauza = 0;
+	this.trajanjePauze = 0;
 	this.trajanjeIzlaska = 0;
-	this.kraj_pauze = 0; 			// odrediPauzu
-	this.kraj_izlaska = 0;			// odrediIzlaz
+	this.krajPauze = 0; 			// odrediPauzu
+	this.krajIzlaska = 0;			// odrediIzlaz
 	
 	this.parole = [
 		"Mi branimo srpski narod!", 
@@ -57,8 +57,14 @@ Karakter.prototype.igraj = function(vreme, trenutak_ulaska) {
 /* CRTANJE */
 
 Karakter.prototype.crtaj = function() {
-	console.log("this.x " + this.x, "this.y " + this.y)
-	scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);
+	scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);	
+}   // kraj crtaj
+
+
+Karakter.prototype.crtajIzlazak = function() {
+	if(this.trajanjeIzlaska) {
+		scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);	
+	}
 }   // kraj crtaj
 
 
@@ -101,55 +107,55 @@ Karakter.prototype.nadjiSlobodnoMesto = function (karakteri) {
 /* IZLAZ I PAUZA */
 
 Karakter.prototype.odrediIzlaz = function(vreme, min, max){
-	if(!this.trajanjeIzlaska) {
+	if(!this.trajanjeIzlaska && !this.trajanjePauze) {	// i ako nijePauza
 		this.odrediDuzinuIzlaska(vreme, min, max)
-		//log(this.trajanjeIzlaska)
 		this.dodeliPoziciju(scena.pozicije)
-		console.log("this.x " + this.x, "this.y " + this.y)
 	}
 }	// kraj odrediIzlaz
 
 
 Karakter.prototype.odrediDuzinuIzlaska = function(vreme, min, max){
 	this.trajanjeIzlaska = vreme.trajanjeSlucajno(min, max);
-	this.kraj_izlaska = vreme.ovajTren() + this.trajanjeIzlaska;	
+	this.krajIzlaska = vreme.sadasnje() + this.trajanjeIzlaska;	
 }	// odrediDuzinuIzlaska
 
 
-//dodeliPoziciju(scena.pozicije)
-
 Karakter.prototype.azurirajIzlaz = function(vreme){
-	if(this.kraj_izlaska <= vreme.ovajTren()) {
+	if(this.krajIzlaska <= vreme.sadasnje()) {
 		this.trajanjeIzlaska = 0;
+		// zapocniPauzu
 	}
 }	// azurirajIzlaz
 
 
 Karakter.prototype.odrediPauzu = function(vreme, min, max){
-	this.traje_pauza = vreme.trajanjeSlucajno(min, max);
-	this.kraj_pauze = vreme.ovajTren() + this.traje_pauza;
+	if(!this.trajanjeIzlaska && !this.trajanjePauze){
+		this.trajanjePauze = vreme.trajanjeSlucajno(min, max);
+		this.krajPauze = vreme.sadasnje() + this.trajanjePauze;
+		log(this.trajanjePauze)
+	}
 }	// kraj odrediPauzu
 
 
-Karakter.prototype.kadProdjeResetujPauzu = function(vreme){
-	if(this.kraj_pauze <= vreme.ovajTren()) {
-		this.traje_pauza = 0;
+Karakter.prototype.azurirajPauzu = function(vreme){
+	if(this.krajPauze <= vreme.sadasnje()) {
+		this.trajanjePauze = 0;
 	}
-}	// kadProdjeResetujPauzu
+}	// azurirajPauzu
 
 
 Karakter.prototype.neIzlaziNiPauzira = function(){
-	return !this.trajanjeIzlaska && !this.traje_pauza;
+	return !this.trajanjeIzlaska && !this.trajanjePauze;
 }	// neIzlaziNiPauzira
 
 
 Karakter.prototype.upravoIzlazi = function(){
-	return this.trajanjeIzlaska && !this.traje_pauza
+	return this.trajanjeIzlaska && !this.trajanjePauze
 }	// upravoIzlazi
 
 
 Karakter.prototype.upravoPauzira = function(){
-	return this.traje_pauza && !this.trajanjeIzlaska
+	return this.trajanjePauze && !this.trajanjeIzlaska
 }	// upravoPauzira
 
 
