@@ -54,7 +54,7 @@ Scena.prototype.prikazujPoene = function(vreme){
     this.sadrzaj.fillText("Vreme: " + vreme.preostalo, 30, 160);
 }	// prikazujPoene
 
-Scena.prototype.crtaFasadu = function(){
+Scena.prototype.crtaPozadinu = function(){
     this.sadrzaj.drawImage(this.pozadina, 0, 0, this.sirina, this.prilagodjena_visina);
 }
 

@@ -108,23 +108,24 @@ function azurirajSve(){
 	//vulin.igraj(vreme, 20);
 	//toma.igraj(vreme, 10);
 
-	dacic.odrediIzlaz(vreme, 2, 3);
-	dacic.azurirajIzlaz(vreme);
-	dacic.odrediPauzu(vreme, 1, 2);
-	dacic.azurirajPauzu(vreme);
+	dacic.odrediAnimaciju()
+	dacic.dodeliIzlazak(vreme, 2, 3);
+	dacic.azurirajAnimaciju()
+	dacic.proveravajIzlazak(vreme);
+	dacic.dodeliPauzu(vreme, 1, 2);
+	dacic.proveravajPauzu(vreme);
 	
+
 	for(var i=0; i < karakteri.length; i++) {
-		// karakteri[i].nadjiSlobodnoMesto(karakteri);
-		// karakteri[i].odrediIzlaz(vreme, 2, 3);
-		// karakteri[i].azurirajIzlaz(vreme);
+		// karakteri[i].nadjiSlobodnoMesto(karakteri);		
 		/*
 		karakteri[i].postaviMrdanje();
 		karakteri[i].azurirajMrdanje();
 		karakteri[i].bacaParole(kursor);
-		karakteri[i].odrediPauzu(vreme, 1, 2);
+		karakteri[i].dodeliPauzu(vreme, 1, 2);
 		karakteri[i].pogodjen = false
 		karakteri[i].promeniParolu();
-		karakteri[i].azurirajPauzu(vreme);
+		karakteri[i].proveravajPauzu(vreme);
 		*/
 	}	// karakteri
 	//scena.prikazujPoene(vreme);		// racunaPoene() i pisePoene()
@@ -135,7 +136,7 @@ function azurirajSve(){
 function crtajSve(){
 	scena.crtaPodlogu();
 	crtajKaraktere()
- 	scena.crtaFasadu();
+ 	scena.crtaPozadinu();
 	kursor.crtaReflektor(scena)
 	kursor.crtaProjektil(scena, paradajz);				// crtaProjektil2 ili crtaProjektilNaLiku je bolji
 	igrac.crtaMasu();
