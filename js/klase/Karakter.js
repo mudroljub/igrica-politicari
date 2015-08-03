@@ -29,6 +29,7 @@ function Karakter(ime, slika_src, scena){
 	this.trajanjeIzlaska = 0;
 	this.krajPauze = 0; 			// dodeliPauzu
 	this.krajIzlaska = 0;			// dodeliIzlazak
+	this.obrniSmer = false;
 	
 	this.parole = [
 		"Mi branimo srpski narod!", 
@@ -124,6 +125,7 @@ Karakter.prototype.odrediDuzinuIzlaska = function(vreme, min, max){
 Karakter.prototype.proveravajIzlazak = function(vreme){
 	if(this.krajIzlaska <= vreme.sadasnje()) {
 		this.trajanjeIzlaska = 0;
+		this.vrstaAnimacije = 0;
 		// zapocniPauzu
 	}
 }	// proveravajIzlazak
@@ -133,7 +135,6 @@ Karakter.prototype.dodeliPauzu = function(vreme, min, max){
 	if(!this.trajanjeIzlaska && !this.trajanjePauze){
 		this.trajanjePauze = vreme.trajanjeSlucajno(min, max);
 		this.krajPauze = vreme.sadasnje() + this.trajanjePauze;
-		this.vrstaAnimacije = 0;
 	}
 }	// kraj dodeliPauzu
 
@@ -148,8 +149,18 @@ Karakter.prototype.proveravajPauzu = function(vreme){
 /* MRDANJE */
 
 Karakter.prototype.odrediAnimaciju = function(){
-	if(!this.vrstaAnimacije) {
+	if(this.trajanjeIzlaska && !this.vrstaAnimacije) {
 		this.vrstaAnimacije = Math.floor((Math.random() * 2) + 1);
+		switch(this.vrstaAnimacije) {
+			case 1:
+				this.y += 20;
+				this.zapamcen_y = this.y;
+				break;
+			case 2:
+				this.x -= 20;
+				this.zapamcen_x = this.x;
+				break;
+		}	// switch
 	}
 }	// odrediAnimaciju
 
@@ -159,11 +170,9 @@ Karakter.prototype.azurirajAnimaciju = function(){
 		switch(this.vrstaAnimacije) {
 			case 1:
 				this.mrdajGore()
-				log("mrdajGore")
 				break;
 			case 2:
 				this.mrdajDesno()
-				log("mrdajDesno")
 				break;
 		}	// switch
 	}
@@ -171,11 +180,33 @@ Karakter.prototype.azurirajAnimaciju = function(){
 
 
 Karakter.prototype.mrdajGore = function(){
-	this.y--;
+	if(!this.obrniSmer) {
+		this.y--;
+	}
+	if(this.obrniSmer) {
+		this.y++;
+	}
+	if(this.y < this.zapamcen_y - 20) {
+		this.obrniSmer = true;
+	}
+	if(this.y > this.zapamcen_y + 20) {
+		this.obrniSmer = false;
+	}
 }	// mrdajGore
 
 Karakter.prototype.mrdajDesno = function(){
-	this.x++;
+	if(!this.obrniSmer) {
+		this.x++;	
+	}
+	if(this.obrniSmer) {
+		this.x--;
+	}	
+	if(this.x > this.zapamcen_x + 50) {
+		this.obrniSmer = true;
+	}
+	if(this.x < this.zapamcen_x - 50) {
+		this.obrniSmer = false;
+	}	
 }	// mrdajDesno
 
 

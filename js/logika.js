@@ -103,13 +103,13 @@ function glavniUkrug(trenutnoVremeAnimacije){
 
 
 function azurirajSve(){
-    //azurirajSekundu()
+    azurirajSekundu()
 	//dacic.igraj(vreme, 30);
 	//vulin.igraj(vreme, 20);
 	//toma.igraj(vreme, 10);
 
-	dacic.odrediAnimaciju()
 	dacic.dodeliIzlazak(vreme, 2, 3);
+	dacic.odrediAnimaciju()	
 	dacic.azurirajAnimaciju()
 	dacic.proveravajIzlazak(vreme);
 	dacic.dodeliPauzu(vreme, 1, 2);
