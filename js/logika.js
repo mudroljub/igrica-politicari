@@ -89,63 +89,60 @@ function postaviScenu(){			// postavlja je reagujNaKlik()
     dacic.jauk = "Jaoj";
     vulin.jauk = "To boli!";
     toma.jauk = "Evropa nema alternativu!";
-	scena.animacija = requestAnimationFrame(glavniUkrug); // startuje animaciju
+	scena.animacija = requestAnimationFrame(glavniLup); // startuje animaciju
 }   // kraj postaviScenu
 
 
 // Ukrug
 // izvrsava svaki frejm na 16.6 milisekundi (60 herca/sekund)
-function glavniUkrug(trenutnoVremeAnimacije){
-	scena.animacija = requestAnimationFrame(glavniUkrug);		// zakazuje povratnu funkciju, izvršava je prilikom osvežavanja	
-	azurirajSve();
-    crtajSve();
-}   // kraj glavniUkrug
+function glavniLup(trenutnoVremeAnimacije){
+	scena.animacija = requestAnimationFrame(glavniLup);		// zakazuje povratnu funkciju, izvršava je prilikom osvežavanja	
+	azuriraj();
+    crtaj();
+}   // kraj glavniLup
 
 
-function azurirajSve(){
+function azuriraj(){
     azurirajSekundu()
 	//dacic.igraj(vreme, 30);
 	//vulin.igraj(vreme, 20);
 	//toma.igraj(vreme, 10);
 
+	dacic.dodeliParolu();
 	dacic.dodeliIzlazak(vreme, 2, 3);
-	dacic.odrediAnimaciju()	
-	dacic.azurirajAnimaciju()
+	dacic.dodeliAnimaciju()	
+	dacic.azurirajAnimaciju()	
+	
 	dacic.proveravajIzlazak(vreme);
 	dacic.dodeliPauzu(vreme, 1, 2);
 	dacic.proveravajPauzu(vreme);
-	
 
 	for(var i=0; i < karakteri.length; i++) {
 		// karakteri[i].nadjiSlobodnoMesto(karakteri);		
-		/*
-		karakteri[i].postaviMrdanje();
-		karakteri[i].azurirajMrdanje();
-		karakteri[i].bacaParole(kursor);
-		karakteri[i].dodeliPauzu(vreme, 1, 2);
-		karakteri[i].pogodjen = false
-		karakteri[i].promeniParolu();
-		karakteri[i].proveravajPauzu(vreme);
-		*/
+		// karakteri[i].pogodjen = false
 	}	// karakteri
+
 	//scena.prikazujPoene(vreme);		// racunaPoene() i pisePoene()
 	//vreme.proveriKraj(kraj);
-}	// azurirajSve
+}	// azuriraj
 
 
-function crtajSve(){
+function crtaj(){
 	scena.crtaPodlogu();
 	crtajKaraktere()
  	scena.crtaPozadinu();
+	dacic.bacaParole();
+ 		
 	kursor.crtaReflektor(scena)
 	kursor.crtaProjektil(scena, paradajz);				// crtaProjektil2 ili crtaProjektilNaLiku je bolji
 	igrac.crtaMasu();
 	
-}	// crtajSve
+}	// crtaj
 
 
 function crtajKaraktere(){
 	dacic.crtajIzlazak();
+	
 	for(var i=0; i < karakteri.length; i++) {	
 		//karakteri[i].crtajIzlazak();
 		//karakteri[i].crtaKukanje(kursor);

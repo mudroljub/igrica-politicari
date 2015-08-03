@@ -109,7 +109,7 @@ Karakter.prototype.nadjiSlobodnoMesto = function (karakteri) {
 /* IZLAZ I PAUZA */
 
 Karakter.prototype.dodeliIzlazak = function(vreme, min, max){
-	if(!this.trajanjeIzlaska && !this.trajanjePauze) {	// i ako nijePauza
+	if(this.nemaStanja()) { 
 		this.odrediDuzinuIzlaska(vreme, min, max)
 		this.dodeliPoziciju(scena.pozicije)
 	}
@@ -148,8 +148,8 @@ Karakter.prototype.proveravajPauzu = function(vreme){
 
 /* MRDANJE */
 
-Karakter.prototype.odrediAnimaciju = function(){
-	if(this.trajanjeIzlaska && !this.vrstaAnimacije) {
+Karakter.prototype.dodeliAnimaciju = function(){
+	if(this.upravoIzlazi() && !this.vrstaAnimacije) {
 		this.vrstaAnimacije = Math.floor((Math.random() * 2) + 1);
 		switch(this.vrstaAnimacije) {
 			case 1:
@@ -162,11 +162,11 @@ Karakter.prototype.odrediAnimaciju = function(){
 				break;
 		}	// switch
 	}
-}	// odrediAnimaciju
+}	// dodeliAnimaciju
 
 
 Karakter.prototype.azurirajAnimaciju = function(){
-	if(this.trajanjeIzlaska) {
+	if(this.upravoIzlazi()) {
 		switch(this.vrstaAnimacije) {
 			case 1:
 				this.mrdajGore()
@@ -249,24 +249,29 @@ Karakter.prototype.kukaPogodjen = function(kursor){
 }
 */
 
-Karakter.prototype.promeniParolu = function(){
-	var slucaj = Math.floor( Math.random() * this.parole.length )
-	this.parola = this.parole[slucaj];
-}	// promeniParolu
+Karakter.prototype.dodeliParolu = function(){
+	// ako nema parolu
+	if(this.nemaStanja()) {
+		var slucaj = Math.floor( Math.random() * this.parole.length )
+		this.parola = this.parole[slucaj];		
+	}
+}	// dodeliParolu
 
 
-Karakter.prototype.bacaParole = function(kursor){
-	var sirina = 200;
-    crtaBalonce(scena.sadrzaj, this.x * 0.96, this.y - this.zapamcena_visina, sirina * 1.2, 80, 40)
-    piseTekst(scena.sadrzaj, this.parola, this.x, this.y - this.zapamcena_visina * 0.6, "#000", 30, sirina)
+Karakter.prototype.bacaParole = function(){
+	if(this.upravoIzlazi()) {
+		var maxSirina = 200;
+		crtaBalonce(scena.sadrzaj, this.x * 0.96, this.y - this.zapamcena_visina, maxSirina * 1.2, 80, 40)
+		piseTekst(scena.sadrzaj, this.parola, this.x, this.y - this.zapamcena_visina * 0.6, "#000", 30, maxSirina)		
+	}
 }   // kraj bacaParole
 
 
 /* POMOĆNE */
 
-Karakter.prototype.neIzlaziNiPauzira = function(){
+Karakter.prototype.nemaStanja = function(){
 	return !this.trajanjeIzlaska && !this.trajanjePauze;
-}	// neIzlaziNiPauzira
+}	// nemaStanja
 
 
 Karakter.prototype.upravoIzlazi = function(){
