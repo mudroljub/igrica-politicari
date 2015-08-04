@@ -151,14 +151,14 @@ Karakter.prototype.proveravajPauzu = function(vreme){
 Karakter.prototype.dodeliAnimaciju = function(){
 	if(this.upravoIzlazi() && !this.vrstaAnimacije) {
 		this.vrstaAnimacije = Math.floor((Math.random() * 2) + 1);
+		this.zapamcen_x = this.x;
+		this.zapamcen_y = this.y;
 		switch(this.vrstaAnimacije) {
 			case 1:
-				this.y += 20;
-				this.zapamcen_y = this.y;
+				this.y += 20;	// startna pozicija
 				break;
 			case 2:
-				this.x -= 20;
-				this.zapamcen_x = this.x;
+				this.x -= 20;	// startna pozicija
 				break;
 		}	// switch
 	}
@@ -186,10 +186,10 @@ Karakter.prototype.mrdajGore = function(){
 	if(this.obrniSmer) {
 		this.y++;
 	}
-	if(this.y < this.zapamcen_y - 20) {
+	if(this.y < this.zapamcen_y) {
 		this.obrniSmer = true;
 	}
-	if(this.y > this.zapamcen_y + 20) {
+	if(this.y > this.zapamcen_y + 40) {
 		this.obrniSmer = false;
 	}
 }	// mrdajGore
@@ -201,12 +201,14 @@ Karakter.prototype.mrdajDesno = function(){
 	if(this.obrniSmer) {
 		this.x--;
 	}	
-	if(this.x > this.zapamcen_x + 50) {
+	
+	if(this.x > this.zapamcen_x + 100) {
 		this.obrniSmer = true;
 	}
-	if(this.x < this.zapamcen_x - 50) {
+	if(this.x < this.zapamcen_x - 100) {
 		this.obrniSmer = false;
 	}	
+	
 }	// mrdajDesno
 
 
@@ -261,8 +263,23 @@ Karakter.prototype.dodeliParolu = function(){
 Karakter.prototype.bacaParole = function(){
 	if(this.upravoIzlazi()) {
 		var maxSirina = 200;
-		crtaBalonce(scena.sadrzaj, this.x * 0.96, this.y - this.zapamcena_visina, maxSirina * 1.2, 80, 40)
-		piseTekst(scena.sadrzaj, this.parola, this.x, this.y - this.zapamcena_visina * 0.6, "#000", 30, maxSirina)		
+		crtaBalonce(
+			scena.sadrzaj, 						// podloga
+			this.zapamcen_x * 0.96, 			// x
+			this.zapamcen_y - this.visina * 1.2, // y
+			maxSirina * 1.2, 					// sirina
+			70, 								// visina
+			30
+		)	// crtaBalonce
+		piseTekst(
+			scena.sadrzaj, 						// podloga
+			this.parola, 						// tekst
+			this.zapamcen_x, 					// x
+			this.zapamcen_y - this.visina * 0.7, // y 
+			"#000", 							// boja teksta
+			30, 								// visina
+			maxSirina							// sirina
+		)	// piseTekst
 	}
 }   // kraj bacaParole
 

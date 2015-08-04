@@ -13,12 +13,15 @@
 * prilagodiPozadinu, uzeti u obzir sire i tanje ekrane
 * izdvojiti klasu Politicar
 * prilagoditi tablu s poenima
+* smanjiti paradajz
+* balonce odlece
 
     PROBLEMI:
 * parole se preklapaju jer izadje po jedna za svakog politicara
 * prvi paradajz ne treba da puca
 * da crtaProjektilNaLiku ne napusta prozor, a crtaParadajzOkolo ne ulazu u zauzet prozor
 * kad je presirok ekran, sece pozadinu po visini !
+* balonce se raspadne kad se smanji visina
 
     DOBRA PRAKSA:
 * zaokruziti crtanje na pun piksel, bez decimala

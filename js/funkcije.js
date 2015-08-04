@@ -105,6 +105,6 @@ function crtaBalonce(sadrzaj, startX, startY, sirina, visina, radius) {
 	sadrzaj.strokeStyle = "black";
 	sadrzaj.lineWidth = "2";
 	sadrzaj.stroke(putanja);
-	sadrzaj.fillStyle="#fff";
+	sadrzaj.fillStyle="rgba(255,255,255,0.75)";
 	sadrzaj.fill(putanja);
 }	// crtaBalonce
