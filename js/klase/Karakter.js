@@ -29,7 +29,8 @@ function Karakter(ime, slika_src, scena){
 	this.trajanjeIzlaska = 0;
 	this.krajPauze = 0; 			// dodeliPauzu
 	this.krajIzlaska = 0;			// dodeliIzlazak
-	this.obrniSmer = false;
+	this.obrnutSmer = false;
+	this.mracnost = 0.2;
 	
 	this.parole = [
 		"Mi branimo srpski narod!", 
@@ -65,7 +66,9 @@ Karakter.prototype.crtaj = function() {
 
 Karakter.prototype.crtajIzlazak = function() {
 	if(this.trajanjeIzlaska) {
+		scena.sadrzaj.globalAlpha = this.mracnost;
 		scena.sadrzaj.drawImage(this.slika, this.x, this.y, this.sirina, this.visina);	
+		scena.sadrzaj.globalAlpha = 1;
 	}
 }   // kraj crtaj
 
@@ -153,6 +156,7 @@ Karakter.prototype.dodeliAnimaciju = function(){
 		this.vrstaAnimacije = Math.floor((Math.random() * 2) + 1);
 		this.zapamcen_x = this.x;
 		this.zapamcen_y = this.y;
+		this.mracnost = 0.2;
 		switch(this.vrstaAnimacije) {
 			case 1:
 				this.y += 20;	// startna pozicija
@@ -167,6 +171,8 @@ Karakter.prototype.dodeliAnimaciju = function(){
 
 Karakter.prototype.azurirajAnimaciju = function(){
 	if(this.upravoIzlazi()) {
+		this.mracnost += 0.03;
+		if(this.mracnost >= 1) this.mracnost = 1; 
 		switch(this.vrstaAnimacije) {
 			case 1:
 				this.mrdajGore()
@@ -180,33 +186,33 @@ Karakter.prototype.azurirajAnimaciju = function(){
 
 
 Karakter.prototype.mrdajGore = function(){
-	if(!this.obrniSmer) {
+	if(!this.obrnutSmer) {
 		this.y--;
 	}
-	if(this.obrniSmer) {
+	if(this.obrnutSmer) {
 		this.y++;
 	}
 	if(this.y < this.zapamcen_y) {
-		this.obrniSmer = true;
+		this.obrnutSmer = true;
 	}
 	if(this.y > this.zapamcen_y + 40) {
-		this.obrniSmer = false;
+		this.obrnutSmer = false;
 	}
 }	// mrdajGore
 
 Karakter.prototype.mrdajDesno = function(){
-	if(!this.obrniSmer) {
+	if(!this.obrnutSmer) {
 		this.x++;	
 	}
-	if(this.obrniSmer) {
+	if(this.obrnutSmer) {
 		this.x--;
 	}	
 	
 	if(this.x > this.zapamcen_x + 100) {
-		this.obrniSmer = true;
+		this.obrnutSmer = true;
 	}
 	if(this.x < this.zapamcen_x - 100) {
-		this.obrniSmer = false;
+		this.obrnutSmer = false;
 	}	
 	
 }	// mrdajDesno
