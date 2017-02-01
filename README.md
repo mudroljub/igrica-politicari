@@ -1,4 +1,4 @@
-# igrica
+# Igrica političari
 
 Javascript igrica otvorenog koda. 
 
