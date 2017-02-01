@@ -1,4 +1,4 @@
-![](screen.png)
+[![](screen.png)](http://mudroljub.github.io/igrica-politicari/)
 
 # Igrica političari
 
