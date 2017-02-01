@@ -1,7 +1,16 @@
 # Igrica političari
 
-Javascript igrica otvorenog koda. 
+![](screen.png)
 
-Dozvoljeno je slobodno igranje, prepravljanje i kopiranje. 
+Političari izlaze na prozor skupštine, i ti ih gađaš paradajzom. To je sve.
+
+* crteži: Uroš
+* programiranje: Damjan
+
+Status: nezavršeno.
+
+## Licenca
+
+Igrica je otvorenog koda. Dozvoljeno je slobodno igranje, prepravljanje i kopiranje.
 
 Autori zadržavaju isključivo pravo na komercijalizaciju dela.
