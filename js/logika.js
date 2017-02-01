@@ -1,18 +1,24 @@
 /*****************************************************************
-    IDEJE:
-* da se ne pojavljuju dva paradajza kada pogodi
-* klasa paradajz ili predmet
-* nišan kao fokus, tri paradajza random pogađaju unutar kruga
-* da menjaju sliku na pogodak
-* napraviti energiju od mase 
-* da nasumicno ispustaju parole
-* paradajz pogadja
+    URADITI:
+* ubaciti sirinu i visinu ekrana medju parametre, da se ne uzima window.innerHeight tokom igre
+	* prvo mora da ucita pozadinu da bi prilagodio
+* da crtabalon posle paradajza
+// parola da skida energiju
+// bacaParolu malo nakon izlaska, a nekad ne baca
+// politicar izadje, malo odstoji, pa ode
+* da crta balon posle paradajza, kao masu
+* menjanje oruzja
 * uvodna animacija uvecavanje skupstina
+* prikazati najbolji rezultat u tabeli (napraviti upisivanje)
+* prilagodiPozadinu, uzeti u obzir sire i tanje ekrane
+* izdvojiti klasu Politicar
+* prilagoditi tablu s poenima
 
     PROBLEMI:
-* srediti proveru sudara, sada se oslanja samo na jednu tacku!
+* parole se preklapaju jer izadje po jedna za svakog politicara
+* prvi paradajz ne treba da puca
+* da crtaProjektilNaLiku ne napusta prozor, a crtaParadajzOkolo ne ulazu u zauzet prozor
 * kad je presirok ekran, sece pozadinu po visini !
-* mozda klasa Prilagodjavac za pozadinu, slike, slova
 
     DOBRA PRAKSA:
 * zaokruziti crtanje na pun piksel, bez decimala
@@ -20,7 +26,7 @@
 
 // nazivi bitni, od njih pravi objekte
 var slike = {
-    pozadina: {
+    pozadine: {
         skupstina: 'slike/skupstina3d.png'
     },
     likovi: {
@@ -38,27 +44,38 @@ var slike = {
 
 /*************** LOGIKA IGRE ***************/
 
-var ucitavac = new Ucitavac();                      // pravi karaktere
+var ucitavac = new Ucitavac(slike);                      // pravi karaktere
 var vreme = new Vreme(30);          				// zadaje vreme igre
-var scena = new Scena('platno', slike.pozadina.skupstina);
-var mish = new Mish(scena);
-var uvod = new Uvod(scena);
-var kraj = new Kraj(scena);
-var karakteri = scena.karakteri;
+var uvod = new Uvod('platno');
+var kursor = new Kursor();
+var scena, karakteri, igrac, kraj;
+ucitavac.ucitajSlike(slike, pripremiScenu);	
 
-var paradajz = new Image();
-paradajz.src = "slike/paradajz.png";
-	
-ucitavac.ucitajSlike(slike, uvod.pusti);
-scena.platno.addEventListener('click', reagujNaKlik);
-scena.platno.addEventListener('mousemove', mish.azuriraPoziciju);
+		// praviPredmete
+		var paradajz = new Image();
+		paradajz.src = "slike/paradajz.png";
 
+$("#platno").addEventListener('click', reagujNaKlik);
+$("#platno").addEventListener('mousemove', reagujNaPokret);
 
 /*************** GLAVNE FUNKCIJE ***************/
 
-function postaviScenu(){
+
+function pripremiScenu(){
+	var slika_pozadine = ucitavac.nadjiPozadinu();
+	var prilagodjena_visina = prilagodiPozadinu(slika_pozadine); 
+	scena = new Scena('platno', slika_pozadine, prilagodjena_visina);	
+	uvod.pusti()
+}	// pripremiScenu
+
+
+function postaviScenu(){			// postavlja je reagujNaKlik()
+	karakteri = scena.karakteri;
+	igrac = new Igrac(scena);
+	kraj = new Kraj(scena);
+	$("#platno").style.cursor = 'none';
     scena.praviProzore(parametri_prozora);
-    scena.praviKaraktere(slike.likovi); 
+    scena.praviKaraktere(slike.likovi);
     //scena.praviPredmete(slike.predmeti); 	
     dacic.jauk = "Jaoj";
     vulin.jauk = "To boli!";
@@ -68,17 +85,15 @@ function postaviScenu(){
 
 
 function azuriraj(){
-
-    // izvrsava svakih 16.6 milisekundi (60 herca/sekund)
+    // izvrsava svaki frejm, tj. 16.6 milisekundi (60 herca/sekund)
     if(scena.ide){
-		scena.crtajPozadinu();
+		scena.crtaPozadinu();
 		dacic.igraj(vreme, 30);
 		vulin.igraj(vreme, 20);
 		toma.igraj(vreme, 10);
-				
+
 		for(var i=0; i < karakteri.length; i++) {
 			if(karakteri[i].igra) {	
-
 				if(karakteri[i].neIzlaziNiPauzira()){
 					karakteri[i].nadjiSlobodnoMesto(karakteri);	
 					karakteri[i].odrediIzlaz(vreme, 2, 3);
@@ -87,22 +102,23 @@ function azuriraj(){
 				if(karakteri[i].upravoIzlazi()) {
 					karakteri[i].azurirajMrdanje();
 					karakteri[i].crtajMrdanje();
-					karakteri[i].kukaAkoJePogodjen(mish);
+					karakteri[i].bacaParole(kursor);
+					karakteri[i].crtaKukanje(kursor);
 					karakteri[i].kadOdeResetujIzlaz(vreme);
-					mish.crtaParadajzNaLiku(karakteri[i]);					
 				}
 				if(karakteri[i].neIzlaziNiPauzira()){
 					karakteri[i].odrediPauzu(vreme, 1, 2);
 				}
 				if(karakteri[i].upravoPauzira()){
 					karakteri[i].pogodjen = false
+					karakteri[i].promeniParolu();
 					karakteri[i].kadProdjeResetujPauzu(vreme);
 				}
-
 			} // kraj if karakter igra
+		kursor.azurirajProjektil(scena, karakteri[i], paradajz);
 		} // kraj for karakteri
 
-		mish.crtaParadajz();
+		kursor.crtaKrug(scena)
         scena.prikazujPoene(vreme);
         vreme.proveriKraj(kraj);
         scena.animacija = requestAnimationFrame(azuriraj);
@@ -113,14 +129,13 @@ function azuriraj(){
         vreme.smanjuje();
         vreme.azurira();
     }	// kraj svaki sekund
-
+	igrac.crtaMasu();
 }   // kraj azuriraj
 
 
-// nije u petlji, ovo je on click
 function reagujNaKlik(event){
-	mish.azuriraZapamcenuPoziciju(event); 
-	
+	kursor.pamtiKliknutuPoziciju(event);			// koristi da crtaProjektil
+
 	if(uvod.ide){
 		uvod.ide = false;	// prekida uvod
 		window.cancelAnimationFrame(uvod.animacija);
@@ -131,14 +146,19 @@ function reagujNaKlik(event){
 	if(scena.ide){	
 		for(var i=0; i < karakteri.length; i++){
 			karakteri[i].pogodjen = false;	
-			if(karakteri[i].iskljucivoIzlaz()) { 			// da ne pogadja nevidljive
-				mish.proveriPogodak(scena, karakteri[i]);
+			if(karakteri[i].upravoIzlazi()) { 			// da ne pogadja nevidljive
+				kursor.proveriPogodak(scena, karakteri[i]);
 			}
 		}
 	}	// kraj ako igra
 	
 	if(kraj.ide){
-		mish.crtaParadajz();
+		kursor.crtaProjektil(scena, paradajz);
 	 }
 	 
 }   // kraj reagujNaKlik
+
+
+function reagujNaPokret(event){
+	kursor.azuriraPoziciju(event)
+}
