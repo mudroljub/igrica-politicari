@@ -1,6 +1,6 @@
 [![](screen.png)](http://mudroljub.github.io/igrica-politicari/)
 
-# Igrica političari
+# Igrica političari (Parliament Siege game)
 
 Političari izlaze na prozor skupštine, i ti ih gađaš paradajzom. To je sve.
 
