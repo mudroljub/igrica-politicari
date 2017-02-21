@@ -4,9 +4,6 @@
 
 Političari izlaze na prozor skupštine, i ti ih gađaš paradajzom. To je sve.
 
-* crteži: Uroš
-* programiranje: Damjan
-
 Možeš je isprobati ovde: [mudroljub.github.io/igrica-politicari/](http://mudroljub.github.io/igrica-politicari/)
 
 Status: nezavršeno.
